@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EVIN - Estimulación Visual</title>
+    
+        <!-- Favicon (icono en pestaña) -->
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+        <link rel="manifest" href="img/site.webmanifest">
+    
+        <!-- Google Fonts: Fuente moderna y legible -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+        <!-- Estilos principales -->
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="css/accesibilidad.css">
+        <link rel="stylesheet" href="css/juego-diferencias.css">
+        <link rel="stylesheet" href="css/accesibilidad-fuentes.css">
+        <link rel="stylesheet" href="css/perfil-alumno.css">
+        <link rel="stylesheet" href="css/tarjetas.css">
+        <link rel="stylesheet" href="css/alto-contraste.css">
+        <link rel="stylesheet" href="css/dashboard.css">
+
+        
+    
+        <!-- Metaetiquetas para SEO -->
+        <meta name="description" content="EVIN es una plataforma web de estimulación visual con juegos interactivos y seguimiento de progreso para profesionales, técnicos y familias.">
+        <meta name="keywords" content="estimulación visual, EVIN, juegos educativos, percepción visual, rehabilitación visual, alumnos, plataforma educativa">
+    
+        <!-- Metaetiquetas para compartir en redes sociales -->
+        <meta property="og:title" content="EVIN - Estimulación Visual">
+        <meta property="og:description" content="Plataforma interactiva con juegos de estimulación visual y seguimiento de alumnos.">
+        <meta property="og:image" content="img/evin-social.png">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://tusitio.com/">
+    
+        <!-- Tema para navegadores móviles -->
+        <meta name="theme-color" content="#e63946">
+    </head>
+    
+<body>
+  <a href="#inicio" class="skip-link">Saltar al contenido principal</a>
+  <header>
+    <div class="container header-container">
+      <div class="logo-box">
+        <img src="img/corporativo.png" alt="Logo EVIN" class="logo-img" />
+        <span class="logo-text">EVIN</span>
+      </div>
+      <!-- Botón hamburger solo visible en móvil -->
+      <button class="nav-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class = "main-nav">
+        <ul class = "nav-links">
+        
+          <li><a href="#inicio" class="menu-btn"><i class="fas fa-home"></i>Inicio</a></li>
+          <li><a href="#dashboard" class="menu-btn"><i class="fas fa-chart-bar"></i>Dashboard</a></li>
+          <li><a href="#juegos" class="menu-btn"><i class="fa-solid fa-puzzle-piece"></i>Juegos</a></li>
+          <li><a href="#alumnos" class="menu-btn"><i class="fas fa-user-graduate"></i>Alumnos</a></li>
+          <li><a href="#faq" class="menu-btn"><i class="fas fa-question-circle"></i>FAQ</a></li>
+          <li><a href="#contactos" class="menu-btn"><i class="fas fa-envelope"></i>Contactos</a></li>
+                    
+        </ul>
+        <a href="#usuario" class="menu-btn"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+      </nav>
+    </div>
+  </header>
+  
+
+
+    <main>
+        
+            <section id="inicio">
+                <h2>Bienvenido a EVIN</h2>
+                <p id="inicio-bienvenida"></p>
+                <p>
+                  La plataforma web de Estimulación Visual EVIN (Estimulación Visual en Internet) es un proyecto diseñado para ofrecer a los usuarios una serie de juegos y ejercicios que estimulan el 			desarrollo perceptivo-visual, especialmente en personas con dificultades para la recepción y/o procesamiento de estímulos visuales.
+                </p>
+                <p>
+                  Los juegos de EVIN permiten ejercitar distintas tareas visuales y pueden configurarse mediante parámetros adaptables (tamaño, complejidad, tiempo, número de estímulos, etc.) para ajustarse a las necesidades de cada usuario.
+                </p>
+                <p>
+                  Mientras el alumno se entrena, los resultados se muestran en tiempo real, lo que permite a los profesionales hacer un seguimiento individual y global de los progresos y valorar la eficacia de cada ejercicio.
+                </p>
+                <p>
+                  En EVIN encontrarás:
+                  <ul>
+                    <li>Juegos configurables para estimular diferentes habilidades visuales.</li>
+                    <li>Seguimiento y evaluación de resultados individuales y grupales.</li>
+                    <li>Un entorno accesible y adaptable para profesionales, técnicos y familiares.</li>
+                  </ul>
+                </p>
+                <p>
+                  ¡Empieza a explorar y descubre cómo EVIN puede ayudarte en la estimulación visual!
+                </p>
+              </section>
+              
+        
+
+              <section id="juegos" class="hidden">
+                <div id="app-juegos">
+                  <h2>Juegos disponibles</h2>
+              
+                  <!-- Filtros controlados por Vue -->
+                <div class="filters">
+                  <input
+                    type="search"
+                    v-model="busqueda"
+                    placeholder="Buscar juegos..."
+                    aria-label="Buscar juegos"
+                  >
+
+                  <select v-model="filtroNivel" aria-label="Filtrar por nivel">
+                    <option value="">Todos los niveles</option>
+                    <option value="Fácil">Fácil</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Difícil">Difícil</option>
+                  </select>
+
+                  <select v-model="filtroTipo" aria-label="Filtrar por tipo">
+                    <option value="">Todos los tipos</option>
+                    <option value="Atención visual">Atención visual</option>
+                    <option value="Reconocimiento emocional">Reconocimiento emocional</option>
+                    <option value="Memoria visual">Memoria visual</option>
+                    <!-- añade aquí más tipos si los usas -->
+                  </select>
+                </div>
+
+                  <div class="game-list">
+                    <!-- Tarjetas generadas por Vue -->
+                    <div class="card" v-for="juego in juegosFiltrados" :key="juego.id">
+		  <img
+		    :src="juego.img"
+		    :alt="`Imagen de ${juego.nombre}`"
+		    @error="$event.target.style.display='none'"
+		  >
+		  <h3>{{ juego.nombre }}</h3>
+		  <span class="badge" :class="`badge-${juego.nivel?.toLowerCase()}`">
+		    {{ juego.nivel }}
+		  </span>
+		  <p>{{ juego.descripcion }}</p>
+		  <p>
+		    <strong>Nivel:</strong> {{ juego.nivel }}<br>
+		    <strong>Tipo:</strong> {{ juego.tipo }}
+		  </p>
+		  <div class="card-botones">
+		    <button
+		      type="button"
+		      class="btn"
+		      @click="jugar(juego)"
+		      :aria-label="`Jugar ${juego.nombre}`"
+		    >
+		      Jugar
+		    </button>
+		    <button
+		      type="button"
+		      class="btn-secundario"
+		      @click="verDetalles(juego)"
+		    >
+		      Detalles
+		    </button>
+		  </div>
+		</div>
+                </div>
+              </section>
+              
+              <!-- Añadir dentro de <main>, después de <section id="inicio"> -->
+<section id="dashboard" class="hidden">
+  <div id="app-dashboard">
+
+    <h2>Panel del profesor</h2>
+
+    <p v-if="cargando" class="cargando-texto">Cargando datos...</p>
+    <p v-if="error" class="form-error">{{ error }}</p>
+
+    <!-- ── Stats rápidas ──────────────────────────────────── -->
+    <div class="dash-stats" v-if="!cargando">
+      <div class="dash-stat-card">
+        <span class="dash-stat-icono">👨‍🎓</span>
+        <span class="dash-stat-valor">{{ totalAlumnos }}</span>
+        <span class="dash-stat-label">Alumnos</span>
+      </div>
+      <div class="dash-stat-card">
+        <span class="dash-stat-icono">🎮</span>
+        <span class="dash-stat-valor">{{ sesionesHoy }}</span>
+        <span class="dash-stat-label">Sesiones hoy</span>
+      </div>
+      <div class="dash-stat-card">
+        <span class="dash-stat-icono">📊</span>
+        <span class="dash-stat-valor">{{ mediaGlobal }}%</span>
+        <span class="dash-stat-label">Media global</span>
+      </div>
+      <div class="dash-stat-card">
+        <span class="dash-stat-icono">🏆</span>
+        <span class="dash-stat-valor">{{ totalSesiones }}</span>
+        <span class="dash-stat-label">Sesiones totales</span>
+      </div>
+    </div>
+
+    <div class="dash-grid" v-if="!cargando">
+
+      <!-- ── Ranking alumnos ─────────────────────────────── -->
+      <div class="dash-panel">
+        <h3>🏅 Ranking de progreso</h3>
+        <div class="dash-ranking">
+          <div
+            class="dash-ranking-item"
+            v-for="(alumno, i) in rankingAlumnos"
+            :key="alumno.id"
+          >
+            <span class="dash-ranking-pos" :class="posClass(i)">{{ i + 1 }}</span>
+            <span class="dash-ranking-nombre">{{ alumno.nombre }}</span>
+            <div class="dash-barra-wrap">
+              <div
+                class="dash-barra"
+                :style="{ width: alumno.progreso + '%', background: colorProgreso(alumno.progreso) }"
+              ></div>
+            </div>
+            <span class="dash-ranking-pct">{{ alumno.progreso || 0 }}%</span>
+          </div>
+          <p v-if="!rankingAlumnos.length" class="dash-vacio">Sin datos aún</p>
+        </div>
+      </div>
+
+      <!-- ── Actividad reciente ──────────────────────────── -->
+      <div class="dash-panel">
+        <h3>⏱ Actividad reciente</h3>
+        <div class="dash-actividad">
+          <div
+            class="dash-actividad-item"
+            v-for="sesion in sesionesRecientes"
+            :key="sesion.id"
+          >
+            <div class="dash-actividad-info">
+              <span class="dash-actividad-alumno">{{ sesion.alumno }}</span>
+              <span class="dash-actividad-juego">{{ sesion.juego }}</span>
+            </div>
+            <div class="dash-actividad-meta">
+              <span class="pct-badge" :class="clasePct(sesion.porcentaje)">
+                {{ sesion.porcentaje }}%
+              </span>
+              <span class="dash-actividad-fecha">{{ formatFecha(sesion.fecha) }}</span>
+            </div>
+          </div>
+          <p v-if="!sesionesRecientes.length" class="dash-vacio">Sin sesiones recientes</p>
+        </div>
+      </div>
+
+      <!-- ── Alumnos que necesitan atención ─────────────── -->
+      <div class="dash-panel dash-panel-full">
+        <h3>⚠️ Alumnos que necesitan atención <small>(progreso menor del 40%)</small></h3>
+        <div class="dash-atencion">
+          <div
+            class="dash-atencion-item"
+            v-for="alumno in alumnosAtencion"
+            :key="alumno.id"
+          >
+            <span class="dash-atencion-nombre">{{ alumno.nombre }}</span>
+            <span class="dash-atencion-curso">{{ alumno.curso || 'Sin curso' }}</span>
+            <span class="pct-badge pct-bajo">{{ alumno.progreso || 0 }}%</span>
+          </div>
+          <p v-if="!alumnosAtencion.length" class="dash-vacio">✅ Todos los alumnos tienen buen progreso</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+              <section id="juego-memoria" class="hidden">
+                <h2>Juego: Encuentra las parejas</h2>
+
+                <div class="memoria-panel-controles">
+                  <p>Encuentra todas las parejas de cartas. Pulsa en las cartas para girarlas.</p>
+
+                  <div class="memoria-info">
+                    <span>Intentos: <strong id="memoria-intentos">0</strong></span>
+                    <span>Tiempo: <strong id="memoria-tiempo">0</strong> s</span>
+
+                    <label>
+                      Nivel:
+                      <select id="memoria-nivel">
+                        <option value="facil">Fácil</option>
+                        <option value="medio">Medio</option>
+                        <option value="dificil">Difícil</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <button id="memoria-reiniciar" class="btn">Reiniciar</button>
+                  <button id="memoria-volver" class="btn-secundario">Volver a juegos</button>
+                </div>
+                <div id="memoria-grid" class="memoria-grid">
+                    <!-- Cartas generadas por JS -->
+                </div>
+
+              </section>
+
+              <section id="juego-grid" class="hidden">
+                <h2>Juego: Recuerda las casillas</h2>
+
+                <div class="grid-panel-controles">
+                  <p>
+                    Observa las casillas destacadas, memorízalas y luego haz clic en las mismas posiciones.
+                  </p>
+
+                  <div class="grid-info">
+                    <span>Ronda: <strong id="grid-ronda">1</strong></span>
+                    <span>Aciertos: <strong id="grid-aciertos">0</strong></span>
+                    <span>Errores: <strong id="grid-errores">0</strong></span>
+
+                    <label>
+                      Nivel:
+                      <select id="grid-nivel">
+                        <option value="facil">Fácil (3x3)</option>
+                        <option value="medio">Medio (4x4)</option>
+                        <option value="dificil">Difícil (5x5)</option>
+                      </select>
+                    </label>
+                  </div>
+
+                 <div class="grid-botones">
+                  <button id="grid-empezar"  class="btn">Nueva ronda</button>
+                  <button id="grid-comprobar" class="btn" disabled>Comprobar</button>
+                  <button id="grid-volver"   class="btn-secundario">Volver a juegos</button>
+                </div>
+                </div>
+
+                <div id="grid-tablero" class="grid-tablero">
+                  <!-- Celdas generadas por JS -->
+                </div>
+              </section>
+              
+              <section id="juego-radar" class="hidden">
+                  <h2>Juego Radar visual</h2>
+                  <div class="radar-panel-controles">
+                    <p>Busca los estímulos objetivo entre los distractores y haz clic solo en ellos.</p>
+                    <div class="radar-info">
+                      <span>Objetivo: <strong id="radar-objetivo">▲ azul</strong></span>
+                      <span>Aciertos: <strong id="radar-aciertos">0</strong></span>
+                      <span>Errores: <strong id="radar-errores">0</strong></span>
+                      <span>Tiempo: <strong id="radar-tiempo">0</strong> s</span>
+                    </div>
+                    <label>
+                     Nivel
+                      <select id="radar-nivel">
+                      <option value="facil">Fácil</option>
+                      <option value="medio" selected>Medio</option>
+                      <option value="dificil">Difícil</option>
+                      </select>
+                    </label>
+                    <div class="radar-botones">
+                      <button id="radar-empezar" class="btn">Nueva búsqueda</button>
+                      <button id="radar-volver" class="btn-secundario">Volver a juegos</button>
+                      <button id="radar-comprobar" class="btn" disabled>Comprobar selección</button>
+                    </div>
+                  </div>
+
+                  <div id="radar-grid" class="radar-grid">
+                    <!-- Celdas generadas por JS -->
+                  </div>
+                  
+                  
+              </section>
+              
+              <section id="juego-diferencias" class="hidden">
+		  <h2>Juego: Encuentra las diferencias</h2>
+		 
+		  <div class="diferencias-panel-controles">
+		    <p>Observa las dos imágenes y haz clic en las diferencias que encuentres en la imagen de la derecha.</p>
+		 
+		<div class="diferencias-info">
+			<span>Encontradas: <strong id="diferencias-contador">0</strong> / <strong id="diferencias-total">0</strong></span>
+			<span>Tiempo: <strong id="diferencias-tiempo">0</strong> s</span>
+			<label>
+			Nivel:
+			<select id="diferencias-nivel">
+			<option value="facil">Fácil (3x3, 3 diferencias)</option>
+			<option value="medio" selected>Medio (4x4, 5 diferencias)</option>
+			<option value="dificil">Difícil (5x5, 7 diferencias)</option>
+			</select>
+			</label>
+		</div>
+			 
+		    <div class="diferencias-botones">
+		      <button id="diferencias-empezar" class="btn">Nueva partida</button>
+		      <button id="diferencias-volver"  class="btn-secundario">Volver a juegos</button>
+		    </div>
+		 
+		    <p id="diferencias-mensaje" class="diferencias-mensaje" style="display:none"></p>
+		  </div>
+		 
+		  <div class="diferencias-tableros">
+		    <div class="diferencias-lado">
+		      <h3>Imagen original</h3>
+		      <div id="diferencias-izq" class="diferencias-grid"></div>
+		    </div>
+		    <div class="diferencias-lado">
+		      <h3>¿Cuáles son las diferencias?</h3>
+		      <div id="diferencias-der" class="diferencias-grid"></div>
+		    </div>
+		  </div>
+		</section>
+
+
+              
+
+	<section id="alumnos" class="hidden">
+  <div id="app-alumnos">
+    <h2>Alumnos</h2>
+
+    <div class="alumnos-header">
+      <input type="search" v-model="busqueda" placeholder="Buscar alumnos..." aria-label="Buscar alumnos">
+      <button v-if="puedeGestionar" class="btn" @click="abrirModalNuevo">+ Añadir alumno</button>
+    </div>
+
+    <p v-if="error" class="form-error">{{ error }}</p>
+    <p v-if="cargando" class="cargando-texto">Cargando alumnos...</p>
+
+    <div class="student-list" v-if="!cargando && !error">
+      <div class="card card-alumno" v-for="alumno in alumnosFiltrados" :key="alumno.id">
+        <img src="img/corporativo.png" alt="Icono EVIN" class="alumno-evin-icon"/>
+        <img :src="alumno.img" class="foto-carnet" :alt="`Foto de ${alumno.nombre}`"/>
+        <h3>{{ alumno.nombre }}</h3>
+        <p>
+          Edad: {{ alumno.edad || '—' }} años<br>
+          Curso: {{ alumno.curso || '—' }}<br>
+          Dificultad: {{ alumno.dificultad || '—' }}
+        </p>
+        <span class="badge-progreso" :class="claseProgreso(alumno.progreso)">
+          Progreso: {{ alumno.progreso || 0 }}%
+        </span>
+        <div class="card-acciones">
+          <button class="btn" @click="verPerfil(alumno)" :aria-label="`Ver perfil de ${alumno.nombre}`">
+            Ver perfil
+          </button>
+          <button v-if="puedeGestionar" class="btn-secundario" @click="abrirModalEditar(alumno)">
+            ✏️ Editar
+          </button>
+          <button v-if="puedeGestionar" class="btn-danger" @click="confirmarEliminar(alumno)">
+            🗑️ Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Panel de perfil ──────────────────────────────────── -->
+    <div v-if="perfilVisible" class="perfil-overlay" @click.self="cerrarPerfil">
+      <div class="perfil-panel" role="dialog" aria-modal="true">
+
+        <!-- Cabecera -->
+        <div class="perfil-header">
+          <div class="perfil-header-info">
+            <h2>{{ perfilAlumno?.nombre }}</h2>
+            <p>{{ perfilAlumno?.curso || 'Sin curso' }} · {{ perfilAlumno?.dificultad || 'Sin dificultad' }}</p>
+          </div>
+          <button class="perfil-cerrar" @click="cerrarPerfil" aria-label="Cerrar perfil">&times;</button>
+        </div>
+
+        <!-- Stats rápidas -->
+        <div class="perfil-stats" v-if="perfilStats">
+          <div class="perfil-stat">
+            <span class="perfil-stat-valor">{{ perfilStats.total }}</span>
+            <span class="perfil-stat-label">Sesiones totales</span>
+          </div>
+          <div class="perfil-stat">
+            <span class="perfil-stat-valor">{{ perfilStats.mediaAct }}%</span>
+            <span class="perfil-stat-label">Media de aciertos</span>
+          </div>
+          <div class="perfil-stat">
+            <span class="perfil-stat-valor">{{ perfilStats.juegos }}</span>
+            <span class="perfil-stat-label">Juegos distintos</span>
+          </div>
+          <div class="perfil-stat">
+            <span class="perfil-stat-valor">{{ perfilAlumno?.progreso || 0 }}%</span>
+            <span class="perfil-stat-label">Progreso general</span>
+          </div>
+        </div>
+
+        <!-- Gráfico de evolución -->
+        <div class="perfil-grafico" v-if="perfilGrafico.length">
+          <h3>Evolución de aciertos (últimas sesiones)</h3>
+          <div class="grafico-barras">
+            <div class="barra-wrap" v-for="(s, i) in perfilGrafico" :key="i">
+              <div
+                class="barra"
+                :style="{ height: (s.porcentaje || 0) + '%', background: colorBarra(s.porcentaje) }"
+                :data-pct="s.porcentaje"
+              ></div>
+              <span class="barra-fecha">{{ formatFecha(s.fecha) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabla de sesiones -->
+        <div class="perfil-sesiones">
+          <h3>Historial de sesiones</h3>
+
+          <p v-if="perfilCargando">Cargando sesiones...</p>
+
+          <p v-else-if="!perfilSesiones.length" class="perfil-vacio">
+            Este alumno aún no tiene sesiones registradas.
+          </p>
+
+          <table v-else class="perfil-tabla">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Juego</th>
+                <th>Aciertos</th>
+                <th>Intentos</th>
+                <th>% Acierto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="sesion in perfilSesiones" :key="sesion.id">
+                <td>{{ formatFecha(sesion.fecha) }}</td>
+                <td>{{ sesion.juego }}</td>
+                <td>{{ sesion.aciertos }}</td>
+                <td>{{ sesion.intentos }}</td>
+                <td>
+                  <span class="pct-badge" :class="clasePct(sesion.porcentaje)">
+                    {{ sesion.porcentaje }}%
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Modal editar/crear alumno ─────────────────────────── -->
+    <div v-if="modalVisible" class="modal-overlay" @click.self="cerrarModal">
+      <div class="modal-content">
+        <button class="modal-close" @click="cerrarModal">&times;</button>
+        <h3>{{ modoModal === 'nuevo' ? 'Añadir alumno' : 'Editar alumno' }}</h3>
+        <form @submit.prevent="guardarAlumno" novalidate>
+          <label>Nombre completo</label>
+          <input type="text" v-model="form.nombre" required>
+          <label>Edad</label>
+          <input type="number" v-model.number="form.edad" min="1" max="99">
+          <label>Curso</label>
+          <input type="text" v-model="form.curso" placeholder="Ej: 3º Primaria">
+          <label>Dificultad</label>
+          <select v-model="form.dificultad">
+            <option value="Fácil">Fácil</option>
+            <option value="Medio">Medio</option>
+            <option value="Difícil">Difícil</option>
+          </select>
+          <label>Progreso (%)</label>
+          <input type="number" v-model.number="form.progreso" min="0" max="100">
+          <p v-if="modalError" class="form-error">{{ modalError }}</p>
+          <div class="modal-botones">
+            <button type="submit" class="btn">
+              {{ modoModal === 'nuevo' ? 'Crear alumno' : 'Guardar cambios' }}
+            </button>
+            <button type="button" class="btn-secundario" @click="cerrarModal">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+              
+
+        <section id="usuario">
+
+	  <!-- ── Login ─────────────────────────────────────────────────── -->
+	  <div id="login-form">
+	    <h2>Iniciar sesión</h2>
+	    <form novalidate>
+	      <label for="login-email">Correo electrónico</label>
+	      <input type="email" id="login-email" autocomplete="email" required>
+
+	      <label for="login-password">Contraseña</label>
+	      <input type="password" id="login-password" autocomplete="current-password" required>
+
+	      <!-- Mensaje de error visible cuando falla el login -->
+	      <p id="login-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
+
+	      <button type="submit">Entrar</button>
+
+	      <p class="form-links">
+		¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a>
+	      </p>
+	      <p class="form-links">
+		<a href="#" id="show-forgot">¿Olvidaste tu contraseña?</a>
+	      </p>
+	    </form>
+	  </div>
+
+	  <!-- ── Registro ──────────────────────────────────────────────── -->
+	  <div id="register-form" class="hidden">
+	    <h2>Crear cuenta</h2>
+	    <form novalidate>
+	      <label for="register-name">Nombre completo</label>
+	      <input type="text" id="register-name" autocomplete="name" required>
+
+	      <label for="register-email">Correo electrónico</label>
+	      <input type="email" id="register-email" autocomplete="email" required>
+
+	      <label for="register-password">Contraseña</label>
+	      <input type="password" id="register-password" autocomplete="new-password"
+		     minlength="8" required
+		     aria-describedby="password-hint">
+	      <small id="password-hint" class="form-hint">
+		Mínimo 8 caracteres, con al menos una mayúscula, un número y un símbolo.
+	      </small>
+
+	      <!-- Indicador visual de fortaleza -->
+	      <div id="password-strength-bar" class="strength-bar">
+		<span></span><span></span><span></span><span></span>
+	      </div>
+	      <p id="password-strength-label" class="strength-label"></p>
+
+	      <label for="register-password-confirm">Repetir contraseña</label>
+	      <input type="password" id="register-password-confirm" autocomplete="new-password" required>
+
+	      <label for="register-category">Rol</label>
+	      <select id="register-category" required>
+		<option value="">-- Selecciona tu rol --</option>
+		<option value="profesor">Profesor</option>
+		<option value="tecnico">Técnico</option>
+		<option value="padre">Familiar / Padre</option>
+		<option value="alumno">Alumno</option>
+	      </select>
+
+	      <!-- Campo alumno: solo visible si el rol es "alumno" -->
+	      <div id="alumno-extra" class="hidden">
+		<label for="register-alumno-nombre">Nombre del alumno</label>
+		<input type="text" id="register-alumno-nombre" autocomplete="off">
+
+		<label for="register-alumno-curso">Curso</label>
+		<input type="text" id="register-alumno-curso" placeholder="Ej: 3º Primaria">
+	      </div>
+
+	      <p id="register-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
+
+	      <button type="submit">Crear cuenta</button>
+
+	      <p class="form-links">
+		¿Ya tienes cuenta? <a href="#" id="show-login">Inicia sesión</a>
+	      </p>
+	    </form>
+	  </div>
+
+	  <!-- ── Recuperar contraseña ──────────────────────────────────── -->
+	  <div id="forgot-form" class="hidden">
+	    <h2>Recuperar contraseña</h2>
+	    <p>Introduce tu correo y te enviaremos un enlace para restablecer tu contraseña.</p>
+	    <form novalidate>
+	      <label for="forgot-email">Correo electrónico</label>
+	      <input type="email" id="forgot-email" autocomplete="email" required>
+
+	      <p id="forgot-error"   class="form-error"   role="alert" aria-live="assertive" style="display:none"></p>
+	      <p id="forgot-success" class="form-success" role="status" aria-live="polite"   style="display:none"></p>
+
+	      <button type="submit">Enviar enlace</button>
+
+	      <p class="form-links">
+		<a href="#" id="show-login-from-forgot">Volver al inicio de sesión</a>
+	      </p>
+	    </form>
+	  </div>
+
+	  <!-- ── Usuario logueado ──────────────────────────────────────── -->
+	  <div id="user-info" class="hidden">
+	    <p>Bienvenido, <strong><span id="user-name"></span></strong></p>
+	    <p id="user-role" class="user-role-badge"></p>
+	    <button id="logout">Cerrar sesión</button>
+	  </div>
+
+	</section>
+	<div id="anuncio-juego" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+  	<div id="anuncio-urgente" role="alert" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+
+    </main>
+
+    <footer>
+        <p><a href="#accesibilidad">Accesibilidad</a></p>
+        <p>&copy; 2025 EVIN - Estimulación Visual</p>
+    </footer>
+ 
+
+	<!-- Vue  desde CDN -->
+	<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+	<!-- 1. API centralizada (debe ir antes que main.js) -->
+	<script src="js/api.js"></script>
+	<script src="js/alto-contraste.js"></script>
+	<!-- 2. Modal para ventanas de juego (debe ir antes que los juegos) -->
+	<script src="js/juego-modal.js"></script>
+	<script src="js/dashboard.js"></script>
+
+	<!-- 3. Lógica principal -->
+	<script src="js/main.js"></script>
+	<script src="js/roles.js"></script>
+	<!-- 4. Juegos (solo se activan cuando se abren con ?juego=...) -->
+	<script src="js/juego_memoria.js"></script>
+	<script src="js/juego_grid.js"></script>
+	<script src="js/juego_radar.js"></script>
+	<script src="js/juego_diferencias.js"></script>
+  
+    
+</body>
+</html>
+

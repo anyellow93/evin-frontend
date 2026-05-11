@@ -1,0 +1,899 @@
+/* Variables, reset y estilos base */
+:root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --light: #f4f6fb;
+    --dark: #212529;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --radius: 8px;
+    --gap: 1rem;
+    --max-width: 1200px;
+    --font-family: 'Arial', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+header {
+background: linear-gradient(90deg, #1d3557 60%, #06033f 100%);
+  color: white;
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+}
+/* Nav  desktop*/
+.main-nav {
+  display: flex;
+  align-items: center;
+  flex: 1;                /* ocupa todo el ancho disponible entre logo y borde derecho */
+  margin-left : 1.5rem;
+}
+
+/* Lista centrada */
+.nav-links {
+  display: flex;
+  justify-content: center; /* centra los enlaces dentro del ancho disponible */
+  flex: 1;                 /* la lista se expande y deja hueco para el login a la derecha */
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ESTILO BASE COMÚN PARA TODOS LOS BOTONES DEL MENÚ, INCLUIDO LOGIN */
+.menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1.1rem;     /* misma altura y ancho mínimo */
+  border-radius: 999px;        /* mismo radio */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;           /* misma tipografía/tamaño */
+  text-decoration: none;
+  border: 1px solid transparent;
+  color: #f1faee;
+  background-color: transparent;
+  transition: background-color 0.15s ease, color 0.15s ease,
+              transform 0.1s ease, border-color 0.15s ease;
+}
+
+/* Separación del icono respecto al texto */
+.menu-btn i {
+  margin-right: 0.35rem;   /* ajusta este valor a tu gusto */
+  font-size: 0.95em;       /* opcional: tamaño relativo al texto */
+}
+
+/* Hover para todos */
+.menu-btn:hover {
+  background-color: rgba(241, 250, 238, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Estado activo (opcional) */
+.menu-btn.active {
+  background-color: rgba(241, 250, 238, 0.25);
+}
+
+
+
+
+/* Enlaces del menú y login */
+.nav-links a,
+.nav-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #f1faee;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+/* Login fijo a la derecha */
+.nav-login {
+  margin-left: 1rem;       /* separación respecto al menú centrado */
+  background: #ffffff;
+  color: #1d3557;
+  /*font-weight: 600;*/
+  border-color : #ffffff
+}
+
+.nav-login:hover {
+ /* background: #f1f5ff;*/
+  background-color: #f1f5ff;
+  border-color: #f1f5ff;
+}
+
+
+/* Hover general */
+.nav-links a:hover {
+  background: rgba(241, 250, 238, 0.18);
+  transform: translateY(-1px);
+}
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #f1faee;
+  border-radius: 999px;
+}
+
+.alumno-activo-label {
+  margin-top: 0.5rem;
+  color: #2a9d8f;
+  font-weight: 700;
+}
+
+
+
+
+/*nav li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  }
+  
+  nav li a:hover,
+  nav li a.active {
+    background: #fff;
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(226, 40, 7, 0.1);
+    text-decoration: underline;
+  }
+  
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: var(--gap);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    transition: background-color 0.2s ease;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+    background-color: var(--secondary);
+}*/
+
+.logo-box {
+    animation: logoFadeIn 1.2s;
+  }
+  
+  @keyframes logoFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-24px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+
+main {
+    padding: 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+input[type="search"] {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--secondary);
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease;
+}
+
+input[type="search"]:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.game-list,
+.student-list {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+
+.card-alumno {
+  position: relative; /* necesario para posicionar el icono dentro */
+}
+
+.alumno-evin-icon {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.7rem;
+  width: 60px;   /* ajusta al tamaño del logo que te guste */
+  height: auto;  /* mantiene proporción */
+}
+.foto-carnet {
+  width: 60px;
+  height: 80px;   /* mantiene proporción 3:4 aprox. */
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+
+
+.card {
+  background: #f1ebeb;
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/*.card:hover,
+.card:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}*/
+
+.card .button:hover {
+  background: #d62839;
+  transform: translateY(-1px);
+}
+.card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1d3557; /* azul oscuro EVIN */
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+}
+.card img {
+  border-radius: 8px;
+  align-self: flex-start;
+}
+
+.card button {
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  background: #e63946;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+/*.card button:hover,*/
+.card button:focus {
+    background-color: var(--secondary);
+}
+
+.hidden {
+    display: none !important;
+}
+
+footer {
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+
+  
+
+/* Modal styles */
+#modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 14px;
+  max-width: 480px;
+  width: 90%;
+  padding: 1.6rem 1.8rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+  position: relative;
+  font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  color: #1d3557;
+}
+
+#modalDesc {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+  white-space: pre-line; /* para respetar saltos de línea del texto */
+}
+
+#closeModal {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.9rem;
+  border: none;
+  background: transparent;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+}
+
+#closeModal:hover {
+  color: #e63946;
+}
+
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  
+  .logo-img {
+    height: 48px;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(67,97,238,0.10);
+  }
+  
+  .logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2.1rem;
+    color: white;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 5px #3f37c9;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0.1rem 0 0.35rem;
+  }
+  
+  /* Colores por nivel */
+  .badge-fácil {
+    background-color: #2ecc71; /* verde */
+  }
+  
+  .badge-medio {
+    background-color: #f1c40f; /* amarillo */
+    color: #333;
+  }
+  
+  .badge-difícil {
+    background-color: #e74c3c; /* rojo */
+  }
+  
+  .badge-progreso {
+    display: inline-block;
+    margin-top: 0.4rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  /* Colores según porcentaje */
+  .progreso-alto {
+    background-color: #2ecc71;
+  }
+  
+  .progreso-medio {
+    background-color: #f1c40f;
+    color: #333;
+  }
+  
+  .progreso-bajo {
+    background-color: #e74c3c;
+  }
+
+  .logo-text {
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  /* Degradado en el texto */
+  background: linear-gradient(120deg, #ffffff, #f4d35e, #f94144);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: evin-pop 1.2s ease-out forwards;
+  cursor: default;
+}
+
+/* Sombra suave por detrás */
+.logo-text::after {
+  content: 'EVIN';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: rgba(0, 0, 0, 0.18);
+  filter: blur(2px);
+  transform: translateY(2px);
+}
+
+/* Animación de entrada */
+@keyframes evin-pop {
+  0% {
+    transform: scale(0.8);
+    letter-spacing: 0.3em;
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Pequeño “latido” al pasar el ratón */
+.logo-text:hover {
+  animation: evin-bounce 0.4s ease-out;
+}
+
+@keyframes evin-bounce {
+  0%   { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(-2px) scale(1.05); }
+  60%  { transform: translateY(1px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+  /* Responsive header */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0.4rem 0.75rem;
+  }
+
+  /* Mostrar botón hamburguesa */
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* Nav como panel oculto por defecto */
+  .main-nav {
+    position: absolute;
+    top: 56px; /* justo bajo el header */
+    left: 0;
+    right: 0;
+    background: #1d3557;
+    padding: 0.5rem 0.75rem 0.75rem;
+    display: none;              /* IMPORTANTE: oculto por defecto */
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 20;
+  }
+
+  /* Se muestra cuando tenga la clase .open (JS) */
+  .main-nav.open {
+    display: flex;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.35rem;
+  }
+
+  .menu-btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nav-login {
+    margin-left: 0;
+    margin-top: 0.25rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* JUEGOS*/
+
+/* Juego de Memoria Visual */
+.memoria-panel-controles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.memoria-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.memoria-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(60px, 1fr));
+  gap: 0.75rem;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+}
+
+.memoria-card {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;             /* cuadrado */
+  cursor: pointer;
+  perspective: 700px;
+}
+
+.memoria-card-inner {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.memoria-card.memoria-girada .memoria-card-inner,
+.memoria-card.memoria-acertada .memoria-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Cara */
+.memoria-card-front,
+.memoria-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* Dorso */
+.memoria-card-front {
+  background: linear-gradient(135deg, #4361ee, #3f37c9);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Lado con símbolo */
+.memoria-card-back {
+  background: #f8f9ff;
+  color: #1d3557;
+  font-size: 2rem; 
+  transform: rotateY(180deg);   /* empieza “dada la vuelta” */
+}
+
+/* Estado acertado */
+.memoria-card.memoria-acertada .memoria-card-back {
+  background: #2ecc71;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .memoria-grid {
+    grid-template-columns: repeat(3, minmax(60px, 1fr));
+  }
+}
+
+/* Juego Recuerda las casillas */
+.grid-panel-controles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.grid-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.grid-tablero {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 420px;
+  margin: 0 auto 2rem;
+}
+
+.grid-celda {
+  width: 100%;
+  padding-top: 100%;             /* cuadrado */
+  position: relative;
+  border-radius: 8px;
+  background: #535456;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.grid-celda-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* Estado objetivo mostrado */
+.grid-celda-objetivo {
+  background: #ffb703;
+}
+
+/* Estado seleccionado por el usuario */
+.grid-celda-seleccionada {
+  background: #8ecae6;
+}
+
+/* Estado correcta tras comprobar */
+.grid-celda-correcta {
+  background: #2ecc71;
+}
+
+/* Estado incorrecta tras comprobar */
+.grid-celda-incorrecta {
+  background: #e63946;
+}
+
+.grid-celda-eracorrecta {
+  background: #ffb703;
+}
+
+@media (max-width: 600px) {
+  .grid-tablero {
+    max-width: 320px;
+  }
+}
+
+/* Juego Radar Visual */
+
+.radar-grid {
+  display: grid;
+  gap: 8px;
+  justify-content: center;
+}
+
+/*.radar-cell {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.radar-cell-objetivo {
+  outline: 3px solid #1d3557;
+}
+
+.radar-cell-error {
+  outline: 3px solid #e63946;
+}*/
+
+.radar-cell {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.radar-img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.radar-cell-seleccionada {
+  outline: 3px solid #1d3557;
+  box-shadow: 0 0 4px rgba(0,0,0,0.4);
+}
+
+.radar-cell-correcta {
+  outline: 3px solid #2a9d8f;
+}
+
+.radar-cell-incorrecta,
+.radar-cell-faltante {
+  outline: 3px solid #e63946;
+}
+
+/* solo juego */
+
+body.solo-juego header,
+body.solo-juego nav.main-nav,
+body.solo-juego footer,
+body.solo-juego #app-juegos,
+body.solo-juego #alumnos,
+body.solo-juego #usuario,
+body.solo-juego #inicio {
+  display: none;
+}
+
+body.solo-juego main > section {
+  margin-top: 0;
+}
+
+/* ── Errores y mensajes ────────────────────────────────────── */
+.form-error {
+  color: #e63946;
+  background: #fdecea;
+  border: 1px solid #e63946;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.form-success {
+  color: #2a9d8f;
+  background: #eaf7f5;
+  border: 1px solid #2a9d8f;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.form-hint {
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.form-links {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ── Barra de fortaleza de contraseña ─────────────────────── */
+.strength-bar {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.4rem;
+}
+
+.strength-bar span {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: #ddd;
+  transition: background 0.3s ease;
+}
+
+.strength-label {
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  font-weight: 600;
+}
+
+/* ── Badge de rol en user-info ────────────────────────────── */
+.user-role-badge {
+  display: inline-block;
+  background: #4361ee;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  margin-top: 0.25rem;
+}
+
+
+
+/* ── Badges de rol ────────────────────────────────────────── */
+.rol-profesor { background: #4361ee; }
+.rol-tecnico  { background: #2a9d8f; }
+.rol-padre    { background: #e76f51; }
+.rol-alumno   { background: #2ecc71; color: #1a1a1a; }
+
+
+    
+  
+
+/* Responsive adjustments */
+/*@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

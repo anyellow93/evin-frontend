@@ -1,0 +1,233 @@
+/* ── Modal de perfil de alumno ───────────────────────────── */
+
+.perfil-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.perfil-panel {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: perfil-entrada 0.3s ease;
+}
+
+@keyframes perfil-entrada {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Cabecera del perfil ──────────────────────────────────── */
+.perfil-header {
+  background: linear-gradient(135deg, #4361ee, #3a0ca3);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.perfil-header-info h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.4rem;
+}
+
+.perfil-header-info p {
+  margin: 0;
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.perfil-cerrar {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.perfil-cerrar:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+/* ── Stats rápidas ───────────────────────────────────────── */
+.perfil-stats {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem 2rem;
+  background: #f8f9ff;
+  border-bottom: 1px solid #e9ecef;
+  flex-wrap: wrap;
+}
+
+.perfil-stat {
+  flex: 1;
+  min-width: 100px;
+  text-align: center;
+  padding: 0.75rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.perfil-stat-valor {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #4361ee;
+  display: block;
+}
+
+.perfil-stat-label {
+  font-size: 0.78rem;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+/* ── Gráfico de barras ───────────────────────────────────── */
+.perfil-grafico {
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.perfil-grafico h3 {
+  font-size: 1rem;
+  margin: 0 0 1rem;
+  color: #333;
+}
+
+.grafico-barras {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 80px;
+}
+
+.barra-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.barra {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  background: #4361ee;
+  transition: height 0.5s ease;
+  position: relative;
+}
+
+.barra:hover::after {
+  content: attr(data-pct) '%';
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.barra-fecha {
+  font-size: 0.6rem;
+  color: #999;
+  margin-top: 4px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ── Tabla de sesiones ───────────────────────────────────── */
+.perfil-sesiones {
+  padding: 1.25rem 2rem 2rem;
+}
+
+.perfil-sesiones h3 {
+  font-size: 1rem;
+  margin: 0 0 1rem;
+  color: #333;
+}
+
+.perfil-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.perfil-tabla th {
+  background: #f1f3ff;
+  color: #4361ee;
+  font-weight: 600;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 2px solid #dee2ff;
+}
+
+.perfil-tabla td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+  color: #444;
+}
+
+.perfil-tabla tr:last-child td {
+  border-bottom: none;
+}
+
+.perfil-tabla tr:hover td {
+  background: #f8f9ff;
+}
+
+.pct-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pct-alto   { background: #d4edda; color: #155724; }
+.pct-medio  { background: #fff3cd; color: #856404; }
+.pct-bajo   { background: #f8d7da; color: #721c24; }
+
+.perfil-vacio {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .perfil-header { padding: 1rem; }
+  .perfil-stats  { padding: 1rem; }
+  .perfil-sesiones, .perfil-grafico { padding: 1rem; }
+  .perfil-stat-valor { font-size: 1.3rem; }
+}

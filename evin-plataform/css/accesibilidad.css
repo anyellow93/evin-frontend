@@ -1,0 +1,185 @@
+/* =============================================
+   PARCHE DE ACCESIBILIDAD - EVIN
+  
+   ============================================= */
+
+/* 1. CONTRASTE MEJORADO
+   ------------------------------------------- */
+
+/* Texto secundario en tarjetas: de #555 → #4a4a4a (ratio > 5:1 sobre #f1ebeb) */
+.card p {
+  color: #4a4a4a;
+}
+
+/* Badge medio: texto más oscuro para mayor contraste con el amarillo */
+.badge-medio {
+  color: #1a1a1a;
+}
+
+/* Añadir icono/símbolo a cada badge para no depender SOLO del color */
+.badge-fácil::before   { content: "▲ "; font-size: 0.7em; }
+.badge-medio::before   { content: "◆ "; font-size: 0.7em; }
+.badge-difícil::before { content: "● "; font-size: 0.7em; }
+
+
+/* 2. FOCUS VISIBLE
+   ------------------------------------------- */
+
+/* Regla global: cualquier elemento enfocado muestra un contorno claro */
+:focus-visible {
+  outline: 3px solid #f4d35e;   /* amarillo contrastado sobre fondo oscuro y claro */
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Quitar outline:none en el input de búsqueda y sustituir por uno visible */
+input[type="search"]:focus {
+  outline: 3px solid #4361ee;
+  outline-offset: 2px;
+  border-color: var(--primary);
+}
+
+/* Botones del menú también ganan foco visible */
+.menu-btn:focus-visible,
+.nav-links a:focus-visible {
+  outline: 3px solid #f4d35e;
+  outline-offset: 3px;
+}
+
+
+/* 3. ÁREA DE TOQUE MÍNIMA (44×44px recomendado WCAG 2.5.5)
+   ------------------------------------------- */
+
+.card button,
+#closeModal,
+.btn,
+.menu-btn {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Botones pequeños de carta: ampliar padding para alcanzar 44px */
+.card button {
+  padding: 0.6rem 1.1rem;
+}
+
+/* Botón cerrar modal: área táctil grande aunque visualmente sea pequeño */
+#closeModal {
+  padding: 0.6rem;
+  font-size: 1.5rem;
+}
+
+
+/* 4. CELDAS DE JUEGO ACCESIBLES
+   (complementar con atributos ARIA en HTML — ver parche HTML)
+   ------------------------------------------- */
+
+/* Las celdas de cuadrícula deben tener cursor pointer claro y estados bien diferenciados */
+.grid-celda:focus-visible,
+.radar-cell:focus-visible,
+.memoria-card:focus-visible {
+  outline: 4px solid #f4d35e;
+  outline-offset: 2px;
+  z-index: 1;
+}
+
+/* Diferenciar estados del grid no solo por color, también por forma/borde */
+.grid-celda-objetivo {
+  background: #ffb703;
+  outline: 3px dashed #1d3557;  /* patrón visual adicional */
+}
+
+.grid-celda-correcta {
+  background: #2ecc71;
+  outline: 3px solid #155d27;
+}
+
+.grid-celda-incorrecta {
+  background: #e63946;
+  outline: 3px solid #7a0c14;
+}
+
+.grid-celda-seleccionada {
+  background: #8ecae6;
+  outline: 3px solid #0077b6;
+}
+
+/* Celdas radar: estados diferenciados con borde grueso */
+.radar-cell-correcta  { outline: 4px solid #2a9d8f; }
+.radar-cell-incorrecta,
+.radar-cell-faltante  { outline: 4px solid #e63946; }
+.radar-cell-seleccionada { outline: 4px solid #1d3557; }
+
+
+/* 5. TEXTO ESCALABLE — Usar rem en vez de px fijo donde sea posible
+   ------------------------------------------- */
+
+/* Las fuentes de juego se benefician de ser relativas al zoom del usuario */
+.memoria-card-front,
+.memoria-card-back {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+}
+
+.grid-celda-inner,
+.radar-cell {
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+}
+
+
+/* 6. SKIP LINK (saltar al contenido principal)
+   ------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  background: #1d3557;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 8px 8px;
+  font-weight: 700;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+
+/* 7. REDUCIR MOVIMIENTO para usuarios sensibles
+   ------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .memoria-card-inner {
+    transition: none;
+  }
+}
+
+
+/* 8. MODO ALTO CONTRASTE del sistema operativo
+   ------------------------------------------- */
+
+@media (forced-colors: active) {
+  .badge,
+  .badge-progreso {
+    border: 2px solid ButtonText;
+  }
+
+  .grid-celda,
+  .radar-cell,
+  .memoria-card-front,
+  .memoria-card-back {
+    border: 2px solid ButtonText;
+    forced-color-adjust: none;
+  }
+}

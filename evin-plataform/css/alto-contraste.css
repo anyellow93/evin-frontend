@@ -1,0 +1,234 @@
+/* =============================================
+   MODO ALTO CONTRASTE — EVIN
+   Se activa añadiendo la clase .alto-contraste al <body>
+   ============================================= */
+
+body.alto-contraste {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* ── Header y nav ─────────────────────────────────────────── */
+body.alto-contraste header {
+  background: #000 !important;
+  border-bottom: 3px solid #fff !important;
+}
+
+body.alto-contraste .menu-btn,
+body.alto-contraste .nav-links a {
+  color: #fff !important;
+}
+
+body.alto-contraste .menu-btn.active {
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #fff !important;
+}
+
+body.alto-contraste .logo-text {
+  color: #fff !important;
+}
+
+/* ── Secciones y fondo ───────────────────────────────────── */
+body.alto-contraste main,
+body.alto-contraste section,
+body.alto-contraste footer {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste h4,
+body.alto-contraste p,
+body.alto-contraste li,
+body.alto-contraste label,
+body.alto-contraste span {
+  color: #fff !important;
+}
+
+/* ── Tarjetas ─────────────────────────────────────────────── */
+body.alto-contraste .card {
+  background: #111 !important;
+  border: 2px solid #fff !important;
+  box-shadow: none !important;
+}
+
+body.alto-contraste .card h3,
+body.alto-contraste .card p {
+  color: #fff !important;
+}
+
+/* ── Botones ──────────────────────────────────────────────── */
+body.alto-contraste .btn {
+  background: #fff !important;
+  color: #000 !important;
+  border: 2px solid #fff !important;
+  font-weight: 700 !important;
+}
+
+body.alto-contraste .btn:hover {
+  background: #ff0 !important;
+  color: #000 !important;
+}
+
+body.alto-contraste .btn-secundario {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn-secundario:hover {
+  background: #ff0 !important;
+  color: #000 !important;
+  border-color: #ff0 !important;
+}
+
+body.alto-contraste .btn-danger {
+  background: #ff0 !important;
+  color: #000 !important;
+  border: 2px solid #ff0 !important;
+}
+
+/* ── Formularios ──────────────────────────────────────────── */
+body.alto-contraste input,
+body.alto-contraste select,
+body.alto-contraste textarea {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+body.alto-contraste input::placeholder {
+  color: #ccc !important;
+}
+
+body.alto-contraste input:focus,
+body.alto-contraste select:focus {
+  outline: 3px solid #ff0 !important;
+  border-color: #ff0 !important;
+}
+
+/* ── Badges ───────────────────────────────────────────────── */
+body.alto-contraste .badge,
+body.alto-contraste .badge-progreso {
+  background: #fff !important;
+  color: #000 !important;
+  border: 2px solid #fff !important;
+}
+
+/* ── Errores y mensajes ───────────────────────────────────── */
+body.alto-contraste .form-error {
+  background: #ff0 !important;
+  color: #000 !important;
+  border-color: #ff0 !important;
+}
+
+body.alto-contraste .form-success {
+  background: #0f0 !important;
+  color: #000 !important;
+  border-color: #0f0 !important;
+}
+
+/* ── Modal ────────────────────────────────────────────────── */
+body.alto-contraste .modal-content,
+body.alto-contraste .perfil-panel {
+  background: #000 !important;
+  border: 3px solid #fff !important;
+  color: #fff !important;
+}
+
+body.alto-contraste .perfil-header {
+  background: #000 !important;
+  border-bottom: 2px solid #fff !important;
+}
+
+body.alto-contraste .perfil-tabla th {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+body.alto-contraste .perfil-tabla td {
+  color: #fff !important;
+  border-color: #555 !important;
+}
+
+/* ── Juegos ───────────────────────────────────────────────── */
+body.alto-contraste .grid-celda {
+  background: #111 !important;
+  border: 2px solid #fff !important;
+}
+
+body.alto-contraste .grid-celda-objetivo {
+  background: #ff0 !important;
+  border-color: #ff0 !important;
+}
+
+body.alto-contraste .grid-celda-correcta {
+  background: #0f0 !important;
+  border-color: #0f0 !important;
+}
+
+body.alto-contraste .grid-celda-incorrecta {
+  background: #f00 !important;
+  border-color: #f00 !important;
+}
+
+body.alto-contraste .grid-celda-seleccionada {
+  background: #ff0 !important;
+  border-color: #ff0 !important;
+}
+
+body.alto-contraste .radar-cell {
+  background: #111 !important;
+  border: 2px solid #fff !important;
+}
+
+body.alto-contraste .dif-celda {
+  background: #111 !important;
+  border: 2px solid #555 !important;
+}
+
+body.alto-contraste .dif-celda.dif-correcta {
+  border-color: #0f0 !important;
+  background: #001a00 !important;
+}
+
+/* ── Botón de toggle ──────────────────────────────────────── */
+.btn-contraste {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: #1d3557;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.2s, color 0.2s;
+  min-height: 44px;
+}
+
+.btn-contraste:hover {
+  background: #fff;
+  color: #1d3557;
+}
+
+body.alto-contraste .btn-contraste {
+  background: #ff0;
+  color: #000;
+  border-color: #000;
+}
+
+body.alto-contraste .btn-contraste:hover {
+  background: #fff;
+  color: #000;
+}

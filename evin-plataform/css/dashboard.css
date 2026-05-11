@@ -1,0 +1,233 @@
+/* ── Dashboard del profesor ──────────────────────────────── */
+
+#dashboard h2 {
+  margin-bottom: 1.5rem;
+  color: #1a2e4a;
+}
+
+/* ── Stats rápidas ───────────────────────────────────────── */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.dash-stat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  border: 1px solid #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  transition: transform 0.15s;
+}
+
+.dash-stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.dash-stat-icono {
+  font-size: 2rem;
+}
+
+.dash-stat-valor {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #4361ee;
+  line-height: 1;
+}
+
+.dash-stat-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* ── Grid de paneles ─────────────────────────────────────── */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.dash-panel {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  border: 1px solid #e8e8e8;
+}
+
+.dash-panel h3 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: #1a2e4a;
+}
+
+.dash-panel-full {
+  grid-column: 1 / -1;
+}
+
+/* ── Ranking ─────────────────────────────────────────────── */
+.dash-ranking {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.dash-ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dash-ranking-pos {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.pos-oro    { background: #ffd700; color: #5c3d00; }
+.pos-plata  { background: #c0c0c0; color: #2d2d2d; }
+.pos-bronce { background: #cd7f32; color: #fff; }
+.pos-normal { background: #f0f0f0; color: #555; }
+
+.dash-ranking-nombre {
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 120px;
+  color: #2d2d2d;
+}
+
+.dash-barra-wrap {
+  flex: 1;
+  height: 10px;
+  background: #f0f0f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.dash-barra {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+  min-width: 4px;
+}
+
+.dash-ranking-pct {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #555;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ── Actividad reciente ───────────────────────────────────── */
+.dash-actividad {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.dash-actividad-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #f8f9ff;
+  border-radius: 8px;
+  gap: 1rem;
+}
+
+.dash-actividad-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.dash-actividad-alumno {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1a2e4a;
+}
+
+.dash-actividad-juego {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.dash-actividad-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.dash-actividad-fecha {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+/* ── Alumnos que necesitan atención ──────────────────────── */
+.dash-atencion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dash-atencion-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff8f0;
+  border: 1px solid #f4a261;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+}
+
+.dash-atencion-nombre {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1a2e4a;
+}
+
+.dash-atencion-curso {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* ── Vacío ────────────────────────────────────────────────── */
+.dash-vacio {
+  color: #999;
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .dash-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-panel-full {
+    grid-column: 1;
+  }
+
+  .dash-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
