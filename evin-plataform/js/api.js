@@ -2,7 +2,7 @@
 // Centraliza todas las llamadas al backend EVIN
 // Todos los métodos devuelven una Promise
 
-const API_URL = 'http://localhost:3001/api/v1';
+const API_URL = 'http://162.0.228.169/api/v1';
 
 const Api = {
 

@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function registrarSesion(aciertos, intentos) {
     try {
       const token = localStorage.getItem('evin_token');
-      await fetch('http://localhost:3001/api/v1/sesiones', {
+      await fetch('http://162.0.228.169/api/v1/sesiones', {
         method:  'POST',
         headers: {
           'Content-Type':  'application/json',
