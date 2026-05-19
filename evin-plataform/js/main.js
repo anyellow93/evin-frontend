@@ -79,25 +79,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Auth — elementos del DOM ───────────────────────────────────────────────
 
-  const loginForm      = document.getElementById('login-form');
-  const registerForm   = document.getElementById('register-form');
-  const forgotForm     = document.getElementById('forgot-form');
-  const userInfo       = document.getElementById('user-info');
-  const showRegister   = document.getElementById('show-register');
-  const showLogin      = document.getElementById('show-login');
-  const showForgot     = document.getElementById('show-forgot');
+  const loginForm       = document.getElementById('login-form');
+  const registerForm    = document.getElementById('register-form');
+  const forgotForm      = document.getElementById('forgot-form');
+  const userInfo        = document.getElementById('user-info');
+  const showRegister    = document.getElementById('show-register');
+  const showLogin       = document.getElementById('show-login');
+  const showForgot      = document.getElementById('show-forgot');
   const showLoginForgot = document.getElementById('show-login-from-forgot');
-  const logoutBtn      = document.getElementById('logout');
-  const userNameSpan   = document.getElementById('user-name');
-  const userRoleBadge  = document.getElementById('user-role');
-  const loginError     = document.getElementById('login-error');
-  const registerError  = document.getElementById('register-error');
-  const forgotError    = document.getElementById('forgot-error');
-  const forgotSuccess  = document.getElementById('forgot-success');
-  const alumnoExtra    = document.getElementById('alumno-extra');
-  const categorySelect = document.getElementById('register-category');
-  const strengthBar    = document.getElementById('password-strength-bar');
-  const strengthLabel  = document.getElementById('password-strength-label');
+  const logoutBtn       = document.getElementById('logout');
+  const userNameSpan    = document.getElementById('user-name');
+  const userRoleBadge   = document.getElementById('user-role');
+  const loginError      = document.getElementById('login-error');
+  const registerError   = document.getElementById('register-error');
+  const forgotError     = document.getElementById('forgot-error');
+  const forgotSuccess   = document.getElementById('forgot-success');
+  const alumnoExtra     = document.getElementById('alumno-extra');
+  const categorySelect  = document.getElementById('register-category');
+  const strengthBar     = document.getElementById('password-strength-bar');
+  const strengthLabel   = document.getElementById('password-strength-label');
 
   // ── Helpers de error ──────────────────────────────────────────────────────
 
@@ -132,17 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
     forgotForm?.classList.remove('hidden');
   }
 
-  showRegister?.addEventListener('click',      e => { e.preventDefault(); mostrarRegister(); });
-  showLogin?.addEventListener('click',         e => { e.preventDefault(); mostrarLogin(); });
-  showForgot?.addEventListener('click',        e => { e.preventDefault(); mostrarForgot(); });
-  showLoginForgot?.addEventListener('click',   e => { e.preventDefault(); mostrarLogin(); });
+  showRegister?.addEventListener('click',    e => { e.preventDefault(); mostrarRegister(); });
+  showLogin?.addEventListener('click',       e => { e.preventDefault(); mostrarLogin(); });
+  showForgot?.addEventListener('click',      e => { e.preventDefault(); mostrarForgot(); });
+  showLoginForgot?.addEventListener('click', e => { e.preventDefault(); mostrarLogin(); });
 
   // ── Restaurar sesión al cargar la página ─────────────────────────────────
 
   const savedUser = cargarUsuario();
   if (savedUser) {
     actualizarUIUsuario(savedUser);
-  if (window.aplicarPermisosPorRol) aplicarPermisosPorRol(savedUser);
+    if (window.aplicarPermisosPorRol) aplicarPermisosPorRol(savedUser);
   }
 
   // ── Actualizar UI tras login/registro ────────────────────────────────────
@@ -156,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     userNameSpan.textContent = user.nombre;
-    if (userRoleBadge) userRoleBadge.textContent = rolesLabel[user.role] || user.role;
+    // FIX: el backend devuelve user.rol (sin 'e'), no user.role
+    if (userRoleBadge) userRoleBadge.textContent = rolesLabel[user.rol] || user.rol || user.role;
 
     loginForm?.classList.add('hidden');
     registerForm?.classList.add('hidden');
@@ -336,6 +337,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       showSection(target);
+
+      // FIX: recargar alumnos cada vez que se navega a esa sección
+      // así no hace falta borrar caché tras login
+      if (target === 'alumnos' && window.__vueAlumnos) {
+        window.__vueAlumnos.cargarAlumnos();
+      }
     });
   });
 
@@ -357,10 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
   } else if (juegoParam === 'radar') {
     showSection('juego-radar');
     if (typeof iniciarRadarVisual === 'function') iniciarRadarVisual();
-    } else if (juegoParam === 'diferencias') {
-    showSection('juego-diferencias'); 
+  } else if (juegoParam === 'diferencias') {
+    showSection('juego-diferencias');
     if (typeof iniciarDiferencias === 'function') iniciarDiferencias();
-
   } else if (!juegoParam) {
     showSection('inicio');
   }
@@ -414,9 +420,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const p       = new URLSearchParams();
 
         const mapa = {
-          'Encuentra las parejas': 'memoria',
-          'Recuerda las casillas': 'grid',
-          'Radar visual':          'radar',
+          'Encuentra las parejas':     'memoria',
+          'Recuerda las casillas':     'grid',
+          'Radar visual':              'radar',
           'Encuentra las diferencias': 'diferencias'
         };
 
@@ -431,16 +437,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const user = cargarUsuario();
         if (user) p.set('usuario', encodeURIComponent(user.nombre));
 
-        window.open(`${urlBase}?${p.toString()}`, '_blank', 'width=1024,height=768');
+        window.open(`${urlBase}?${p.toString()}`, '_blank');
       }
     }
   }).mount('#app-juegos');
 
   // ── Vue: listado de alumnos ───────────────────────────────────────────────
 
- const { createApp: createAppAlumnos } = Vue;
- 
-  createAppAlumnos({
+  const { createApp: createAppAlumnos } = Vue;
+
+  // FIX: guardamos la instancia montada en window.__vueAlumnos
+  // para poder llamar a cargarAlumnos() desde el listener de navegación
+  const _alumnosApp = createAppAlumnos({
     data() {
       return {
         busqueda:       '',
@@ -462,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
         perfilCargando: false
       };
     },
- 
+
     computed: {
       alumnosFiltrados() {
         const q = this.busqueda.toLowerCase();
@@ -470,12 +478,13 @@ document.addEventListener('DOMContentLoaded', () => {
           [a.nombre, a.dificultad, a.curso].join(' ').toLowerCase().includes(q)
         );
       },
- 
+
       puedeGestionar() {
         const user = cargarUsuario();
-        return user && (user.role === 'profesor' || user.role === 'tecnico');
+        // FIX: el backend devuelve user.rol (sin 'e'), no user.role
+        return user && (user.rol === 'profesor' || user.rol === 'tecnico');
       },
- 
+
       // Stats rápidas del alumno en perfil
       perfilStats() {
         if (!this.perfilSesiones.length) return null;
@@ -483,21 +492,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const mediaAct = Math.round(
           this.perfilSesiones.reduce((s, x) => s + (x.porcentaje || 0), 0) / total
         );
-        const juegos   = [...new Set(this.perfilSesiones.map(s => s.juego))].length;
-        const ultima   = this.perfilSesiones[0]?.fecha || '—';
+        const juegos = [...new Set(this.perfilSesiones.map(s => s.juego))].length;
+        const ultima = this.perfilSesiones[0]?.fecha || '—';
         return { total, mediaAct, juegos, ultima };
       },
- 
+
       // Últimas 10 sesiones para el gráfico
       perfilGrafico() {
         return [...this.perfilSesiones].slice(0, 10).reverse();
       }
     },
- 
+
     async mounted() {
-	await this.cargarAlumnos();
+      await this.cargarAlumnos();
     },
- 
+
     methods: {
       async cargarAlumnos() {
         this.cargando = true;
@@ -510,14 +519,14 @@ document.addEventListener('DOMContentLoaded', () => {
           this.cargando = false;
         }
       },
- 
+
       // ── Panel perfil ──────────────────────────────────────
       async verPerfil(alumno) {
         this.perfilAlumno   = alumno;
         this.perfilSesiones = [];
         this.perfilCargando = true;
         this.perfilVisible  = true;
- 
+
         try {
           this.perfilSesiones = await Api.getSesiones({ alumno_id: alumno.id });
         } catch (e) {
@@ -526,32 +535,32 @@ document.addEventListener('DOMContentLoaded', () => {
           this.perfilCargando = false;
         }
       },
- 
+
       cerrarPerfil() {
         this.perfilVisible = false;
         this.perfilAlumno  = null;
       },
- 
+
       // Color de barra según porcentaje
       colorBarra(pct) {
         if (pct >= 70) return '#2ecc71';
         if (pct >= 40) return '#f4a261';
         return '#e63946';
       },
- 
+
       clasePct(pct) {
         if (pct >= 70) return 'pct-alto';
         if (pct >= 40) return 'pct-medio';
         return 'pct-bajo';
       },
- 
+
       formatFecha(fecha) {
         if (!fecha) return '—';
         return new Date(fecha).toLocaleDateString('es-ES', {
           day: '2-digit', month: '2-digit'
         });
       },
- 
+
       // ── Modal editar/crear ────────────────────────────────
       abrirModalNuevo() {
         this.modoModal      = 'nuevo';
@@ -560,7 +569,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.form = { nombre: '', edad: '', curso: '', dificultad: 'Fácil', progreso: 0 };
         this.modalVisible   = true;
       },
- 
+
       abrirModalEditar(alumno) {
         this.modoModal      = 'editar';
         this.alumnoEditando = alumno;
@@ -574,12 +583,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         this.modalVisible = true;
       },
- 
+
       cerrarModal() {
         this.modalVisible = false;
         this.modalError   = null;
       },
- 
+
       async guardarAlumno() {
         this.modalError = null;
         if (!this.form.nombre.trim()) {
@@ -600,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.modalError = e.message || 'Error al guardar el alumno.';
         }
       },
- 
+
       async confirmarEliminar(alumno) {
         if (!confirm(`¿Seguro que quieres eliminar a ${alumno.nombre}? Esta acción no se puede deshacer.`)) return;
         try {
@@ -610,13 +619,16 @@ document.addEventListener('DOMContentLoaded', () => {
           alert('Error al eliminar el alumno: ' + e.message);
         }
       },
- 
+
       claseProgreso(valor) {
         if (valor >= 70) return 'progreso-alto';
         if (valor >= 40) return 'progreso-medio';
         return 'progreso-bajo';
       }
     }
-  }).mount('#app-alumnos');
+  });
+
+  // FIX: guardamos la instancia para poder llamar cargarAlumnos() al navegar
+  window.__vueAlumnos = _alumnosApp.mount('#app-alumnos');
 
 });
