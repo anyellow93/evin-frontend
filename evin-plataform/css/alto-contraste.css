@@ -3,36 +3,9 @@
    Se activa añadiendo la clase .alto-contraste al <body>
    ============================================= */
 
+
+/* ── 1. BASE ──────────────────────────────────────────────── */
 body.alto-contraste {
-  background: #000 !important;
-  color: #fff !important;
-}
-
-/* ── Header y nav ─────────────────────────────────────────── */
-body.alto-contraste header {
-  background: #000 !important;
-  border-bottom: 3px solid #fff !important;
-}
-
-body.alto-contraste .menu-btn,
-body.alto-contraste .nav-links a {
-  color: #fff !important;
-}
-
-body.alto-contraste .menu-btn.active {
-  background: #fff !important;
-  color: #000 !important;
-  border-color: #fff !important;
-}
-
-body.alto-contraste .logo-text {
-  color: #fff !important;
-}
-
-/* ── Secciones y fondo ───────────────────────────────────── */
-body.alto-contraste main,
-body.alto-contraste section,
-body.alto-contraste footer {
   background: #000 !important;
   color: #fff !important;
 }
@@ -46,9 +19,50 @@ body.alto-contraste li,
 body.alto-contraste label,
 body.alto-contraste span {
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
 }
 
-/* ── Tarjetas ─────────────────────────────────────────────── */
+body.alto-contraste main,
+body.alto-contraste section,
+body.alto-contraste footer {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+
+/* ── 2. HEADER Y NAV ──────────────────────────────────────── */
+body.alto-contraste header {
+  background: #000 !important;
+  border-bottom: 3px solid #fff !important;
+}
+
+body.alto-contraste .menu-btn,
+body.alto-contraste .nav-links a {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .menu-btn.active {
+  background: #fff !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border-color: #fff !important;
+}
+
+body.alto-contraste .logo-text {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .logo-text::after {
+  display: none !important;
+}
+
+
+/* ── 3. TARJETAS GENERALES ────────────────────────────────── */
 body.alto-contraste .card {
   background: #111 !important;
   border: 2px solid #fff !important;
@@ -56,83 +70,250 @@ body.alto-contraste .card {
 }
 
 body.alto-contraste .card h3,
-body.alto-contraste .card p {
+body.alto-contraste .card p,
+body.alto-contraste .card span,
+body.alto-contraste .card li {
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
 }
 
-/* ── Botones ──────────────────────────────────────────────── */
-body.alto-contraste .btn {
+body.alto-contraste .card button {
+  background: #ff0 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border: 2px solid #ff0 !important;
+  width: auto !important;
+  min-height: 44px !important;
+}
+
+body.alto-contraste .card button:hover {
   background: #fff !important;
   color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+
+/* ── 4. DASHBOARD — STATS ─────────────────────────────────── */
+body.alto-contraste #dashboard h2 {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .dash-stat-card {
+  background: #111 !important;
+  border: 2px solid #fff !important;
+  box-shadow: none !important;
+}
+
+body.alto-contraste .dash-stat-valor {
+  color: #ff0 !important;
+  -webkit-text-fill-color: #ff0 !important;
+}
+
+body.alto-contraste .dash-stat-label {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+
+/* ── 5. DASHBOARD — PANELES ───────────────────────────────── */
+body.alto-contraste .dash-panel {
+  background: #111 !important;
+  border: 2px solid #fff !important;
+  box-shadow: none !important;
+}
+
+body.alto-contraste .dash-panel h3 {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+
+/* ── 6. DASHBOARD — RANKING ───────────────────────────────── */
+body.alto-contraste .dash-ranking-nombre {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .dash-barra-wrap {
+  background: #333 !important;
+}
+
+body.alto-contraste .dash-ranking-pct {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .pos-oro    { background: #ffd700 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
+body.alto-contraste .pos-plata  { background: #c0c0c0 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
+body.alto-contraste .pos-bronce { background: #cd7f32 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
+body.alto-contraste .pos-normal { background: #333 !important;    color: #fff !important; -webkit-text-fill-color: #fff !important; }
+
+
+/* ── 7. DASHBOARD — ACTIVIDAD RECIENTE ───────────────────── */
+body.alto-contraste .dash-actividad-item {
+  background: #1a1a1a !important;
+  border: 1px solid #555 !important;
+}
+
+body.alto-contraste .dash-actividad-alumno {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .dash-actividad-juego,
+body.alto-contraste .dash-actividad-fecha {
+  color: #ccc !important;
+  -webkit-text-fill-color: #ccc !important;
+}
+
+
+/* ── 8. DASHBOARD — ATENCIÓN ──────────────────────────────── */
+body.alto-contraste .dash-atencion-item {
+  background: #1a0d00 !important;
+  border-color: #ff0 !important;
+}
+
+body.alto-contraste .dash-atencion-nombre {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .dash-atencion-curso {
+  color: #ccc !important;
+  -webkit-text-fill-color: #ccc !important;
+}
+
+body.alto-contraste .dash-vacio {
+  color: #999 !important;
+  -webkit-text-fill-color: #999 !important;
+}
+
+
+/* ── 9. BOTONES GENERALES ─────────────────────────────────── */
+body.alto-contraste .btn,
+body.alto-contraste .btn-primary {
+  background: #fff !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
   border: 2px solid #fff !important;
   font-weight: 700 !important;
 }
 
-body.alto-contraste .btn:hover {
+body.alto-contraste .btn:hover,
+body.alto-contraste .btn-primary:hover {
   background: #ff0 !important;
   color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border-color: #ff0 !important;
 }
 
 body.alto-contraste .btn-secundario {
   background: #000 !important;
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
   border: 2px solid #fff !important;
 }
 
 body.alto-contraste .btn-secundario:hover {
   background: #ff0 !important;
   color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
   border-color: #ff0 !important;
 }
 
 body.alto-contraste .btn-danger {
   background: #ff0 !important;
   color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
   border: 2px solid #ff0 !important;
 }
 
-/* ── Formularios ──────────────────────────────────────────── */
+
+/* ── 10. FORMULARIOS ──────────────────────────────────────── */
 body.alto-contraste input,
 body.alto-contraste select,
 body.alto-contraste textarea {
   background: #000 !important;
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
   border: 2px solid #fff !important;
 }
 
 body.alto-contraste input::placeholder {
   color: #ccc !important;
+  -webkit-text-fill-color: #ccc !important;
 }
 
 body.alto-contraste input:focus,
-body.alto-contraste select:focus {
+body.alto-contraste select:focus,
+body.alto-contraste textarea:focus {
   outline: 3px solid #ff0 !important;
   border-color: #ff0 !important;
 }
 
-/* ── Badges ───────────────────────────────────────────────── */
-body.alto-contraste .badge,
-body.alto-contraste .badge-progreso {
-  background: #fff !important;
-  color: #000 !important;
-  border: 2px solid #fff !important;
-}
-
-/* ── Errores y mensajes ───────────────────────────────────── */
 body.alto-contraste .form-error {
   background: #ff0 !important;
   color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
   border-color: #ff0 !important;
 }
 
 body.alto-contraste .form-success {
   background: #0f0 !important;
   color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
   border-color: #0f0 !important;
 }
 
-/* ── Modal ────────────────────────────────────────────────── */
-body.alto-contraste .modal-content,
+
+/* ── 11. BADGES ───────────────────────────────────────────── */
+body.alto-contraste .badge,
+body.alto-contraste .badge-progreso,
+body.alto-contraste .badge-fácil,
+body.alto-contraste .badge-medio,
+body.alto-contraste .badge-difícil,
+body.alto-contraste .progreso-alto,
+body.alto-contraste .progreso-medio,
+body.alto-contraste .progreso-bajo,
+body.alto-contraste .user-role-badge,
+body.alto-contraste .rol-profesor,
+body.alto-contraste .rol-tecnico,
+body.alto-contraste .rol-padre,
+body.alto-contraste .rol-alumno {
+  background: #fff !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border: 2px solid #fff !important;
+}
+
+
+/* ── 12. MODAL ────────────────────────────────────────────── */
+body.alto-contraste .modal-content {
+  background: #000 !important;
+  border: 3px solid #fff !important;
+  color: #fff !important;
+}
+
+body.alto-contraste .modal-content h2,
+body.alto-contraste #modalDesc {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste #closeModal {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste #closeModal:hover {
+  background: #ff0 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+
+/* ── 13. PERFIL ALUMNO ────────────────────────────────────── */
 body.alto-contraste .perfil-panel {
   background: #000 !important;
   border: 3px solid #fff !important;
@@ -147,88 +328,92 @@ body.alto-contraste .perfil-header {
 body.alto-contraste .perfil-tabla th {
   background: #fff !important;
   color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
 }
 
 body.alto-contraste .perfil-tabla td {
   color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
   border-color: #555 !important;
 }
 
-/* ── Juegos ───────────────────────────────────────────────── */
+
+/* ── 14. JUEGO — MEMORIA VISUAL ───────────────────────────── */
+body.alto-contraste .memoria-card-front {
+  background: #1a1a1a !important;
+  border: 2px solid #fff !important;
+  border-radius: 10px !important;
+}
+
+body.alto-contraste .memoria-card-front .memoria-card-dorso {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .memoria-card-back {
+  background: #111 !important;
+  border: 2px solid #fff !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .memoria-card.memoria-acertada .memoria-card-back {
+  background: #004d00 !important;
+  border-color: #0f0 !important;
+}
+
+body.alto-contraste .memoria-card.memoria-error .memoria-card-front,
+body.alto-contraste .memoria-card.memoria-error .memoria-card-back {
+  border-color: #f00 !important;
+}
+
+
+/* ── 15. JUEGO — RECUERDA LAS CASILLAS ───────────────────── */
 body.alto-contraste .grid-celda {
   background: #111 !important;
   border: 2px solid #fff !important;
 }
 
-body.alto-contraste .grid-celda-objetivo {
-  background: #ff0 !important;
-  border-color: #ff0 !important;
-}
+body.alto-contraste .grid-celda-objetivo    { background: #ff0 !important; border-color: #ff0 !important; }
+body.alto-contraste .grid-celda-seleccionada { background: #ff0 !important; border-color: #ff0 !important; }
+body.alto-contraste .grid-celda-correcta    { background: #0f0 !important; border-color: #0f0 !important; }
+body.alto-contraste .grid-celda-incorrecta  { background: #f00 !important; border-color: #f00 !important; }
+body.alto-contraste .grid-celda-eracorrecta { background: #856404 !important; border-color: #ff0 !important; }
 
-body.alto-contraste .grid-celda-correcta {
-  background: #0f0 !important;
-  border-color: #0f0 !important;
-}
 
-body.alto-contraste .grid-celda-incorrecta {
-  background: #f00 !important;
-  border-color: #f00 !important;
-}
-
-body.alto-contraste .grid-celda-seleccionada {
-  background: #ff0 !important;
-  border-color: #ff0 !important;
-}
-
+/* ── 16. JUEGO — RADAR VISUAL ─────────────────────────────── */
 body.alto-contraste .radar-cell {
   background: #111 !important;
   border: 2px solid #fff !important;
 }
 
+body.alto-contraste .radar-cell-seleccionada { outline: 4px solid #ff0 !important; border-color: #ff0 !important; }
+body.alto-contraste .radar-cell-correcta     { outline: 4px solid #0f0 !important; border-color: #0f0 !important; }
+body.alto-contraste .radar-cell-incorrecta,
+body.alto-contraste .radar-cell-faltante     { outline: 4px solid #f00 !important; border-color: #f00 !important; }
+
+
+/* ── 17. JUEGO — DIFERENCIAS ──────────────────────────────── */
 body.alto-contraste .dif-celda {
   background: #111 !important;
   border: 2px solid #555 !important;
 }
 
-body.alto-contraste .dif-celda.dif-correcta {
-  border-color: #0f0 !important;
-  background: #001a00 !important;
-}
+body.alto-contraste .dif-celda.dif-correcta { border-color: #0f0 !important; background: #001a00 !important; }
+body.alto-contraste .dif-celda.dif-error    { border-color: #f00 !important; }
 
-/* ── Botón de toggle ──────────────────────────────────────── */
-.btn-contraste {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  background: #1d3557;
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 999px;
-  padding: 0.6rem 1.1rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: background 0.2s, color 0.2s;
-  min-height: 44px;
-}
 
-.btn-contraste:hover {
-  background: #fff;
-  color: #1d3557;
-}
-
+/* ── 18. BOTÓN DE TOGGLE ──────────────────────────────────── */
 body.alto-contraste .btn-contraste {
-  background: #ff0;
-  color: #000;
-  border-color: #000;
+  background: #ff0 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border-color: #000 !important;
 }
 
 body.alto-contraste .btn-contraste:hover {
-  background: #fff;
-  color: #000;
+  background: #fff !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
 }

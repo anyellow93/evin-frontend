@@ -137,12 +137,61 @@ document.addEventListener('DOMContentLoaded', () => {
   showForgot?.addEventListener('click',      e => { e.preventDefault(); mostrarForgot(); });
   showLoginForgot?.addEventListener('click', e => { e.preventDefault(); mostrarLogin(); });
 
+  // ── Permisos por rol ──────────────────────────────────────────────────────
+  // Controla qué secciones y botones del nav son visibles según el rol
+
+  function aplicarPermisosPorRol(user) {
+    const rol = user?.rol || user?.role || '';
+
+    // Botones del nav por id del href
+    const btnAlumnos    = document.querySelector('.menu-btn[href="#alumnos"]');
+    const btnDashboard  = document.querySelector('.menu-btn[href="#dashboard"]');
+    const btnJuegos     = document.querySelector('.menu-btn[href="#juegos"]');
+
+    // Roles que pueden ver alumnos y dashboard
+    const esGestor = rol === 'profesor' || rol === 'tecnico';
+
+    // Alumnos: solo profesor y técnico
+    if (btnAlumnos) {
+      btnAlumnos.style.display = esGestor ? '' : 'none';
+    }
+
+    // Dashboard: solo profesor y técnico
+    if (btnDashboard) {
+      btnDashboard.style.display = esGestor ? '' : 'none';
+    }
+
+    // Juegos: todos los roles pueden jugar
+    if (btnJuegos) {
+      btnJuegos.style.display = '';
+    }
+
+    // Si el usuario es alumno o padre y está en una sección restringida, redirigir a inicio
+    if (!esGestor) {
+      const seccionActual = [...sections].find(s => !s.classList.contains('hidden'));
+      if (seccionActual && (seccionActual.id === 'alumnos' || seccionActual.id === 'dashboard')) {
+        showSection('inicio');
+      }
+    }
+  }
+
+  function resetearPermisos() {
+    // Al cerrar sesión, mostrar todos los botones del nav
+    document.querySelectorAll('.menu-btn').forEach(btn => {
+      btn.style.display = '';
+    });
+  }
+
+  // Exponer para uso externo si hace falta
+  window.aplicarPermisosPorRol = aplicarPermisosPorRol;
+  window.resetearPermisos      = resetearPermisos;
+
   // ── Restaurar sesión al cargar la página ─────────────────────────────────
 
   const savedUser = cargarUsuario();
   if (savedUser) {
     actualizarUIUsuario(savedUser);
-    if (window.aplicarPermisosPorRol) aplicarPermisosPorRol(savedUser);
+    aplicarPermisosPorRol(savedUser);
   }
 
   // ── Actualizar UI tras login/registro ────────────────────────────────────
@@ -156,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     userNameSpan.textContent = user.nombre;
-    // FIX: el backend devuelve user.rol (sin 'e'), no user.role
     if (userRoleBadge) userRoleBadge.textContent = rolesLabel[user.rol] || user.rol || user.role;
 
     loginForm?.classList.add('hidden');
@@ -173,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (/[A-Z]/.test(pwd))        puntos++;
     if (/[0-9]/.test(pwd))        puntos++;
     if (/[^A-Za-z0-9]/.test(pwd)) puntos++;
-    return puntos; // 0-4
+    return puntos;
   }
 
   function actualizarBarraFortaleza(pwd) {
@@ -233,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await Api.login(email, password);
       guardarSesion(data.token, data.user);
       actualizarUIUsuario(data.user);
-      if (window.aplicarPermisosPorRol) aplicarPermisosPorRol(data.user);
+      aplicarPermisosPorRol(data.user);
       showSection('inicio');
     } catch (err) {
       mostrarError(loginError, 'Correo o contraseña incorrectos. Inténtalo de nuevo.');
@@ -278,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await Api.register(nombre, email, password, role, curso);
       guardarSesion(data.token, data.user);
       actualizarUIUsuario(data.user);
-      if (window.aplicarPermisosPorRol) aplicarPermisosPorRol(data.user);
+      aplicarPermisosPorRol(data.user);
       showSection('inicio');
     } catch (err) {
       mostrarError(registerError, err.message || 'Error al crear la cuenta. Inténtalo de nuevo.');
@@ -304,9 +352,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (_) {
       // Silenciamos el error intencionadamente por seguridad
     } finally {
-      // Siempre mostramos el mismo mensaje para no revelar si el email existe
       if (forgotSuccess) {
-        forgotSuccess.textContent  = 'Si ese correo está registrado, recibirás un enlace en breve.';
+        forgotSuccess.textContent   = 'Si ese correo está registrado, recibirás un enlace en breve.';
         forgotSuccess.style.display = 'block';
       }
       document.getElementById('forgot-email').value = '';
@@ -319,7 +366,8 @@ document.addEventListener('DOMContentLoaded', () => {
     borrarSesion();
     userInfo?.classList.add('hidden');
     mostrarLogin();
-    if (window.resetearPermisos) resetearPermisos();
+    resetearPermisos();
+    showSection('inicio');
   });
 
   // ── Navegación con control de acceso ─────────────────────────────────────
@@ -330,16 +378,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = btn.getAttribute('href').slice(1);
       const user   = cargarUsuario();
 
-      if (!user && (target === 'juegos' || target === 'alumnos')) {
+      // Sin sesión: solo inicio y usuario son accesibles
+      if (!user && (target === 'juegos' || target === 'alumnos' || target === 'dashboard')) {
         showSection('usuario');
         mostrarLogin();
         return;
       }
 
+      // Con sesión: verificar permisos por rol
+      if (user) {
+        const rol      = user.rol || user.role || '';
+        const esGestor = rol === 'profesor' || rol === 'tecnico';
+
+        if (!esGestor && (target === 'alumnos' || target === 'dashboard')) {
+          showSection('inicio');
+          return;
+        }
+      }
+
       showSection(target);
 
-      // FIX: recargar alumnos cada vez que se navega a esa sección
-      // así no hace falta borrar caché tras login
+      // Recargar alumnos al navegar a la sección
       if (target === 'alumnos' && window.__vueAlumnos) {
         window.__vueAlumnos.cargarAlumnos();
       }
@@ -446,8 +505,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const { createApp: createAppAlumnos } = Vue;
 
-  // FIX: guardamos la instancia montada en window.__vueAlumnos
-  // para poder llamar a cargarAlumnos() desde el listener de navegación
   const _alumnosApp = createAppAlumnos({
     data() {
       return {
@@ -455,7 +512,6 @@ document.addEventListener('DOMContentLoaded', () => {
         alumnos:        [],
         cargando:       true,
         error:          null,
-        // Modal editar/crear
         modalVisible:   false,
         modoModal:      'nuevo',
         modalError:     null,
@@ -463,7 +519,6 @@ document.addEventListener('DOMContentLoaded', () => {
         form: {
           nombre: '', edad: '', curso: '', dificultad: 'Fácil', progreso: 0
         },
-        // Panel perfil
         perfilVisible:  false,
         perfilAlumno:   null,
         perfilSesiones: [],
@@ -481,11 +536,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       puedeGestionar() {
         const user = cargarUsuario();
-        // FIX: el backend devuelve user.rol (sin 'e'), no user.role
         return user && (user.rol === 'profesor' || user.rol === 'tecnico');
       },
 
-      // Stats rápidas del alumno en perfil
       perfilStats() {
         if (!this.perfilSesiones.length) return null;
         const total    = this.perfilSesiones.length;
@@ -497,7 +550,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return { total, mediaAct, juegos, ultima };
       },
 
-      // Últimas 10 sesiones para el gráfico
       perfilGrafico() {
         return [...this.perfilSesiones].slice(0, 10).reverse();
       }
@@ -520,7 +572,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       },
 
-      // ── Panel perfil ──────────────────────────────────────
       async verPerfil(alumno) {
         this.perfilAlumno   = alumno;
         this.perfilSesiones = [];
@@ -541,7 +592,6 @@ document.addEventListener('DOMContentLoaded', () => {
         this.perfilAlumno  = null;
       },
 
-      // Color de barra según porcentaje
       colorBarra(pct) {
         if (pct >= 70) return '#2ecc71';
         if (pct >= 40) return '#f4a261';
@@ -561,7 +611,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       },
 
-      // ── Modal editar/crear ────────────────────────────────
       abrirModalNuevo() {
         this.modoModal      = 'nuevo';
         this.alumnoEditando = null;
@@ -628,7 +677,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // FIX: guardamos la instancia para poder llamar cargarAlumnos() al navegar
   window.__vueAlumnos = _alumnosApp.mount('#app-alumnos');
 
 });

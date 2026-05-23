@@ -17,6 +17,7 @@
         <!-- Estilos principales -->
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="css/juegos-responsive.css">
         <link rel="stylesheet" href="css/accesibilidad.css">
         <link rel="stylesheet" href="css/juego-diferencias.css">
         <link rel="stylesheet" href="css/accesibilidad-fuentes.css">
@@ -24,6 +25,8 @@
         <link rel="stylesheet" href="css/tarjetas.css">
         <link rel="stylesheet" href="css/alto-contraste.css">
         <link rel="stylesheet" href="css/dashboard.css">
+        <link rel="stylesheet" href="css/carrusel.css">
+        
 
         
     
@@ -77,6 +80,174 @@
     <main>
         
             <section id="inicio">
+            	<!-- ============================================================
+     CARRUSEL EVIN — 4 slides de beneficios
+     Pegar dentro de <section id="inicio"> en index.html,
+     justo antes del contenido actual de la sección inicio.
+     ============================================================ -->
+
+<div class="evin-carrusel" role="region" aria-label="Presentación de juegos EVIN" aria-live="polite">
+
+  <!-- Track -->
+  <div class="evin-carrusel-track" id="carrusel-track">
+
+    <!-- SLIDE 1: Encuentra las parejas -->
+    <div class="evin-slide" role="group" aria-label="Slide 1 de 4: Encuentra las parejas">
+      <div class="evin-slide-texto">
+        <span class="evin-slide-tag">Memoria visual</span>
+        <h2 class="evin-slide-titulo">Encuentra las parejas</h2>
+        <p class="evin-slide-desc">Un ejercicio de memoria visual que reta al alumno a localizar y emparejar cartas con el mismo símbolo.</p>
+        <ul class="evin-slide-beneficios">
+          <li>Entrena la atención visual sostenida</li>
+          <li>Mejora la memoria a corto plazo</li>
+          <li>Trabaja la fijación y el rastreo visual</li>
+        </ul>
+      </div>
+      <div class="evin-slide-ilustracion" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- Grid de cartas 2x2 -->
+          <rect x="10"  y="10"  width="80" height="80" rx="12" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+          <rect x="110" y="10"  width="80" height="80" rx="12" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+          <rect x="10"  y="110" width="80" height="80" rx="12" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+          <rect x="110" y="110" width="80" height="80" rx="12" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+          <!-- Emojis en cartas reveladas -->
+          <text x="50"  y="165" text-anchor="middle" font-size="40">🐶</text>
+          <text x="150" y="165" text-anchor="middle" font-size="40">🐶</text>
+          <!-- Signo ? en cartas ocultas -->
+          <text x="50"  y="65"  text-anchor="middle" font-size="36" fill="rgba(255,255,255,0.6)" font-weight="700">?</text>
+          <text x="150" y="65"  text-anchor="middle" font-size="36" fill="rgba(255,255,255,0.6)" font-weight="700">?</text>
+          <!-- Marca de par encontrado -->
+          <circle cx="150" cy="150" r="18" fill="#2ecc71"/>
+          <text x="150" y="156" text-anchor="middle" font-size="16" fill="#fff" font-weight="700">✓</text>
+          <circle cx="50"  cy="150" r="18" fill="#2ecc71"/>
+          <text x="50"  y="156" text-anchor="middle" font-size="16" fill="#fff" font-weight="700">✓</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Recuerda las casillas -->
+    <div class="evin-slide" role="group" aria-label="Slide 2 de 4: Recuerda las casillas">
+      <div class="evin-slide-texto">
+        <span class="evin-slide-tag">Memoria espacial</span>
+        <h2 class="evin-slide-titulo">Recuerda las casillas</h2>
+        <p class="evin-slide-desc">El alumno observa un patrón iluminado durante unos segundos y debe reproducirlo de memoria.</p>
+        <ul class="evin-slide-beneficios">
+          <li>Desarrolla la memoria espacial</li>
+          <li>Refuerza la atención visual selectiva</li>
+          <li>Adaptable en dificultad: 3×3 a 5×5</li>
+        </ul>
+      </div>
+      <div class="evin-slide-ilustracion" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- Grid 3x3 -->
+          <rect x="10"  y="10"  width="55" height="55" rx="8" fill="#ffb703"/>
+          <rect x="73"  y="10"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+          <rect x="136" y="10"  width="55" height="55" rx="8" fill="#ffb703"/>
+          <rect x="10"  y="73"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+          <rect x="73"  y="73"  width="55" height="55" rx="8" fill="#ffb703"/>
+          <rect x="136" y="73"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+          <rect x="10"  y="136" width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+          <rect x="73"  y="136" width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+          <rect x="136" y="136" width="55" height="55" rx="8" fill="#ffb703"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Radar visual -->
+    <div class="evin-slide" role="group" aria-label="Slide 3 de 4: Radar visual">
+      <div class="evin-slide-texto">
+        <span class="evin-slide-tag">Atención visual</span>
+        <h2 class="evin-slide-titulo">Radar visual</h2>
+        <p class="evin-slide-desc">Localiza el estímulo objetivo entre una cuadrícula de imágenes distractoras lo antes posible.</p>
+        <ul class="evin-slide-beneficios">
+          <li>Entrena los recorridos visuales</li>
+          <li>Trabaja la discriminación figura-fondo</li>
+          <li>Mejora la velocidad de procesamiento</li>
+        </ul>
+      </div>
+      <div class="evin-slide-ilustracion" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- Grid 4x4 de formas -->
+          <!-- Fila 1 -->
+          <circle cx="30"  cy="30"  r="18" fill="rgba(255,255,255,0.2)"/>
+          <rect   x="58"  y="12"  width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="120" cy="30"  r="18" fill="rgba(255,255,255,0.2)"/>
+          <polygon points="170,12 188,48 152,48" fill="rgba(255,255,255,0.2)"/>
+          <!-- Fila 2 -->
+          <polygon points="30,58 48,94 12,94" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="85"  cy="75"  r="18" fill="rgba(255,255,255,0.2)"/>
+          <rect   x="103" y="57"  width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="170" cy="75"  r="18" fill="rgba(255,255,255,0.2)"/>
+          <!-- Fila 3 — objetivo destacado -->
+          <circle cx="30"  cy="120" r="18" fill="rgba(255,255,255,0.2)"/>
+          <polygon points="85,102 103,138 67,138" fill="#f4d35e" stroke="#fff" stroke-width="3"/><!-- OBJETIVO -->
+          <circle cx="120" cy="120" r="18" fill="rgba(255,255,255,0.2)"/>
+          <rect   x="148" y="102" width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
+          <!-- Fila 4 -->
+          <rect   x="12"  y="147" width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="85"  cy="165" r="18" fill="rgba(255,255,255,0.2)"/>
+          <polygon points="120,147 138,183 102,183" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="170" cy="165" r="18" fill="rgba(255,255,255,0.2)"/>
+          <!-- Círculo de selección sobre el objetivo -->
+          <circle cx="85" cy="120" r="26" fill="none" stroke="#f4d35e" stroke-width="3" stroke-dasharray="6 3" opacity="0.9"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Encuentra las diferencias -->
+    <div class="evin-slide" role="group" aria-label="Slide 4 de 4: Encuentra las diferencias">
+      <div class="evin-slide-texto">
+        <span class="evin-slide-tag">Discriminación visual</span>
+        <h2 class="evin-slide-titulo">Encuentra las diferencias</h2>
+        <p class="evin-slide-desc">Dos imágenes casi idénticas. El alumno debe detectar todas las diferencias entre ellas.</p>
+        <ul class="evin-slide-beneficios">
+          <li>Mejora la discriminación visual fina</li>
+          <li>Trabaja la atención sostenida</li>
+          <li>Desarrolla los recorridos visuales ordenados</li>
+        </ul>
+      </div>
+      <div class="evin-slide-ilustracion" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- Imagen izquierda -->
+          <rect x="5" y="30" width="88" height="140" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+          <circle cx="49" cy="80"  r="18" fill="#4361ee" opacity="0.9"/>
+          <rect   x="20" y="108" width="58" height="18" rx="4" fill="#f4a261" opacity="0.9"/>
+          <polygon points="49,135 67,163 31,163" fill="#2ecc71" opacity="0.9"/>
+
+          <!-- Imagen derecha (con diferencias) -->
+          <rect x="107" y="30" width="88" height="140" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+          <circle cx="151" cy="80"  r="18" fill="#e63946" opacity="0.9"/><!-- diferencia: color -->
+          <rect   x="122" y="108" width="58" height="18" rx="4" fill="#f4a261" opacity="0.9"/>
+          <polygon points="151,128 169,163 133,163" fill="#2ecc71" opacity="0.9"/><!-- diferencia: posición -->
+
+          <!-- Marcadores de diferencia -->
+          <circle cx="151" cy="80" r="23" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="5 3" opacity="0.85"/>
+          <circle cx="151" cy="80" r="10" fill="none"/>
+          <!-- Icono check diferencia encontrada -->
+          <circle cx="168" cy="62" r="10" fill="#2ecc71"/>
+          <text x="168" y="67" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">✓</text>
+        </svg>
+      </div>
+    </div>
+
+  </div><!-- /track -->
+
+  <!-- Flechas -->
+  <button class="evin-carrusel-prev" id="carrusel-prev" aria-label="Slide anterior">&#8592;</button>
+  <button class="evin-carrusel-next" id="carrusel-next" aria-label="Slide siguiente">&#8594;</button>
+
+  <!-- Dots -->
+  <div class="evin-carrusel-dots" role="tablist" aria-label="Slides">
+    <button class="evin-carrusel-dot activo" role="tab" aria-selected="true"  aria-label="Slide 1" data-idx="0"></button>
+    <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 2" data-idx="1"></button>
+    <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 3" data-idx="2"></button>
+    <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 4" data-idx="3"></button>
+  </div>
+
+</div><!-- /evin-carrusel -->
+
+
+<
                 <h2>Bienvenido a EVIN</h2>
                 <p id="inicio-bienvenida"></p>
                 <p>
@@ -697,6 +868,7 @@
 	<!-- 1. API centralizada (debe ir antes que main.js) -->
 	<script src="js/api.js"></script>
 	<script src="js/alto-contraste.js"></script>
+	<script src="js/carrusel.js" defer></script>
 	<!-- 2. Modal para ventanas de juego (debe ir antes que los juegos) -->
 	<script src="js/juego-modal.js"></script>
 	<script src="js/dashboard.js"></script>
@@ -709,6 +881,7 @@
 	<script src="js/juego_grid.js"></script>
 	<script src="js/juego_radar.js"></script>
 	<script src="js/juego_diferencias.js"></script>
+	
   
     
 </body>

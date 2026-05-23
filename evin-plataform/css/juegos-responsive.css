@@ -1,0 +1,282 @@
+/* ============================================================
+   juegos-responsive.css
+   ============================================================ */
+
+/* ── 1. Modo solo-juego: ocultar chrome de la app ─────────── */
+
+body.solo-juego header,
+body.solo-juego nav.main-nav,
+body.solo-juego footer,
+body.solo-juego #app-juegos,
+body.solo-juego #alumnos,
+body.solo-juego #usuario,
+body.solo-juego #inicio {
+  display: none !important;
+}
+
+/* ── 2. Pantalla completa real ────────────────────────────── */
+
+body.solo-juego {
+  margin:  0;
+  padding: 0;
+  background: #f4f6fb;
+  min-height: 100dvh;          /* dvh: usa el viewport real en móvil */
+}
+
+body.solo-juego main {
+  padding: 0;
+  margin:  0;
+  width:   100%;
+  max-width: 100%;
+}
+
+body.solo-juego main > section {
+  margin-top: 0;
+  padding: 1rem;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 3. Cabecera de cada juego ────────────────────────────── */
+
+.juego-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.juego-header h2 {
+  margin: 0;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  flex: 1;
+}
+
+.juego-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* ── 4. Tablero genérico centrado y escalable ─────────────── */
+
+.juego-tablero-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+/* ── 5. MEMORIA — responsive ──────────────────────────────── */
+
+.memoria-grid {
+  display: grid;
+  gap: clamp(0.4rem, 1.5vw, 0.75rem);
+  justify-content: center;
+  margin: 0 auto 1rem;
+  width: 100%;
+  max-width: min(480px, 95vw);
+}
+
+/* Fácil: 4 col | Medio: 4 col | Difícil: 4 col */
+/* Se controla desde JS con gridTemplateColumns — no sobreescribir */
+
+.memoria-card {
+  width:      100%;
+  padding-top: 100%;
+  cursor: pointer;
+  perspective: 700px;
+}
+
+@media (max-width: 480px) {
+  .memoria-grid {
+    gap: 0.35rem;
+  }
+
+  .memoria-card-back {
+    font-size: 1.4rem;
+  }
+}
+
+/* ── 6. GRID (Recuerda las casillas) — responsive ─────────── */
+
+.grid-tablero {
+  display: grid;
+  gap: clamp(0.25rem, 1vw, 0.4rem);
+  margin: 0 auto 1rem;
+  width: 100%;
+  max-width: min(420px, 92vw);
+}
+
+@media (max-width: 480px) {
+  .grid-tablero {
+    max-width: 92vw;
+  }
+}
+
+/* ── 7. RADAR VISUAL — responsive ────────────────────────── */
+
+.radar-grid {
+  display: grid;
+  gap: clamp(4px, 1vw, 8px);
+  justify-content: center;
+  width: 100%;
+  overflow-x: auto;            /* scroll horizontal si no cabe en móvil */
+}
+
+/* Celdas más pequeñas en móvil */
+@media (max-width: 600px) {
+  .radar-cell {
+    width:  48px !important;
+    height: 48px !important;
+  }
+
+  .radar-svg-wrap svg {
+    width:  40px !important;
+    height: 40px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .radar-cell {
+    width:  38px !important;
+    height: 38px !important;
+  }
+}
+
+/* ── 8. DIFERENCIAS — responsive ─────────────────────────── */
+
+/* En escritorio: lado a lado */
+.diferencias-paneles {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.diferencias-panel {
+  display: grid;
+  gap: clamp(3px, 0.8vw, 6px);
+  flex: 0 0 auto;
+}
+
+/* En móvil: uno encima del otro */
+@media (max-width: 700px) {
+  .diferencias-paneles {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .diferencias-panel {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .dif-celda svg {
+    width: 42px !important;
+    height: 42px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .dif-celda svg {
+    width: 34px !important;
+    height: 34px !important;
+  }
+}
+
+/* ── 9. Panel de estadísticas (común a todos) ─────────────── */
+
+.juego-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  margin-bottom: 0.75rem;
+}
+
+.juego-stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ── 10. Botones de juego ─────────────────────────────────── */
+
+.juego-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.juego-btn:active {
+  transform: scale(0.96);
+}
+
+/* En móvil los botones ocupan todo el ancho */
+@media (max-width: 480px) {
+  .juego-controles {
+    width: 100%;
+  }
+
+  .juego-btn {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+/* ── 11. Select de nivel ──────────────────────────────────── */
+
+.juego-nivel-select {
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  border: 1.5px solid #ccd;
+  font-size: 0.9rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* ── 12. Mensaje de resultado ─────────────────────────────── */
+
+.juego-mensaje {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* ── 13. Objetivo del radar (imagen + texto) ──────────────── */
+
+.radar-objetivo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.radar-objetivo-wrap svg {
+  width:  clamp(40px, 8vw, 56px);
+  height: clamp(40px, 8vw, 56px);
+}
+
+/* ── 14. Utilidad: ocultar en móvil ───────────────────────── */
+
+@media (max-width: 480px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}

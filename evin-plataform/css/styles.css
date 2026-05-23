@@ -1,39 +1,112 @@
-/* Variables, reset y estilos base */
+/* =============================================
+   EVIN — styles.css
+   Hoja de estilos principal
+   Orden: Variables → Reset → Base → Layout →
+          Header → Nav → Tarjetas → Botones →
+          Formularios → Modal → Badges →
+          Juegos → Modo solo-juego → Responsive
+   ============================================= */
+
+
+/* ── 1. VARIABLES ─────────────────────────────────────────── */
 :root {
-    --primary: #4361ee;
-    --secondary: #3f37c9;
-    --light: #f4f6fb;
-    --dark: #212529;
-    --shadow: rgba(0, 0, 0, 0.1);
-    --radius: 8px;
-    --gap: 1rem;
-    --max-width: 1200px;
-    --font-family: 'Arial', sans-serif;
+  /* Paleta principal */
+  --primary:        #1e3a5f;
+  --primary-light:  #2d5a8e;
+  --accent:         #e63946;
+  --accent-green:   #16a34a;
+  --accent-amber:   #d97706;
+
+  /* Fondos */
+  --light:          #f8fafc;
+  --surface:        #ffffff;
+  --surface-2:      #f1f5f9;
+
+  /* Texto */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+
+  /* Bordes */
+  --border:         #e2e8f0;
+  --border-strong:  #cbd5e1;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 28px rgba(0,0,0,0.10), 0 4px 10px rgba(0,0,0,0.05);
+
+  /* Tipografía */
+  --font-family:  'Roboto', system-ui, -apple-system, sans-serif;
+  --font-display: 'Montserrat', sans-serif;
+
+  /* Espaciado y radios */
+  --radius:     10px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --gap:        1rem;
+  --max-width:  1200px;
+
+  /* Transición global */
+  --transition: 0.18s ease;
 }
 
+
+/* ── 2. RESET ─────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+
+/* ── 3. BASE ──────────────────────────────────────────────── */
 body {
-    font-family: var(--font-family);
-    margin: 0;
-    padding: 0;
-    background-color: var(--light);
-    color: var(--dark);
-    line-height: 1.5;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+  padding: 0;
+  background: var(--light);
+  color: var(--text-primary);
 }
 
+::selection {
+  background: #bfdbfe;
+  color: var(--primary);
+}
+
+::-webkit-scrollbar       { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--surface-2); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+
+/* ── 4. LAYOUT ────────────────────────────────────────────── */
+main {
+  padding: 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* ── 5. HEADER ────────────────────────────────────────────── */
 header {
-background: linear-gradient(90deg, #1d3557 60%, #06033f 100%);
+  background: linear-gradient(90deg, var(--primary) 0%, #0f2744 100%);
   color: white;
   padding: 0.5rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 12px rgba(15,39,68,0.18);
 }
 
 .header-container {
@@ -42,67 +115,131 @@ background: linear-gradient(90deg, #1d3557 60%, #06033f 100%);
   justify-content: space-between;
   padding: 0.5rem 0.75rem;
 }
-/* Nav  desktop*/
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  animation: logoFadeIn 1.2s;
+}
+
+@keyframes logoFadeIn {
+  0%   { opacity: 0; transform: translateY(-24px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.logo-img {
+  height: 48px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(67,97,238,0.10);
+}
+
+.logo-text {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(120deg, #ffffff, #f4d35e, #f94144);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: evin-pop 1.2s ease-out forwards;
+  cursor: default;
+}
+
+.logo-text::after {
+  content: 'EVIN';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: rgba(0,0,0,0.18);
+  filter: blur(2px);
+  transform: translateY(2px);
+}
+
+@keyframes evin-pop {
+  0%   { transform: scale(0.8); letter-spacing: 0.3em; opacity: 0; }
+  50%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1);   letter-spacing: 0.08em; }
+}
+
+.logo-text:hover {
+  animation: evin-bounce 0.4s ease-out;
+}
+
+@keyframes evin-bounce {
+  0%   { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(-2px) scale(1.05); }
+  60%  { transform: translateY(1px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+
+/* ── 6. FOOTER ────────────────────────────────────────────── */
+footer {
+  background: var(--primary);
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 1.25rem;
+  margin-top: 2rem;
+}
+
+
+/* ── 7. NAVEGACIÓN ────────────────────────────────────────── */
 .main-nav {
   display: flex;
   align-items: center;
-  flex: 1;                /* ocupa todo el ancho disponible entre logo y borde derecho */
-  margin-left : 1.5rem;
+  flex: 1;
+  margin-left: 1.5rem;
 }
 
-/* Lista centrada */
 .nav-links {
   display: flex;
-  justify-content: center; /* centra los enlaces dentro del ancho disponible */
-  flex: 1;                 /* la lista se expande y deja hueco para el login a la derecha */
+  justify-content: center;
+  flex: 1;
   gap: 0.75rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-
-/* ESTILO BASE COMÚN PARA TODOS LOS BOTONES DEL MENÚ, INCLUIDO LOGIN */
 .menu-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.45rem 1.1rem;     /* misma altura y ancho mínimo */
-  border-radius: 999px;        /* mismo radio */
-  font-family: 'Montserrat', sans-serif;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.9rem;           /* misma tipografía/tamaño */
+  font-size: 0.9rem;
   text-decoration: none;
   border: 1px solid transparent;
   color: #f1faee;
-  background-color: transparent;
-  transition: background-color 0.15s ease, color 0.15s ease,
-              transform 0.1s ease, border-color 0.15s ease;
+  background: transparent;
+  min-height: 44px;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition),
+              transform var(--transition), border-color var(--transition);
 }
 
-/* Separación del icono respecto al texto */
 .menu-btn i {
-  margin-right: 0.35rem;   /* ajusta este valor a tu gusto */
-  font-size: 0.95em;       /* opcional: tamaño relativo al texto */
+  margin-right: 0.35rem;
+  font-size: 0.95em;
 }
 
-/* Hover para todos */
 .menu-btn:hover {
-  background-color: rgba(241, 250, 238, 0.15);
+  background: rgba(241,250,238,0.15);
   transform: translateY(-1px);
 }
 
-/* Estado activo (opcional) */
 .menu-btn.active {
-  background-color: rgba(241, 250, 238, 0.25);
+  background: rgba(241,250,238,0.25);
 }
 
-
-
-
-/* Enlaces del menú y login */
-.nav-links a,
-.nav-login {
+.nav-links a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -111,30 +248,34 @@ background: linear-gradient(90deg, #1d3557 60%, #06033f 100%);
   text-decoration: none;
   color: #f1faee;
   font-size: 0.9rem;
-  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
 }
 
-/* Login fijo a la derecha */
+.nav-links a:hover {
+  background: rgba(241,250,238,0.18);
+  transform: translateY(-1px);
+}
+
 .nav-login {
-  margin-left: 1rem;       /* separación respecto al menú centrado */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-left: 1rem;
   background: #ffffff;
-  color: #1d3557;
-  /*font-weight: 600;*/
-  border-color : #ffffff
+  color: var(--primary);
+  border: 1px solid #ffffff;
+  transition: background var(--transition), border-color var(--transition);
 }
 
 .nav-login:hover {
- /* background: #f1f5ff;*/
-  background-color: #f1f5ff;
+  background: #f1f5ff;
   border-color: #f1f5ff;
 }
 
-
-/* Hover general */
-.nav-links a:hover {
-  background: rgba(241, 250, 238, 0.18);
-  transform: translateY(-1px);
-}
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -155,162 +296,47 @@ background: linear-gradient(90deg, #1d3557 60%, #06033f 100%);
   border-radius: 999px;
 }
 
-.alumno-activo-label {
-  margin-top: 0.5rem;
-  color: #2a9d8f;
-  font-weight: 700;
-}
 
-
-
-
-/*nav li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius);
-    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-  }
-  
-  nav li a:hover,
-  nav li a.active {
-    background: #fff;
-    color: var(--primary);
-    box-shadow: 0 2px 8px rgba(226, 40, 7, 0.1);
-    text-decoration: underline;
-  }
-  
-
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: var(--gap);
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius);
-    transition: background-color 0.2s ease;
-}
-
-nav a:hover,
-nav a[aria-current="page"] {
-    background-color: var(--secondary);
-}*/
-
-.logo-box {
-    animation: logoFadeIn 1.2s;
-  }
-  
-  @keyframes logoFadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-24px) scale(0.9);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-  
-
-main {
-    padding: 2rem;
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-section {
-    margin-bottom: 2rem;
-}
-
-input[type="search"] {
-    width: 100%;
-    padding: 0.6rem 1rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    border: 2px solid var(--secondary);
-    border-radius: var(--radius);
-    transition: border-color 0.2s ease;
-}
-
-input[type="search"]:focus {
-    border-color: var(--primary);
-    outline: none;
-}
-
+/* ── 8. TARJETAS ──────────────────────────────────────────── */
 .game-list,
 .student-list {
   display: grid;
-  gap: 1.2rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.4rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
-
-
-.card-alumno {
-  position: relative; /* necesario para posicionar el icono dentro */
-}
-
-.alumno-evin-icon {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.7rem;
-  width: 60px;   /* ajusta al tamaño del logo que te guste */
-  height: auto;  /* mantiene proporción */
-}
-.foto-carnet {
-  width: 60px;
-  height: 80px;   /* mantiene proporción 3:4 aprox. */
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-
 
 .card {
-  background: #f1ebeb;
-  border-radius: 12px;
-  padding: 1.2rem 1.4rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
-/*.card:hover,
-.card:focus-within {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}*/
-
-.card .button:hover {
-  background: #d62839;
-  transform: translateY(-1px);
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
+
 .card h3 {
   margin: 0;
-  font-size: 1.1rem;
-  color: #1d3557; /* azul oscuro EVIN */
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--primary);
+  letter-spacing: -0.01em;
 }
 
 .card p {
   margin: 0;
-  font-size: 0.9rem;
-  color: #555;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
 }
 
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
-}
 .card img {
   border-radius: 8px;
   align-self: flex-start;
@@ -319,43 +345,188 @@ input[type="search"]:focus {
 .card button {
   margin-top: 0.4rem;
   align-self: flex-start;
-  background: #e63946;
+  background: var(--primary);
   color: #fff;
   border-radius: 999px;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.1s ease;
+  min-height: 44px;
+  transition: background var(--transition), transform var(--transition);
 }
 
-/*.card button:hover,*/
-.card button:focus {
-    background-color: var(--secondary);
+.card button:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
 }
 
-.hidden {
-    display: none !important;
+.card-alumno {
+  position: relative;
 }
 
-footer {
-    background-color: var(--dark);
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
+.alumno-evin-icon {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.7rem;
+  width: 60px;
+  height: auto;
+}
+
+.foto-carnet {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.alumno-activo-label {
+  margin-top: 0.5rem;
+  color: var(--accent-green);
+  font-weight: 700;
 }
 
 
-  
+/* ── 9. BOTONES GENERALES ─────────────────────────────────── */
+.btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+  border-radius: 999px;
+  padding: 0.55rem 1.4rem;
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
 
-/* Modal styles */
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-danger {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #c1121f;
+  transform: translateY(-1px);
+}
+
+.btn-secundario {
+  background: var(--surface);
+  color: var(--primary);
+  border: 1.5px solid var(--border-strong);
+}
+
+.btn-secundario:hover {
+  background: var(--surface-2);
+  border-color: var(--primary);
+}
+
+
+/* ── 10. FORMULARIOS ──────────────────────────────────────── */
+input,
+select,
+textarea {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.9rem;
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(30,58,95,0.12);
+}
+
+input[type="search"] {
+  width: 100%;
+  padding: 0.55rem 1.1rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-strong);
+}
+
+.form-error {
+  color: #7f1d1d;
+  background: #fff1f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.form-success {
+  color: #14532d;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.form-hint {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.form-links {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.strength-bar {
+  display: flex;
+  gap: 4px;
+  margin-top: 0.4rem;
+}
+
+.strength-bar span {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border);
+  transition: background 0.3s ease;
+}
+
+.strength-label {
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  font-weight: 600;
+}
+
+
+/* ── 11. MODAL ────────────────────────────────────────────── */
 #modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0,0,0,0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -367,29 +538,31 @@ footer {
 }
 
 .modal-content {
-  background: #ffffff;
-  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
   max-width: 480px;
   width: 90%;
-  padding: 1.6rem 1.8rem;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+  padding: 2rem 2.2rem;
+  box-shadow: var(--shadow-lg);
   position: relative;
-  font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-family);
 }
 
 .modal-content h2 {
-  margin-top: 0;
-  margin-bottom: 0.8rem;
-  font-size: 1.3rem;
-  color: #1d3557;
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--primary);
+  font-weight: 700;
 }
 
 #modalDesc {
   margin: 0.4rem 0 0;
   font-size: 0.95rem;
-  color: #444;
-  line-height: 1.5;
-  white-space: pre-line; /* para respetar saltos de línea del texto */
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-line;
 }
 
 #closeModal {
@@ -400,193 +573,69 @@ footer {
   background: transparent;
   font-size: 1.3rem;
   cursor: pointer;
-  color: #666;
-  padding: 0;
+  color: var(--text-muted);
+  padding: 0.6rem;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color var(--transition), background var(--transition);
 }
 
 #closeModal:hover {
-  color: #e63946;
+  color: var(--accent);
+  background: #fff1f2;
 }
 
 
-.logo-box {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-  
-  .logo-img {
-    height: 48px;
-    width: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(67,97,238,0.10);
-  }
-  
-  .logo-text {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 2.1rem;
-    color: white;
-    letter-spacing: 2px;
-    text-shadow: 1px 1px 5px #3f37c9;
-  }
-
-  .badge {
-    display: inline-block;
-    padding: 0.15rem 0.6rem;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #fff;
-    margin: 0.1rem 0 0.35rem;
-  }
-  
-  /* Colores por nivel */
-  .badge-fácil {
-    background-color: #2ecc71; /* verde */
-  }
-  
-  .badge-medio {
-    background-color: #f1c40f; /* amarillo */
-    color: #333;
-  }
-  
-  .badge-difícil {
-    background-color: #e74c3c; /* rojo */
-  }
-  
-  .badge-progreso {
-    display: inline-block;
-    margin-top: 0.4rem;
-    padding: 0.2rem 0.7rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #fff;
-  }
-  
-  /* Colores según porcentaje */
-  .progreso-alto {
-    background-color: #2ecc71;
-  }
-  
-  .progreso-medio {
-    background-color: #f1c40f;
-    color: #333;
-  }
-  
-  .progreso-bajo {
-    background-color: #e74c3c;
-  }
-
-  .logo-text {
-  position: relative;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 1.6rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  /* Degradado en el texto */
-  background: linear-gradient(120deg, #ffffff, #f4d35e, #f94144);
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: evin-pop 1.2s ease-out forwards;
-  cursor: default;
+/* ── 12. BADGES ───────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0.1rem 0 0.35rem;
 }
 
-/* Sombra suave por detrás */
-.logo-text::after {
-  content: 'EVIN';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  color: rgba(0, 0, 0, 0.18);
-  filter: blur(2px);
-  transform: translateY(2px);
+.badge-fácil   { background: #dcfce7; color: #166534; }
+.badge-medio   { background: #fef9c3; color: #713f12; }
+.badge-difícil { background: #fee2e2; color: #7f1d1d; }
+
+.badge-progreso {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
-/* Animación de entrada */
-@keyframes evin-pop {
-  0% {
-    transform: scale(0.8);
-    letter-spacing: 0.3em;
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    letter-spacing: 0.08em;
-  }
+.progreso-alto  { background: #dcfce7; color: #166534; }
+.progreso-medio { background: #fef9c3; color: #713f12; }
+.progreso-bajo  { background: #fee2e2; color: #991b1b; }
+
+.user-role-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  margin-top: 0.25rem;
+  color: #fff;
+  background: var(--primary);
 }
 
-/* Pequeño “latido” al pasar el ratón */
-.logo-text:hover {
-  animation: evin-bounce 0.4s ease-out;
-}
+.rol-profesor { background: var(--primary); color: #fff; }
+.rol-tecnico  { background: #0f766e;         color: #fff; }
+.rol-padre    { background: #c2410c;         color: #fff; }
+.rol-alumno   { background: #16a34a;         color: #fff; }
 
-@keyframes evin-bounce {
-  0%   { transform: translateY(0) scale(1); }
-  30%  { transform: translateY(-2px) scale(1.05); }
-  60%  { transform: translateY(1px) scale(0.98); }
-  100% { transform: translateY(0) scale(1); }
-}
 
-  /* Responsive header */
-@media (max-width: 768px) {
-  .header-container {
-    padding: 0.4rem 0.75rem;
-  }
-
-  /* Mostrar botón hamburguesa */
-  .nav-toggle {
-    display: flex;
-  }
-
-  /* Nav como panel oculto por defecto */
-  .main-nav {
-    position: absolute;
-    top: 56px; /* justo bajo el header */
-    left: 0;
-    right: 0;
-    background: #1d3557;
-    padding: 0.5rem 0.75rem 0.75rem;
-    display: none;              /* IMPORTANTE: oculto por defecto */
-    flex-direction: column;
-    gap: 0.5rem;
-    z-index: 20;
-  }
-
-  /* Se muestra cuando tenga la clase .open (JS) */
-  .main-nav.open {
-    display: flex;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0.35rem;
-  }
-
-  .menu-btn {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .nav-login {
-    margin-left: 0;
-    margin-top: 0.25rem;
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* JUEGOS*/
-
-/* Juego de Memoria Visual */
+/* ── 13. JUEGO — MEMORIA VISUAL ───────────────────────────── */
 .memoria-panel-controles {
   display: flex;
   flex-direction: column;
@@ -612,7 +661,7 @@ footer {
 .memoria-card {
   position: relative;
   width: 100%;
-  padding-top: 100%;             /* cuadrado */
+  padding-top: 100%;
   cursor: pointer;
   perspective: 700px;
 }
@@ -629,7 +678,6 @@ footer {
   transform: rotateY(180deg);
 }
 
-/* Cara */
 .memoria-card-front,
 .memoria-card-back {
   position: absolute;
@@ -639,39 +687,30 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  font-size: clamp(1.2rem, 4vw, 2rem);
   font-weight: 700;
 }
 
-/* Dorso */
 .memoria-card-front {
   background: linear-gradient(135deg, #4361ee, #3f37c9);
   color: #fff;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* Lado con símbolo */
 .memoria-card-back {
   background: #f8f9ff;
-  color: #1d3557;
-  font-size: 2rem; 
-  transform: rotateY(180deg);   /* empieza “dada la vuelta” */
+  color: var(--primary);
+  font-size: 2rem;
+  transform: rotateY(180deg);
 }
 
-/* Estado acertado */
 .memoria-card.memoria-acertada .memoria-card-back {
   background: #2ecc71;
   color: #fff;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .memoria-grid {
-    grid-template-columns: repeat(3, minmax(60px, 1fr));
-  }
-}
 
-/* Juego Recuerda las casillas */
+/* ── 14. JUEGO — RECUERDA LAS CASILLAS ───────────────────── */
 .grid-panel-controles {
   display: flex;
   flex-direction: column;
@@ -695,76 +734,35 @@ footer {
 
 .grid-celda {
   width: 100%;
-  padding-top: 100%;             /* cuadrado */
+  padding-top: 100%;
   position: relative;
   border-radius: 8px;
   background: #535456;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.06);
-  transition: background 0.15s ease, transform 0.1s ease;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), transform var(--transition);
 }
 
 .grid-celda-inner {
   position: absolute;
   inset: 0;
   border-radius: inherit;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
 }
 
-/* Estado objetivo mostrado */
-.grid-celda-objetivo {
-  background: #ffb703;
-}
+.grid-celda-objetivo    { background: #ffb703; outline: 3px dashed var(--primary); }
+.grid-celda-seleccionada { background: #8ecae6; outline: 3px solid #0077b6; }
+.grid-celda-correcta    { background: #2ecc71; outline: 3px solid #155d27; }
+.grid-celda-incorrecta  { background: #e63946; outline: 3px solid #7a0c14; }
+.grid-celda-eracorrecta { background: #ffb703; }
 
-/* Estado seleccionado por el usuario */
-.grid-celda-seleccionada {
-  background: #8ecae6;
-}
 
-/* Estado correcta tras comprobar */
-.grid-celda-correcta {
-  background: #2ecc71;
-}
-
-/* Estado incorrecta tras comprobar */
-.grid-celda-incorrecta {
-  background: #e63946;
-}
-
-.grid-celda-eracorrecta {
-  background: #ffb703;
-}
-
-@media (max-width: 600px) {
-  .grid-tablero {
-    max-width: 320px;
-  }
-}
-
-/* Juego Radar Visual */
-
+/* ── 15. JUEGO — RADAR VISUAL ─────────────────────────────── */
 .radar-grid {
   display: grid;
   gap: 8px;
   justify-content: center;
 }
-
-/*.radar-cell {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.radar-cell-objetivo {
-  outline: 3px solid #1d3557;
-}
-
-.radar-cell-error {
-  outline: 3px solid #e63946;
-}*/
 
 .radar-cell {
   width: 64px;
@@ -775,29 +773,17 @@ footer {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
 }
 
-.radar-img {
-  max-width: 80%;
-  max-height: 80%;
-}
-
-.radar-cell-seleccionada {
-  outline: 3px solid #1d3557;
-  box-shadow: 0 0 4px rgba(0,0,0,0.4);
-}
-
-.radar-cell-correcta {
-  outline: 3px solid #2a9d8f;
-}
-
+.radar-img               { max-width: 80%; max-height: 80%; }
+.radar-cell-seleccionada { outline: 4px solid var(--primary); box-shadow: 0 0 4px rgba(0,0,0,0.4); }
+.radar-cell-correcta     { outline: 4px solid #2a9d8f; }
 .radar-cell-incorrecta,
-.radar-cell-faltante {
-  outline: 3px solid #e63946;
-}
+.radar-cell-faltante     { outline: 4px solid var(--accent); }
 
-/* solo juego */
 
+/* ── 16. MODO SOLO-JUEGO ──────────────────────────────────── */
 body.solo-juego header,
 body.solo-juego nav.main-nav,
 body.solo-juego footer,
@@ -805,95 +791,110 @@ body.solo-juego #app-juegos,
 body.solo-juego #alumnos,
 body.solo-juego #usuario,
 body.solo-juego #inicio {
-  display: none;
+  display: none !important;
+}
+
+body.solo-juego {
+  margin: 0;
+  padding: 0;
+  background: var(--light);
+  min-height: 100dvh;
+}
+
+body.solo-juego main {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 body.solo-juego main > section {
   margin-top: 0;
-}
-
-/* ── Errores y mensajes ────────────────────────────────────── */
-.form-error {
-  color: #e63946;
-  background: #fdecea;
-  border: 1px solid #e63946;
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
-
-.form-success {
-  color: #2a9d8f;
-  background: #eaf7f5;
-  border: 1px solid #2a9d8f;
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
-
-.form-hint {
-  color: #666;
-  font-size: 0.8rem;
-  margin-top: 0.2rem;
-  display: block;
-}
-
-.form-links {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-/* ── Barra de fortaleza de contraseña ─────────────────────── */
-.strength-bar {
+  padding: 1rem;
+  min-height: 100dvh;
+  box-sizing: border-box;
   display: flex;
-  gap: 4px;
-  margin-top: 0.4rem;
+  flex-direction: column;
 }
 
-.strength-bar span {
-  flex: 1;
-  height: 5px;
-  border-radius: 3px;
-  background: #ddd;
-  transition: background 0.3s ease;
-}
 
-.strength-label {
-  font-size: 0.8rem;
-  margin-top: 0.2rem;
-  font-weight: 600;
-}
-
-/* ── Badge de rol en user-info ────────────────────────────── */
-.user-role-badge {
-  display: inline-block;
-  background: #4361ee;
+/* ── 17. BOTÓN ALTO CONTRASTE ─────────────────────────────── */
+.btn-contraste {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--primary);
   color: #fff;
-  font-size: 0.75rem;
-  padding: 0.15rem 0.6rem;
+  border: 2px solid rgba(255,255,255,0.4);
   border-radius: 999px;
-  margin-top: 0.25rem;
+  padding: 0.6rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  box-shadow: var(--shadow-md);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.btn-contraste:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 
+/* ── 18. RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header-container { padding: 0.4rem 0.75rem; }
 
-/* ── Badges de rol ────────────────────────────────────────── */
-.rol-profesor { background: #4361ee; }
-.rol-tecnico  { background: #2a9d8f; }
-.rol-padre    { background: #e76f51; }
-.rol-alumno   { background: #2ecc71; color: #1a1a1a; }
+  .nav-toggle { display: flex; }
 
+  .main-nav {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--primary);
+    padding: 0.5rem 0.75rem 0.75rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 20;
+  }
 
-    
-  
+  .main-nav.open { display: flex; }
 
-/* Responsive adjustments */
-/*@media (max-width: 600px) {
-    nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.35rem;
+  }
+
+  .menu-btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nav-login {
+    margin-left: 0;
+    margin-top: 0.25rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .memoria-grid {
+    grid-template-columns: repeat(3, minmax(60px, 1fr));
+  }
+
+  .grid-tablero { max-width: 320px; }
+
+  body.solo-juego main > section { padding: 0.75rem; }
 }
