@@ -1,889 +1,865 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>EVIN - Estimulación Visual</title>
-    
-        <!-- Favicon (icono en pestaña) -->
-        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-        <link rel="manifest" href="img/site.webmanifest">
-    
-        <!-- Google Fonts: Fuente moderna y legible -->
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    
-        <!-- Estilos principales -->
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link rel="stylesheet" href="css/juegos-responsive.css">
-        <link rel="stylesheet" href="css/accesibilidad.css">
-        <link rel="stylesheet" href="css/juego-diferencias.css">
-        <link rel="stylesheet" href="css/accesibilidad-fuentes.css">
-        <link rel="stylesheet" href="css/perfil-alumno.css">
-        <link rel="stylesheet" href="css/tarjetas.css">
-        <link rel="stylesheet" href="css/alto-contraste.css">
-        <link rel="stylesheet" href="css/dashboard.css">
-        <link rel="stylesheet" href="css/carrusel.css">
-        
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVIN - Estimulación Visual</title>
 
-        
-    
-        <!-- Metaetiquetas para SEO -->
-        <meta name="description" content="EVIN es una plataforma web de estimulación visual con juegos interactivos y seguimiento de progreso para profesionales, técnicos y familias.">
-        <meta name="keywords" content="estimulación visual, EVIN, juegos educativos, percepción visual, rehabilitación visual, alumnos, plataforma educativa">
-    
-        <!-- Metaetiquetas para compartir en redes sociales -->
-        <meta property="og:title" content="EVIN - Estimulación Visual">
-        <meta property="og:description" content="Plataforma interactiva con juegos de estimulación visual y seguimiento de alumnos.">
-        <meta property="og:image" content="img/evin-social.png">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="https://tusitio.com/">
-    
-        <!-- Tema para navegadores móviles -->
-        <meta name="theme-color" content="#e63946">
-    </head>
-    
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="manifest" href="img/site.webmanifest">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/juegos-responsive.css">
+  <link rel="stylesheet" href="css/accesibilidad.css">
+  <link rel="stylesheet" href="css/juego-diferencias.css">
+  <link rel="stylesheet" href="css/accesibilidad-fuentes.css">
+  <link rel="stylesheet" href="css/perfil-alumno.css">
+  <link rel="stylesheet" href="css/tarjetas.css">
+  <link rel="stylesheet" href="css/alto-contraste.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/carrusel.css">
+  <link rel="stylesheet" href="css/faqs.css">
+
+  <!-- SEO -->
+  <meta name="description" content="EVIN es una plataforma web de estimulación visual con juegos interactivos y seguimiento de progreso para profesionales, técnicos y familias.">
+  <meta name="keywords" content="estimulación visual, EVIN, juegos educativos, percepción visual, rehabilitación visual, alumnos, plataforma educativa">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="EVIN - Estimulación Visual">
+  <meta property="og:description" content="Plataforma interactiva con juegos de estimulación visual y seguimiento de alumnos.">
+  <meta property="og:image" content="img/evin-social.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tusitio.com/">
+
+  <!-- Theme color -->
+  <meta name="theme-color" content="#1e3a5f">
+</head>
+
 <body>
+
+  <!-- Skip link accesibilidad -->
   <a href="#inicio" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- ── HEADER ─────────────────────────────────────────────── -->
   <header>
     <div class="container header-container">
       <div class="logo-box">
-        <img src="img/corporativo.png" alt="Logo EVIN" class="logo-img" />
+        <img src="img/corporativo.png" alt="Logo EVIN" class="logo-img">
         <span class="logo-text">EVIN</span>
       </div>
-      <!-- Botón hamburger solo visible en móvil -->
+
+      <!-- Botón hamburguesa (solo móvil) -->
       <button class="nav-toggle" aria-label="Abrir menú">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <nav class = "main-nav">
-        <ul class = "nav-links">
-        
-          <li><a href="#inicio" class="menu-btn"><i class="fas fa-home"></i>Inicio</a></li>
-          <li><a href="#dashboard" class="menu-btn"><i class="fas fa-chart-bar"></i>Dashboard</a></li>
-          <li><a href="#juegos" class="menu-btn"><i class="fa-solid fa-puzzle-piece"></i>Juegos</a></li>
-          <li><a href="#alumnos" class="menu-btn"><i class="fas fa-user-graduate"></i>Alumnos</a></li>
-          <li><a href="#faq" class="menu-btn"><i class="fas fa-question-circle"></i>FAQ</a></li>
-          <li><a href="#contactos" class="menu-btn"><i class="fas fa-envelope"></i>Contactos</a></li>
-                    
+
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li><a href="#inicio"    class="menu-btn"><i class="fas fa-home"></i> Inicio</a></li>
+          <li><a href="#dashboard" class="menu-btn"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+          <li><a href="#juegos"    class="menu-btn"><i class="fa-solid fa-puzzle-piece"></i> Juegos</a></li>
+          <li><a href="#alumnos"   class="menu-btn"><i class="fas fa-user-graduate"></i> Alumnos</a></li>
+          <li><a href="#faqs"      class="menu-btn"><i class="fas fa-question-circle"></i> FAQs</a></li>
+          
         </ul>
         <a href="#usuario" class="menu-btn"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
       </nav>
     </div>
   </header>
-  
 
+  <!-- ── MAIN ───────────────────────────────────────────────── -->
+  <main>
 
-    <main>
-        
-            <section id="inicio">
-            	<!-- ============================================================
-     CARRUSEL EVIN — 4 slides de beneficios
-     Pegar dentro de <section id="inicio"> en index.html,
-     justo antes del contenido actual de la sección inicio.
-     ============================================================ -->
+    <!-- ── INICIO ─────────────────────────────────────────── -->
+    <section id="inicio">
 
-<div class="evin-carrusel" role="region" aria-label="Presentación de juegos EVIN" aria-live="polite">
+      <!-- Carrusel -->
+      <div class="evin-carrusel" role="region" aria-label="Presentación de juegos EVIN" aria-live="polite">
+        <div class="evin-carrusel-track" id="carrusel-track">
 
-  <!-- Track -->
-  <div class="evin-carrusel-track" id="carrusel-track">
-
-    <!-- SLIDE 1: Encuentra las parejas -->
-    <div class="evin-slide" role="group" aria-label="Slide 1 de 4: Encuentra las parejas">
-      <div class="evin-slide-texto">
-        <span class="evin-slide-tag">Memoria visual</span>
-        <h2 class="evin-slide-titulo">Encuentra las parejas</h2>
-        <p class="evin-slide-desc">Un ejercicio de memoria visual que reta al alumno a localizar y emparejar cartas con el mismo símbolo.</p>
-        <ul class="evin-slide-beneficios">
-          <li>Entrena la atención visual sostenida</li>
-          <li>Mejora la memoria a corto plazo</li>
-          <li>Trabaja la fijación y el rastreo visual</li>
-        </ul>
-      </div>
-      <div class="evin-slide-ilustracion" aria-hidden="true">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <!-- Grid de cartas 2x2 -->
-          <rect x="10"  y="10"  width="80" height="80" rx="12" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-          <rect x="110" y="10"  width="80" height="80" rx="12" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-          <rect x="10"  y="110" width="80" height="80" rx="12" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-          <rect x="110" y="110" width="80" height="80" rx="12" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-          <!-- Emojis en cartas reveladas -->
-          <text x="50"  y="165" text-anchor="middle" font-size="40">🐶</text>
-          <text x="150" y="165" text-anchor="middle" font-size="40">🐶</text>
-          <!-- Signo ? en cartas ocultas -->
-          <text x="50"  y="65"  text-anchor="middle" font-size="36" fill="rgba(255,255,255,0.6)" font-weight="700">?</text>
-          <text x="150" y="65"  text-anchor="middle" font-size="36" fill="rgba(255,255,255,0.6)" font-weight="700">?</text>
-          <!-- Marca de par encontrado -->
-          <circle cx="150" cy="150" r="18" fill="#2ecc71"/>
-          <text x="150" y="156" text-anchor="middle" font-size="16" fill="#fff" font-weight="700">✓</text>
-          <circle cx="50"  cy="150" r="18" fill="#2ecc71"/>
-          <text x="50"  y="156" text-anchor="middle" font-size="16" fill="#fff" font-weight="700">✓</text>
-        </svg>
-      </div>
-    </div>
-
-    <!-- SLIDE 2: Recuerda las casillas -->
-    <div class="evin-slide" role="group" aria-label="Slide 2 de 4: Recuerda las casillas">
-      <div class="evin-slide-texto">
-        <span class="evin-slide-tag">Memoria espacial</span>
-        <h2 class="evin-slide-titulo">Recuerda las casillas</h2>
-        <p class="evin-slide-desc">El alumno observa un patrón iluminado durante unos segundos y debe reproducirlo de memoria.</p>
-        <ul class="evin-slide-beneficios">
-          <li>Desarrolla la memoria espacial</li>
-          <li>Refuerza la atención visual selectiva</li>
-          <li>Adaptable en dificultad: 3×3 a 5×5</li>
-        </ul>
-      </div>
-      <div class="evin-slide-ilustracion" aria-hidden="true">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <!-- Grid 3x3 -->
-          <rect x="10"  y="10"  width="55" height="55" rx="8" fill="#ffb703"/>
-          <rect x="73"  y="10"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
-          <rect x="136" y="10"  width="55" height="55" rx="8" fill="#ffb703"/>
-          <rect x="10"  y="73"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
-          <rect x="73"  y="73"  width="55" height="55" rx="8" fill="#ffb703"/>
-          <rect x="136" y="73"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
-          <rect x="10"  y="136" width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
-          <rect x="73"  y="136" width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
-          <rect x="136" y="136" width="55" height="55" rx="8" fill="#ffb703"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- SLIDE 3: Radar visual -->
-    <div class="evin-slide" role="group" aria-label="Slide 3 de 4: Radar visual">
-      <div class="evin-slide-texto">
-        <span class="evin-slide-tag">Atención visual</span>
-        <h2 class="evin-slide-titulo">Radar visual</h2>
-        <p class="evin-slide-desc">Localiza el estímulo objetivo entre una cuadrícula de imágenes distractoras lo antes posible.</p>
-        <ul class="evin-slide-beneficios">
-          <li>Entrena los recorridos visuales</li>
-          <li>Trabaja la discriminación figura-fondo</li>
-          <li>Mejora la velocidad de procesamiento</li>
-        </ul>
-      </div>
-      <div class="evin-slide-ilustracion" aria-hidden="true">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <!-- Grid 4x4 de formas -->
-          <!-- Fila 1 -->
-          <circle cx="30"  cy="30"  r="18" fill="rgba(255,255,255,0.2)"/>
-          <rect   x="58"  y="12"  width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="120" cy="30"  r="18" fill="rgba(255,255,255,0.2)"/>
-          <polygon points="170,12 188,48 152,48" fill="rgba(255,255,255,0.2)"/>
-          <!-- Fila 2 -->
-          <polygon points="30,58 48,94 12,94" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="85"  cy="75"  r="18" fill="rgba(255,255,255,0.2)"/>
-          <rect   x="103" y="57"  width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="170" cy="75"  r="18" fill="rgba(255,255,255,0.2)"/>
-          <!-- Fila 3 — objetivo destacado -->
-          <circle cx="30"  cy="120" r="18" fill="rgba(255,255,255,0.2)"/>
-          <polygon points="85,102 103,138 67,138" fill="#f4d35e" stroke="#fff" stroke-width="3"/><!-- OBJETIVO -->
-          <circle cx="120" cy="120" r="18" fill="rgba(255,255,255,0.2)"/>
-          <rect   x="148" y="102" width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
-          <!-- Fila 4 -->
-          <rect   x="12"  y="147" width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="85"  cy="165" r="18" fill="rgba(255,255,255,0.2)"/>
-          <polygon points="120,147 138,183 102,183" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="170" cy="165" r="18" fill="rgba(255,255,255,0.2)"/>
-          <!-- Círculo de selección sobre el objetivo -->
-          <circle cx="85" cy="120" r="26" fill="none" stroke="#f4d35e" stroke-width="3" stroke-dasharray="6 3" opacity="0.9"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- SLIDE 4: Encuentra las diferencias -->
-    <div class="evin-slide" role="group" aria-label="Slide 4 de 4: Encuentra las diferencias">
-      <div class="evin-slide-texto">
-        <span class="evin-slide-tag">Discriminación visual</span>
-        <h2 class="evin-slide-titulo">Encuentra las diferencias</h2>
-        <p class="evin-slide-desc">Dos imágenes casi idénticas. El alumno debe detectar todas las diferencias entre ellas.</p>
-        <ul class="evin-slide-beneficios">
-          <li>Mejora la discriminación visual fina</li>
-          <li>Trabaja la atención sostenida</li>
-          <li>Desarrolla los recorridos visuales ordenados</li>
-        </ul>
-      </div>
-      <div class="evin-slide-ilustracion" aria-hidden="true">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-          <!-- Imagen izquierda -->
-          <rect x="5" y="30" width="88" height="140" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-          <circle cx="49" cy="80"  r="18" fill="#4361ee" opacity="0.9"/>
-          <rect   x="20" y="108" width="58" height="18" rx="4" fill="#f4a261" opacity="0.9"/>
-          <polygon points="49,135 67,163 31,163" fill="#2ecc71" opacity="0.9"/>
-
-          <!-- Imagen derecha (con diferencias) -->
-          <rect x="107" y="30" width="88" height="140" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-          <circle cx="151" cy="80"  r="18" fill="#e63946" opacity="0.9"/><!-- diferencia: color -->
-          <rect   x="122" y="108" width="58" height="18" rx="4" fill="#f4a261" opacity="0.9"/>
-          <polygon points="151,128 169,163 133,163" fill="#2ecc71" opacity="0.9"/><!-- diferencia: posición -->
-
-          <!-- Marcadores de diferencia -->
-          <circle cx="151" cy="80" r="23" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="5 3" opacity="0.85"/>
-          <circle cx="151" cy="80" r="10" fill="none"/>
-          <!-- Icono check diferencia encontrada -->
-          <circle cx="168" cy="62" r="10" fill="#2ecc71"/>
-          <text x="168" y="67" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">✓</text>
-        </svg>
-      </div>
-    </div>
-
-  </div><!-- /track -->
-
-  <!-- Flechas -->
-  <button class="evin-carrusel-prev" id="carrusel-prev" aria-label="Slide anterior">&#8592;</button>
-  <button class="evin-carrusel-next" id="carrusel-next" aria-label="Slide siguiente">&#8594;</button>
-
-  <!-- Dots -->
-  <div class="evin-carrusel-dots" role="tablist" aria-label="Slides">
-    <button class="evin-carrusel-dot activo" role="tab" aria-selected="true"  aria-label="Slide 1" data-idx="0"></button>
-    <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 2" data-idx="1"></button>
-    <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 3" data-idx="2"></button>
-    <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 4" data-idx="3"></button>
-  </div>
-
-</div><!-- /evin-carrusel -->
-
-
-<
-                <h2>Bienvenido a EVIN</h2>
-                <p id="inicio-bienvenida"></p>
-                <p>
-                  La plataforma web de Estimulación Visual EVIN (Estimulación Visual en Internet) es un proyecto diseñado para ofrecer a los usuarios una serie de juegos y ejercicios que estimulan el 			desarrollo perceptivo-visual, especialmente en personas con dificultades para la recepción y/o procesamiento de estímulos visuales.
-                </p>
-                <p>
-                  Los juegos de EVIN permiten ejercitar distintas tareas visuales y pueden configurarse mediante parámetros adaptables (tamaño, complejidad, tiempo, número de estímulos, etc.) para ajustarse a las necesidades de cada usuario.
-                </p>
-                <p>
-                  Mientras el alumno se entrena, los resultados se muestran en tiempo real, lo que permite a los profesionales hacer un seguimiento individual y global de los progresos y valorar la eficacia de cada ejercicio.
-                </p>
-                <p>
-                  En EVIN encontrarás:
-                  <ul>
-                    <li>Juegos configurables para estimular diferentes habilidades visuales.</li>
-                    <li>Seguimiento y evaluación de resultados individuales y grupales.</li>
-                    <li>Un entorno accesible y adaptable para profesionales, técnicos y familiares.</li>
-                  </ul>
-                </p>
-                <p>
-                  ¡Empieza a explorar y descubre cómo EVIN puede ayudarte en la estimulación visual!
-                </p>
-              </section>
-              
-        
-
-              <section id="juegos" class="hidden">
-                <div id="app-juegos">
-                  <h2>Juegos disponibles</h2>
-              
-                  <!-- Filtros controlados por Vue -->
-                <div class="filters">
-                  <input
-                    type="search"
-                    v-model="busqueda"
-                    placeholder="Buscar juegos..."
-                    aria-label="Buscar juegos"
-                  >
-
-                  <select v-model="filtroNivel" aria-label="Filtrar por nivel">
-                    <option value="">Todos los niveles</option>
-                    <option value="Fácil">Fácil</option>
-                    <option value="Medio">Medio</option>
-                    <option value="Difícil">Difícil</option>
-                  </select>
-
-                  <select v-model="filtroTipo" aria-label="Filtrar por tipo">
-                    <option value="">Todos los tipos</option>
-                    <option value="Atención visual">Atención visual</option>
-                    <option value="Reconocimiento emocional">Reconocimiento emocional</option>
-                    <option value="Memoria visual">Memoria visual</option>
-                    <!-- añade aquí más tipos si los usas -->
-                  </select>
-                </div>
-
-                  <div class="game-list">
-                    <!-- Tarjetas generadas por Vue -->
-                    <div class="card" v-for="juego in juegosFiltrados" :key="juego.id">
-		  <img
-		    :src="juego.img"
-		    :alt="`Imagen de ${juego.nombre}`"
-		    @error="$event.target.style.display='none'"
-		  >
-		  <h3>{{ juego.nombre }}</h3>
-		  <span class="badge" :class="`badge-${juego.nivel?.toLowerCase()}`">
-		    {{ juego.nivel }}
-		  </span>
-		  <p>{{ juego.descripcion }}</p>
-		  <p>
-		    <strong>Nivel:</strong> {{ juego.nivel }}<br>
-		    <strong>Tipo:</strong> {{ juego.tipo }}
-		  </p>
-		  <div class="card-botones">
-		    <button
-		      type="button"
-		      class="btn"
-		      @click="jugar(juego)"
-		      :aria-label="`Jugar ${juego.nombre}`"
-		    >
-		      Jugar
-		    </button>
-		    <button
-		      type="button"
-		      class="btn-secundario"
-		      @click="verDetalles(juego)"
-		    >
-		      Detalles
-		    </button>
-		  </div>
-		</div>
-                </div>
-              </section>
-              
-              <!-- Añadir dentro de <main>, después de <section id="inicio"> -->
-<section id="dashboard" class="hidden">
-  <div id="app-dashboard">
-
-    <h2>Panel del profesor</h2>
-
-    <p v-if="cargando" class="cargando-texto">Cargando datos...</p>
-    <p v-if="error" class="form-error">{{ error }}</p>
-
-    <!-- ── Stats rápidas ──────────────────────────────────── -->
-    <div class="dash-stats" v-if="!cargando">
-      <div class="dash-stat-card">
-        <span class="dash-stat-icono">👨‍🎓</span>
-        <span class="dash-stat-valor">{{ totalAlumnos }}</span>
-        <span class="dash-stat-label">Alumnos</span>
-      </div>
-      <div class="dash-stat-card">
-        <span class="dash-stat-icono">🎮</span>
-        <span class="dash-stat-valor">{{ sesionesHoy }}</span>
-        <span class="dash-stat-label">Sesiones hoy</span>
-      </div>
-      <div class="dash-stat-card">
-        <span class="dash-stat-icono">📊</span>
-        <span class="dash-stat-valor">{{ mediaGlobal }}%</span>
-        <span class="dash-stat-label">Media global</span>
-      </div>
-      <div class="dash-stat-card">
-        <span class="dash-stat-icono">🏆</span>
-        <span class="dash-stat-valor">{{ totalSesiones }}</span>
-        <span class="dash-stat-label">Sesiones totales</span>
-      </div>
-    </div>
-
-    <div class="dash-grid" v-if="!cargando">
-
-      <!-- ── Ranking alumnos ─────────────────────────────── -->
-      <div class="dash-panel">
-        <h3>🏅 Ranking de progreso</h3>
-        <div class="dash-ranking">
-          <div
-            class="dash-ranking-item"
-            v-for="(alumno, i) in rankingAlumnos"
-            :key="alumno.id"
-          >
-            <span class="dash-ranking-pos" :class="posClass(i)">{{ i + 1 }}</span>
-            <span class="dash-ranking-nombre">{{ alumno.nombre }}</span>
-            <div class="dash-barra-wrap">
-              <div
-                class="dash-barra"
-                :style="{ width: alumno.progreso + '%', background: colorProgreso(alumno.progreso) }"
-              ></div>
+          <!-- Slide 1: Encuentra las parejas -->
+          <div class="evin-slide" role="group" aria-label="Slide 1 de 4: Encuentra las parejas">
+            <div class="evin-slide-texto">
+              <span class="evin-slide-tag">Memoria visual</span>
+              <h2 class="evin-slide-titulo">Encuentra las parejas</h2>
+              <p class="evin-slide-desc">Un ejercicio de memoria visual que reta al alumno a localizar y emparejar cartas con el mismo símbolo.</p>
+              <ul class="evin-slide-beneficios">
+                <li>Entrena la atención visual sostenida</li>
+                <li>Mejora la memoria a corto plazo</li>
+                <li>Trabaja la fijación y el rastreo visual</li>
+              </ul>
             </div>
-            <span class="dash-ranking-pct">{{ alumno.progreso || 0 }}%</span>
-          </div>
-          <p v-if="!rankingAlumnos.length" class="dash-vacio">Sin datos aún</p>
-        </div>
-      </div>
-
-      <!-- ── Actividad reciente ──────────────────────────── -->
-      <div class="dash-panel">
-        <h3>⏱ Actividad reciente</h3>
-        <div class="dash-actividad">
-          <div
-            class="dash-actividad-item"
-            v-for="sesion in sesionesRecientes"
-            :key="sesion.id"
-          >
-            <div class="dash-actividad-info">
-              <span class="dash-actividad-alumno">{{ sesion.alumno }}</span>
-              <span class="dash-actividad-juego">{{ sesion.juego }}</span>
-            </div>
-            <div class="dash-actividad-meta">
-              <span class="pct-badge" :class="clasePct(sesion.porcentaje)">
-                {{ sesion.porcentaje }}%
-              </span>
-              <span class="dash-actividad-fecha">{{ formatFecha(sesion.fecha) }}</span>
+            <div class="evin-slide-ilustracion" aria-hidden="true">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <rect x="10"  y="10"  width="80" height="80" rx="12" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                <rect x="110" y="10"  width="80" height="80" rx="12" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                <rect x="10"  y="110" width="80" height="80" rx="12" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                <rect x="110" y="110" width="80" height="80" rx="12" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                <text x="50"  y="165" text-anchor="middle" font-size="40">🐶</text>
+                <text x="150" y="165" text-anchor="middle" font-size="40">🐶</text>
+                <text x="50"  y="65"  text-anchor="middle" font-size="36" fill="rgba(255,255,255,0.6)" font-weight="700">?</text>
+                <text x="150" y="65"  text-anchor="middle" font-size="36" fill="rgba(255,255,255,0.6)" font-weight="700">?</text>
+                <circle cx="150" cy="150" r="18" fill="#2ecc71"/>
+                <text x="150" y="156" text-anchor="middle" font-size="16" fill="#fff" font-weight="700">✓</text>
+                <circle cx="50"  cy="150" r="18" fill="#2ecc71"/>
+                <text x="50"  y="156" text-anchor="middle" font-size="16" fill="#fff" font-weight="700">✓</text>
+              </svg>
             </div>
           </div>
-          <p v-if="!sesionesRecientes.length" class="dash-vacio">Sin sesiones recientes</p>
-        </div>
-      </div>
 
-      <!-- ── Alumnos que necesitan atención ─────────────── -->
-      <div class="dash-panel dash-panel-full">
-        <h3>⚠️ Alumnos que necesitan atención <small>(progreso menor del 40%)</small></h3>
-        <div class="dash-atencion">
-          <div
-            class="dash-atencion-item"
-            v-for="alumno in alumnosAtencion"
-            :key="alumno.id"
-          >
-            <span class="dash-atencion-nombre">{{ alumno.nombre }}</span>
-            <span class="dash-atencion-curso">{{ alumno.curso || 'Sin curso' }}</span>
-            <span class="pct-badge pct-bajo">{{ alumno.progreso || 0 }}%</span>
-          </div>
-          <p v-if="!alumnosAtencion.length" class="dash-vacio">✅ Todos los alumnos tienen buen progreso</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-              <section id="juego-memoria" class="hidden">
-                <h2>Juego: Encuentra las parejas</h2>
-
-                <div class="memoria-panel-controles">
-                  <p>Encuentra todas las parejas de cartas. Pulsa en las cartas para girarlas.</p>
-
-                  <div class="memoria-info">
-                    <span>Intentos: <strong id="memoria-intentos">0</strong></span>
-                    <span>Tiempo: <strong id="memoria-tiempo">0</strong> s</span>
-
-                    <label>
-                      Nivel:
-                      <select id="memoria-nivel">
-                        <option value="facil">Fácil</option>
-                        <option value="medio">Medio</option>
-                        <option value="dificil">Difícil</option>
-                      </select>
-                    </label>
-                  </div>
-
-                  <button id="memoria-reiniciar" class="btn">Reiniciar</button>
-                  <button id="memoria-volver" class="btn-secundario">Volver a juegos</button>
-                </div>
-                <div id="memoria-grid" class="memoria-grid">
-                    <!-- Cartas generadas por JS -->
-                </div>
-
-              </section>
-
-              <section id="juego-grid" class="hidden">
-                <h2>Juego: Recuerda las casillas</h2>
-
-                <div class="grid-panel-controles">
-                  <p>
-                    Observa las casillas destacadas, memorízalas y luego haz clic en las mismas posiciones.
-                  </p>
-
-                  <div class="grid-info">
-                    <span>Ronda: <strong id="grid-ronda">1</strong></span>
-                    <span>Aciertos: <strong id="grid-aciertos">0</strong></span>
-                    <span>Errores: <strong id="grid-errores">0</strong></span>
-
-                    <label>
-                      Nivel:
-                      <select id="grid-nivel">
-                        <option value="facil">Fácil (3x3)</option>
-                        <option value="medio">Medio (4x4)</option>
-                        <option value="dificil">Difícil (5x5)</option>
-                      </select>
-                    </label>
-                  </div>
-
-                 <div class="grid-botones">
-                  <button id="grid-empezar"  class="btn">Nueva ronda</button>
-                  <button id="grid-comprobar" class="btn" disabled>Comprobar</button>
-                  <button id="grid-volver"   class="btn-secundario">Volver a juegos</button>
-                </div>
-                </div>
-
-                <div id="grid-tablero" class="grid-tablero">
-                  <!-- Celdas generadas por JS -->
-                </div>
-              </section>
-              
-              <section id="juego-radar" class="hidden">
-                  <h2>Juego Radar visual</h2>
-                  <div class="radar-panel-controles">
-                    <p>Busca los estímulos objetivo entre los distractores y haz clic solo en ellos.</p>
-                    <div class="radar-info">
-                      <span>Objetivo: <strong id="radar-objetivo">▲ azul</strong></span>
-                      <span>Aciertos: <strong id="radar-aciertos">0</strong></span>
-                      <span>Errores: <strong id="radar-errores">0</strong></span>
-                      <span>Tiempo: <strong id="radar-tiempo">0</strong> s</span>
-                    </div>
-                    <label>
-                     Nivel
-                      <select id="radar-nivel">
-                      <option value="facil">Fácil</option>
-                      <option value="medio" selected>Medio</option>
-                      <option value="dificil">Difícil</option>
-                      </select>
-                    </label>
-                    <div class="radar-botones">
-                      <button id="radar-empezar" class="btn">Nueva búsqueda</button>
-                      <button id="radar-volver" class="btn-secundario">Volver a juegos</button>
-                      <button id="radar-comprobar" class="btn" disabled>Comprobar selección</button>
-                    </div>
-                  </div>
-
-                  <div id="radar-grid" class="radar-grid">
-                    <!-- Celdas generadas por JS -->
-                  </div>
-                  
-                  
-              </section>
-              
-              <section id="juego-diferencias" class="hidden">
-		  <h2>Juego: Encuentra las diferencias</h2>
-		 
-		  <div class="diferencias-panel-controles">
-		    <p>Observa las dos imágenes y haz clic en las diferencias que encuentres en la imagen de la derecha.</p>
-		 
-		<div class="diferencias-info">
-			<span>Encontradas: <strong id="diferencias-contador">0</strong> / <strong id="diferencias-total">0</strong></span>
-			<span>Tiempo: <strong id="diferencias-tiempo">0</strong> s</span>
-			<label>
-			Nivel:
-			<select id="diferencias-nivel">
-			<option value="facil">Fácil (3x3, 3 diferencias)</option>
-			<option value="medio" selected>Medio (4x4, 5 diferencias)</option>
-			<option value="dificil">Difícil (5x5, 7 diferencias)</option>
-			</select>
-			</label>
-		</div>
-			 
-		    <div class="diferencias-botones">
-		      <button id="diferencias-empezar" class="btn">Nueva partida</button>
-		      <button id="diferencias-volver"  class="btn-secundario">Volver a juegos</button>
-		    </div>
-		 
-		    <p id="diferencias-mensaje" class="diferencias-mensaje" style="display:none"></p>
-		  </div>
-		 
-		  <div class="diferencias-tableros">
-		    <div class="diferencias-lado">
-		      <h3>Imagen original</h3>
-		      <div id="diferencias-izq" class="diferencias-grid"></div>
-		    </div>
-		    <div class="diferencias-lado">
-		      <h3>¿Cuáles son las diferencias?</h3>
-		      <div id="diferencias-der" class="diferencias-grid"></div>
-		    </div>
-		  </div>
-		</section>
-
-
-              
-
-	<section id="alumnos" class="hidden">
-  <div id="app-alumnos">
-    <h2>Alumnos</h2>
-
-    <div class="alumnos-header">
-      <input type="search" v-model="busqueda" placeholder="Buscar alumnos..." aria-label="Buscar alumnos">
-      <button v-if="puedeGestionar" class="btn" @click="abrirModalNuevo">+ Añadir alumno</button>
-    </div>
-
-    <p v-if="error" class="form-error">{{ error }}</p>
-    <p v-if="cargando" class="cargando-texto">Cargando alumnos...</p>
-
-    <div class="student-list" v-if="!cargando && !error">
-      <div class="card card-alumno" v-for="alumno in alumnosFiltrados" :key="alumno.id">
-        <img src="img/corporativo.png" alt="Icono EVIN" class="alumno-evin-icon"/>
-        <img :src="alumno.img" class="foto-carnet" :alt="`Foto de ${alumno.nombre}`"/>
-        <h3>{{ alumno.nombre }}</h3>
-        <p>
-          Edad: {{ alumno.edad || '—' }} años<br>
-          Curso: {{ alumno.curso || '—' }}<br>
-          Dificultad: {{ alumno.dificultad || '—' }}
-        </p>
-        <span class="badge-progreso" :class="claseProgreso(alumno.progreso)">
-          Progreso: {{ alumno.progreso || 0 }}%
-        </span>
-        <div class="card-acciones">
-          <button class="btn" @click="verPerfil(alumno)" :aria-label="`Ver perfil de ${alumno.nombre}`">
-            Ver perfil
-          </button>
-          <button v-if="puedeGestionar" class="btn-secundario" @click="abrirModalEditar(alumno)">
-            ✏️ Editar
-          </button>
-          <button v-if="puedeGestionar" class="btn-danger" @click="confirmarEliminar(alumno)">
-            🗑️ Eliminar
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Panel de perfil ──────────────────────────────────── -->
-    <div v-if="perfilVisible" class="perfil-overlay" @click.self="cerrarPerfil">
-      <div class="perfil-panel" role="dialog" aria-modal="true">
-
-        <!-- Cabecera -->
-        <div class="perfil-header">
-          <div class="perfil-header-info">
-            <h2>{{ perfilAlumno?.nombre }}</h2>
-            <p>{{ perfilAlumno?.curso || 'Sin curso' }} · {{ perfilAlumno?.dificultad || 'Sin dificultad' }}</p>
-          </div>
-          <button class="perfil-cerrar" @click="cerrarPerfil" aria-label="Cerrar perfil">&times;</button>
-        </div>
-
-        <!-- Stats rápidas -->
-        <div class="perfil-stats" v-if="perfilStats">
-          <div class="perfil-stat">
-            <span class="perfil-stat-valor">{{ perfilStats.total }}</span>
-            <span class="perfil-stat-label">Sesiones totales</span>
-          </div>
-          <div class="perfil-stat">
-            <span class="perfil-stat-valor">{{ perfilStats.mediaAct }}%</span>
-            <span class="perfil-stat-label">Media de aciertos</span>
-          </div>
-          <div class="perfil-stat">
-            <span class="perfil-stat-valor">{{ perfilStats.juegos }}</span>
-            <span class="perfil-stat-label">Juegos distintos</span>
-          </div>
-          <div class="perfil-stat">
-            <span class="perfil-stat-valor">{{ perfilAlumno?.progreso || 0 }}%</span>
-            <span class="perfil-stat-label">Progreso general</span>
-          </div>
-        </div>
-
-        <!-- Gráfico de evolución -->
-        <div class="perfil-grafico" v-if="perfilGrafico.length">
-          <h3>Evolución de aciertos (últimas sesiones)</h3>
-          <div class="grafico-barras">
-            <div class="barra-wrap" v-for="(s, i) in perfilGrafico" :key="i">
-              <div
-                class="barra"
-                :style="{ height: (s.porcentaje || 0) + '%', background: colorBarra(s.porcentaje) }"
-                :data-pct="s.porcentaje"
-              ></div>
-              <span class="barra-fecha">{{ formatFecha(s.fecha) }}</span>
+          <!-- Slide 2: Recuerda las casillas -->
+          <div class="evin-slide" role="group" aria-label="Slide 2 de 4: Recuerda las casillas">
+            <div class="evin-slide-texto">
+              <span class="evin-slide-tag">Memoria espacial</span>
+              <h2 class="evin-slide-titulo">Recuerda las casillas</h2>
+              <p class="evin-slide-desc">El alumno observa un patrón iluminado durante unos segundos y debe reproducirlo de memoria.</p>
+              <ul class="evin-slide-beneficios">
+                <li>Desarrolla la memoria espacial</li>
+                <li>Refuerza la atención visual selectiva</li>
+                <li>Adaptable en dificultad: 3×3 a 5×5</li>
+              </ul>
+            </div>
+            <div class="evin-slide-ilustracion" aria-hidden="true">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <rect x="10"  y="10"  width="55" height="55" rx="8" fill="#ffb703"/>
+                <rect x="73"  y="10"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+                <rect x="136" y="10"  width="55" height="55" rx="8" fill="#ffb703"/>
+                <rect x="10"  y="73"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+                <rect x="73"  y="73"  width="55" height="55" rx="8" fill="#ffb703"/>
+                <rect x="136" y="73"  width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+                <rect x="10"  y="136" width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+                <rect x="73"  y="136" width="55" height="55" rx="8" fill="rgba(255,255,255,0.15)"/>
+                <rect x="136" y="136" width="55" height="55" rx="8" fill="#ffb703"/>
+              </svg>
             </div>
           </div>
+
+          <!-- Slide 3: Radar visual -->
+          <div class="evin-slide" role="group" aria-label="Slide 3 de 4: Radar visual">
+            <div class="evin-slide-texto">
+              <span class="evin-slide-tag">Atención visual</span>
+              <h2 class="evin-slide-titulo">Radar visual</h2>
+              <p class="evin-slide-desc">Localiza el estímulo objetivo entre una cuadrícula de imágenes distractoras lo antes posible.</p>
+              <ul class="evin-slide-beneficios">
+                <li>Entrena los recorridos visuales</li>
+                <li>Trabaja la discriminación figura-fondo</li>
+                <li>Mejora la velocidad de procesamiento</li>
+              </ul>
+            </div>
+            <div class="evin-slide-ilustracion" aria-hidden="true">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <circle cx="30"  cy="30"  r="18" fill="rgba(255,255,255,0.2)"/>
+                <rect   x="58"  y="12"  width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="120" cy="30"  r="18" fill="rgba(255,255,255,0.2)"/>
+                <polygon points="170,12 188,48 152,48" fill="rgba(255,255,255,0.2)"/>
+                <polygon points="30,58 48,94 12,94" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="85"  cy="75"  r="18" fill="rgba(255,255,255,0.2)"/>
+                <rect   x="103" y="57"  width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="170" cy="75"  r="18" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="30"  cy="120" r="18" fill="rgba(255,255,255,0.2)"/>
+                <polygon points="85,102 103,138 67,138" fill="#f4d35e" stroke="#fff" stroke-width="3"/>
+                <circle cx="120" cy="120" r="18" fill="rgba(255,255,255,0.2)"/>
+                <rect   x="148" y="102" width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
+                <rect   x="12"  y="147" width="36" height="36" rx="5" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="85"  cy="165" r="18" fill="rgba(255,255,255,0.2)"/>
+                <polygon points="120,147 138,183 102,183" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="170" cy="165" r="18" fill="rgba(255,255,255,0.2)"/>
+                <circle cx="85" cy="120" r="26" fill="none" stroke="#f4d35e" stroke-width="3" stroke-dasharray="6 3" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Slide 4: Encuentra las diferencias -->
+          <div class="evin-slide" role="group" aria-label="Slide 4 de 4: Encuentra las diferencias">
+            <div class="evin-slide-texto">
+              <span class="evin-slide-tag">Discriminación visual</span>
+              <h2 class="evin-slide-titulo">Encuentra las diferencias</h2>
+              <p class="evin-slide-desc">Dos imágenes casi idénticas. El alumno debe detectar todas las diferencias entre ellas.</p>
+              <ul class="evin-slide-beneficios">
+                <li>Mejora la discriminación visual fina</li>
+                <li>Trabaja la atención sostenida</li>
+                <li>Desarrolla los recorridos visuales ordenados</li>
+              </ul>
+            </div>
+            <div class="evin-slide-ilustracion" aria-hidden="true">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <rect x="5"   y="30" width="88"  height="140" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <circle cx="49"  cy="80" r="18" fill="#4361ee" opacity="0.9"/>
+                <rect   x="20"  y="108" width="58" height="18" rx="4" fill="#f4a261" opacity="0.9"/>
+                <polygon points="49,135 67,163 31,163" fill="#2ecc71" opacity="0.9"/>
+                <rect x="107" y="30" width="88"  height="140" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <circle cx="151" cy="80" r="18" fill="#e63946" opacity="0.9"/>
+                <rect   x="122" y="108" width="58" height="18" rx="4" fill="#f4a261" opacity="0.9"/>
+                <polygon points="151,128 169,163 133,163" fill="#2ecc71" opacity="0.9"/>
+                <circle cx="151" cy="80" r="23" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="5 3" opacity="0.85"/>
+                <circle cx="168" cy="62" r="10" fill="#2ecc71"/>
+                <text x="168" y="67" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">✓</text>
+              </svg>
+            </div>
+          </div>
+
+        </div><!-- /track -->
+
+        <button class="evin-carrusel-prev" id="carrusel-prev" aria-label="Slide anterior">&#8592;</button>
+        <button class="evin-carrusel-next" id="carrusel-next" aria-label="Slide siguiente">&#8594;</button>
+
+        <div class="evin-carrusel-dots" role="tablist" aria-label="Slides">
+          <button class="evin-carrusel-dot activo" role="tab" aria-selected="true"  aria-label="Slide 1" data-idx="0"></button>
+          <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 2" data-idx="1"></button>
+          <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 3" data-idx="2"></button>
+          <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 4" data-idx="3"></button>
+        </div>
+      </div><!-- /carrusel -->
+
+      <!-- Contenido de bienvenida -->
+      <h2>Bienvenido a EVIN</h2>
+      <p id="inicio-bienvenida"></p>
+      <p>La plataforma web de Estimulación Visual EVIN es un proyecto diseñado para ofrecer a los usuarios una serie de juegos y ejercicios que estimulan el desarrollo perceptivo-visual, especialmente en personas con dificultades para la recepción y/o procesamiento de estímulos visuales.</p>
+      <p>Los juegos de EVIN permiten ejercitar distintas tareas visuales y pueden configurarse mediante parámetros adaptables (tamaño, complejidad, tiempo, número de estímulos, etc.) para ajustarse a las necesidades de cada usuario.</p>
+      <p>Mientras el alumno se entrena, los resultados se muestran en tiempo real, lo que permite a los profesionales hacer un seguimiento individual y global de los progresos y valorar la eficacia de cada ejercicio.</p>
+      <p>En EVIN encontrarás:</p>
+      <ul>
+        <li>Juegos configurables para estimular diferentes habilidades visuales.</li>
+        <li>Seguimiento y evaluación de resultados individuales y grupales.</li>
+        <li>Un entorno accesible y adaptable para profesionales, técnicos y familiares.</li>
+      </ul>
+      <p>¡Empieza a explorar y descubre cómo EVIN puede ayudarte en la estimulación visual!</p>
+
+    </section>
+
+    <!-- ── DASHBOARD ───────────────────────────────────────── -->
+    <section id="dashboard" class="hidden">
+      <div id="app-dashboard">
+
+        <h2>Panel del profesor</h2>
+
+        <p v-if="cargando" class="cargando-texto">Cargando datos...</p>
+        <p v-if="error" class="form-error">{{ error }}</p>
+
+        <div class="dash-stats" v-if="!cargando">
+          <div class="dash-stat-card">
+            <span class="dash-stat-icono">👨‍🎓</span>
+            <span class="dash-stat-valor">{{ totalAlumnos }}</span>
+            <span class="dash-stat-label">Alumnos</span>
+          </div>
+          <div class="dash-stat-card">
+            <span class="dash-stat-icono">🎮</span>
+            <span class="dash-stat-valor">{{ sesionesHoy }}</span>
+            <span class="dash-stat-label">Sesiones hoy</span>
+          </div>
+          <div class="dash-stat-card">
+            <span class="dash-stat-icono">📊</span>
+            <span class="dash-stat-valor">{{ mediaGlobal }}%</span>
+            <span class="dash-stat-label">Media global</span>
+          </div>
+          <div class="dash-stat-card">
+            <span class="dash-stat-icono">🏆</span>
+            <span class="dash-stat-valor">{{ totalSesiones }}</span>
+            <span class="dash-stat-label">Sesiones totales</span>
+          </div>
         </div>
 
-        <!-- Tabla de sesiones -->
-        <div class="perfil-sesiones">
-          <h3>Historial de sesiones</h3>
+        <div class="dash-grid" v-if="!cargando">
 
-          <p v-if="perfilCargando">Cargando sesiones...</p>
+          <div class="dash-panel">
+            <h3>🏅 Ranking de progreso</h3>
+            <div class="dash-ranking">
+              <div class="dash-ranking-item" v-for="(alumno, i) in rankingAlumnos" :key="alumno.id">
+                <span class="dash-ranking-pos" :class="posClass(i)">{{ i + 1 }}</span>
+                <span class="dash-ranking-nombre">{{ alumno.nombre }}</span>
+                <div class="dash-barra-wrap">
+                  <div class="dash-barra" :style="{ width: alumno.progreso + '%', background: colorProgreso(alumno.progreso) }"></div>
+                </div>
+                <span class="dash-ranking-pct">{{ alumno.progreso || 0 }}%</span>
+              </div>
+              <p v-if="!rankingAlumnos.length" class="dash-vacio">Sin datos aún</p>
+            </div>
+          </div>
 
-          <p v-else-if="!perfilSesiones.length" class="perfil-vacio">
-            Este alumno aún no tiene sesiones registradas.
-          </p>
+          <div class="dash-panel">
+            <h3>⏱ Actividad reciente</h3>
+            <div class="dash-actividad">
+              <div class="dash-actividad-item" v-for="sesion in sesionesRecientes" :key="sesion.id">
+                <div class="dash-actividad-info">
+                  <span class="dash-actividad-alumno">{{ sesion.alumno }}</span>
+                  <span class="dash-actividad-juego">{{ sesion.juego }}</span>
+                </div>
+                <div class="dash-actividad-meta">
+                  <span class="pct-badge" :class="clasePct(sesion.porcentaje)">{{ sesion.porcentaje }}%</span>
+                  <span class="dash-actividad-fecha">{{ formatFecha(sesion.fecha) }}</span>
+                </div>
+              </div>
+              <p v-if="!sesionesRecientes.length" class="dash-vacio">Sin sesiones recientes</p>
+            </div>
+          </div>
 
-          <table v-else class="perfil-tabla">
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Juego</th>
-                <th>Aciertos</th>
-                <th>Intentos</th>
-                <th>% Acierto</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="sesion in perfilSesiones" :key="sesion.id">
-                <td>{{ formatFecha(sesion.fecha) }}</td>
-                <td>{{ sesion.juego }}</td>
-                <td>{{ sesion.aciertos }}</td>
-                <td>{{ sesion.intentos }}</td>
-                <td>
-                  <span class="pct-badge" :class="clasePct(sesion.porcentaje)">
-                    {{ sesion.porcentaje }}%
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="dash-panel dash-panel-full">
+            <h3>⚠️ Alumnos que necesitan atención <small>(progreso menor del 40%)</small></h3>
+            <div class="dash-atencion">
+              <div class="dash-atencion-item" v-for="alumno in alumnosAtencion" :key="alumno.id">
+                <span class="dash-atencion-nombre">{{ alumno.nombre }}</span>
+                <span class="dash-atencion-curso">{{ alumno.curso || 'Sin curso' }}</span>
+                <span class="pct-badge pct-bajo">{{ alumno.progreso || 0 }}%</span>
+              </div>
+              <p v-if="!alumnosAtencion.length" class="dash-vacio">✅ Todos los alumnos tienen buen progreso</p>
+            </div>
+          </div>
+
         </div>
-
       </div>
-    </div>
+    </section>
 
-    <!-- ── Modal editar/crear alumno ─────────────────────────── -->
-    <div v-if="modalVisible" class="modal-overlay" @click.self="cerrarModal">
-      <div class="modal-content">
-        <button class="modal-close" @click="cerrarModal">&times;</button>
-        <h3>{{ modoModal === 'nuevo' ? 'Añadir alumno' : 'Editar alumno' }}</h3>
-        <form @submit.prevent="guardarAlumno" novalidate>
-          <label>Nombre completo</label>
-          <input type="text" v-model="form.nombre" required>
-          <label>Edad</label>
-          <input type="number" v-model.number="form.edad" min="1" max="99">
-          <label>Curso</label>
-          <input type="text" v-model="form.curso" placeholder="Ej: 3º Primaria">
-          <label>Dificultad</label>
-          <select v-model="form.dificultad">
+    <!-- ── JUEGOS ──────────────────────────────────────────── -->
+    <section id="juegos" class="hidden">
+      <div id="app-juegos">
+        <h2>Juegos disponibles</h2>
+
+        <div class="filters">
+          <input type="search" v-model="busqueda" placeholder="Buscar juegos..." aria-label="Buscar juegos">
+          <select v-model="filtroNivel" aria-label="Filtrar por nivel">
+            <option value="">Todos los niveles</option>
             <option value="Fácil">Fácil</option>
             <option value="Medio">Medio</option>
             <option value="Difícil">Difícil</option>
           </select>
-          <label>Progreso (%)</label>
-          <input type="number" v-model.number="form.progreso" min="0" max="100">
-          <p v-if="modalError" class="form-error">{{ modalError }}</p>
-          <div class="modal-botones">
-            <button type="submit" class="btn">
-              {{ modoModal === 'nuevo' ? 'Crear alumno' : 'Guardar cambios' }}
-            </button>
-            <button type="button" class="btn-secundario" @click="cerrarModal">Cancelar</button>
+          <select v-model="filtroTipo" aria-label="Filtrar por tipo">
+            <option value="">Todos los tipos</option>
+            <option value="Atención visual">Atención visual</option>
+            <option value="Reconocimiento emocional">Reconocimiento emocional</option>
+            <option value="Memoria visual">Memoria visual</option>
+          </select>
+        </div>
+
+        <div class="game-list">
+          <div class="card" v-for="juego in juegosFiltrados" :key="juego.id">
+            <img :src="juego.img" :alt="`Imagen de ${juego.nombre}`" @error="$event.target.style.display='none'">
+            <h3>{{ juego.nombre }}</h3>
+            <span class="badge" :class="`badge-${juego.nivel?.toLowerCase()}`">{{ juego.nivel }}</span>
+            <p>{{ juego.descripcion }}</p>
+            <p><strong>Nivel:</strong> {{ juego.nivel }}<br><strong>Tipo:</strong> {{ juego.tipo }}</p>
+            <div class="card-botones">
+              <button type="button" class="btn" @click="jugar(juego)" :aria-label="`Jugar ${juego.nombre}`">Jugar</button>
+              <button type="button" class="btn-secundario" @click="verDetalles(juego)">Detalles</button>
+            </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── JUEGO MEMORIA ───────────────────────────────────── -->
+    <section id="juego-memoria" class="hidden">
+      <h2>Juego: Encuentra las parejas</h2>
+      <div class="memoria-panel-controles">
+        <p>Encuentra todas las parejas de cartas. Pulsa en las cartas para girarlas.</p>
+        <div class="memoria-info">
+          <span>Intentos: <strong id="memoria-intentos">0</strong></span>
+          <span>Tiempo: <strong id="memoria-tiempo">0</strong> s</span>
+          <label>
+            Nivel:
+            <select id="memoria-nivel">
+              <option value="facil">Fácil</option>
+              <option value="medio">Medio</option>
+              <option value="dificil">Difícil</option>
+            </select>
+          </label>
+        </div>
+        <button id="memoria-reiniciar" class="btn">Reiniciar</button>
+        <button id="memoria-volver" class="btn-secundario">Volver a juegos</button>
+      </div>
+      <div id="memoria-grid" class="memoria-grid"></div>
+    </section>
+
+    <!-- ── JUEGO GRID ──────────────────────────────────────── -->
+    <section id="juego-grid" class="hidden">
+      <h2>Juego: Recuerda las casillas</h2>
+      <div class="grid-panel-controles">
+        <p>Observa las casillas destacadas, memorízalas y luego haz clic en las mismas posiciones.</p>
+        <div class="grid-info">
+          <span>Ronda: <strong id="grid-ronda">1</strong></span>
+          <span>Aciertos: <strong id="grid-aciertos">0</strong></span>
+          <span>Errores: <strong id="grid-errores">0</strong></span>
+          <label>
+            Nivel:
+            <select id="grid-nivel">
+              <option value="facil">Fácil (3x3)</option>
+              <option value="medio">Medio (4x4)</option>
+              <option value="dificil">Difícil (5x5)</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid-botones">
+          <button id="grid-empezar"   class="btn">Nueva ronda</button>
+          <button id="grid-comprobar" class="btn" disabled>Comprobar</button>
+          <button id="grid-volver"    class="btn-secundario">Volver a juegos</button>
+        </div>
+      </div>
+      <div id="grid-tablero" class="grid-tablero"></div>
+    </section>
+
+    <!-- ── JUEGO RADAR ─────────────────────────────────────── -->
+    <section id="juego-radar" class="hidden">
+      <h2>Juego: Radar visual</h2>
+      <div class="radar-panel-controles">
+        <p>Busca los estímulos objetivo entre los distractores y haz clic solo en ellos.</p>
+        <div class="radar-info">
+          <span>Objetivo: <strong id="radar-objetivo">▲ azul</strong></span>
+          <span>Aciertos: <strong id="radar-aciertos">0</strong></span>
+          <span>Errores: <strong id="radar-errores">0</strong></span>
+          <span>Tiempo: <strong id="radar-tiempo">0</strong> s</span>
+        </div>
+        <label>
+          Nivel:
+          <select id="radar-nivel">
+            <option value="facil">Fácil</option>
+            <option value="medio" selected>Medio</option>
+            <option value="dificil">Difícil</option>
+          </select>
+        </label>
+        <div class="radar-botones">
+          <button id="radar-empezar"    class="btn">Nueva búsqueda</button>
+          <button id="radar-comprobar"  class="btn" disabled>Comprobar selección</button>
+          <button id="radar-volver"     class="btn-secundario">Volver a juegos</button>
+        </div>
+      </div>
+      <div id="radar-grid" class="radar-grid"></div>
+    </section>
+
+    <!-- ── JUEGO DIFERENCIAS ───────────────────────────────── -->
+    <section id="juego-diferencias" class="hidden">
+      <h2>Juego: Encuentra las diferencias</h2>
+      <div class="diferencias-panel-controles">
+        <p>Observa las dos imágenes y haz clic en las diferencias que encuentres en la imagen de la derecha.</p>
+        <div class="diferencias-info">
+          <span>Encontradas: <strong id="diferencias-contador">0</strong> / <strong id="diferencias-total">0</strong></span>
+          <span>Tiempo: <strong id="diferencias-tiempo">0</strong> s</span>
+          <label>
+            Nivel:
+            <select id="diferencias-nivel">
+              <option value="facil">Fácil (3x3, 3 diferencias)</option>
+              <option value="medio" selected>Medio (4x4, 5 diferencias)</option>
+              <option value="dificil">Difícil (5x5, 7 diferencias)</option>
+            </select>
+          </label>
+        </div>
+        <div class="diferencias-botones">
+          <button id="diferencias-empezar" class="btn">Nueva partida</button>
+          <button id="diferencias-volver"  class="btn-secundario">Volver a juegos</button>
+        </div>
+        <p id="diferencias-mensaje" class="diferencias-mensaje" style="display:none"></p>
+      </div>
+      <div class="diferencias-tableros">
+        <div class="diferencias-lado">
+          <h3>Imagen original</h3>
+          <div id="diferencias-izq" class="diferencias-grid"></div>
+        </div>
+        <div class="diferencias-lado">
+          <h3>¿Cuáles son las diferencias?</h3>
+          <div id="diferencias-der" class="diferencias-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ALUMNOS ─────────────────────────────────────────── -->
+    <section id="alumnos" class="hidden">
+      <div id="app-alumnos">
+        <h2>Alumnos</h2>
+
+        <div class="alumnos-header">
+          <input type="search" v-model="busqueda" placeholder="Buscar alumnos..." aria-label="Buscar alumnos">
+          <button v-if="puedeGestionar" class="btn" @click="abrirModalNuevo">+ Añadir alumno</button>
+        </div>
+
+        <p v-if="error"    class="form-error">{{ error }}</p>
+        <p v-if="cargando" class="cargando-texto">Cargando alumnos...</p>
+
+        <div class="student-list" v-if="!cargando && !error">
+          <div class="card card-alumno" v-for="alumno in alumnosFiltrados" :key="alumno.id">
+            <img src="img/corporativo.png" alt="Icono EVIN" class="alumno-evin-icon">
+            <img :src="alumno.img" class="foto-carnet" :alt="`Foto de ${alumno.nombre}`">
+            <h3>{{ alumno.nombre }}</h3>
+            <p>
+              Edad: {{ alumno.edad || '—' }} años<br>
+              Curso: {{ alumno.curso || '—' }}<br>
+              Dificultad: {{ alumno.dificultad || '—' }}
+            </p>
+            <span class="badge-progreso" :class="claseProgreso(alumno.progreso)">
+              Progreso: {{ alumno.progreso || 0 }}%
+            </span>
+            <div class="card-acciones">
+              <button class="btn" @click="verPerfil(alumno)" :aria-label="`Ver perfil de ${alumno.nombre}`">Ver perfil</button>
+              <button v-if="puedeGestionar" class="btn-secundario" @click="abrirModalEditar(alumno)">✏️ Editar</button>
+              <button v-if="puedeGestionar" class="btn-danger"     @click="confirmarEliminar(alumno)">🗑️ Eliminar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel perfil -->
+        <div v-if="perfilVisible" class="perfil-overlay" @click.self="cerrarPerfil">
+          <div class="perfil-panel" role="dialog" aria-modal="true">
+            <div class="perfil-header">
+              <div class="perfil-header-info">
+                <h2>{{ perfilAlumno?.nombre }}</h2>
+                <p>{{ perfilAlumno?.curso || 'Sin curso' }} · {{ perfilAlumno?.dificultad || 'Sin dificultad' }}</p>
+              </div>
+              <button class="perfil-cerrar" @click="cerrarPerfil" aria-label="Cerrar perfil">&times;</button>
+            </div>
+
+            <div class="perfil-stats" v-if="perfilStats">
+              <div class="perfil-stat">
+                <span class="perfil-stat-valor">{{ perfilStats.total }}</span>
+                <span class="perfil-stat-label">Sesiones totales</span>
+              </div>
+              <div class="perfil-stat">
+                <span class="perfil-stat-valor">{{ perfilStats.mediaAct }}%</span>
+                <span class="perfil-stat-label">Media de aciertos</span>
+              </div>
+              <div class="perfil-stat">
+                <span class="perfil-stat-valor">{{ perfilStats.juegos }}</span>
+                <span class="perfil-stat-label">Juegos distintos</span>
+              </div>
+              <div class="perfil-stat">
+                <span class="perfil-stat-valor">{{ perfilAlumno?.progreso || 0 }}%</span>
+                <span class="perfil-stat-label">Progreso general</span>
+              </div>
+            </div>
+
+            <div class="perfil-grafico" v-if="perfilGrafico.length">
+              <h3>Evolución de aciertos (últimas sesiones)</h3>
+              <div class="grafico-barras">
+                <div class="barra-wrap" v-for="(s, i) in perfilGrafico" :key="i">
+                  <div class="barra" :style="{ height: (s.porcentaje || 0) + '%', background: colorBarra(s.porcentaje) }" :data-pct="s.porcentaje"></div>
+                  <span class="barra-fecha">{{ formatFecha(s.fecha) }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="perfil-sesiones">
+              <h3>Historial de sesiones</h3>
+              <p v-if="perfilCargando">Cargando sesiones...</p>
+              <p v-else-if="!perfilSesiones.length" class="perfil-vacio">Este alumno aún no tiene sesiones registradas.</p>
+              <table v-else class="perfil-tabla">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Juego</th>
+                    <th>Aciertos</th>
+                    <th>Intentos</th>
+                    <th>% Acierto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="sesion in perfilSesiones" :key="sesion.id">
+                    <td>{{ formatFecha(sesion.fecha) }}</td>
+                    <td>{{ sesion.juego }}</td>
+                    <td>{{ sesion.aciertos }}</td>
+                    <td>{{ sesion.intentos }}</td>
+                    <td><span class="pct-badge" :class="clasePct(sesion.porcentaje)">{{ sesion.porcentaje }}%</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal editar/crear -->
+        <div v-if="modalVisible" class="modal-overlay" @click.self="cerrarModal">
+          <div class="modal-content">
+            <button class="modal-close" @click="cerrarModal">&times;</button>
+            <h3>{{ modoModal === 'nuevo' ? 'Añadir alumno' : 'Editar alumno' }}</h3>
+            <form @submit.prevent="guardarAlumno" novalidate>
+              <label>Nombre completo</label>
+              <input type="text" v-model="form.nombre" required>
+              <label>Edad</label>
+              <input type="number" v-model.number="form.edad" min="1" max="99">
+              <label>Curso</label>
+              <input type="text" v-model="form.curso" placeholder="Ej: 3º Primaria">
+              <label>Dificultad</label>
+              <select v-model="form.dificultad">
+                <option value="Fácil">Fácil</option>
+                <option value="Medio">Medio</option>
+                <option value="Difícil">Difícil</option>
+              </select>
+              <label>Progreso (%)</label>
+              <input type="number" v-model.number="form.progreso" min="0" max="100">
+              <p v-if="modalError" class="form-error">{{ modalError }}</p>
+              <div class="modal-botones">
+                <button type="submit" class="btn">{{ modoModal === 'nuevo' ? 'Crear alumno' : 'Guardar cambios' }}</button>
+                <button type="button" class="btn-secundario" @click="cerrarModal">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── FAQs ────────────────────────────────────────────── -->
+    <section id="faqs" class="hidden">
+      <div class="faqs-container">
+
+        <div class="faqs-header">
+          <h2>Preguntas frecuentes</h2>
+          <p>Encuentra respuesta a las dudas más comunes sobre EVIN y sus juegos de entrenamiento visual.</p>
+        </div>
+
+        <!-- Sobre EVIN -->
+        <div class="faqs-grupo">
+          <h3 class="faqs-grupo-titulo"><span class="faqs-grupo-icono" aria-hidden="true">🎯</span> Sobre EVIN</h3>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Qué es EVIN? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>EVIN es una plataforma de entrenamiento visual diseñada para personas con baja visión. A través de juegos interactivos, los alumnos ejercitan funciones visuales como la atención, la memoria visual, la discriminación y los recorridos visuales, con el objetivo de mejorar su eficiencia en tareas visuales del día a día.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Para quién está pensado EVIN? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>EVIN está dirigido a tres tipos de usuarios:</p>
+              <ul>
+                <li><strong>Alumnos:</strong> personas con baja visión que se entrenan con los juegos.</li>
+                <li><strong>Profesores y educadores:</strong> profesionales que guían el proceso de aprendizaje, gestionan alumnos y consultan resultados.</li>
+                <li><strong>Familiares:</strong> pueden acceder a los juegos para practicar junto al alumno.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Necesito instalar algo para usar EVIN? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>No. EVIN funciona directamente en el navegador, sin necesidad de instalar ninguna aplicación. Solo necesitas una conexión a internet y un navegador actualizado (Chrome, Firefox, Edge o Safari).</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿EVIN es accesible para personas con baja visión? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Sí. EVIN está diseñado específicamente para personas con baja visión. Incluye un modo de alto contraste activable con el botón de la esquina inferior derecha, tipografía grande, elementos con tamaño mínimo de toque de 44px y navegación completa por teclado.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Los juegos -->
+        <div class="faqs-grupo">
+          <h3 class="faqs-grupo-titulo"><span class="faqs-grupo-icono" aria-hidden="true">🎮</span> Los juegos</h3>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Qué juegos hay disponibles? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <ul>
+                <li><strong>Encuentra las parejas:</strong> entrena la memoria visual y la atención a corto plazo.</li>
+                <li><strong>Recuerda las casillas:</strong> trabaja la memoria espacial y la atención sostenida.</li>
+                <li><strong>Radar visual:</strong> entrena los recorridos visuales y la discriminación figura-fondo.</li>
+                <li><strong>Encuentra las diferencias:</strong> mejora la discriminación visual fina y la atención sostenida.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Los juegos tienen diferentes niveles de dificultad? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Sí. Todos los juegos tienen tres niveles: Fácil, Medio y Difícil. El nivel se puede cambiar en cualquier momento desde el selector que aparece en la parte superior de cada juego.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Se guardan los resultados de cada partida? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Sí. Al finalizar cada partida, los resultados (aciertos, intentos y tiempo) se guardan automáticamente en el servidor. El profesor o técnico puede consultarlos desde el perfil del alumno en la sección Alumnos.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Puedo jugar desde el móvil o tablet? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Sí. Los juegos están adaptados para funcionar en pantallas de cualquier tamaño. En móvil y tablet, los elementos se redimensionan automáticamente y los controles táctiles están optimizados.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Alumnos y resultados -->
+        <div class="faqs-grupo">
+          <h3 class="faqs-grupo-titulo"><span class="faqs-grupo-icono" aria-hidden="true">👤</span> Alumnos y resultados</h3>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Cómo añado un alumno nuevo? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Ve a la sección <strong>Alumnos</strong> y pulsa el botón <strong>Añadir alumno</strong>. Rellena los campos (nombre, edad, curso y nivel de dificultad) y guarda. El alumno aparecerá en el listado de forma inmediata.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Cómo consulto los resultados de un alumno? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Desde la sección <strong>Alumnos</strong>, haz clic en <strong>Ver perfil</strong>. Verás un resumen de sus sesiones, los juegos practicados, el porcentaje medio de aciertos y la fecha de la última sesión.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Qué significa el porcentaje de progreso? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Refleja el rendimiento medio del alumno en sus sesiones. Verde (70%+) indica buen rendimiento. Amarillo (40-69%) es progreso en desarrollo. Rojo (menos del 40%) puede indicar que el nivel es demasiado alto.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Quién puede ver los datos de los alumnos? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Solo los usuarios con rol de <strong>Profesor</strong> o <strong>Técnico</strong> tienen acceso a la sección de alumnos y a sus resultados. Los familiares y los propios alumnos solo pueden acceder a los juegos.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Cuenta y acceso -->
+        <div class="faqs-grupo">
+          <h3 class="faqs-grupo-titulo"><span class="faqs-grupo-icono" aria-hidden="true">🔐</span> Cuenta y acceso</h3>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Cómo creo una cuenta? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Pulsa en <strong>Iniciar sesión</strong> y luego en <strong>Crear cuenta</strong>. Rellena tu nombre, correo, contraseña y selecciona tu rol. La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">He olvidado mi contraseña, ¿qué hago? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>En el formulario de inicio de sesión, pulsa <strong>¿Olvidaste tu contraseña?</strong>. Introduce tu correo y recibirás un enlace para restablecerla. Si no recibes el correo, revisa la carpeta de spam.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Por qué no veo la sección de Alumnos? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>La sección de Alumnos y el Dashboard solo son visibles para usuarios con rol de Profesor o Técnico. Si tu cuenta tiene rol de Familiar o Alumno, estas secciones no están disponibles.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Es segura la información de los alumnos? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Sí. EVIN almacena los datos con acceso restringido por rol. Las contraseñas se guardan cifradas y el acceso a los datos de alumnos está limitado exclusivamente a profesores y técnicos autenticados.</p>
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── USUARIO (login/registro) ────────────────────────── -->
+    <section id="usuario">
+
+      <!-- Login -->
+      <div id="login-form">
+        <h2>Iniciar sesión</h2>
+        <form novalidate>
+          <label for="login-email">Correo electrónico</label>
+          <input type="email" id="login-email" autocomplete="email" required>
+          <label for="login-password">Contraseña</label>
+          <input type="password" id="login-password" autocomplete="current-password" required>
+          <p id="login-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
+          <button type="submit">Entrar</button>
+          <p class="form-links">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+          <p class="form-links"><a href="#" id="show-forgot">¿Olvidaste tu contraseña?</a></p>
         </form>
       </div>
-    </div>
 
-  </div>
-</section>
-              
+      <!-- Registro -->
+      <div id="register-form" class="hidden">
+        <h2>Crear cuenta</h2>
+        <form novalidate>
+          <label for="register-name">Nombre completo</label>
+          <input type="text" id="register-name" autocomplete="name" required>
+          <label for="register-email">Correo electrónico</label>
+          <input type="email" id="register-email" autocomplete="email" required>
+          <label for="register-password">Contraseña</label>
+          <input type="password" id="register-password" autocomplete="new-password" minlength="8" required aria-describedby="password-hint">
+          <small id="password-hint" class="form-hint">Mínimo 8 caracteres, con al menos una mayúscula, un número y un símbolo.</small>
+          <div id="password-strength-bar" class="strength-bar">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <p id="password-strength-label" class="strength-label"></p>
+          <label for="register-password-confirm">Repetir contraseña</label>
+          <input type="password" id="register-password-confirm" autocomplete="new-password" required>
+          <label for="register-category">Rol</label>
+          <select id="register-category" required>
+            <option value="">-- Selecciona tu rol --</option>
+            <option value="profesor">Profesor</option>
+            <option value="tecnico">Técnico</option>
+            <option value="padre">Familiar / Padre</option>
+            <option value="alumno">Alumno</option>
+          </select>
+          <div id="alumno-extra" class="hidden">
+            <label for="register-alumno-nombre">Nombre del alumno</label>
+            <input type="text" id="register-alumno-nombre" autocomplete="off">
+            <label for="register-alumno-curso">Curso</label>
+            <input type="text" id="register-alumno-curso" placeholder="Ej: 3º Primaria">
+          </div>
+          <p id="register-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
+          <button type="submit">Crear cuenta</button>
+          <p class="form-links">¿Ya tienes cuenta? <a href="#" id="show-login">Inicia sesión</a></p>
+        </form>
+      </div>
 
-        <section id="usuario">
+      <!-- Recuperar contraseña -->
+      <div id="forgot-form" class="hidden">
+        <h2>Recuperar contraseña</h2>
+        <p>Introduce tu correo y te enviaremos un enlace para restablecer tu contraseña.</p>
+        <form novalidate>
+          <label for="forgot-email">Correo electrónico</label>
+          <input type="email" id="forgot-email" autocomplete="email" required>
+          <p id="forgot-error"   class="form-error"   role="alert"  aria-live="assertive" style="display:none"></p>
+          <p id="forgot-success" class="form-success" role="status" aria-live="polite"    style="display:none"></p>
+          <button type="submit">Enviar enlace</button>
+          <p class="form-links"><a href="#" id="show-login-from-forgot">Volver al inicio de sesión</a></p>
+        </form>
+      </div>
 
-	  <!-- ── Login ─────────────────────────────────────────────────── -->
-	  <div id="login-form">
-	    <h2>Iniciar sesión</h2>
-	    <form novalidate>
-	      <label for="login-email">Correo electrónico</label>
-	      <input type="email" id="login-email" autocomplete="email" required>
+      <!-- Usuario logueado -->
+      <div id="user-info" class="hidden">
+        <p>Bienvenido, <strong><span id="user-name"></span></strong></p>
+        <p id="user-role" class="user-role-badge"></p>
+        <button id="logout">Cerrar sesión</button>
+      </div>
 
-	      <label for="login-password">Contraseña</label>
-	      <input type="password" id="login-password" autocomplete="current-password" required>
+    </section>
 
-	      <!-- Mensaje de error visible cuando falla el login -->
-	      <p id="login-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
+    <!-- Regiones ARIA para anuncios de juego -->
+    <div id="anuncio-juego"   role="status" aria-live="polite"     aria-atomic="true" class="sr-only"></div>
+    <div id="anuncio-urgente" role="alert"  aria-live="assertive"  aria-atomic="true" class="sr-only"></div>
 
-	      <button type="submit">Entrar</button>
+  </main>
 
-	      <p class="form-links">
-		¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a>
-	      </p>
-	      <p class="form-links">
-		<a href="#" id="show-forgot">¿Olvidaste tu contraseña?</a>
-	      </p>
-	    </form>
-	  </div>
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <p><a href="#accesibilidad">Accesibilidad</a></p>
+    <p>&copy; 2025 EVIN - Estimulación Visual</p>
+  </footer>
 
-	  <!-- ── Registro ──────────────────────────────────────────────── -->
-	  <div id="register-form" class="hidden">
-	    <h2>Crear cuenta</h2>
-	    <form novalidate>
-	      <label for="register-name">Nombre completo</label>
-	      <input type="text" id="register-name" autocomplete="name" required>
+  <!-- ── SCRIPTS ────────────────────────────────────────────── -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/alto-contraste.js"></script>
+  <script src="js/carrusel.js" defer></script>
+  <script src="js/juego-modal.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/roles.js"></script>
+  <script src="js/juego_memoria.js"></script>
+  <script src="js/juego_grid.js"></script>
+  <script src="js/juego_radar.js"></script>
+  <script src="js/juego_diferencias.js"></script>
 
-	      <label for="register-email">Correo electrónico</label>
-	      <input type="email" id="register-email" autocomplete="email" required>
-
-	      <label for="register-password">Contraseña</label>
-	      <input type="password" id="register-password" autocomplete="new-password"
-		     minlength="8" required
-		     aria-describedby="password-hint">
-	      <small id="password-hint" class="form-hint">
-		Mínimo 8 caracteres, con al menos una mayúscula, un número y un símbolo.
-	      </small>
-
-	      <!-- Indicador visual de fortaleza -->
-	      <div id="password-strength-bar" class="strength-bar">
-		<span></span><span></span><span></span><span></span>
-	      </div>
-	      <p id="password-strength-label" class="strength-label"></p>
-
-	      <label for="register-password-confirm">Repetir contraseña</label>
-	      <input type="password" id="register-password-confirm" autocomplete="new-password" required>
-
-	      <label for="register-category">Rol</label>
-	      <select id="register-category" required>
-		<option value="">-- Selecciona tu rol --</option>
-		<option value="profesor">Profesor</option>
-		<option value="tecnico">Técnico</option>
-		<option value="padre">Familiar / Padre</option>
-		<option value="alumno">Alumno</option>
-	      </select>
-
-	      <!-- Campo alumno: solo visible si el rol es "alumno" -->
-	      <div id="alumno-extra" class="hidden">
-		<label for="register-alumno-nombre">Nombre del alumno</label>
-		<input type="text" id="register-alumno-nombre" autocomplete="off">
-
-		<label for="register-alumno-curso">Curso</label>
-		<input type="text" id="register-alumno-curso" placeholder="Ej: 3º Primaria">
-	      </div>
-
-	      <p id="register-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
-
-	      <button type="submit">Crear cuenta</button>
-
-	      <p class="form-links">
-		¿Ya tienes cuenta? <a href="#" id="show-login">Inicia sesión</a>
-	      </p>
-	    </form>
-	  </div>
-
-	  <!-- ── Recuperar contraseña ──────────────────────────────────── -->
-	  <div id="forgot-form" class="hidden">
-	    <h2>Recuperar contraseña</h2>
-	    <p>Introduce tu correo y te enviaremos un enlace para restablecer tu contraseña.</p>
-	    <form novalidate>
-	      <label for="forgot-email">Correo electrónico</label>
-	      <input type="email" id="forgot-email" autocomplete="email" required>
-
-	      <p id="forgot-error"   class="form-error"   role="alert" aria-live="assertive" style="display:none"></p>
-	      <p id="forgot-success" class="form-success" role="status" aria-live="polite"   style="display:none"></p>
-
-	      <button type="submit">Enviar enlace</button>
-
-	      <p class="form-links">
-		<a href="#" id="show-login-from-forgot">Volver al inicio de sesión</a>
-	      </p>
-	    </form>
-	  </div>
-
-	  <!-- ── Usuario logueado ──────────────────────────────────────── -->
-	  <div id="user-info" class="hidden">
-	    <p>Bienvenido, <strong><span id="user-name"></span></strong></p>
-	    <p id="user-role" class="user-role-badge"></p>
-	    <button id="logout">Cerrar sesión</button>
-	  </div>
-
-	</section>
-	<div id="anuncio-juego" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-  	<div id="anuncio-urgente" role="alert" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
-
-    </main>
-
-    <footer>
-        <p><a href="#accesibilidad">Accesibilidad</a></p>
-        <p>&copy; 2025 EVIN - Estimulación Visual</p>
-    </footer>
- 
-
-	<!-- Vue  desde CDN -->
-	<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-
-	<!-- 1. API centralizada (debe ir antes que main.js) -->
-	<script src="js/api.js"></script>
-	<script src="js/alto-contraste.js"></script>
-	<script src="js/carrusel.js" defer></script>
-	<!-- 2. Modal para ventanas de juego (debe ir antes que los juegos) -->
-	<script src="js/juego-modal.js"></script>
-	<script src="js/dashboard.js"></script>
-
-	<!-- 3. Lógica principal -->
-	<script src="js/main.js"></script>
-	<script src="js/roles.js"></script>
-	<!-- 4. Juegos (solo se activan cuando se abren con ?juego=...) -->
-	<script src="js/juego_memoria.js"></script>
-	<script src="js/juego_grid.js"></script>
-	<script src="js/juego_radar.js"></script>
-	<script src="js/juego_diferencias.js"></script>
-	
-  
-    
 </body>
 </html>
-
