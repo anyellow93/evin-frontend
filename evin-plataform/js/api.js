@@ -96,6 +96,13 @@ const Api = {
       method: 'DELETE'
     });
   },
+  
+  actualizarPerfil(datos) {
+  return this._fetch('/me', {
+    method: 'PATCH',
+    body: JSON.stringify(datos)
+  });
+ },
 
   // ── Sesiones ───────────────────────────────────────────────────────────────
 

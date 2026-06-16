@@ -387,6 +387,18 @@ footer {
   font-weight: 700;
 }
 
+.avatar-alumno {
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.perfil-avatar {
+  width: 72px;
+  height: 72px;
+  border: 3px solid rgba(255,255,255,0.3);
+}
+
 
 /* ── 9. BOTONES GENERALES ─────────────────────────────────── */
 .btn {
@@ -887,6 +899,142 @@ body.solo-juego main > section {
     width: 100%;
     justify-content: center;
   }
+}
+
+ /* ── Panel perfil usuario ─────────────────────────────────── */
+#perfil-usuario-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+#perfil-usuario-overlay.hidden { display: none; }
+
+#perfil-usuario-panel {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.perfil-usuario-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.perfil-usuario-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
+
+.perfil-usuario-header p {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.perfil-usuario-cerrar {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition);
+}
+
+.perfil-usuario-cerrar:hover {
+  background: #fff1f2;
+  color: var(--accent);
+}
+
+.perfil-usuario-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.perfil-usuario-body h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--primary);
+}
+
+.perfil-usuario-body h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.perfil-usuario-body h4 small {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.perfil-separador {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0.75rem 0;
+}
+
+.perfil-usuario-body label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0.25rem;
+}
+
+.perfil-usuario-body input {
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.perfil-usuario-botones {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Alto contraste */
+body.alto-contraste #perfil-usuario-panel {
+  background: #000 !important;
+  border: 2px solid #fff !important;
+}
+
+body.alto-contraste .perfil-usuario-header {
+  border-bottom-color: #555 !important;
+}
+
+body.alto-contraste .perfil-usuario-body h3,
+body.alto-contraste .perfil-usuario-body h4,
+body.alto-contraste .perfil-usuario-body label {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
 }
 
 @media (max-width: 600px) {

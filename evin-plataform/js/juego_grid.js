@@ -1,12 +1,10 @@
 // js/juego_grid.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Leer el usuario que viene en la URL
   const params        = new URLSearchParams(window.location.search);
   const usuarioActual = decodeURIComponent(params.get('usuario') || 'Anónimo');
   const alumnoId      = params.get('alumno_id') || null;
 
-  // ── Elementos del DOM ──────────────────────────────────────────────────────
   const gridTablero    = document.getElementById('grid-tablero');
   const gridRondaEl    = document.getElementById('grid-ronda');
   const gridAciertosEl = document.getElementById('grid-aciertos');
@@ -16,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnComprobar   = document.getElementById('grid-comprobar');
   const btnVolver      = document.getElementById('grid-volver');
 
-  // ── Estado del juego ───────────────────────────────────────────────────────
   let gridFilas     = 3;
   let gridCols      = 3;
   let numObjetivo   = 3;
@@ -26,8 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let ronda         = 1;
   let aciertosTotal = 0;
   let erroresTotal  = 0;
-
-  // ── Helpers ────────────────────────────────────────────────────────────────
 
   function configurarNivel() {
     if (gridNivelEl.value === 'facil') {
@@ -40,37 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function barajar(arr) {
-    return arr
-      .map(v => ({ v, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ v }) => v);
+    return arr.map(v => ({ v, sort: Math.random() }))
+              .sort((a, b) => a.sort - b.sort)
+              .map(({ v }) => v);
   }
-
-  // ── Registro de sesión ─────────────────────────────────────────────────────
 
   async function registrarSesion(aciertos, intentos) {
     try {
       const token = localStorage.getItem('evin_token');
       await fetch('http://162.0.228.169/api/v1/sesiones', {
         method:  'POST',
-        headers: {
-          'Content-Type':  'application/json',
-          'Authorization': token ? `Bearer ${token}` : ''
-        },
-        body: JSON.stringify({
-          alumno:    usuarioActual,
-          alumno_id: alumnoId,
-          juego:    'Recuerda las casillas',
-          aciertos,
-          intentos
-        })
+        headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
+        body: JSON.stringify({ alumno: usuarioActual, alumno_id: alumnoId, juego: 'Recuerda las casillas', aciertos, intentos })
       });
-    } catch (e) {
-      console.error('Error al registrar sesión:', e);
-    }
+    } catch (e) { console.error('Error al registrar sesión:', e); }
   }
-
-  // ── Crear tablero ──────────────────────────────────────────────────────────
 
   window.crearTableroGrid = function () {
     configurarNivel();
@@ -86,12 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
       celda.setAttribute('tabindex', '0');
       celda.setAttribute('aria-pressed', 'false');
 
-      // Teclado: Enter y Espacio también activan la celda
       celda.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          manejarClick(celda);
-        }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); manejarClick(celda); }
       });
 
       const inner = document.createElement('div');
@@ -101,10 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
       celda.addEventListener('click', () => manejarClick(celda));
       gridTablero.appendChild(celda);
       celdas.push(celda);
-    } // ← cierre del for
-  }; // ← cierre de crearTableroGrid
-
-  // ── Lógica de ronda ────────────────────────────────────────────────────────
+    }
+  };
 
   function nuevaRonda() {
     fase = 'mostrando';
@@ -113,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const indices = [...Array(gridFilas * gridCols).keys()];
     indicesObj    = barajar(indices).slice(0, numObjetivo);
-
     indicesObj.forEach(i => celdas[i].classList.add('grid-celda-objetivo'));
 
     setTimeout(() => {
@@ -126,10 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function manejarClick(celda) {
     if (fase !== 'respondiendo') return;
     celda.classList.toggle('grid-celda-seleccionada');
-    celda.setAttribute(
-      'aria-pressed',
-      celda.classList.contains('grid-celda-seleccionada') ? 'true' : 'false'
-    );
+    celda.setAttribute('aria-pressed', celda.classList.contains('grid-celda-seleccionada') ? 'true' : 'false');
   }
 
   async function comprobarRespuesta() {
@@ -141,10 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let aciertos = 0;
     let errores  = 0;
 
-    // Iconos SVG para cada estado — no dependen solo del color
-    const iconoCorrecto   = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="#155d27" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
-    const iconoError      = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#7a0c14" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
-    const iconoFaltaba    = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#856404" stroke-width="3" fill="none"/><path d="M12 7v5l3 3" stroke="#856404" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>';
+    const iconoCorrecto = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="#155d27" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
+    const iconoError    = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#7a0c14" stroke-width="3" fill="none" stroke-linecap="round"/></svg>';
+    const iconoFaltaba  = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#856404" stroke-width="3" fill="none"/><path d="M12 7v5l3 3" stroke="#856404" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>';
 
     celdas.forEach(c => {
       const idx   = Number(c.dataset.index);
@@ -163,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
         c.setAttribute('aria-label', 'Incorrecto');
         if (inner) inner.innerHTML = iconoError;
       } else if (esObj && !esSel) {
-        
         c.classList.add('grid-celda-eracorrecta');
         c.setAttribute('aria-label', 'Esta era la casilla correcta');
         if (inner) inner.innerHTML = iconoFaltaba;
@@ -174,6 +141,13 @@ document.addEventListener('DOMContentLoaded', () => {
     erroresTotal  += errores;
     gridAciertosEl.textContent = aciertosTotal;
     gridErroresEl.textContent  = erroresTotal;
+
+    // ── SONIDO — después de calcular aciertos y errores ──
+    if (errores === 0) {
+      if (window.Sonidos) Sonidos.victoria();
+    } else {
+      if (window.Sonidos) Sonidos.error();
+    }
 
     await registrarSesion(aciertos, numObjetivo);
 
@@ -187,14 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
     gridRondaEl.textContent = ronda;
   }
 
-  // ── Eventos de UI ──────────────────────────────────────────────────────────
-
   btnEmpezar?.addEventListener('click',   nuevaRonda);
   btnComprobar?.addEventListener('click', comprobarRespuesta);
   btnVolver?.addEventListener('click',    () => window.close());
   gridNivelEl?.addEventListener('change', crearTableroGrid);
 
-  // Primera configuración visual (sin iniciar ronda)
   crearTableroGrid();
 
 });

@@ -70,12 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.querySelector('#closeModal').focus();
   };
 
-  modal.querySelector('#closeModal').addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
-  modal.addEventListener('keydown', e => {
-    if (e.key === 'Escape') modal.classList.add('hidden');
-  });
+  modal.querySelector('#closeModal').addEventListener('click', () => modal.classList.add('hidden'));
+  modal.addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.add('hidden'); });
 
   // ── Auth — elementos del DOM ───────────────────────────────────────────────
 
@@ -99,38 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const strengthBar     = document.getElementById('password-strength-bar');
   const strengthLabel   = document.getElementById('password-strength-label');
 
-  // ── Helpers de error ──────────────────────────────────────────────────────
+  function mostrarError(el, msg) { if (!el) return; el.textContent = msg; el.style.display = 'block'; }
+  function ocultarError(el)      { if (!el) return; el.style.display = 'none'; }
 
-  function mostrarError(el, mensaje) {
-    if (!el) return;
-    el.textContent   = mensaje;
-    el.style.display = 'block';
-  }
-
-  function ocultarError(el) {
-    if (!el) return;
-    el.style.display = 'none';
-  }
-
-  // ── Helpers de navegación entre formularios ───────────────────────────────
-
-  function mostrarLogin() {
-    loginForm?.classList.remove('hidden');
-    registerForm?.classList.add('hidden');
-    forgotForm?.classList.add('hidden');
-  }
-
-  function mostrarRegister() {
-    loginForm?.classList.add('hidden');
-    registerForm?.classList.remove('hidden');
-    forgotForm?.classList.add('hidden');
-  }
-
-  function mostrarForgot() {
-    loginForm?.classList.add('hidden');
-    registerForm?.classList.add('hidden');
-    forgotForm?.classList.remove('hidden');
-  }
+  function mostrarLogin()    { loginForm?.classList.remove('hidden'); registerForm?.classList.add('hidden'); forgotForm?.classList.add('hidden'); }
+  function mostrarRegister() { loginForm?.classList.add('hidden'); registerForm?.classList.remove('hidden'); forgotForm?.classList.add('hidden'); }
+  function mostrarForgot()   { loginForm?.classList.add('hidden'); registerForm?.classList.add('hidden'); forgotForm?.classList.remove('hidden'); }
 
   showRegister?.addEventListener('click',    e => { e.preventDefault(); mostrarRegister(); });
   showLogin?.addEventListener('click',       e => { e.preventDefault(); mostrarLogin(); });
@@ -138,120 +108,161 @@ document.addEventListener('DOMContentLoaded', () => {
   showLoginForgot?.addEventListener('click', e => { e.preventDefault(); mostrarLogin(); });
 
   // ── Permisos por rol ──────────────────────────────────────────────────────
-  // Controla qué secciones y botones del nav son visibles según el rol
 
   function aplicarPermisosPorRol(user) {
-    const rol = user?.rol || user?.role || '';
-
-    // Botones del nav por id del href
-    const btnAlumnos    = document.querySelector('.menu-btn[href="#alumnos"]');
-    const btnDashboard  = document.querySelector('.menu-btn[href="#dashboard"]');
-    const btnJuegos     = document.querySelector('.menu-btn[href="#juegos"]');
-
-    // Roles que pueden ver alumnos y dashboard
+    const rol      = user?.rol || user?.role || '';
     const esGestor = rol === 'profesor' || rol === 'tecnico';
-
-    // Alumnos: solo profesor y técnico
-    if (btnAlumnos) {
-      btnAlumnos.style.display = esGestor ? '' : 'none';
-    }
-
-    // Dashboard: solo profesor y técnico
-    if (btnDashboard) {
-      btnDashboard.style.display = esGestor ? '' : 'none';
-    }
-
-    // Juegos: todos los roles pueden jugar
-    if (btnJuegos) {
-      btnJuegos.style.display = '';
-    }
-
-    // Si el usuario es alumno o padre y está en una sección restringida, redirigir a inicio
+    const btnAlumnos   = document.querySelector('.menu-btn[href="#alumnos"]');
+    const btnDashboard = document.querySelector('.menu-btn[href="#dashboard"]');
+    if (btnAlumnos)   btnAlumnos.style.display   = esGestor ? '' : 'none';
+    if (btnDashboard) btnDashboard.style.display  = esGestor ? '' : 'none';
     if (!esGestor) {
       const seccionActual = [...sections].find(s => !s.classList.contains('hidden'));
-      if (seccionActual && (seccionActual.id === 'alumnos' || seccionActual.id === 'dashboard')) {
-        showSection('inicio');
-      }
+      if (seccionActual && (seccionActual.id === 'alumnos' || seccionActual.id === 'dashboard')) showSection('inicio');
     }
   }
 
   function resetearPermisos() {
-    // Al cerrar sesión, mostrar todos los botones del nav
-    document.querySelectorAll('.menu-btn').forEach(btn => {
-      btn.style.display = '';
-    });
+    document.querySelectorAll('.menu-btn').forEach(btn => { btn.style.display = ''; });
   }
 
-  // Exponer para uso externo si hace falta
   window.aplicarPermisosPorRol = aplicarPermisosPorRol;
   window.resetearPermisos      = resetearPermisos;
 
-  // ── Restaurar sesión al cargar la página ─────────────────────────────────
+  // ── Restaurar sesión ──────────────────────────────────────────────────────
 
   const savedUser = cargarUsuario();
-  if (savedUser) {
-    actualizarUIUsuario(savedUser);
-    aplicarPermisosPorRol(savedUser);
-  }
+  if (savedUser) { actualizarUIUsuario(savedUser); aplicarPermisosPorRol(savedUser); }
 
-  // ── Actualizar UI tras login/registro ────────────────────────────────────
+  // ── Actualizar UI ─────────────────────────────────────────────────────────
 
   function actualizarUIUsuario(user) {
-    const rolesLabel = {
-      profesor: 'Profesor',
-      tecnico:  'Técnico',
-      padre:    'Familiar',
-      alumno:   'Alumno'
-    };
-
+    const rolesLabel = { profesor: 'Profesor', tecnico: 'Técnico', padre: 'Familiar', alumno: 'Alumno' };
     userNameSpan.textContent = user.nombre;
     if (userRoleBadge) userRoleBadge.textContent = rolesLabel[user.rol] || user.rol || user.role;
-
     loginForm?.classList.add('hidden');
     registerForm?.classList.add('hidden');
     forgotForm?.classList.add('hidden');
     userInfo?.classList.remove('hidden');
+    const navLoginBtn     = document.getElementById('nav-login-btn');
+    const navPerfilBtn    = document.getElementById('nav-perfil-btn');
+    const navPerfilNombre = document.getElementById('nav-perfil-nombre');
+    if (navLoginBtn)      navLoginBtn.classList.add('hidden');
+    if (navPerfilBtn)     navPerfilBtn.classList.remove('hidden');
+    if (navPerfilNombre)  navPerfilNombre.textContent = user.nombre;
   }
 
-  // ── Validación de contraseña segura ──────────────────────────────────────
+  // ── Panel perfil de usuario ───────────────────────────────────────────────
+
+  const navPerfilBtn      = document.getElementById('nav-perfil-btn');
+  const navLoginBtn       = document.getElementById('nav-login-btn');
+  const navPerfilNombre   = document.getElementById('nav-perfil-nombre');
+  const perfilOverlay     = document.getElementById('perfil-usuario-overlay');
+  const perfilCerrarBtn   = document.getElementById('perfil-usuario-cerrar');
+  const perfilCancelarBtn = document.getElementById('perfil-usuario-cancelar');
+  const perfilForm        = document.getElementById('perfil-usuario-form');
+  const perfilAvatar      = document.getElementById('perfil-usuario-avatar');
+  const perfilNombreDisp  = document.getElementById('perfil-usuario-nombre-display');
+  const perfilRolDisp     = document.getElementById('perfil-usuario-rol-display');
+  const perfilEmailDisp   = document.getElementById('perfil-usuario-email-display');
+  const perfilError       = document.getElementById('perfil-error');
+  const perfilSuccess     = document.getElementById('perfil-success');
+
+  function abrirPerfilUsuario() {
+    const user = cargarUsuario();
+    if (!user) return;
+    const rolesLabel = { profesor: 'Profesor', tecnico: 'Técnico', padre: 'Familiar', alumno: 'Alumno' };
+    document.getElementById('perfil-nombre').value        = user.nombre || '';
+    document.getElementById('perfil-email').value         = user.email  || '';
+    document.getElementById('perfil-pwd-actual').value    = '';
+    document.getElementById('perfil-pwd-nueva').value     = '';
+    document.getElementById('perfil-pwd-confirmar').value = '';
+    if (perfilNombreDisp) perfilNombreDisp.textContent = user.nombre;
+    if (perfilRolDisp)    perfilRolDisp.textContent    = rolesLabel[user.rol] || user.rol || '';
+    if (perfilEmailDisp)  perfilEmailDisp.textContent  = user.email || '';
+    if (perfilAvatar && window.Avatar) {
+      perfilAvatar.innerHTML = `<img src="${Avatar.svg(user.nombre, 72)}" alt="Avatar" style="border-radius:50%;width:72px;height:72px;">`;
+    }
+    if (perfilError)   perfilError.style.display   = 'none';
+    if (perfilSuccess) perfilSuccess.style.display = 'none';
+    perfilOverlay?.classList.remove('hidden');
+  }
+
+  function cerrarPerfilUsuario() { perfilOverlay?.classList.add('hidden'); }
+
+  navPerfilBtn?.addEventListener('click',    e => { e.preventDefault(); abrirPerfilUsuario(); });
+  perfilCerrarBtn?.addEventListener('click',   cerrarPerfilUsuario);
+  perfilCancelarBtn?.addEventListener('click', cerrarPerfilUsuario);
+  perfilOverlay?.addEventListener('click', e => { if (e.target === perfilOverlay) cerrarPerfilUsuario(); });
+
+  document.getElementById('perfil-usuario-logout')?.addEventListener('click', () => {
+    cerrarPerfilUsuario();
+    borrarSesion();
+    userInfo?.classList.add('hidden');
+    mostrarLogin();
+    resetearPermisos();
+    navLoginBtn?.classList.remove('hidden');
+    navPerfilBtn?.classList.add('hidden');
+    showSection('inicio');
+  });
+
+  perfilForm?.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (perfilError)   perfilError.style.display   = 'none';
+    if (perfilSuccess) perfilSuccess.style.display = 'none';
+    const nombre     = document.getElementById('perfil-nombre').value.trim();
+    const email      = document.getElementById('perfil-email').value.trim();
+    const pwdActual  = document.getElementById('perfil-pwd-actual').value;
+    const pwdNueva   = document.getElementById('perfil-pwd-nueva').value;
+    const pwdConfirm = document.getElementById('perfil-pwd-confirmar').value;
+    if (!nombre || !email) { if (perfilError) { perfilError.textContent = 'El nombre y el correo son obligatorios.'; perfilError.style.display = 'block'; } return; }
+    if (pwdNueva && pwdNueva !== pwdConfirm) { if (perfilError) { perfilError.textContent = 'Las contraseñas nuevas no coinciden.'; perfilError.style.display = 'block'; } return; }
+    if (pwdNueva && pwdNueva.length < 8) { if (perfilError) { perfilError.textContent = 'La nueva contraseña debe tener al menos 8 caracteres.'; perfilError.style.display = 'block'; } return; }
+    try {
+      const payload = { nombre, email };
+      if (pwdNueva) { payload.password_actual = pwdActual; payload.password = pwdNueva; }
+      await Api.actualizarPerfil(payload);
+      const user = cargarUsuario();
+      user.nombre = nombre; user.email = email;
+      localStorage.setItem('evin_user', JSON.stringify(user));
+      if (navPerfilNombre)  navPerfilNombre.textContent  = nombre;
+      if (userNameSpan)     userNameSpan.textContent     = nombre;
+      if (perfilNombreDisp) perfilNombreDisp.textContent = nombre;
+      if (perfilAvatar && window.Avatar) {
+        perfilAvatar.innerHTML = `<img src="${Avatar.svg(nombre, 72)}" alt="Avatar" style="border-radius:50%;width:72px;height:72px;">`;
+      }
+      if (perfilSuccess) { perfilSuccess.textContent = '¡Perfil actualizado correctamente!'; perfilSuccess.style.display = 'block'; }
+    } catch (err) {
+      if (perfilError) { perfilError.textContent = err.message || 'Error al guardar los cambios.'; perfilError.style.display = 'block'; }
+    }
+  });
+
+  // ── Validación contraseña ─────────────────────────────────────────────────
 
   function evaluarPassword(pwd) {
-    let puntos = 0;
-    if (pwd.length >= 8)          puntos++;
-    if (/[A-Z]/.test(pwd))        puntos++;
-    if (/[0-9]/.test(pwd))        puntos++;
-    if (/[^A-Za-z0-9]/.test(pwd)) puntos++;
-    return puntos;
+    let p = 0;
+    if (pwd.length >= 8)          p++;
+    if (/[A-Z]/.test(pwd))        p++;
+    if (/[0-9]/.test(pwd))        p++;
+    if (/[^A-Za-z0-9]/.test(pwd)) p++;
+    return p;
   }
 
   function actualizarBarraFortaleza(pwd) {
     if (!strengthBar) return;
-    const puntos = evaluarPassword(pwd);
+    const p = evaluarPassword(pwd);
     const spans  = strengthBar.querySelectorAll('span');
     const labels = ['', 'Débil', 'Regular', 'Buena', 'Fuerte'];
     const colors = ['', '#e63946', '#f4a261', '#2a9d8f', '#2ecc71'];
-
-    spans.forEach((span, i) => {
-      span.style.background = i < puntos ? colors[puntos] : '#ddd';
-    });
-
-    if (strengthLabel) {
-      strengthLabel.textContent = pwd.length ? labels[puntos] : '';
-      strengthLabel.style.color = colors[puntos];
-    }
+    spans.forEach((s, i) => { s.style.background = i < p ? colors[p] : '#ddd'; });
+    if (strengthLabel) { strengthLabel.textContent = pwd.length ? labels[p] : ''; strengthLabel.style.color = colors[p]; }
   }
 
   function passwordEsSegura(pwd) {
-    return pwd.length >= 8
-      && /[A-Z]/.test(pwd)
-      && /[0-9]/.test(pwd)
-      && /[^A-Za-z0-9]/.test(pwd);
+    return pwd.length >= 8 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd) && /[^A-Za-z0-9]/.test(pwd);
   }
 
-  document.getElementById('register-password')
-    ?.addEventListener('input', e => actualizarBarraFortaleza(e.target.value));
-
-  // ── Mostrar campo alumno según rol ───────────────────────────────────────
+  document.getElementById('register-password')?.addEventListener('input', e => actualizarBarraFortaleza(e.target.value));
 
   categorySelect?.addEventListener('change', () => {
     if (categorySelect.value === 'alumno') {
@@ -268,24 +279,16 @@ document.addEventListener('DOMContentLoaded', () => {
   loginForm?.querySelector('form').addEventListener('submit', async e => {
     e.preventDefault();
     ocultarError(loginError);
-
     const email    = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
-
-    if (!email || !password) {
-      mostrarError(loginError, 'Por favor, rellena todos los campos.');
-      return;
-    }
-
+    if (!email || !password) { mostrarError(loginError, 'Por favor, rellena todos los campos.'); return; }
     try {
       const data = await Api.login(email, password);
       guardarSesion(data.token, data.user);
       actualizarUIUsuario(data.user);
       aplicarPermisosPorRol(data.user);
       showSection('inicio');
-    } catch (err) {
-      mostrarError(loginError, 'Correo o contraseña incorrectos. Inténtalo de nuevo.');
-    }
+    } catch (err) { mostrarError(loginError, 'Correo o contraseña incorrectos. Inténtalo de nuevo.'); }
   });
 
   // ── Registro ──────────────────────────────────────────────────────────────
@@ -293,44 +296,23 @@ document.addEventListener('DOMContentLoaded', () => {
   registerForm?.querySelector('form').addEventListener('submit', async e => {
     e.preventDefault();
     ocultarError(registerError);
-
     const nombre   = document.getElementById('register-name').value.trim();
     const email    = document.getElementById('register-email').value.trim();
     const password = document.getElementById('register-password').value;
     const confirm  = document.getElementById('register-password-confirm').value;
     const role     = document.getElementById('register-category').value;
     const curso    = document.getElementById('register-alumno-curso')?.value.trim() || '';
-
-    if (!nombre || !email || !password || !role) {
-      mostrarError(registerError, 'Por favor, rellena todos los campos obligatorios.');
-      return;
-    }
-
-    if (role === 'alumno' && !curso) {
-      mostrarError(registerError, 'El curso es obligatorio para alumnos.');
-      return;
-    }
-
-    if (!passwordEsSegura(password)) {
-      mostrarError(registerError,
-        'La contraseña debe tener mínimo 8 caracteres, una mayúscula, un número y un símbolo.');
-      return;
-    }
-
-    if (password !== confirm) {
-      mostrarError(registerError, 'Las contraseñas no coinciden.');
-      return;
-    }
-
+    if (!nombre || !email || !password || !role) { mostrarError(registerError, 'Por favor, rellena todos los campos obligatorios.'); return; }
+    if (role === 'alumno' && !curso) { mostrarError(registerError, 'El curso es obligatorio para alumnos.'); return; }
+    if (!passwordEsSegura(password)) { mostrarError(registerError, 'La contraseña debe tener mínimo 8 caracteres, una mayúscula, un número y un símbolo.'); return; }
+    if (password !== confirm) { mostrarError(registerError, 'Las contraseñas no coinciden.'); return; }
     try {
       const data = await Api.register(nombre, email, password, role, curso);
       guardarSesion(data.token, data.user);
       actualizarUIUsuario(data.user);
       aplicarPermisosPorRol(data.user);
       showSection('inicio');
-    } catch (err) {
-      mostrarError(registerError, err.message || 'Error al crear la cuenta. Inténtalo de nuevo.');
-    }
+    } catch (err) { mostrarError(registerError, err.message || 'Error al crear la cuenta. Inténtalo de nuevo.'); }
   });
 
   // ── Recuperar contraseña ──────────────────────────────────────────────────
@@ -339,23 +321,11 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     ocultarError(forgotError);
     if (forgotSuccess) forgotSuccess.style.display = 'none';
-
     const email = document.getElementById('forgot-email').value.trim();
-
-    if (!email) {
-      mostrarError(forgotError, 'Introduce tu correo electrónico.');
-      return;
-    }
-
-    try {
-      await Api.forgotPassword(email);
-    } catch (_) {
-      // Silenciamos el error intencionadamente por seguridad
-    } finally {
-      if (forgotSuccess) {
-        forgotSuccess.textContent   = 'Si ese correo está registrado, recibirás un enlace en breve.';
-        forgotSuccess.style.display = 'block';
-      }
+    if (!email) { mostrarError(forgotError, 'Introduce tu correo electrónico.'); return; }
+    try { await Api.forgotPassword(email); } catch (_) {}
+    finally {
+      if (forgotSuccess) { forgotSuccess.textContent = 'Si ese correo está registrado, recibirás un enlace en breve.'; forgotSuccess.style.display = 'block'; }
       document.getElementById('forgot-email').value = '';
     }
   });
@@ -368,6 +338,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarLogin();
     resetearPermisos();
     showSection('inicio');
+    navLoginBtn?.classList.remove('hidden');
+    navPerfilBtn?.classList.add('hidden');
   });
 
   // ── Navegación con control de acceso ─────────────────────────────────────
@@ -377,58 +349,106 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const target = btn.getAttribute('href').slice(1);
       const user   = cargarUsuario();
-
-      // Sin sesión: solo inicio y usuario son accesibles
       if (!user && (target === 'juegos' || target === 'alumnos' || target === 'dashboard')) {
-        showSection('usuario');
-        mostrarLogin();
-        return;
+        showSection('usuario'); mostrarLogin(); return;
       }
-
-      // Con sesión: verificar permisos por rol
       if (user) {
         const rol      = user.rol || user.role || '';
         const esGestor = rol === 'profesor' || rol === 'tecnico';
-
-        if (!esGestor && (target === 'alumnos' || target === 'dashboard')) {
-          showSection('inicio');
-          return;
-        }
+        if (!esGestor && (target === 'alumnos' || target === 'dashboard')) { showSection('inicio'); return; }
       }
-
       showSection(target);
-
-      // Recargar alumnos al navegar a la sección
-      if (target === 'alumnos' && window.__vueAlumnos) {
-        window.__vueAlumnos.cargarAlumnos();
-      }
+      if (target === 'alumnos' && window.__vueAlumnos) window.__vueAlumnos.cargarAlumnos();
     });
   });
 
-  // ── Parámetros de URL (modo juego standalone) ─────────────────────────────
+  // ── Parámetros de URL ─────────────────────────────────────────────────────
 
   const params     = new URLSearchParams(window.location.search);
   const juegoParam = params.get('juego');
 
-  if (juegoParam) {
-    document.body.classList.add('solo-juego');
-  }
+  if (juegoParam) document.body.classList.add('solo-juego');
 
-  if (juegoParam === 'memoria') {
-    showSection('juego-memoria');
-    if (typeof crearCartasMemoria === 'function') crearCartasMemoria();
-  } else if (juegoParam === 'grid') {
-    showSection('juego-grid');
-    if (typeof crearTableroGrid === 'function') crearTableroGrid();
-  } else if (juegoParam === 'radar') {
-    showSection('juego-radar');
-    if (typeof iniciarRadarVisual === 'function') iniciarRadarVisual();
-  } else if (juegoParam === 'diferencias') {
-    showSection('juego-diferencias');
-    if (typeof iniciarDiferencias === 'function') iniciarDiferencias();
-  } else if (!juegoParam) {
-    showSection('inicio');
-  }
+  if      (juegoParam === 'memoria')     { showSection('juego-memoria');     if (typeof crearCartasMemoria === 'function') crearCartasMemoria(); }
+  else if (juegoParam === 'grid')        { showSection('juego-grid');        if (typeof crearTableroGrid   === 'function') crearTableroGrid(); }
+  else if (juegoParam === 'radar')       { showSection('juego-radar');       if (typeof iniciarRadarVisual === 'function') iniciarRadarVisual(); }
+  else if (juegoParam === 'diferencias') { showSection('juego-diferencias'); if (typeof iniciarDiferencias === 'function') iniciarDiferencias(); }
+  else if (juegoParam === 'rasgos')      { showSection('juego-rasgos');      if (typeof iniciarRasgos      === 'function') iniciarRasgos(); }
+  else if (juegoParam === 'puzzle')      { showSection('juego-puzzle');      if (typeof iniciarPuzzle      === 'function') iniciarPuzzle(); }
+  else if (!juegoParam)                  { showSection('inicio'); }
+
+  // ── SVGs para tarjetas de juego ───────────────────────────────────────────
+
+  const svgJuegos = {
+    memoria: `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5"  y="5"  width="50" height="50" rx="8" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+      <rect x="65" y="5"  width="50" height="50" rx="8" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+      <rect x="5"  y="65" width="50" height="50" rx="8" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+      <rect x="65" y="65" width="50" height="50" rx="8" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+      <text x="90" y="48" text-anchor="middle" font-size="24">🐶</text>
+      <text x="30" y="108" text-anchor="middle" font-size="24">🐶</text>
+      <text x="30" y="38" text-anchor="middle" font-size="20" fill="rgba(255,255,255,0.6)" font-weight="700">?</text>
+      <text x="90" y="108" text-anchor="middle" font-size="20" fill="rgba(255,255,255,0.6)" font-weight="700">?</text>
+      <circle cx="90" cy="90" r="12" fill="#2ecc71"/>
+      <text x="90" y="95" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">✓</text>
+    </svg>`,
+
+    grid: `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5"  y="5"  width="34" height="34" rx="6" fill="#ffb703"/>
+      <rect x="43" y="5"  width="34" height="34" rx="6" fill="rgba(255,255,255,0.15)"/>
+      <rect x="81" y="5"  width="34" height="34" rx="6" fill="#ffb703"/>
+      <rect x="5"  y="43" width="34" height="34" rx="6" fill="rgba(255,255,255,0.15)"/>
+      <rect x="43" y="43" width="34" height="34" rx="6" fill="#ffb703"/>
+      <rect x="81" y="43" width="34" height="34" rx="6" fill="rgba(255,255,255,0.15)"/>
+      <rect x="5"  y="81" width="34" height="34" rx="6" fill="rgba(255,255,255,0.15)"/>
+      <rect x="43" y="81" width="34" height="34" rx="6" fill="rgba(255,255,255,0.15)"/>
+      <rect x="81" y="81" width="34" height="34" rx="6" fill="#ffb703"/>
+    </svg>`,
+
+    radar: `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="12" fill="rgba(255,255,255,0.2)"/>
+      <rect   x="38" y="8"  width="24" height="24" rx="4" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="80" cy="20" r="12" fill="rgba(255,255,255,0.2)"/>
+      <polygon points="108,8 120,32 96,32" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="20" cy="60" r="12" fill="rgba(255,255,255,0.2)"/>
+      <polygon points="60,48 72,72 48,72" fill="#f4d35e" stroke="#fff" stroke-width="2"/>
+      <circle cx="100" cy="60" r="12" fill="rgba(255,255,255,0.2)"/>
+      <rect   x="8"  y="88" width="24" height="24" rx="4" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="60" cy="100" r="12" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="100" cy="100" r="12" fill="rgba(255,255,255,0.2)"/>
+      <circle cx="60" cy="60" r="18" fill="none" stroke="#f4d35e" stroke-width="2.5" stroke-dasharray="5 3" opacity="0.9"/>
+    </svg>`,
+
+    diferencias: `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2"  y="15" width="54" height="90" rx="8" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <circle cx="29" cy="45" r="12" fill="#4361ee" opacity="0.9"/>
+      <rect   x="10" y="62" width="38" height="12" rx="3" fill="#f4a261" opacity="0.9"/>
+      <polygon points="29,82 41,103 17,103" fill="#2ecc71" opacity="0.9"/>
+      <rect x="64" y="15" width="54" height="90" rx="8" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <circle cx="91" cy="45" r="12" fill="#e63946" opacity="0.9"/>
+      <rect   x="72" y="62" width="38" height="12" rx="3" fill="#f4a261" opacity="0.9"/>
+      <polygon points="91,75 103,103 79,103" fill="#2ecc71" opacity="0.9"/>
+      <circle cx="91" cy="45" r="16" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 2" opacity="0.85"/>
+      <circle cx="103" cy="33" r="7" fill="#2ecc71"/>
+      <text x="103" y="37" text-anchor="middle" font-size="8" fill="#fff" font-weight="700">✓</text>
+    </svg>`,
+
+    rasgos: `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="60,8 72,40 106,40 80,60 90,92 60,72 30,92 40,60 14,40 48,40" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="8 4"/>
+      <polygon points="60,8 72,40 106,40 80,60 90,92 60,72 30,92 40,60 14,40 48,40" fill="rgba(255,255,255,0.15)"/>
+      <text x="60" y="115" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.7)" font-weight="600">¿Cuál es completa?</text>
+    </svg>`,
+
+    puzzle: `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5"  y="5"  width="50" height="50" rx="6" fill="rgba(255,255,255,0.8)"/>
+      <rect x="65" y="5"  width="50" height="50" rx="6" fill="#2ecc71" opacity="0.8"/>
+      <rect x="5"  y="65" width="50" height="50" rx="6" fill="#4361ee" opacity="0.8"/>
+      <rect x="65" y="65" width="50" height="50" rx="6" fill="rgba(255,255,255,0.15)" stroke="#fff" stroke-width="2" stroke-dasharray="5 3"/>
+      <text x="90" y="100" text-anchor="middle" font-size="28">🧩</text>
+      <path d="M 55 30 Q 60 20 65 30" stroke="#00897b" stroke-width="4" fill="rgba(0,137,123,0.3)"/>
+      <path d="M 90 55 Q 100 60 90 65" stroke="#00897b" stroke-width="4" fill="rgba(0,137,123,0.3)"/>
+    </svg>`
+  };
 
   // ── Vue: listado de juegos ────────────────────────────────────────────────
 
@@ -436,32 +456,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   createAppJuegos({
     data() {
-      return {
-        busqueda:    '',
-        filtroNivel: '',
-        filtroTipo:  '',
-        juegos:      [],
-        cargando:    true,
-        error:       null
-      };
+      return { busqueda: '', filtroNivel: '', filtroTipo: '', juegos: [], cargando: true, error: null };
     },
 
     async mounted() {
-      try {
-        this.juegos = await Api.getJuegos();
-      } catch (e) {
-        this.error = 'No se pudieron cargar los juegos. Comprueba que el servidor está activo.';
-      } finally {
-        this.cargando = false;
-      }
+      try { this.juegos = await Api.getJuegos(); }
+      catch (e) { this.error = 'No se pudieron cargar los juegos.'; }
+      finally { this.cargando = false; }
     },
 
     computed: {
       juegosFiltrados() {
         const q = this.busqueda.toLowerCase();
         return this.juegos.filter(j => {
-          const texto = [j.nombre, j.descripcion, j.nivel, j.tipo]
-                          .join(' ').toLowerCase().includes(q);
+          const texto = [j.nombre, j.descripcion, j.nivel, j.tipo].join(' ').toLowerCase().includes(q);
           const nivel = !this.filtroNivel || j.nivel === this.filtroNivel;
           const tipo  = !this.filtroTipo  || j.tipo  === this.filtroTipo;
           return texto && nivel && tipo;
@@ -470,32 +478,36 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     methods: {
-      verDetalles(juego) {
-        showModal(juego.nombre, juego.descripcion);
+      headerJuego(juego) {
+        const mapa = {
+          'Encuentra las parejas':     { grad: 'juego-grad-memoria',     svg: svgJuegos.memoria },
+          'Recuerda las casillas':     { grad: 'juego-grad-grid',        svg: svgJuegos.grid },
+          'Radar visual':              { grad: 'juego-grad-radar',       svg: svgJuegos.radar },
+          'Encuentra las diferencias': { grad: 'juego-grad-diferencias', svg: svgJuegos.diferencias },
+          'Rasgos críticos':           { grad: 'juego-grad-rasgos',      svg: svgJuegos.rasgos },
+          'Puzzle':                    { grad: 'juego-grad-puzzle',      svg: svgJuegos.puzzle }
+        };
+        return mapa[juego.nombre] || { grad: 'juego-grad-default', svg: '<svg viewBox="0 0 120 120"><text x="60" y="70" text-anchor="middle" font-size="50">🎮</text></svg>' };
       },
+
+      verDetalles(juego) { showModal(juego.nombre, juego.descripcion); },
 
       jugar(juego) {
         const urlBase = window.location.origin + window.location.pathname;
         const p       = new URLSearchParams();
-
         const mapa = {
           'Encuentra las parejas':     'memoria',
           'Recuerda las casillas':     'grid',
           'Radar visual':              'radar',
-          'Encuentra las diferencias': 'diferencias'
+          'Encuentra las diferencias': 'diferencias',
+          'Rasgos críticos':           'rasgos',
+          'Puzzle':                    'puzzle'
         };
-
         const clave = mapa[juego.nombre];
-        if (!clave) {
-          showModal(juego.nombre, 'Este juego todavía está en desarrollo.');
-          return;
-        }
-
+        if (!clave) { showModal(juego.nombre, 'Este juego todavía está en desarrollo.'); return; }
         p.set('juego', clave);
-
         const user = cargarUsuario();
         if (user) p.set('usuario', encodeURIComponent(user.nombre));
-
         window.open(`${urlBase}?${p.toString()}`, '_blank');
       }
     }
@@ -508,142 +520,76 @@ document.addEventListener('DOMContentLoaded', () => {
   const _alumnosApp = createAppAlumnos({
     data() {
       return {
-        busqueda:       '',
-        alumnos:        [],
-        cargando:       true,
-        error:          null,
-        modalVisible:   false,
-        modoModal:      'nuevo',
-        modalError:     null,
-        alumnoEditando: null,
-        form: {
-          nombre: '', edad: '', curso: '', dificultad: 'Fácil', progreso: 0
-        },
-        perfilVisible:  false,
-        perfilAlumno:   null,
-        perfilSesiones: [],
-        perfilCargando: false
+        busqueda: '', alumnos: [], cargando: true, error: null,
+        modalVisible: false, modoModal: 'nuevo', modalError: null, alumnoEditando: null,
+        form: { nombre: '', edad: '', curso: '', dificultad: 'Fácil', progreso: 0 },
+        perfilVisible: false, perfilAlumno: null, perfilSesiones: [], perfilCargando: false
       };
     },
 
     computed: {
       alumnosFiltrados() {
         const q = this.busqueda.toLowerCase();
-        return this.alumnos.filter(a =>
-          [a.nombre, a.dificultad, a.curso].join(' ').toLowerCase().includes(q)
-        );
+        return this.alumnos.filter(a => [a.nombre, a.dificultad, a.curso].join(' ').toLowerCase().includes(q));
       },
-
       puedeGestionar() {
         const user = cargarUsuario();
         return user && (user.rol === 'profesor' || user.rol === 'tecnico');
       },
-
       perfilStats() {
         if (!this.perfilSesiones.length) return null;
         const total    = this.perfilSesiones.length;
-        const mediaAct = Math.round(
-          this.perfilSesiones.reduce((s, x) => s + (x.porcentaje || 0), 0) / total
-        );
-        const juegos = [...new Set(this.perfilSesiones.map(s => s.juego))].length;
-        const ultima = this.perfilSesiones[0]?.fecha || '—';
+        const mediaAct = Math.round(this.perfilSesiones.reduce((s, x) => s + (x.porcentaje || 0), 0) / total);
+        const juegos   = [...new Set(this.perfilSesiones.map(s => s.juego))].length;
+        const ultima   = this.perfilSesiones[0]?.fecha || '—';
         return { total, mediaAct, juegos, ultima };
       },
-
-      perfilGrafico() {
-        return [...this.perfilSesiones].slice(0, 10).reverse();
-      }
+      perfilGrafico() { return [...this.perfilSesiones].slice(0, 10).reverse(); }
     },
 
-    async mounted() {
-      await this.cargarAlumnos();
-    },
+    async mounted() { await this.cargarAlumnos(); },
 
     methods: {
+      avatarSvg(nombre)       { return window.Avatar ? window.Avatar.svg(nombre || '?', 60) : ''; },
+      avatarSvgGrande(nombre) { return window.Avatar ? window.Avatar.svg(nombre || '?', 72) : ''; },
+
       async cargarAlumnos() {
-        this.cargando = true;
-        this.error    = null;
-        try {
-          this.alumnos = await Api.getAlumnos();
-        } catch (e) {
-          this.error = 'No se pudieron cargar los alumnos. ¿Estás logueado?';
-        } finally {
-          this.cargando = false;
-        }
+        this.cargando = true; this.error = null;
+        try { this.alumnos = await Api.getAlumnos(); }
+        catch (e) { this.error = 'No se pudieron cargar los alumnos. ¿Estás logueado?'; }
+        finally { this.cargando = false; }
       },
 
       async verPerfil(alumno) {
-        this.perfilAlumno   = alumno;
-        this.perfilSesiones = [];
-        this.perfilCargando = true;
-        this.perfilVisible  = true;
-
-        try {
-          this.perfilSesiones = await Api.getSesiones({ alumno_id: alumno.id });
-        } catch (e) {
-          this.perfilSesiones = [];
-        } finally {
-          this.perfilCargando = false;
-        }
+        this.perfilAlumno = alumno; this.perfilSesiones = []; this.perfilCargando = true; this.perfilVisible = true;
+        try { this.perfilSesiones = await Api.getSesiones({ alumno_id: alumno.id }); }
+        catch (e) { this.perfilSesiones = []; }
+        finally { this.perfilCargando = false; }
       },
 
-      cerrarPerfil() {
-        this.perfilVisible = false;
-        this.perfilAlumno  = null;
-      },
+      cerrarPerfil() { this.perfilVisible = false; this.perfilAlumno = null; },
 
-      colorBarra(pct) {
-        if (pct >= 70) return '#2ecc71';
-        if (pct >= 40) return '#f4a261';
-        return '#e63946';
-      },
-
-      clasePct(pct) {
-        if (pct >= 70) return 'pct-alto';
-        if (pct >= 40) return 'pct-medio';
-        return 'pct-bajo';
-      },
-
-      formatFecha(fecha) {
-        if (!fecha) return '—';
-        return new Date(fecha).toLocaleDateString('es-ES', {
-          day: '2-digit', month: '2-digit'
-        });
-      },
+      colorBarra(pct) { return pct >= 70 ? '#2ecc71' : pct >= 40 ? '#f4a261' : '#e63946'; },
+      clasePct(pct)   { return pct >= 70 ? 'pct-alto' : pct >= 40 ? 'pct-medio' : 'pct-bajo'; },
+      formatFecha(f)  { if (!f) return '—'; return new Date(f).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' }); },
 
       abrirModalNuevo() {
-        this.modoModal      = 'nuevo';
-        this.alumnoEditando = null;
-        this.modalError     = null;
+        this.modoModal = 'nuevo'; this.alumnoEditando = null; this.modalError = null;
         this.form = { nombre: '', edad: '', curso: '', dificultad: 'Fácil', progreso: 0 };
-        this.modalVisible   = true;
-      },
-
-      abrirModalEditar(alumno) {
-        this.modoModal      = 'editar';
-        this.alumnoEditando = alumno;
-        this.modalError     = null;
-        this.form = {
-          nombre:     alumno.nombre,
-          edad:       alumno.edad,
-          curso:      alumno.curso,
-          dificultad: alumno.dificultad || 'Fácil',
-          progreso:   alumno.progreso || 0
-        };
         this.modalVisible = true;
       },
 
-      cerrarModal() {
-        this.modalVisible = false;
-        this.modalError   = null;
+      abrirModalEditar(alumno) {
+        this.modoModal = 'editar'; this.alumnoEditando = alumno; this.modalError = null;
+        this.form = { nombre: alumno.nombre, edad: alumno.edad, curso: alumno.curso, dificultad: alumno.dificultad || 'Fácil', progreso: alumno.progreso || 0 };
+        this.modalVisible = true;
       },
+
+      cerrarModal() { this.modalVisible = false; this.modalError = null; },
 
       async guardarAlumno() {
         this.modalError = null;
-        if (!this.form.nombre.trim()) {
-          this.modalError = 'El nombre es obligatorio.';
-          return;
-        }
+        if (!this.form.nombre.trim()) { this.modalError = 'El nombre es obligatorio.'; return; }
         try {
           if (this.modoModal === 'nuevo') {
             const nuevo = await Api.crearAlumno(this.form);
@@ -654,19 +600,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (idx !== -1) this.alumnos.splice(idx, 1, actualizado);
           }
           this.cerrarModal();
-        } catch (e) {
-          this.modalError = e.message || 'Error al guardar el alumno.';
-        }
+        } catch (e) { this.modalError = e.message || 'Error al guardar el alumno.'; }
       },
 
       async confirmarEliminar(alumno) {
-        if (!confirm(`¿Seguro que quieres eliminar a ${alumno.nombre}? Esta acción no se puede deshacer.`)) return;
+        if (!confirm(`¿Seguro que quieres eliminar a ${alumno.nombre}?`)) return;
         try {
           await Api.eliminarAlumno(alumno.id);
           this.alumnos = this.alumnos.filter(a => a.id !== alumno.id);
-        } catch (e) {
-          alert('Error al eliminar el alumno: ' + e.message);
-        }
+        } catch (e) { alert('Error al eliminar: ' + e.message); }
       },
 
       claseProgreso(valor) {
