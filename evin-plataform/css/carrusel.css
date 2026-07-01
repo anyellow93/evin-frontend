@@ -47,6 +47,8 @@
 .evin-slide:nth-child(2) { background: linear-gradient(135deg, #0f4c75 0%, #1b6ca8 100%); }
 .evin-slide:nth-child(3) { background: linear-gradient(135deg, #1b4332 0%, #2a9d8f 100%); }
 .evin-slide:nth-child(4) { background: linear-gradient(135deg, #3d0066 0%, #9b5de5 100%); }
+.evin-slide:nth-child(5) { background: linear-gradient(135deg, #7a0c14 0%, #c62828 100%); }
+.evin-slide:nth-child(6) { background: linear-gradient(135deg, #004d40 0%, #00897b 100%); }
 
 /* Patrón decorativo de fondo */
 .evin-slide::before {
@@ -84,15 +86,15 @@
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(1.3rem, 3.5vw, 2.2rem);
   font-weight: 700;
-  color: #fff;
+  color: #fff !important;
   line-height: 1.2;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
 .evin-slide-desc {
   margin: 0 0 1.4rem;
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  color: rgba(255,255,255,0.88);
+  font-size: clamp(0.9rem, 2vw, 1.1rem)!important;
+  color: rgba(255,255,255,0.88)!important;
   line-height: 1.6;
   max-width: 480px;
 }

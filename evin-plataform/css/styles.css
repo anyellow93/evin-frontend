@@ -710,7 +710,7 @@ input[type="search"] {
 }
 
 .memoria-card-back {
-  background: #f8f9ff;
+  background: linear-gradient(135deg, #f0f4ff, #e8ecff)!important;
   color: var(--primary);
   font-size: 2rem;
   transform: rotateY(180deg);
@@ -1035,6 +1035,33 @@ body.alto-contraste .perfil-usuario-body h4,
 body.alto-contraste .perfil-usuario-body label {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
+}
+
+/* ── Pantalla completa en juegos ──────────────────────────── */
+section[id^="juego-"]:fullscreen,
+section[id^="juego-"]:-webkit-full-screen {
+  display: flex !important;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+#juego-radar:fullscreen,
+#juego-radar:-webkit-full-screen,
+#juego-rasgos:fullscreen,
+#juego-rasgos:-webkit-full-screen {
+  background: #000 !important;
+  color: #fff;
+}
+
+#juego-puzzle:fullscreen,
+#juego-puzzle:-webkit-full-screen {
+  background: #1a1a2e !important;
+  color: #fff;
 }
 
 @media (max-width: 600px) {

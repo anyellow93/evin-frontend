@@ -1,9 +1,9 @@
 // js/juego_diferencias.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const params        = new URLSearchParams(window.location.search);
-  const usuarioActual = decodeURIComponent(params.get('usuario') || 'Anónimo');
-  const alumnoId      = params.get('alumno_id') || null;
+  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+  const usuarioActual = _evinUser.nombre || 'Anónimo';
+  const alumnoId      = null;
 
   const panelIzq   = document.getElementById('diferencias-izq');
   const panelDer   = document.getElementById('diferencias-der');
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   btnEmpezar?.addEventListener('click',  iniciarDiferencias);
-  btnVolver?.addEventListener('click',   () => { clearInterval(timerID); window.close(); });
+  btnVolver?.addEventListener('click',   () => { clearInterval(timerID); if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
   nivelEl?.addEventListener('change',    iniciarDiferencias);
 
 });

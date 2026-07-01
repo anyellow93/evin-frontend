@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.toggle('active', btn.getAttribute('href') === `#${idToShow}`);
     });
   }
+  window.showSection = showSection;
 
   // ── Modal principal ────────────────────────────────────────────────────────
 
@@ -362,20 +363,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Parámetros de URL ─────────────────────────────────────────────────────
-
-  const params     = new URLSearchParams(window.location.search);
-  const juegoParam = params.get('juego');
-
-  if (juegoParam) document.body.classList.add('solo-juego');
-
-  if      (juegoParam === 'memoria')     { showSection('juego-memoria');     if (typeof crearCartasMemoria === 'function') crearCartasMemoria(); }
-  else if (juegoParam === 'grid')        { showSection('juego-grid');        if (typeof crearTableroGrid   === 'function') crearTableroGrid(); }
-  else if (juegoParam === 'radar')       { showSection('juego-radar');       if (typeof iniciarRadarVisual === 'function') iniciarRadarVisual(); }
-  else if (juegoParam === 'diferencias') { showSection('juego-diferencias'); if (typeof iniciarDiferencias === 'function') iniciarDiferencias(); }
-  else if (juegoParam === 'rasgos')      { showSection('juego-rasgos');      if (typeof iniciarRasgos      === 'function') iniciarRasgos(); }
-  else if (juegoParam === 'puzzle')      { showSection('juego-puzzle');      if (typeof iniciarPuzzle      === 'function') iniciarPuzzle(); }
-  else if (!juegoParam)                  { showSection('inicio'); }
+  // ── Iniciar en sección inicio ────────────────────────────────────────────
+  showSection('inicio');
 
   // ── SVGs para tarjetas de juego ───────────────────────────────────────────
 
@@ -484,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'Recuerda las casillas':     { grad: 'juego-grad-grid',        svg: svgJuegos.grid },
           'Radar visual':              { grad: 'juego-grad-radar',       svg: svgJuegos.radar },
           'Encuentra las diferencias': { grad: 'juego-grad-diferencias', svg: svgJuegos.diferencias },
-          'Rasgos críticos':           { grad: 'juego-grad-rasgos',      svg: svgJuegos.rasgos },
+          'Rasgos Críticos':           { grad: 'juego-grad-rasgos',      svg: svgJuegos.rasgos },
           'Puzzle':                    { grad: 'juego-grad-puzzle',      svg: svgJuegos.puzzle }
         };
         return mapa[juego.nombre] || { grad: 'juego-grad-default', svg: '<svg viewBox="0 0 120 120"><text x="60" y="70" text-anchor="middle" font-size="50">🎮</text></svg>' };
@@ -493,22 +482,37 @@ document.addEventListener('DOMContentLoaded', () => {
       verDetalles(juego) { showModal(juego.nombre, juego.descripcion); },
 
       jugar(juego) {
-        const urlBase = window.location.origin + window.location.pathname;
-        const p       = new URLSearchParams();
         const mapa = {
-          'Encuentra las parejas':     'memoria',
-          'Recuerda las casillas':     'grid',
-          'Radar visual':              'radar',
-          'Encuentra las diferencias': 'diferencias',
-          'Rasgos críticos':           'rasgos',
-          'Puzzle':                    'puzzle'
+          'Encuentra las parejas':     'juego-memoria',
+          'Recuerda las casillas':     'juego-grid',
+          'Radar visual':              'juego-radar',
+          'Encuentra las diferencias': 'juego-diferencias',
+          'Rasgos críticos':           'juego-rasgos',
+          'Puzzle':                    'juego-puzzle'
         };
-        const clave = mapa[juego.nombre];
-        if (!clave) { showModal(juego.nombre, 'Este juego todavía está en desarrollo.'); return; }
-        p.set('juego', clave);
-        const user = cargarUsuario();
-        if (user) p.set('usuario', encodeURIComponent(user.nombre));
-        window.open(`${urlBase}?${p.toString()}`, '_blank');
+
+        const seccionId = mapa[juego.nombre];
+        if (!seccionId) { showModal(juego.nombre, 'Este juego todavía está en desarrollo.'); return; }
+
+        // Mostrar sección del juego
+        showSection(seccionId);
+
+        // Iniciar el juego
+        if (seccionId === 'juego-memoria'     && typeof crearCartasMemoria === 'function') crearCartasMemoria();
+        if (seccionId === 'juego-grid'        && typeof crearTableroGrid   === 'function') crearTableroGrid();
+        if (seccionId === 'juego-radar'       && typeof iniciarRadarVisual === 'function') iniciarRadarVisual();
+        if (seccionId === 'juego-diferencias' && typeof iniciarDiferencias === 'function') iniciarDiferencias();
+        if (seccionId === 'juego-rasgos'      && typeof iniciarRasgos      === 'function') iniciarRasgos();
+        if (seccionId === 'juego-puzzle'      && typeof iniciarPuzzle      === 'function') iniciarPuzzle();
+
+        // Solicitar pantalla completa — debe ir después del init para que el DOM esté listo
+        try {
+          const seccionEl = document.getElementById(seccionId);
+	  if (seccionEl) {
+  		if (seccionEl.requestFullscreen) seccionEl.requestFullscreen();
+  		else if (seccionEl.webkitRequestFullscreen) seccionEl.webkitRequestFullscreen();
+	  }	
+        } catch(e) {}
       }
     }
   }).mount('#app-juegos');
@@ -523,7 +527,8 @@ document.addEventListener('DOMContentLoaded', () => {
         busqueda: '', alumnos: [], cargando: true, error: null,
         modalVisible: false, modoModal: 'nuevo', modalError: null, alumnoEditando: null,
         form: { nombre: '', edad: '', curso: '', dificultad: 'Fácil', progreso: 0 },
-        perfilVisible: false, perfilAlumno: null, perfilSesiones: [], perfilCargando: false
+        perfilVisible: false, perfilAlumno: null, perfilSesiones: [], perfilCargando: false,
+        perfilEstadisticas: null
       };
     },
 
@@ -537,14 +542,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return user && (user.rol === 'profesor' || user.rol === 'tecnico');
       },
       perfilStats() {
-        if (!this.perfilSesiones.length) return null;
-        const total    = this.perfilSesiones.length;
-        const mediaAct = Math.round(this.perfilSesiones.reduce((s, x) => s + (x.porcentaje || 0), 0) / total);
-        const juegos   = [...new Set(this.perfilSesiones.map(s => s.juego))].length;
-        const ultima   = this.perfilSesiones[0]?.fecha || '—';
-        return { total, mediaAct, juegos, ultima };
+        if (!this.perfilEstadisticas) return null;
+        return this.perfilEstadisticas;
       },
-      perfilGrafico() { return [...this.perfilSesiones].slice(0, 10).reverse(); }
+      perfilGrafico() { return [...this.perfilSesiones].slice(0, 10).reverse(); },
+      tendenciaIcono() {
+        const t = this.perfilEstadisticas?.tendencia;
+        if (t === 'mejorando')  return { icono: '📈', texto: 'Mejorando',           clase: 'tendencia-bien' };
+        if (t === 'empeorando') return { icono: '📉', texto: 'Necesita atención',   clase: 'tendencia-mal' };
+        if (t === 'estable')    return { icono: '➡️',  texto: 'Estable',             clase: 'tendencia-neutral' };
+        return                         { icono: '📊', texto: 'Sin datos suficientes', clase: 'tendencia-neutral' };
+      }
     },
 
     async mounted() { await this.cargarAlumnos(); },
@@ -561,10 +569,24 @@ document.addEventListener('DOMContentLoaded', () => {
       },
 
       async verPerfil(alumno) {
-        this.perfilAlumno = alumno; this.perfilSesiones = []; this.perfilCargando = true; this.perfilVisible = true;
-        try { this.perfilSesiones = await Api.getSesiones({ alumno_id: alumno.id }); }
-        catch (e) { this.perfilSesiones = []; }
-        finally { this.perfilCargando = false; }
+        this.perfilAlumno      = alumno;
+        this.perfilSesiones    = [];
+        this.perfilEstadisticas = null;
+        this.perfilCargando    = true;
+        this.perfilVisible     = true;
+        try {
+          const [sesiones, estadisticas] = await Promise.all([
+            Api.getSesiones({ alumno_id: alumno.id }),
+            Api.getEstadisticas(alumno.id)
+          ]);
+          this.perfilSesiones    = sesiones;
+          this.perfilEstadisticas = estadisticas;
+        } catch (e) {
+          this.perfilSesiones    = [];
+          this.perfilEstadisticas = null;
+        } finally {
+          this.perfilCargando = false;
+        }
       },
 
       cerrarPerfil() { this.perfilVisible = false; this.perfilAlumno = null; },

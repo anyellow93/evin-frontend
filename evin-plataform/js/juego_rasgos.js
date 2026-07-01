@@ -1,8 +1,8 @@
 // js/juego_rasgos.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const params        = new URLSearchParams(window.location.search);
-  const usuarioActual = decodeURIComponent(params.get('usuario') || 'Anónimo');
+  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+  const usuarioActual = _evinUser.nombre || 'Anónimo';
 
   const rasgosGrid       = document.getElementById('rasgos-grid');
   const rasgosObjetivoEl = document.getElementById('rasgos-objetivo');
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   btnEmpezar?.addEventListener('click', iniciarRasgos);
-  btnVolver?.addEventListener('click',  () => { clearInterval(rasgosTimerId); window.close(); });
+  btnVolver?.addEventListener('click',  () => { clearInterval(rasgosTimerId); if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
   rasgosNivelEl?.addEventListener('change', iniciarRasgos);
 
 });

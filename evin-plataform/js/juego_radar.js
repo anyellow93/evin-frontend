@@ -1,8 +1,8 @@
 // js/juego_radar.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const params        = new URLSearchParams(window.location.search);
-  const usuarioActual = decodeURIComponent(params.get('usuario') || 'Anónimo');
+  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+  const usuarioActual = _evinUser.nombre || 'Anónimo';
 
   const radarGrid       = document.getElementById('radar-grid');
   const radarObjetivoEl = document.getElementById('radar-objetivo');
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   btnEmpezar?.addEventListener('click', iniciarRadarVisual);
-  btnVolver?.addEventListener('click',  () => { clearInterval(radarTimerId); window.close(); });
+  btnVolver?.addEventListener('click',  () => { clearInterval(radarTimerId); if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
   radarNivelEl?.addEventListener('change', iniciarRadarVisual);
 
 });

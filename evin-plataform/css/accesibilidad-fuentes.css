@@ -1,49 +1,26 @@
 /* =============================================
    MEJORAS DE FUENTES Y CONTRASTE — EVIN
-   Añadir después de styles.css y accesibilidad.css
    ============================================= */
 
-/* 1. TAMAÑO BASE DE FUENTE
-   ------------------------------------------- */
-
-/* Base explícita de 18px para baja visión (WCAG recomienda mínimo 16px,
-   para baja visión se recomienda 18-20px) */
-html {
-  font-size: 18px;
-}
+/* ── 1. Tamaño base de fuente ─────────────────────────────── */
+html { font-size: 18px; }
 
 body {
-  font-size: 1rem;        /* 18px */
-  line-height: 1.6;       /* más espaciado entre líneas */
-  letter-spacing: 0.01em; /* ligero espaciado entre letras */
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
 }
 
-/* 2. TEXTOS DE TARJETAS — corregir color insuficiente
-   ------------------------------------------- */
+/* ── 2. Textos de tarjetas ────────────────────────────────── */
+.card p  { color: #3d3d3d; font-size: 1rem; }
+.card h3 { font-size: 1.15rem; color: #1a2e4a; }
 
-/* #555 sobre #f1ebeb → ratio 4.2:1 (insuficiente para baja visión) */
-/* Nuevo: #3d3d3d sobre #f1ebeb → ratio 6.8:1 ✅ */
-.card p {
-  color: #3d3d3d;
-  font-size: 1rem;       /* antes 0.9rem — demasiado pequeño */
-}
-
-.card h3 {
-  font-size: 1.15rem;
-  color: #1a2e4a;        /* ligeramente más oscuro que #1d3557 */
-}
-
-/* 3. HINTS Y TEXTOS SECUNDARIOS
-   ------------------------------------------- */
-
-/* #666 sobre blanco → ratio 3.9:1 (suspende WCAG AA) */
-/* Nuevo: #595959 → ratio 7:1 ✅ */
+/* ── 3. Hints y textos secundarios ───────────────────────── */
 .form-hint {
   color: #595959;
-  font-size: 0.9rem;     /* antes 0.8rem */
+  font-size: 0.9rem;
 }
 
-/* Textos de info en juegos */
 .memoria-info,
 .grid-info,
 .radar-info,
@@ -53,10 +30,7 @@ body {
   font-weight: 500;
 }
 
-/* 4. MENÚ DE NAVEGACIÓN
-   ------------------------------------------- */
-
-/* Estado activo más visible */
+/* ── 4. Menú de navegación ────────────────────────────────── */
 .menu-btn.active {
   background-color: rgba(241, 250, 238, 0.35);
   border-color: rgba(241, 250, 238, 0.6);
@@ -64,18 +38,13 @@ body {
   text-underline-offset: 3px;
 }
 
-/* Texto del menú más grande */
-.menu-btn {
-  font-size: 1rem;       /* antes 0.9rem */
-}
+.menu-btn { font-size: 1rem; }
 
-/* 5. BOTONES PRINCIPALES — más grandes y contrastados
-   ------------------------------------------- */
-
+/* ── 5. Botones ───────────────────────────────────────────── */
 .btn {
   font-size: 1rem;
   padding: 0.6rem 1.2rem;
-  min-height: 48px;      /* supera los 44px de WCAG */
+  min-height: 48px;
   font-weight: 700;
 }
 
@@ -86,15 +55,9 @@ body {
   font-weight: 600;
 }
 
-/* Botón hamburger más grande */
-.nav-toggle {
-  width: 44px;
-  height: 44px;
-}
+.nav-toggle { width: 44px; height: 44px; }
 
-/* 6. FORMULARIOS — labels y inputs más legibles
-   ------------------------------------------- */
-
+/* ── 6. Formularios ───────────────────────────────────────── */
 label {
   font-size: 1rem;
   font-weight: 600;
@@ -111,7 +74,7 @@ input[type="number"],
 select {
   font-size: 1rem;
   padding: 0.6rem 0.75rem;
-  border: 2px solid #767676;  /* ratio mínimo 3:1 para bordes WCAG 1.4.11 */
+  border: 2px solid #767676;
   border-radius: 6px;
   width: 100%;
   color: #1a1a1a;
@@ -126,109 +89,41 @@ select:focus {
   outline-offset: 2px;
 }
 
-/* 7. BADGES Y ETIQUETAS
-   ------------------------------------------- */
+/* ── 7. Badges ────────────────────────────────────────────── */
+.badge         { font-size: 0.85rem; font-weight: 700; padding: 0.25rem 0.75rem; }
+.badge-progreso { font-size: 0.9rem; font-weight: 700; }
 
-.badge {
-  font-size: 0.85rem;
-  font-weight: 700;
-  padding: 0.25rem 0.75rem;
-}
+.progreso-alto  { background: #d4edda; color: #0d4a1f; }
+.progreso-medio { background: #fff3cd; color: #5c3d00; }
+.progreso-bajo  { background: #f8d7da; color: #6b1117; }
 
-.badge-progreso {
-  font-size: 0.9rem;
-  font-weight: 700;
-}
+/* ── 8. Modal ─────────────────────────────────────────────── */
+.modal-content h2 { font-size: 1.4rem; color: #1a2e4a; }
+#modalDesc        { font-size: 1.05rem; color: #2d2d2d; line-height: 1.7; }
 
-/* Colores de progreso con mejor contraste */
-.progreso-alto  { background: #d4edda; color: #0d4a1f; }  /* ratio 8.5:1 ✅ */
-.progreso-medio { background: #fff3cd; color: #5c3d00; }  /* ratio 7.2:1 ✅ */
-.progreso-bajo  { background: #f8d7da; color: #6b1117; }  /* ratio 8.1:1 ✅ */
+/* ── 9. Footer ────────────────────────────────────────────── */
+footer   { font-size: 1rem; }
+footer a { color: #a8d8ea; text-decoration: underline; }
 
-/* 8. MODAL DE RESULTADOS — más grande para baja visión
-   ------------------------------------------- */
+/* ── 10. Inicio ───────────────────────────────────────────── */
+#inicio p      { font-size: 1.05rem; line-height: 1.7; color: #2d2d2d; max-width: 75ch; }
+#inicio h2     { font-size: 1.6rem; color: #1a2e4a; }
+#inicio ul li  { font-size: 1.05rem; line-height: 1.7; margin-bottom: 0.4rem; }
 
-.modal-content h2 {
-  font-size: 1.4rem;
-  color: #1a2e4a;
-}
-
-#modalDesc {
-  font-size: 1.05rem;
-  color: #2d2d2d;
-  line-height: 1.7;
-}
-
-/* 9. FOOTER
-   ------------------------------------------- */
-
-footer {
-  font-size: 1rem;
-}
-
-footer a {
-  color: #a8d8ea;        /* azul claro contrastado sobre fondo oscuro */
-  text-decoration: underline;
-}
-
-/* 10. TEXTOS DE SECCIÓN INICIO
-    ------------------------------------------- */
-
-#inicio p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #2d2d2d;
-  max-width: 75ch;       /* longitud de línea óptima para lectura */
-}
-
-#inicio h2 {
-  font-size: 1.6rem;
-  color: #1a2e4a;
-}
-
-#inicio ul li {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin-bottom: 0.4rem;
-}
-
-/* 11. PERFIL DE ALUMNO
-    ------------------------------------------- */
-
-.perfil-stat-valor {
-  font-size: 1.8rem;
-}
-
-.perfil-stat-label {
-  font-size: 0.9rem;
-  color: #3d3d3d;
-}
-
+/* ── 11. Perfil de alumno ─────────────────────────────────── */
+.perfil-stat-valor       { font-size: 1.8rem; }
+.perfil-stat-label       { font-size: 0.9rem; color: #3d3d3d; }
 .perfil-tabla th,
-.perfil-tabla td {
-  font-size: 1rem;
-}
+.perfil-tabla td         { font-size: 1rem; }
 
-/* 12. RESPONSIVE — mantener legibilidad en móvil
-    ------------------------------------------- */
-
+/* ── 12. Responsive ───────────────────────────────────────── */
 @media (max-width: 768px) {
-  html {
-    font-size: 17px;   /* ligeramente menor en móvil pero sigue siendo accesible */
-  }
-
-  .card p {
-    font-size: 1rem;
-  }
-
-  .btn,
-  .btn-secundario {
-    width: 100%;
-    text-align: center;
-  }
+  html { font-size: 17px; }
+  .card p { font-size: 1rem; }
+  .btn, .btn-secundario { width: 100%; text-align: center; }
 }
 
-/* ── Iconos en celdas del grid ───────────────────────────── */
+/* ── Celdas juego grid ────────────────────────────────────── */
 .grid-celda-inner {
   display: flex;
   align-items: center;
@@ -237,227 +132,49 @@ footer a {
   height: 100%;
 }
 
-.grid-celda-correcta {
-  background: #d4edda !important;
-  border: 3px solid #2ecc71 !important;
-  outline: 3px dashed #155d27 !important;
-}
+.grid-celda-correcta   { background: #d4edda !important; border: 3px solid #2ecc71 !important; outline: 3px dashed #155d27 !important; }
+.grid-celda-incorrecta { background: #f8d7da !important; border: 3px solid #e63946 !important; outline: 3px dashed #7a0c14 !important; }
+.grid-celda-eracorrecta { background: #fff3cd !important; border: 3px solid #f4a261 !important; outline: 3px dashed #856404 !important; }
 
-.grid-celda-incorrecta {
-  background: #f8d7da !important;
-  border: 3px solid #e63946 !important;
-  outline: 3px dashed #7a0c14 !important;
-}
-
-.grid-celda-eracorrecta {
-  background: #fff3cd !important;
-  border: 3px solid #f4a261 !important;
-  outline: 3px dashed #856404 !important;
-}
-
-/* Patrón de rayas en la celda objetivo para no depender solo del color */
 .grid-celda-objetivo {
-  background: repeating-linear-gradient(
-    45deg,
-    #ffb703,
-    #ffb703 6px,
-    #ffd60a 6px,
-    #ffd60a 12px
-  ) !important;
+  background: repeating-linear-gradient(45deg, #ffb703, #ffb703 6px, #ffd60a 6px, #ffd60a 12px) !important;
   outline: 3px dashed #1d3557 !important;
 }
 
-/* ── Iconos y patrones en celdas del radar ───────────────── */
-.radar-cell {
-  position: relative;
-}
+/* ── Celdas juego radar ───────────────────────────────────── */
+.radar-cell             { position: relative; }
+.radar-cell-correcta    { background: #d4edda !important; outline: 3px solid #2ecc71 !important; }
+.radar-cell-incorrecta  { background: #f8d7da !important; outline: 3px solid #e63946 !important; }
+.radar-cell-faltante    { background: #fff3cd !important; outline: 3px dashed #f4a261 !important; }
+.radar-cell-seleccionada { outline: 3px solid #4361ee !important; background: #e8edff !important; }
 
-.radar-cell-correcta {
-  background: #d4edda !important;
-  outline: 3px solid #2ecc71 !important;
-}
+.radar-svg-wrap         { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; }
+.radar-svg-wrap svg     { width: 44px; height: 44px; filter: drop-shadow(2px 3px 2px rgba(0,0,0,0.2)); }
+#radar-objetivo         { display: flex; align-items: center; gap: 0.5rem; }
+#radar-objetivo svg     { width: 28px; height: 28px; vertical-align: middle; }
 
-.radar-cell-incorrecta {
-  background: #f8d7da !important;
-  outline: 3px solid #e63946 !important;
-}
-
-.radar-cell-faltante {
-  background: #fff3cd !important;
-  outline: 3px dashed #f4a261 !important;
-}
-
-.radar-cell-seleccionada {
-  outline: 3px solid #4361ee !important;
-  background: #e8edff !important;
-}
-
-/* ── SVG inline en celdas del radar ─────────────────────── */
-.radar-svg-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-}
-
-.radar-svg-wrap svg {
-  width: 44px;
-  height: 44px;
-  filter: drop-shadow(2px 3px 2px rgba(0,0,0,0.2));
-}
-
-#radar-objetivo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-#radar-objetivo svg {
-  width: 28px;
-  height: 28px;
-  vertical-align: middle;
-}
-
-/* ── Feedback visual juego memoria ───────────────────────── */
-.memoria-card-back {
-  position: relative;
-}
-
-.memoria-icono-ok {
-  position: absolute;
-  top: 4px;
-  right: 6px;
-  font-size: 1rem;
-  font-weight: 900;
-  color: #155d27;
-  background: #d4edda;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-/* Cartas acertadas — fondo verde suave */
-.memoria-acertada .memoria-card-back {
-  background: #d4edda !important;
-  border: 3px solid #2ecc71 !important;
-}
-
-/* Cartas erróneas — flash rojo */
-.memoria-error .memoria-card-back {
-  background: #f8d7da !important;
-  border: 3px solid #e63946 !important;
-  animation: memoria-error-flash 0.4s ease;
-}
-
+/* ── Juego memoria — cartas ───────────────────────────────── */
 @keyframes memoria-error-flash {
   0%, 100% { transform: translateX(0); }
   25%       { transform: translateX(-5px); }
   75%       { transform: translateX(5px); }
 }
 
-/* Cartas giradas — borde azul */
-.memoria-girada:not(.memoria-acertada) .memoria-card-back {
-  border: 3px solid #4361ee !important;
-}
-
-/* ── Cartas de memoria con emoji grande ──────────────────── */
-.memoria-card {
-  width: 90px;
-  height: 90px;
-  cursor: pointer;
-  perspective: 600px;
-  border-radius: 12px;
-}
-
-.memoria-card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.45s ease;
-  border-radius: 12px;
-}
-
-.memoria-girada .memoria-card-inner {
-  transform: rotateY(180deg);
-}
-
-.memoria-card-front,
-.memoria-card-back {
+.memoria-icono-ok {
   position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  backface-visibility: hidden;
+  top: 4px; right: 6px;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #155d27;
+  background: #d4edda;
+  border-radius: 50%;
+  width: 20px; height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Dorso — fondo azul con interrogación */
-.memoria-card-front {
-  background: linear-gradient(135deg, #4361ee, #3a0ca3);
-  border: 3px solid #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.memoria-card-dorso {
-  font-size: 2rem;
-  font-weight: 900;
-  color: rgba(255,255,255,0.6);
-}
-
-/* Cara — fondo blanco con emoji grande */
-.memoria-card-back {
-  background: #fff;
-  border: 3px solid #e0e0e0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transform: rotateY(180deg);
-}
-
-.memoria-emoji {
-  font-size: 3rem;
   line-height: 1;
-  filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.15));
-  user-select: none;
 }
 
-/* Acertada — borde verde */
-.memoria-acertada .memoria-card-back {
-  background: #eaf7f5 !important;
-  border: 3px solid #2ecc71 !important;
-}
-
-.memoria-acertada .memoria-emoji {
-  filter: drop-shadow(0 0 6px rgba(46,204,113,0.6));
-}
-
-/* Error — flash rojo */
-.memoria-error .memoria-card-back {
-  background: #fdecea !important;
-  border: 3px solid #e63946 !important;
-  animation: memoria-error-flash 0.4s ease;
-}
-
-/* Carta girada activa — borde azul */
-.memoria-girada:not(.memoria-acertada) .memoria-card-back {
-  border: 3px solid #4361ee !important;
-}
-
-/* Grid de cartas adaptativo */
-#memoria-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 90px) !important;
-  gap: 12px !important;
-  justify-content: center !important;
-  margin: 1rem auto !important;
-}
-
-/* ── RESET COMPLETO cartas memoria ───────────────────────── */
 .memoria-card {
   width: 90px !important;
   height: 90px !important;
@@ -483,10 +200,8 @@ footer a {
 .memoria-card-front,
 .memoria-card-back {
   position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
+  top: 0 !important; left: 0 !important;
+  width: 100% !important; height: 100% !important;
   border-radius: 12px !important;
   -webkit-backface-visibility: hidden !important;
   backface-visibility: hidden !important;
@@ -509,8 +224,8 @@ footer a {
 }
 
 .memoria-card-back {
-  background: #fff !important;
-  border: 3px solid #dee2e6 !important;
+  background: linear-gradient(135deg, #f0f4ff, #dde4ff) !important;
+  border: 3px solid #4361ee !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
   transform: rotateY(180deg) !important;
 }
@@ -526,26 +241,33 @@ footer a {
   border: 3px solid #2ecc71 !important;
 }
 
+.memoria-acertada .memoria-emoji {
+  filter: drop-shadow(0 0 6px rgba(46,204,113,0.6));
+}
+
 .memoria-error .memoria-card-back {
   background: #fdecea !important;
   border: 3px solid #e63946 !important;
+  animation: memoria-error-flash 0.4s ease;
 }
 
-/*#memoria-grid {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
-  gap: 12px !important;
-  max-width: 560px !important;
-  margin: 1rem auto !important;
-}*/
+.memoria-girada:not(.memoria-acertada) .memoria-card-back {
+  border: 3px solid #4361ee !important;
+}
 
-/* ── Iconos feedback juego diferencias ───────────────────── */
+#memoria-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 90px) !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  margin: 1rem auto !important;
+}
+
+/* ── Juego diferencias ────────────────────────────────────── */
 .dif-icono {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 24px;
-  height: 24px;
+  top: 4px; right: 4px;
+  width: 24px; height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -553,16 +275,139 @@ footer a {
   pointer-events: none;
 }
 
-.dif-icono-ok {
+.dif-icono-ok  { background: #d4edda; border: 2px solid #2ecc71; }
+.dif-icono-err { background: #f8d7da; border: 2px solid #e63946; }
+.dif-celda     { position: relative; }
+
+/* ── Juego memoria — cartas ───────────────────────────────── */
+@keyframes memoria-error-flash {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-5px); }
+  75%       { transform: translateX(5px); }
+}
+
+.memoria-icono-ok {
+  position: absolute;
+  top: 4px; right: 6px;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #155d27;
   background: #d4edda;
-  border: 2px solid #2ecc71;
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
-.dif-icono-err {
-  background: #f8d7da;
-  border: 2px solid #e63946;
+/* Sistema unificado: padding-top trick */
+.memoria-card {
+  position: relative !important;
+  width: 100% !important;
+  padding-top: 100% !important;
+  cursor: pointer !important;
+  perspective: 700px !important;
+  border-radius: 12px !important;
+  display: block !important;
+  height: auto !important;
 }
 
-.dif-celda {
-  position: relative;
+.memoria-card-inner {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform-style: preserve-3d !important;
+  transition: transform 0.45s ease !important;
+  border-radius: 12px !important;
 }
+
+.memoria-girada .memoria-card-inner,
+.memoria-card.memoria-girada .memoria-card-inner,
+.memoria-card.memoria-acertada .memoria-card-inner {
+  transform: rotateY(180deg) !important;
+}
+
+.memoria-card-front,
+.memoria-card-back {
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 12px !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.memoria-card-front {
+  background: linear-gradient(135deg, #4361ee, #3a0ca3) !important;
+  border: 3px solid #fff !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+  transform: rotateY(0deg) !important;
+}
+
+.memoria-card-dorso {
+  font-size: 2.2rem !important;
+  font-weight: 900 !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+
+.memoria-card-back {
+  background: linear-gradient(135deg, #f0f4ff, #dde4ff) !important;
+  border: 3px solid #4361ee !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+  transform: rotateY(180deg) !important;
+  font-size: clamp(1.5rem, 5vw, 2.5rem) !important;
+}
+
+.memoria-emoji {
+  font-size: clamp(1.5rem, 5vw, 2.5rem) !important;
+  line-height: 1 !important;
+  user-select: none !important;
+}
+
+.memoria-acertada .memoria-card-back {
+  background: #eaf7f5 !important;
+  border: 3px solid #2ecc71 !important;
+}
+
+.memoria-acertada .memoria-emoji {
+  filter: drop-shadow(0 0 6px rgba(46,204,113,0.6));
+}
+
+.memoria-error .memoria-card-back {
+  background: #fdecea !important;
+  border: 3px solid #e63946 !important;
+  animation: memoria-error-flash 0.4s ease;
+}
+
+.memoria-girada:not(.memoria-acertada) .memoria-card-back {
+  border: 3px solid #4361ee !important;
+}
+
+#memoria-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(60px, 1fr)) !important;
+  gap: 0.75rem !important;
+  max-width: 480px !important;
+  justify-content: center !important;
+  margin: 1rem auto !important;
+}
+
+/* ── Juego diferencias ────────────────────────────────────── */
+.dif-icono {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dif-icono-ok  { background: #d4edda; border: 2px solid #2ecc71; }
+.dif-icono-err { background: #f8d7da; border: 2px solid #e63946; }
+.dif-celda     { position: relative; }

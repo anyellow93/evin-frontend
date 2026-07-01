@@ -97,6 +97,14 @@ const Api = {
     });
   },
   
+  getDashboard() {
+  return this._fetch('/dashboard');
+  },
+  
+  getEstadisticas(id) {
+  return this._fetch(`/alumnos/${id}/estadisticas`);
+  },
+  
   actualizarPerfil(datos) {
   return this._fetch('/me', {
     method: 'PATCH',

@@ -1,8 +1,8 @@
 // js/juego_puzzle.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const params        = new URLSearchParams(window.location.search);
-  const usuarioActual = decodeURIComponent(params.get('usuario') || 'Anónimo');
+  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+  const usuarioActual = _evinUser.nombre || 'Anónimo';
 
   // ── Elementos del DOM ──────────────────────────────────────────────────────
   const puzzleContenedor = document.getElementById('puzzle-contenedor');
@@ -218,8 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Tamaño de cada pieza ───────────────────────────────────────────────────
   function tamPieza() {
-    const maxAncho = Math.min(window.innerWidth - 32, 500);
-    return Math.floor(maxAncho / cols);
+    const anchoDisponible = Math.min(window.innerWidth - 64, 900);
+    const anchoPorZona    = Math.floor(anchoDisponible / 2); // dividir entre tablero y piezas
+    const maxPieza        = Math.min(anchoPorZona / cols, 500 / cols);
+    return Math.floor(maxPieza);
   }
 
   // ── Registro de sesión ─────────────────────────────────────────────────────
@@ -293,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     estadoTablero = orden;
 
     // Estilos del grid
-    const gridStyle = `display:grid;grid-template-columns:repeat(${cols},${tam}px);gap:3px;`;
+    const gridStyle = `display:grid;grid-template-columns:repeat(${cols},${tam}px);gap:3px;max-width:${tam*cols+cols*3}px;`;
     puzzleHuecos.style.cssText = gridStyle;
     puzzlePiezas.style.cssText = gridStyle;
 
@@ -429,7 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
       hueco.style.border    = '2px solid #0f0';
       hueco.style.boxShadow = '0 0 8px rgba(0,255,0,0.4)';
       hueco.dataset.ocupado = '1';
-      if (window.Sonidos) Sonidos.acierto();
 
       // Eliminar pieza del panel
       pieza.style.opacity  = '0';
@@ -438,8 +439,6 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => pieza.remove(), 300);
 
     } else {
-    
-      if (window.Sonidos) Sonidos.error();
       // Error — flash rojo
       pieza.style.border = '3px solid #f00';
       hueco.style.border = '3px solid #f00';
@@ -483,7 +482,6 @@ document.addEventListener('DOMContentLoaded', () => {
     await registrarSesion(rondasMax, movimientos);
     showModal('🏆 ¡Completado!',
       `Has completado ${rondasMax} puzzles.\nMovimientos totales: ${movimientos}\nTiempo: ${tiempo}s`);
-      if (window.Sonidos) Sonidos.victoria();
   }
 
   // ── Resize ─────────────────────────────────────────────────────────────────
@@ -493,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Eventos ────────────────────────────────────────────────────────────────
   btnEmpezar?.addEventListener('click', iniciarPuzzle);
-  btnVolver?.addEventListener('click',  () => { clearInterval(timerId); window.close(); });
+  btnVolver?.addEventListener('click',  () => { clearInterval(timerId); if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
   puzzleNivelEl?.addEventListener('change', () => { if (juegoActivo) iniciarRonda(); });
 
 });

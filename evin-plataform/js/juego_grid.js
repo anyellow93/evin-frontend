@@ -1,9 +1,9 @@
 // js/juego_grid.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const params        = new URLSearchParams(window.location.search);
-  const usuarioActual = decodeURIComponent(params.get('usuario') || 'Anónimo');
-  const alumnoId      = params.get('alumno_id') || null;
+  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+  const usuarioActual = _evinUser.nombre || 'Anónimo';
+  const alumnoId      = null;
 
   const gridTablero    = document.getElementById('grid-tablero');
   const gridRondaEl    = document.getElementById('grid-ronda');
@@ -163,9 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnEmpezar?.addEventListener('click',   nuevaRonda);
   btnComprobar?.addEventListener('click', comprobarRespuesta);
-  btnVolver?.addEventListener('click',    () => window.close());
+  btnVolver?.addEventListener('click',    () => { if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
   gridNivelEl?.addEventListener('change', crearTableroGrid);
 
-  crearTableroGrid();
+  
 
 });

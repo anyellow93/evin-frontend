@@ -217,6 +217,46 @@
   padding: 0.5rem 0;
 }
 
+/* ── Dashboard — tendencias globales ─────────────────────── */
+.dash-tendencias {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+}
+
+.dash-tendencia-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  flex: 1;
+  text-align: center;
+}
+
+.dash-tendencia-icono { font-size: 1.75rem; }
+.dash-tendencia-num   { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+.dash-tendencia-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.tendencia-mejorando { background: #dcfce7; }
+.tendencia-mejorando .dash-tendencia-num { color: #166534; }
+.tendencia-mejorando .dash-tendencia-label { color: #166534; }
+
+.tendencia-estable { background: #f1f5f9; }
+.tendencia-estable .dash-tendencia-num { color: #475569; }
+.tendencia-estable .dash-tendencia-label { color: #475569; }
+
+.tendencia-atencion { background: #fee2e2; }
+.tendencia-atencion .dash-tendencia-num { color: #991b1b; }
+.tendencia-atencion .dash-tendencia-label { color: #991b1b; }
+
+/* Alto contraste */
+body.alto-contraste .dash-tendencia-item { background: #111 !important; border: 1px solid #555 !important; }
+body.alto-contraste .dash-tendencia-num,
+body.alto-contraste .dash-tendencia-label { color: #fff !important; -webkit-text-fill-color: #fff !important; }
+
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   .dash-grid {

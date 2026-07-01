@@ -2,8 +2,8 @@
   document.addEventListener('DOMContentLoaded', () => {
 
   // Leer el usuario que viene en la URL (?usuario=Ana+García)
-  const params        = new URLSearchParams(window.location.search);
-  const usuarioActual = decodeURIComponent(params.get('usuario') || 'Anónimo');
+  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+  const usuarioActual = _evinUser.nombre || 'Anónimo';
 
   // ── Elementos del DOM ──────────────────────────────────────────────────────
   const memoriaGrid     = document.getElementById('memoria-grid');
@@ -141,14 +141,12 @@
       segundaCarta.querySelector('.memoria-card-back')?.insertAdjacentHTML('beforeend', iconoCorrecto);
       primeraCarta.setAttribute('aria-label', `Pareja encontrada: ${primeraCarta.dataset.simbolo}`);
       segundaCarta.setAttribute('aria-label', `Pareja encontrada: ${segundaCarta.dataset.simbolo}`);
-      if (window.Sonidos) Sonidos.acierto();
       resetSeleccion();
       comprobarFin();
     } else {
       // Error — flash visual
       primeraCarta.classList.add('memoria-error');
       segundaCarta.classList.add('memoria-error');
-      if (window.Sonidos) Sonidos.error();
       setTimeout(() => {
         primeraCarta.classList.remove('memoria-girada', 'memoria-error');
         segundaCarta.classList.remove('memoria-girada', 'memoria-error');
@@ -174,7 +172,6 @@
                 :                                    'Fácil';
 
     const aciertos = cartasMemoria.length / 2; // todas las parejas encontradas
-    if (window.Sonidos) Sonidos.victoria();
 
     await registrarSesion(aciertos, intentosMem);
 
@@ -187,7 +184,7 @@
   // ── Eventos de UI ──────────────────────────────────────────────────────────
 
   btnReiniciar?.addEventListener('click', crearCartasMemoria);
-  btnVolver?.addEventListener('click',    () => window.close());
+  btnVolver?.addEventListener('click',    () => { if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
   memoriaNivel?.addEventListener('change', crearCartasMemoria);
 
 });

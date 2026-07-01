@@ -224,6 +224,88 @@
   font-style: italic;
 }
 
+/* ── Métricas clínicas del perfil de alumno ──────────────── */
+
+/* Stats en grid */
+.perfil-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.perfil-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.25rem;
+}
+
+.perfil-stat-icono {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.perfil-stat-valor {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.perfil-stat-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Tendencia */
+.perfil-tendencia {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tendencia-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.tendencia-mejorando  { background: #dcfce7; color: #166534; }
+.tendencia-estable    { background: #f1f5f9; color: #475569; }
+.tendencia-empeorando { background: #fee2e2; color: #991b1b; }
+
+/* Última sesión */
+.perfil-ultima {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.perfil-ultima strong {
+  color: var(--text-primary);
+}
+
+/* Alto contraste */
+body.alto-contraste .perfil-stat-valor    { color: #fff !important; -webkit-text-fill-color: #fff !important; }
+body.alto-contraste .perfil-stat-label    { color: #ccc !important; -webkit-text-fill-color: #ccc !important; }
+body.alto-contraste .tendencia-mejorando  { background: #004d00 !important; color: #0f0 !important; -webkit-text-fill-color: #0f0 !important; }
+body.alto-contraste .tendencia-estable    { background: #333 !important;    color: #fff !important; -webkit-text-fill-color: #fff !important; }
+body.alto-contraste .tendencia-empeorando { background: #4d0000 !important; color: #f00 !important; -webkit-text-fill-color: #f00 !important; }
+body.alto-contraste .perfil-ultima        { color: #ccc !important; -webkit-text-fill-color: #ccc !important; border-color: #555 !important; }
+
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 600px) {
   .perfil-header { padding: 1rem; }

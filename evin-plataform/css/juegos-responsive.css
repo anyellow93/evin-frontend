@@ -91,6 +91,7 @@ body.solo-juego main > section {
   padding-top: 100%;
   cursor: pointer;
   perspective: 700px;
+  position : relative;
 }
 
 @media (max-width: 480px) {
