@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function registrarSesion(aciertos, intentos) {
     try {
       const token = localStorage.getItem('evin_token');
-      await fetch('http://162.0.228.169/api/v1/sesiones', {
+      await fetch('https://evin.click/api/v1/sesiones', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
         body: JSON.stringify({ alumno: usuarioActual, alumno_id: alumnoId, juego: 'Recuerda las casillas', aciertos, intentos })
