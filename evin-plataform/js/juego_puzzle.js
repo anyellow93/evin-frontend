@@ -469,7 +469,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       setTimeout(() => {
         rondaActual++;
-        showModal('¡Puzzle completado!', `¡Muy bien! Ronda ${rondaActual - 1} superada. ¡Ahora la siguiente ilustración!`);
+        if (window.Animaciones) Animaciones.rondaSuperada();
+        showModal('¡Puzzle completado!', `¡Muy bien! Ronda ${rondaActual - 1} superada. ¡Ahora la siguiente ilustración!`, () => iniciarPuzzle());
         setTimeout(iniciarRonda, 1800);
       }, 400);
     }
@@ -477,7 +478,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Fin de juego ──────────────────────────────────────────────────────────
   async function finJuego() {
+    
     juegoActivo = false;
+    if (window.Animaciones) Animaciones.victoria('juego-puzzle');
     clearInterval(timerId);
     await registrarSesion(rondasMax, movimientos);
     showModal('🏆 ¡Completado!',

@@ -200,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // ── SONIDO RONDA SUPERADA ──
             if (window.Sonidos) Sonidos.rondaSuperada();
             rondaActual++;
+            if (window.Animaciones) Animaciones.rondaSuperada();
             showModal('¡Ronda superada!', `Completaste la ronda ${rondaActual - 1}. ¡Ahora el tablero es más grande!`);
             setTimeout(iniciarRonda, 1800);
           }, 400);
@@ -241,13 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── SONIDO FIN ──
     if (completado) {
       if (window.Sonidos) Sonidos.victoria();
+      if (window.Animaciones) Animaciones.victoria('juego-radar');
       const cfg = configPorNivel();
       showModal('🏆 ¡Completado!',
-        `Has superado las ${cfg.rondasMax} rondas.\nAciertos: ${radarAciertos}\nErrores: ${radarErrores}\nTiempo: ${radarTiempo}s`);
+        `Has superado las ${cfg.rondasMax} rondas.\nAciertos: ${radarAciertos}\nErrores: ${radarErrores}\nTiempo: ${radarTiempo}s`, () => iniciarRadarVisual());
     } else {
       if (window.Sonidos) Sonidos.gameOver();
+      if (window.Animaciones) Animaciones.gameOver('juego-radar');
       showModal('💥 Game Over',
-        `Cometiste ${radarErrores} errores.\nLlegaste hasta la ronda ${rondaActual}.\nAciertos totales: ${radarAciertos}\nTiempo: ${radarTiempo}s`);
+        `Cometiste ${radarErrores} errores.\nLlegaste hasta la ronda ${rondaActual}.\nAciertos totales: ${radarAciertos}\nTiempo: ${radarTiempo}s`, () => iniciarRadarVisual());
     }
   }
 

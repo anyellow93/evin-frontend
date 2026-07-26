@@ -1,5 +1,8 @@
-/* ── Modal de perfil de alumno ───────────────────────────── */
+/* =============================================
+   PERFIL DE ALUMNO — EVIN
+   ============================================= */
 
+/* ── Modal de perfil de alumno ───────────────────────────── */
 .perfil-overlay {
   position: fixed;
   inset: 0;
@@ -29,7 +32,7 @@
 
 /* ── Cabecera del perfil ──────────────────────────────────── */
 .perfil-header {
-  background: linear-gradient(135deg, #4361ee, #3a0ca3);
+  background: linear-gradient(135deg, #0F2E8A, #1B4FD8);
   color: #fff;
   padding: 1.5rem 2rem;
   border-radius: 16px 16px 0 0;
@@ -72,47 +75,91 @@
 
 /* ── Stats rápidas ───────────────────────────────────────── */
 .perfil-stats {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1rem;
-  padding: 1.25rem 2rem;
-  background: #f8f9ff;
-  border-bottom: 1px solid #e9ecef;
-  flex-wrap: wrap;
+  padding: 1.25rem 1.5rem;
+  background: #F0F4FF;
+  border-bottom: 1px solid #c5d0f0;
 }
 
 .perfil-stat {
-  flex: 1;
-  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  gap: 0.25rem;
   padding: 0.75rem;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
+.perfil-stat-icono {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
 .perfil-stat-valor {
   font-size: 1.6rem;
-  font-weight: 700;
-  color: #4361ee;
+  font-weight: 800;
+  color: #0F2E8A;
+  line-height: 1;
   display: block;
 }
 
 .perfil-stat-label {
   font-size: 0.78rem;
-  color: #666;
+  color: #475569;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   margin-top: 0.2rem;
 }
+
+/* ── Tendencia ───────────────────────────────────────────── */
+.perfil-tendencia {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tendencia-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.tendencia-mejorando  { background: #dcfce7; color: #166534; }
+.tendencia-estable    { background: #f1f5f9; color: #475569; }
+.tendencia-empeorando { background: #fee2e2; color: #991b1b; }
+
+/* ── Última sesión ───────────────────────────────────────── */
+.perfil-ultima {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.perfil-ultima strong { color: #0f172a; }
 
 /* ── Gráfico de barras ───────────────────────────────────── */
 .perfil-grafico {
   padding: 1.25rem 2rem;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .perfil-grafico h3 {
   font-size: 1rem;
   margin: 0 0 1rem;
-  color: #333;
+  color: #0F2E8A;
 }
 
 .grafico-barras {
@@ -135,7 +182,7 @@
   width: 100%;
   min-height: 4px;
   border-radius: 4px 4px 0 0;
-  background: #4361ee;
+  background: #1B4FD8;
   transition: height 0.5s ease;
   position: relative;
 }
@@ -146,7 +193,7 @@
   top: -24px;
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
+  background: #0F2E8A;
   color: #fff;
   font-size: 0.7rem;
   padding: 2px 6px;
@@ -156,7 +203,7 @@
 
 .barra-fecha {
   font-size: 0.6rem;
-  color: #999;
+  color: #94a3b8;
   margin-top: 4px;
   text-align: center;
   white-space: nowrap;
@@ -173,7 +220,7 @@
 .perfil-sesiones h3 {
   font-size: 1rem;
   margin: 0 0 1rem;
-  color: #333;
+  color: #0F2E8A;
 }
 
 .perfil-tabla {
@@ -183,12 +230,12 @@
 }
 
 .perfil-tabla th {
-  background: #f1f3ff;
-  color: #4361ee;
+  background: #e8edf8;
+  color: #0F2E8A;
   font-weight: 600;
   padding: 0.6rem 0.75rem;
   text-align: left;
-  border-bottom: 2px solid #dee2ff;
+  border-bottom: 2px solid #c5d0f0;
 }
 
 .perfil-tabla td {
@@ -197,13 +244,9 @@
   color: #444;
 }
 
-.perfil-tabla tr:last-child td {
-  border-bottom: none;
-}
+.perfil-tabla tr:last-child td { border-bottom: none; }
 
-.perfil-tabla tr:hover td {
-  background: #f8f9ff;
-}
+.perfil-tabla tr:hover td { background: #F0F4FF; }
 
 .pct-badge {
   display: inline-block;
@@ -219,97 +262,52 @@
 
 .perfil-vacio {
   text-align: center;
-  color: #999;
+  color: #94a3b8;
   padding: 2rem;
   font-style: italic;
 }
 
-/* ── Métricas clínicas del perfil de alumno ──────────────── */
-
-/* Stats en grid */
-.perfil-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.perfil-stat {
+/* ── Métricas clínicas ────────────────────────────────────── */
+.perfil-detalle {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.25rem;
-}
-
-.perfil-stat-icono {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.perfil-stat-valor {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1;
-}
-
-.perfil-stat-label {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-/* Tendencia */
-.perfil-tendencia {
-  padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
   gap: 0.5rem;
 }
 
-.tendencia-badge {
-  display: inline-flex;
+.perfil-detalle-item {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.tendencia-mejorando  { background: #dcfce7; color: #166534; }
-.tendencia-estable    { background: #f1f5f9; color: #475569; }
-.tendencia-empeorando { background: #fee2e2; color: #991b1b; }
-
-/* Última sesión */
-.perfil-ultima {
-  padding: 0.6rem 1.5rem;
   font-size: 0.9rem;
-  color: var(--text-secondary);
-  border-bottom: 1px solid var(--border);
 }
 
-.perfil-ultima strong {
-  color: var(--text-primary);
-}
+.perfil-detalle-label { color: #475569; font-weight: 500; }
+.perfil-detalle-valor { color: #0F2E8A; font-weight: 700; }
 
-/* Alto contraste */
-body.alto-contraste .perfil-stat-valor    { color: #fff !important; -webkit-text-fill-color: #fff !important; }
+/* ── Alto contraste ───────────────────────────────────────── */
+body.alto-contraste .perfil-panel         { background: #000 !important; border: 2px solid #fff !important; }
+body.alto-contraste .perfil-header        { background: #111 !important; }
+body.alto-contraste .perfil-stats         { background: #111 !important; border-color: #555 !important; }
+body.alto-contraste .perfil-stat          { background: #222 !important; }
+body.alto-contraste .perfil-stat-valor    { color: #ff0 !important; -webkit-text-fill-color: #ff0 !important; }
 body.alto-contraste .perfil-stat-label    { color: #ccc !important; -webkit-text-fill-color: #ccc !important; }
+body.alto-contraste .perfil-tabla th      { background: #111 !important; color: #ff0 !important; -webkit-text-fill-color: #ff0 !important; }
+body.alto-contraste .perfil-tabla td      { color: #fff !important; -webkit-text-fill-color: #fff !important; border-color: #333 !important; }
+body.alto-contraste .perfil-tabla tr:hover td { background: #222 !important; }
+body.alto-contraste .perfil-sesiones h3,
+body.alto-contraste .perfil-grafico h3    { color: #ff0 !important; -webkit-text-fill-color: #ff0 !important; }
 body.alto-contraste .tendencia-mejorando  { background: #004d00 !important; color: #0f0 !important; -webkit-text-fill-color: #0f0 !important; }
 body.alto-contraste .tendencia-estable    { background: #333 !important;    color: #fff !important; -webkit-text-fill-color: #fff !important; }
 body.alto-contraste .tendencia-empeorando { background: #4d0000 !important; color: #f00 !important; -webkit-text-fill-color: #f00 !important; }
-body.alto-contraste .perfil-ultima        { color: #ccc !important; -webkit-text-fill-color: #ccc !important; border-color: #555 !important; }
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .perfil-header { padding: 1rem; }
-  .perfil-stats  { padding: 1rem; }
-  .perfil-sesiones, .perfil-grafico { padding: 1rem; }
+  .perfil-header   { padding: 1rem; }
+  .perfil-stats    { padding: 1rem; }
+  .perfil-sesiones,
+  .perfil-grafico  { padding: 1rem; }
   .perfil-stat-valor { font-size: 1.3rem; }
+  .perfil-detalle-item { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
 }

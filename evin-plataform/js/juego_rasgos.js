@@ -218,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // ── SONIDO RONDA SUPERADA ──
             if (window.Sonidos) Sonidos.rondaSuperada();
             rondaActual++;
+            if (window.Animaciones) Animaciones.rondaSuperada();
             showModal('¡Ronda superada!', `¡Bien! Ronda ${rondaActual - 1} completada. El tablero crece.`);
             setTimeout(iniciarRonda, 1800);
           }, 400);
@@ -258,12 +259,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (completado) {
       // ── SONIDO VICTORIA ──
       if (window.Sonidos) Sonidos.victoria();
+      if (window.Animaciones) Animaciones.victoria('juego-rasgos');
       const cfg = configPorNivel();
-      showModal('🏆 ¡Completado!', `Has superado las ${cfg.rondasMax} rondas.\nAciertos: ${rasgosAciertos}\nErrores: ${rasgosErrores}\nTiempo: ${rasgosTiempo}s`);
+      showModal('🏆 ¡Completado!', `Has superado las ${cfg.rondasMax} rondas.\nAciertos: ${rasgosAciertos}\nErrores: ${rasgosErrores}\nTiempo: ${rasgosTiempo}s`, () => iniciarRasgos());
     } else {
       // ── SONIDO GAME OVER ──
       if (window.Sonidos) Sonidos.gameOver();
-      showModal('💥 Game Over', `Cometiste ${rasgosErrores} errores.\nLlegaste hasta la ronda ${rondaActual}.\nAciertos totales: ${rasgosAciertos}\nTiempo: ${rasgosTiempo}s`);
+      if (window.Animaciones) Animaciones.gameOver('juego-rasgos');
+      showModal('💥 Game Over', `Cometiste ${rasgosErrores} errores.\nLlegaste hasta la ronda ${rondaActual}.\nAciertos totales: ${rasgosAciertos}\nTiempo: ${rasgosTiempo}s`, () => iniciarRasgos());
     }
   }
 

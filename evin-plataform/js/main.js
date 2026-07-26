@@ -64,12 +64,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalTitle = modal.querySelector('#modalTitle');
   const modalDesc  = modal.querySelector('#modalDesc');
 
-  window.showModal = function (title, description) {
-    modalTitle.textContent = title;
-    modalDesc.textContent  = description;
-    modal.classList.remove('hidden');
-    modal.querySelector('#closeModal').focus();
-  };
+ window.showModal = function (title, description, onRepetir) {
+  modalTitle.textContent = title;
+  modalDesc.textContent  = description;
+
+  // Botón "Jugar de nuevo"
+  let btnRepetir = modal.querySelector('#btn-repetir');
+  if (onRepetir) {
+    if (!btnRepetir) {
+      btnRepetir = document.createElement('button');
+      btnRepetir.id = 'btn-repetir';
+      btnRepetir.className = 'btn';
+      btnRepetir.style.cssText = 'margin-top:1rem;width:100%;background:#FF8C00;color:#fff;border:none;padding:0.75rem;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;';
+      modal.querySelector('.modal-content').appendChild(btnRepetir);
+    }
+    btnRepetir.textContent = '🔄 Jugar de nuevo';
+    btnRepetir.onclick = () => {
+      modal.classList.add('hidden');
+      onRepetir();
+    };
+    btnRepetir.style.display = 'block';
+  } else {
+    if (btnRepetir) btnRepetir.style.display = 'none';
+  }
+
+  modal.classList.remove('hidden');
+  modal.querySelector('#closeModal').focus();
+};
 
   modal.querySelector('#closeModal').addEventListener('click', () => modal.classList.add('hidden'));
   modal.addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.add('hidden'); });
@@ -555,7 +576,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     },
 
-    async mounted() { await this.cargarAlumnos(); },
+    async mounted() {
+      const token = localStorage.getItem('evin_token');
+      if (!token) { this.cargando = false; return; }
+      await this.cargarAlumnos();
+   },
 
     methods: {
       avatarSvg(nombre)       { return window.Avatar ? window.Avatar.svg(nombre || '?', 60) : ''; },

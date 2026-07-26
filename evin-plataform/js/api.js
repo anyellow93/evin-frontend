@@ -15,22 +15,30 @@ const Api = {
     return headers;
   },
 
-  async _fetch(path, options = {}) {
-    const response = await fetch(`${API_URL}${path}`, {
-      ...options,
-      headers: this._headers()
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      // Lanza un error con el mensaje del backend para mostrarlo en la UI
-      const mensaje = data.error || (data.errors && data.errors.join(', ')) || 'Error desconocido';
-      throw new Error(mensaje);
+ async _fetch(path, options = {}) {
+  const response = await fetch(`${API_URL}${path}`, {
+    ...options,
+    headers: this._headers()
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    // Sesión expirada — solo si había token guardado
+    if (response.status === 401 && localStorage.getItem('evin_token')) {
+      localStorage.removeItem('evin_token');
+      localStorage.removeItem('evin_user');
+      if (typeof showModal === 'function') {
+        showModal('Sesión expirada', 'Tu sesión ha caducado. Por favor, inicia sesión de nuevo.');
+      }
+      if (typeof showSection === 'function') showSection('usuario');
+      document.getElementById('nav-login-btn')?.classList.remove('hidden');
+      document.getElementById('nav-perfil-btn')?.classList.add('hidden');
+      if (typeof resetearPermisos === 'function') resetearPermisos();
     }
-
-    return data;
-  },
+    const mensaje = data.error || (data.errors && data.errors.join(', ')) || 'Error desconocido';
+    throw new Error(mensaje);
+  }
+  return data;
+ },
 
   // ── Autenticación ──────────────────────────────────────────────────────────
 

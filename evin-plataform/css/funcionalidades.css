@@ -1,0 +1,119 @@
+/* ── Sección funcionalidades ──────────────────────────────── */
+.funcionalidades {
+  padding: 3rem 0 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.funcionalidades-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.funcionalidades-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.funcionalidades-header h2 {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+  color: #1a2e4a;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.funcionalidades-header p {
+  font-size: 1rem;
+  color: #64748b;
+  max-width: 55ch;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.funcionalidades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.funcionalidad-card {
+  background: #fff;
+  border: 1px solid #e8ecf0;
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.funcionalidad-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.funcionalidad-icono {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #0F2E8A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+
+.funcionalidad-icono--verde  { background: #f0fdf4; color: #16a34a; }
+.funcionalidad-icono--naranja { background: #fff7ed; color: #ea580c; }
+.funcionalidad-icono--morado  { background: #faf5ff; color: #9333ea; }
+
+.funcionalidad-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a2e4a;
+  margin: 0;
+}
+
+.funcionalidad-card p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* Alto contraste */
+body.alto-contraste .funcionalidad-card {
+  background: #111 !important;
+  border-color: #555 !important;
+}
+body.alto-contraste .funcionalidad-card h3,
+body.alto-contraste .funcionalidad-card p {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+body.alto-contraste .funcionalidades-header h2 {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+body.alto-contraste .funcionalidades-header p,
+body.alto-contraste .funcionalidades-tag {
+  color: #ccc !important;
+  -webkit-text-fill-color: #ccc !important;
+}
+body.alto-contraste .funcionalidad-icono {
+  background: #222 !important;
+  color: #ff0 !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .funcionalidades-grid {
+    grid-template-columns: 1fr;
+  }
+}

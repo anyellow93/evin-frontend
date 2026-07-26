@@ -84,7 +84,7 @@ select {
 
 input:focus,
 select:focus {
-  border-color: #4361ee;
+  border-color: #1B4FD8;
   outline: 3px solid rgba(67, 97, 238, 0.4);
   outline-offset: 2px;
 }
@@ -146,7 +146,7 @@ footer a { color: #a8d8ea; text-decoration: underline; }
 .radar-cell-correcta    { background: #d4edda !important; outline: 3px solid #2ecc71 !important; }
 .radar-cell-incorrecta  { background: #f8d7da !important; outline: 3px solid #e63946 !important; }
 .radar-cell-faltante    { background: #fff3cd !important; outline: 3px dashed #f4a261 !important; }
-.radar-cell-seleccionada { outline: 3px solid #4361ee !important; background: #e8edff !important; }
+.radar-cell-seleccionada { outline: 3px solid #1B4FD8 !important; background: #e8edf8 !important; }
 
 .radar-svg-wrap         { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; }
 .radar-svg-wrap svg     { width: 44px; height: 44px; filter: drop-shadow(2px 3px 2px rgba(0,0,0,0.2)); }
@@ -211,7 +211,7 @@ footer a { color: #a8d8ea; text-decoration: underline; }
 }
 
 .memoria-card-front {
-  background: linear-gradient(135deg, #4361ee, #3a0ca3) !important;
+  background: linear-gradient(135deg, #1B4FD8, #0F2E8A) !important;
   border: 3px solid #fff !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
   transform: rotateY(0deg) !important;
@@ -225,7 +225,7 @@ footer a { color: #a8d8ea; text-decoration: underline; }
 
 .memoria-card-back {
   background: linear-gradient(135deg, #f0f4ff, #dde4ff) !important;
-  border: 3px solid #4361ee !important;
+  border: 3px solid #1B4FD8 !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
   transform: rotateY(180deg) !important;
 }
@@ -252,7 +252,7 @@ footer a { color: #a8d8ea; text-decoration: underline; }
 }
 
 .memoria-girada:not(.memoria-acertada) .memoria-card-back {
-  border: 3px solid #4361ee !important;
+  border: 3px solid #1B4FD8 !important;
 }
 
 #memoria-grid {
@@ -342,7 +342,7 @@ footer a { color: #a8d8ea; text-decoration: underline; }
 }
 
 .memoria-card-front {
-  background: linear-gradient(135deg, #4361ee, #3a0ca3) !important;
+  background: linear-gradient(135deg, #1B4FD8, #0F2E8A) !important;
   border: 3px solid #fff !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
   transform: rotateY(0deg) !important;
@@ -356,7 +356,7 @@ footer a { color: #a8d8ea; text-decoration: underline; }
 
 .memoria-card-back {
   background: linear-gradient(135deg, #f0f4ff, #dde4ff) !important;
-  border: 3px solid #4361ee !important;
+  border: 3px solid #1B4FD8 !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
   transform: rotateY(180deg) !important;
   font-size: clamp(1.5rem, 5vw, 2.5rem) !important;
@@ -384,7 +384,7 @@ footer a { color: #a8d8ea; text-decoration: underline; }
 }
 
 .memoria-girada:not(.memoria-acertada) .memoria-card-back {
-  border: 3px solid #4361ee !important;
+  border: 3px solid #1B4FD8 !important;
 }
 
 #memoria-grid {

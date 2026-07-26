@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="css/juego-radar.css">
   <link rel="stylesheet" href="css/juego-rasgos.css">
   <link rel="stylesheet" href="css/puzzle.css">
+  <link rel="stylesheet" href="css/funcionalidades.css">
+  <link rel="stylesheet" href="css/animaciones.css">
 
   <!-- SEO -->
   <meta name="description" content="EVIN es una plataforma web de estimulación visual con juegos interactivos y seguimiento de progreso para profesionales, técnicos y familias.">
@@ -40,7 +42,11 @@
   <meta property="og:description" content="Plataforma interactiva con juegos de estimulación visual y seguimiento de alumnos.">
   <meta property="og:image" content="img/evin-social.png">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tusitio.com/">
+  <meta property="og:url" content="https://evin.click/">
+  <meta property="og:site_name" content="EVIN - Estimulación Visual">
+  <meta name="author" content="Angel López">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://evin.click/">
 
   <meta name="theme-color" content="#1e3a5f">
 </head>
@@ -53,8 +59,7 @@
   <header>
     <div class="container header-container">
       <div class="logo-box">
-        <img src="img/corporativo.png" alt="Logo EVIN" class="logo-img">
-        <span class="logo-text">EVIN</span>
+       <img src="img/corporativo.png" alt="Logo EVIN" class="logo-img" style="height:48px;width:auto;">
       </div>
 
       <button class="nav-toggle" aria-label="Abrir menú">
@@ -79,6 +84,26 @@
 
     <!-- ── INICIO ─────────────────────────────────────────── -->
     <section id="inicio">
+    <!-- ── HERO ───────────────────────────────────────────────── -->
+    <div class="hero-evin">
+      <img src="img/hero-evin.png" alt="EVIN - Estimulación Visual en Internet" class="hero-evin-img">
+      <div class="hero-evin-overlay"></div>
+      <div class="hero-evin-contenido">
+        
+        <a href="#juegos" class="hero-evin-cta menu-btn">Explorar juegos</a>
+      </div>
+    </div>
+       <h2>Bienvenido a EVIN</h2>
+      <p id="inicio-bienvenida"></p>
+      <p>La plataforma web de Estimulación Visual EVIN es un proyecto diseñado para ofrecer a los usuarios una serie de juegos y ejercicios que estimulan el desarrollo perceptivo-visual, especialmente en personas con dificultades para la recepción y/o procesamiento de estímulos visuales.</p>
+      <p>Los juegos de EVIN permiten ejercitar distintas tareas visuales y pueden configurarse mediante parámetros adaptables para ajustarse a las necesidades de cada usuario.</p>
+      <p>Mientras el alumno se entrena, los resultados se muestran en tiempo real, lo que permite a los profesionales hacer un seguimiento individual y global de los progresos.</p>
+      <ul>
+        <li>Juegos configurables para estimular diferentes habilidades visuales.</li>
+        <li>Seguimiento y evaluación de resultados individuales y grupales.</li>
+        <li>Un entorno accesible y adaptable para profesionales, técnicos y familiares.</li>
+      </ul>
+    
 
       <div class="evin-carrusel" role="region" aria-label="Presentación de juegos EVIN" aria-live="polite">
         <div class="evin-carrusel-track" id="carrusel-track">
@@ -284,18 +309,61 @@
 	  <button class="evin-carrusel-dot"        role="tab" aria-selected="false" aria-label="Slide 6" data-idx="5"></button>
         </div>
       </div>
+      <!-- ── FUNCIONALIDADES ─────────────────────────────────── -->
+    <div class="funcionalidades">
+      <div class="funcionalidades-header">
+        <span class="funcionalidades-tag">FUNCIONALIDADES</span>
+        <h2>Diseñado para la estimulación visual</h2>
+        <p>Cada módulo está basado en principios de optometría y neurociencia aplicada para maximizar los resultados.</p>
+      </div>
+      <div class="funcionalidades-grid">
 
-      <h2>Bienvenido a EVIN</h2>
-      <p id="inicio-bienvenida"></p>
-      <p>La plataforma web de Estimulación Visual EVIN es un proyecto diseñado para ofrecer a los usuarios una serie de juegos y ejercicios que estimulan el desarrollo perceptivo-visual, especialmente en personas con dificultades para la recepción y/o procesamiento de estímulos visuales.</p>
-      <p>Los juegos de EVIN permiten ejercitar distintas tareas visuales y pueden configurarse mediante parámetros adaptables para ajustarse a las necesidades de cada usuario.</p>
-      <p>Mientras el alumno se entrena, los resultados se muestran en tiempo real, lo que permite a los profesionales hacer un seguimiento individual y global de los progresos.</p>
-      <ul>
-        <li>Juegos configurables para estimular diferentes habilidades visuales.</li>
-        <li>Seguimiento y evaluación de resultados individuales y grupales.</li>
-        <li>Un entorno accesible y adaptable para profesionales, técnicos y familiares.</li>
-      </ul>
-    </section>
+        <div class="funcionalidad-card">
+          <div class="funcionalidad-icono">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3>6 juegos de estimulación</h3>
+          <p>Ejercicios adaptables que trabajan la memoria visual, atención, discriminación, recorridos y percepción espacial.</p>
+        </div>
+
+        <div class="funcionalidad-card">
+          <div class="funcionalidad-icono funcionalidad-icono--verde">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Seguimiento clínico</h3>
+          <p>Métricas de evolución por alumno: racha de días activos, juego favorito, tendencia de mejora y sesiones semanales.</p>
+        </div>
+
+        <div class="funcionalidad-card">
+          <div class="funcionalidad-icono funcionalidad-icono--naranja">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Accesible y adaptable</h3>
+          <p>Modo de alto contraste, tipografía optimizada para baja visión y pantalla completa para máxima concentración.</p>
+        </div>
+
+        <div class="funcionalidad-card">
+          <div class="funcionalidad-icono funcionalidad-icono--morado">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+              <line x1="12" y1="18" x2="12" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Multiplataforma</h3>
+          <p>Accesible desde ordenador, tablet y móvil sin instalación adicional. Compatible con cualquier navegador moderno.</p>
+        </div>
+
+      </div>
+      </div>
+     </section>
 
     <!-- ── DASHBOARD ───────────────────────────────────────── -->
     <section id="dashboard" class="hidden">
@@ -416,15 +484,8 @@
     <section id="juegos" class="hidden">
       <div id="app-juegos">
         <h2>Juegos disponibles</h2>
-        <div class="filters">
-          <input type="search" v-model="busqueda" placeholder="Buscar juegos..." aria-label="Buscar juegos">
-          <select v-model="filtroTipo" aria-label="Filtrar por tipo">
-            <option value="">Todos los tipos</option>
-            <option value="Atención visual">Atención visual</option>
-            <option value="Memoria visual">Memoria visual</option>
-            <option value="Percepción espacial">Percepción espacial</option>
-          </select>
-        </div>
+       
+        
         <div class="game-list">
           <div class="card-juego" v-for="juego in juegosFiltrados" :key="juego.id">
             <div class="card-juego-header" :class="headerJuego(juego).grad">
@@ -594,7 +655,7 @@
             <p>
               Edad: {{ alumno.edad || '—' }} años<br>
               Curso: {{ alumno.curso || '—' }}<br>
-              Dificultad: {{ alumno.dificultad || '—' }}
+             
             </p>
             <div class="card-acciones">
               <button class="btn" @click="verPerfil(alumno)" :aria-label="`Ver perfil de ${alumno.nombre}`">Ver perfil</button>
@@ -682,7 +743,7 @@
           </div>
         </div>
 
-        <!-- Modal editar/crear alumno -->
+<!-- Modal editar/crear alumno -->
         <div v-if="modalVisible" class="modal-overlay" @click.self="cerrarModal">
           <div class="modal-content">
             <button class="modal-close" @click="cerrarModal">&times;</button>
@@ -1004,7 +1065,7 @@
   <!-- ── FOOTER ─────────────────────────────────────────────── -->
   <footer>
     <p><strong>EVIN</strong> — Plataforma de Estimulación Visual en Internet</p>
-    <p>Trabajo Final de Máster · Universidad · 2025</p>
+    <p>Trabajo Final de Grado · UNED · 2026</p>
     <p><a href="#faqs" style="color:rgba(255,255,255,0.7)">FAQs</a> · <a href="#accesibilidad" style="color:rgba(255,255,255,0.7)">Accesibilidad</a></p>
     <p style="font-size:0.8rem;opacity:0.6;margin-top:0.5rem">&copy; 2025 EVIN — Todos los derechos reservados</p>
   </footer>
@@ -1026,6 +1087,7 @@
   <script src="js/juego_diferencias.js"></script>
   <script src="js/juego_rasgos.js"></script>
   <script src="js/juego_puzzle.js"></script>
+  <script src="js/animaciones.js"></script>
 
 </body>
 </html>

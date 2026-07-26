@@ -174,10 +174,11 @@
     const aciertos = cartasMemoria.length / 2; // todas las parejas encontradas
 
     await registrarSesion(aciertos, intentosMem);
-
+    if (window.Animaciones) Animaciones.victoria('juego_memoria');
     showModal(
       '¡Enhorabuena!',
-      `Has completado el nivel ${nivel}.\n\nIntentos: ${intentosMem}\nTiempo: ${tiempoMem}s`
+       `Has completado el nivel ${nivel}.\n\nIntentos: ${intentosMem}\nTiempo: ${tiempoMem}s`,
+       () => crearCartasMemoria()
     );
   }
 

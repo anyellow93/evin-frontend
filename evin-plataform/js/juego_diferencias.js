@@ -156,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (completado) {
       // ── SONIDO VICTORIA ──
       if (window.Sonidos) Sonidos.victoria();
-      showModal('¡Enhorabuena!', `Has encontrado las ${diferencias.size} diferencias en ${segundos} segundos.`);
+      if (window.Animaciones) Animaciones.victoria('juego-diferencias');
+      showModal('¡Enhorabuena!', `Has encontrado las ${diferencias.size} diferencias en ${segundos} segundos.`, () => iniciarRadarVisual());
     }
   }
 

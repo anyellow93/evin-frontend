@@ -28,7 +28,6 @@
   box-shadow: 0 10px 32px rgba(0,0,0,0.22);
 }
 
-/* Cabecera con gradiente e ilustración — igual que el slide */
 .card-juego-header {
   position: relative;
   height: 160px;
@@ -39,7 +38,6 @@
   overflow: hidden;
 }
 
-/* Patrón decorativo igual que el slide */
 .card-juego-header::before {
   content: '';
   position: absolute;
@@ -50,10 +48,7 @@
   pointer-events: none;
 }
 
-.card-juego-texto {
-  flex: 1;
-  z-index: 1;
-}
+.card-juego-texto { flex: 1; z-index: 1; }
 
 .card-juego-tag {
   display: inline-block;
@@ -91,10 +86,7 @@
   animation: cardFloat 4s ease-in-out infinite;
 }
 
-.card-juego-ilustracion svg {
-  width: 100%;
-  height: 100%;
-}
+.card-juego-ilustracion svg { width: 100%; height: 100%; }
 
 @keyframes cardFloat {
   0%, 100% { transform: translateY(0); }
@@ -105,7 +97,7 @@
   .card-juego-ilustracion { animation: none; }
 }
 
-/* Cuerpo de la tarjeta */
+/* Cuerpo de la tarjeta juego */
 .card-juego-body {
   background: #fff;
   padding: 1rem 1.25rem;
@@ -113,10 +105,6 @@
   flex-direction: column;
   gap: 0.5rem;
   flex: 1;
-}
-
-.card-juego-body .badge {
-  align-self: flex-start;
 }
 
 .card-juego-body p {
@@ -130,11 +118,6 @@
   overflow: hidden;
 }
 
-.card-juego-body .card-meta {
-  font-size: 0.82rem;
-  color: #64748b;
-}
-
 .card-juego-body .card-botones {
   display: flex;
   gap: 0.5rem;
@@ -142,40 +125,53 @@
   padding-top: 0.5rem;
 }
 
+/* Botón Jugar — naranja de la paleta EVIN */
 .card-juego-body .btn {
   flex: 1;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
+  font-weight: 700;
   min-height: 44px;
   border-radius: 999px;
-  background: #e63946;
+  background: #FF8C00;
   color: #fff;
-  font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.15s;
+  text-align: center;
+  line-height: 1;
 }
 
-.card-juego-body .btn:hover { background: #c1121f; }
+.card-juego-body .btn:hover {
+  background: #cc7000;
+  transform: translateY(-1px);
+}
 
+/* Botón Detalles — azul oscuro paleta EVIN */
 .card-juego-body .btn-secundario {
   flex: 1;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
+  font-weight: 700;
   min-height: 44px;
   border-radius: 999px;
   background: transparent;
-  color: #1a2e4a;
-  font-weight: 700;
-  border: 2px solid #1a2e4a;
+  color: #0F2E8A;
+  border: 2px solid #0F2E8A;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
+  text-align: center;
+  line-height: 1;
 }
 
 .card-juego-body .btn-secundario:hover {
-  background: #1a2e4a;
+  background: #0F2E8A;
   color: #fff;
 }
 
@@ -186,7 +182,7 @@
 .juego-grad-diferencias { background: linear-gradient(135deg, #3d0066 0%, #9b5de5 100%); }
 .juego-grad-rasgos      { background: linear-gradient(135deg, #7a0c14 0%, #e63946 100%); }
 .juego-grad-puzzle      { background: linear-gradient(135deg, #004d40 0%, #00897b 100%); }
-.juego-grad-default     { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 100%); }
+.juego-grad-default     { background: linear-gradient(135deg, #0F2E8A 0%, #1B4FD8 100%); }
 
 /* ── Tarjeta base (alumnos) ───────────────────────────────── */
 .card {
@@ -210,7 +206,7 @@
 .card h3 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #1a2e4a;
+  color: #0F2E8A;
   margin: 0;
 }
 
@@ -238,7 +234,6 @@
 
 /* ── Tarjetas de ALUMNOS ──────────────────────────────────── */
 .card-alumno { position: relative; }
-
 .alumno-evin-icon { display: none; }
 
 .foto-carnet,
@@ -247,7 +242,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  border: 3px solid #4361ee;
+  border: 3px solid #0F2E8A;
   margin-bottom: 0.25rem;
   object-fit: cover;
   flex-shrink: 0;
@@ -273,6 +268,7 @@
 .progreso-medio { background: #fef9c3; color: #713f12; }
 .progreso-bajo  { background: #fee2e2; color: #991b1b; }
 
+/* Acciones de alumno */
 .card-acciones {
   display: flex;
   flex-direction: column;
@@ -283,7 +279,9 @@
 .card-acciones .btn,
 .card-acciones button {
   width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem 1rem;
   font-size: 0.92rem;
   min-height: 44px;
@@ -291,15 +289,46 @@
   font-weight: 700;
   cursor: pointer;
   border: none;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.15s;
+  text-align: center;
+  line-height: 1;
+  gap: 0.4rem;
 }
 
-.card-acciones .btn            { background: #4361ee; color: #fff; }
-.card-acciones .btn:hover      { background: #3050cc; }
-.card-acciones .btn-secundario { background: transparent; color: #1a2e4a; border: 2px solid #1a2e4a; }
-.card-acciones .btn-secundario:hover { background: #1a2e4a; color: #fff; }
-.card-acciones .btn-danger     { background: #e63946; color: #fff; }
-.card-acciones .btn-danger:hover { background: #c1121f; }
+/* Ver perfil — azul primario */
+.card-acciones .btn {
+  background: #0F2E8A;
+  color: #fff;
+}
+
+.card-acciones .btn:hover {
+  background: #1B4FD8;
+  transform: translateY(-1px);
+}
+
+/* Editar — outline azul */
+.card-acciones .btn-secundario {
+  background: transparent;
+  color: #0F2E8A;
+  border: 2px solid #0F2E8A;
+}
+
+.card-acciones .btn-secundario:hover {
+  background: #0F2E8A;
+  color: #fff;
+}
+
+/* Eliminar — rojo (acción destructiva) */
+.card-acciones .btn-danger {
+  background: #FF8C00;
+  color: #fff;
+  border: none;
+}
+
+.card-acciones .btn-danger:hover {
+  background: #cc7000;
+  transform: translateY(-1px);
+}
 
 /* ── Header de alumnos ────────────────────────────────────── */
 .alumnos-header {
@@ -310,19 +339,33 @@
   flex-wrap: wrap;
 }
 
-.alumnos-header input { flex: 1; min-width: 200px; }
+.alumnos-header input { 
+  flex: 1;
+  min-width: 200px; 
+  margin-bottom : 0;
+ }
 
 .alumnos-header .btn {
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem 1.25rem;
   min-height: 44px;
   border-radius: 999px;
-  background: #4361ee;
+  background: #0F2E8A;
   color: #fff;
   font-weight: 700;
   font-size: 0.95rem;
   border: none;
   cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+  gap: 0.4rem;
+}
+
+.alumnos-header .btn:hover {
+  background: #1B4FD8;
+  transform: translateY(-1px);
 }
 
 /* ── Alto contraste ───────────────────────────────────────── */
@@ -332,14 +375,20 @@ body.alto-contraste .card-juego-body {
 }
 
 body.alto-contraste .card-juego-body p,
-body.alto-contraste .card-juego-body .card-meta {
+body.alto-contraste .card-juego-body .card-meta,
+body.alto-contraste .card-juego-body h3 {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
 
-body.alto-contraste .card-juego-body h3 {
+body.alto-contraste .card-acciones .btn {
+  background: #ff0 !important;
+  color: #000 !important;
+}
+
+body.alto-contraste .card-acciones .btn-secundario {
+  border-color: #fff !important;
   color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
 }
 
 /* ── Responsive ───────────────────────────────────────────── */
@@ -347,5 +396,5 @@ body.alto-contraste .card-juego-body h3 {
   .game-list,
   .student-list { grid-template-columns: 1fr; }
   .card-acciones { flex-direction: column; }
-  
+  .card-juego-ilustracion { display: none; }
 }

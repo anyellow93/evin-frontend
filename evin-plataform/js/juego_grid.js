@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── SONIDO — después de calcular aciertos y errores ──
     if (errores === 0) {
       if (window.Sonidos) Sonidos.victoria();
+      if (window.Animaciones) Animaciones.victoria('juego-grid');
     } else {
       if (window.Sonidos) Sonidos.error();
     }
@@ -155,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ? '¡Perfecto! Has acertado todas las casillas.'
       : `Has acertado ${aciertos} casilla${aciertos !== 1 ? 's' : ''} y has cometido ${errores} error${errores !== 1 ? 'es' : ''}.`;
 
-    showModal('Resultado de la ronda', msg);
+    showModal('Resultado de la ronda', msg, () => nuevaRonda());
 
     ronda++;
     gridRondaEl.textContent = ronda;
