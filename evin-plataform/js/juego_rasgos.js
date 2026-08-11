@@ -1,8 +1,7 @@
 // js/juego_rasgos.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
-  const usuarioActual = _evinUser.nombre || 'Anónimo';
+  
 
   const rasgosGrid       = document.getElementById('rasgos-grid');
   const rasgosObjetivoEl = document.getElementById('rasgos-objetivo');
@@ -93,16 +92,17 @@ document.addEventListener('DOMContentLoaded', () => {
     return Math.max(40, Math.min(90, Math.floor((anchoUtil - totalGaps) / cols)));
   }
 
-  async function registrarSesion(aciertos, intentos) {
-    try {
-      const token = localStorage.getItem('evin_token');
-      await fetch('https://evin.click/api/v1/sesiones', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
-        body: JSON.stringify({ alumno: usuarioActual, juego: 'Rasgos críticos', aciertos, intentos })
-      });
-    } catch (e) { console.error('Error al registrar sesión:', e); }
-  }
+ async function registrarSesion(aciertos, intentos) {
+  try {
+    const token    = localStorage.getItem('evin_token');
+    const user     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+    await fetch('https://evin.click/api/v1/sesiones', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
+      body: JSON.stringify({ alumno: user.nombre || 'Anónimo', alumno_id: user.alumno_id || null, juego: 'Rasgos críticos', aciertos, intentos })
+    });
+  } catch (e) { console.error('Error al registrar sesión:', e); }
+}
 
   function actualizarUI() {
     const cfg = configPorNivel();

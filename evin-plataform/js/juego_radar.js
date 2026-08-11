@@ -1,9 +1,7 @@
 // js/juego_radar.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
-  const usuarioActual = _evinUser.nombre || 'Anónimo';
-
+ 
   const radarGrid       = document.getElementById('radar-grid');
   const radarObjetivoEl = document.getElementById('radar-objetivo');
   const radarAciertosEl = document.getElementById('radar-aciertos');
@@ -73,15 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function registrarSesion(aciertos, intentos) {
-    try {
-      const token = localStorage.getItem('evin_token');
-      await fetch('https://evin.click/api/v1/sesiones', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
-        body: JSON.stringify({ alumno: usuarioActual, juego: 'Radar visual', aciertos, intentos })
-      });
-    } catch (e) { console.error('Error al registrar sesión:', e); }
-  }
+  try {
+    const token    = localStorage.getItem('evin_token');
+    const user     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+    await fetch('https://evin.click/api/v1/sesiones', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
+      body: JSON.stringify({ alumno: user.nombre || 'Anónimo', alumno_id: user.alumno_id || null, juego: 'Radar visual', aciertos, intentos })
+    });
+  } catch (e) { console.error('Error al registrar sesión:', e); }
+}
 
   function actualizarUI() {
     const cfg = configPorNivel();

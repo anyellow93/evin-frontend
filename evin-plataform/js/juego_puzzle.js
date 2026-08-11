@@ -1,8 +1,7 @@
 // js/juego_puzzle.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
-  const usuarioActual = _evinUser.nombre || 'Anónimo';
+ 
 
   // ── Elementos del DOM ──────────────────────────────────────────────────────
   const puzzleContenedor = document.getElementById('puzzle-contenedor');
@@ -225,16 +224,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Registro de sesión ─────────────────────────────────────────────────────
-  async function registrarSesion(aciertos, intentos) {
-    try {
-      const token = localStorage.getItem('evin_token');
-      await fetch('https://evin.click/api/v1/sesiones', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
-        body: JSON.stringify({ alumno: usuarioActual, juego: 'Puzzle', aciertos, intentos })
-      });
-    } catch (e) { console.error('Error al registrar sesión:', e); }
-  }
+ async function registrarSesion(aciertos, intentos) {
+  try {
+    const token    = localStorage.getItem('evin_token');
+    const user     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+    await fetch('https://evin.click/api/v1/sesiones', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
+      body: JSON.stringify({ alumno: user.nombre || 'Anónimo', alumno_id: user.alumno_id || null, juego: 'Puzzle', aciertos, intentos })
+    });
+  } catch (e) { console.error('Error al registrar sesión:', e); }
+}
 
   // ── Actualizar UI ──────────────────────────────────────────────────────────
   function actualizarUI() {

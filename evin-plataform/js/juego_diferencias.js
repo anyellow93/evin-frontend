@@ -1,9 +1,7 @@
 // js/juego_diferencias.js
 document.addEventListener('DOMContentLoaded', () => {
 
-  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
-  const usuarioActual = _evinUser.nombre || 'Anónimo';
-  const alumnoId      = null;
+  
 
   const panelIzq   = document.getElementById('diferencias-izq');
   const panelDer   = document.getElementById('diferencias-der');
@@ -169,15 +167,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function registrarSesion(aciertos, intentos) {
-    try {
-      const token = localStorage.getItem('evin_token');
-      await fetch('https://evin.click/api/v1/sesiones', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
-        body: JSON.stringify({ alumno: usuarioActual, alumno_id: alumnoId, juego: 'Encuentra las diferencias', aciertos, intentos })
-      });
-    } catch (e) { console.error('Error al registrar sesión:', e); }
-  }
+  try {
+    const token    = localStorage.getItem('evin_token');
+    const user     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+    const alumno   = user.nombre || 'Anónimo';
+    const alumnoId = user.alumno_id || null;
+    await fetch('https://evin.click/api/v1/sesiones', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
+      body: JSON.stringify({ alumno, alumno_id: alumnoId, juego: 'Encuentra las diferencias', aciertos, intentos })
+    });
+   } catch (e) { console.error('Error al registrar sesión:', e); }
+  } 
 
   window.iniciarDiferencias = function () {
     configNivel();
