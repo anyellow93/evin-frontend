@@ -178,6 +178,62 @@ body.solo-juego #juego-radar {
   }
 }
 
+
+.radar-objetivo-destacado {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.radar-objetivo-label {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.radar-objetivo-muestra {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.radar-objetivo-muestra svg {
+  width: 48px;
+  height: 48px;
+}
+
+/* ── Celda de referencia (objetivo) ──────────────────────── */
+.radar-cell-referencia {
+  border: 3px solid #FF8C00 !important;
+  background: rgba(255, 140, 0, 0.15) !important;
+  cursor: default !important;
+  position: relative;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.radar-cell-referencia:hover {
+  transform: none !important;
+}
+
+.radar-ref-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #FF8C00;
+  text-align: center;
+  line-height: 1;
+  margin-top: 2px;
+}
 /* ── Alto contraste ───────────────────────────────────────── */
 body.alto-contraste #juego-radar {
   background: #000 !important;

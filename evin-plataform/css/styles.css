@@ -1099,6 +1099,40 @@ body.alto-contraste .perfil-usuario-body label {
   -webkit-text-fill-color: #fff !important;
 }
 
+/* ── Mostrar/ocultar contraseña ───────────────────────────── */
+.input-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-password-wrap input {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.btn-ver-password {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color var(--transition);
+  min-height: unset;
+  width: auto;
+}
+
+.btn-ver-password:hover {
+  color: var(--primary);
+}
+
 /* ── Hero section edge-to-edge ────────────────────────────── */
 .hero-evin {
   position: relative;

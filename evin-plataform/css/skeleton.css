@@ -1,0 +1,87 @@
+/* ── Skeleton loading ─────────────────────────────────────── */
+@keyframes skeletonShimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e8edf8 25%, #f0f4ff 50%, #e8edf8 75%);
+  background-size: 800px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 8px;
+}
+
+/* Skeleton tarjeta juego */
+.skeleton-card-juego {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.skeleton-card-juego .skeleton-header {
+  height: 160px;
+  background: linear-gradient(90deg, #c5d0f0 25%, #d8e0f5 50%, #c5d0f0 75%);
+  background-size: 800px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+}
+
+.skeleton-card-juego .skeleton-body {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.skeleton-card-juego .skeleton-line {
+  height: 14px;
+  border-radius: 6px;
+}
+
+.skeleton-card-juego .skeleton-line--corta { width: 40%; }
+.skeleton-card-juego .skeleton-line--larga  { width: 90%; }
+.skeleton-card-juego .skeleton-line--media  { width: 65%; }
+
+.skeleton-card-juego .skeleton-botones {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.skeleton-card-juego .skeleton-btn {
+  height: 44px;
+  border-radius: 999px;
+  flex: 1;
+}
+
+/* Skeleton tarjeta alumno */
+.skeleton-card-alumno {
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border: 1px solid #e8e8e8;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.skeleton-card-alumno .skeleton-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-card-alumno .skeleton-line {
+  height: 14px;
+  border-radius: 6px;
+}
+
+.skeleton-card-alumno .skeleton-line--nombre { width: 60%; height: 18px; }
+.skeleton-card-alumno .skeleton-line--dato   { width: 80%; }
+.skeleton-card-alumno .skeleton-btn {
+  height: 44px;
+  border-radius: 999px;
+  margin-top: 0.25rem;
+}

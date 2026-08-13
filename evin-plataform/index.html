@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="css/puzzle.css">
   <link rel="stylesheet" href="css/funcionalidades.css">
   <link rel="stylesheet" href="css/animaciones.css">
+  <link rel="stylesheet" href="css/skeleton.css">
 
   <!-- SEO -->
   <meta name="description" content="EVIN es una plataforma web de estimulación visual con juegos interactivos y seguimiento de progreso para profesionales, técnicos y familias.">
@@ -163,10 +164,10 @@
             </div>
           </div>
 
-          <div class="evin-slide" role="group" aria-label="Slide 3 de 6: Radar visual">
+          <div class="evin-slide" role="group" aria-label="Slide 3 de 6: Exploraciones">
             <div class="evin-slide-texto">
               <span class="evin-slide-tag">Atención visual</span>
-              <h2 class="evin-slide-titulo">Radar visual</h2>
+              <h2 class="evin-slide-titulo">Exploraciones</h2>
               <p class="evin-slide-desc">Localiza el estímulo objetivo entre una cuadrícula de imágenes distractoras lo antes posible.</p>
               <ul class="evin-slide-beneficios">
                 <li>Entrena los recorridos visuales</li>
@@ -225,11 +226,11 @@
             </div>
           </div>
           
-          <!-- SLIDE 5: Rasgos críticos -->
-          <div class="evin-slide" role="group" aria-label="Slide 5 de 6: Rasgos críticos">
+          <!-- SLIDE 5: Cierre visual -->
+          <div class="evin-slide" role="group" aria-label="Slide 5 de 6: Cierre visual">
             <div class="evin-slide-texto">
               <span class="evin-slide-tag">Discriminación visual</span>
-              <h2 class="evin-slide-titulo">Rasgos críticos</h2>
+              <h2 class="evin-slide-titulo">Cierre visual</h2>
               <p class="evin-slide-desc">Observa la forma incompleta y encuentra su versión completa entre los distractores.</p>
               <ul class="evin-slide-beneficios">
                 <li>Entrena el reconocimiento de formas parciales</li>
@@ -484,7 +485,20 @@
     <section id="juegos" class="hidden">
       <div id="app-juegos">
         <h2>Juegos disponibles</h2>
-       
+        <div v-if="cargando" class="game-list">
+	  <div class="skeleton-card-juego" v-for="n in 6" :key="n">
+	    <div class="skeleton-header"></div>
+	    <div class="skeleton-body">
+	      <div class="skeleton skeleton-line skeleton-line--corta"></div>
+	      <div class="skeleton skeleton-line skeleton-line--larga"></div>
+	      <div class="skeleton skeleton-line skeleton-line--media"></div>
+	      <div class="skeleton-botones">
+		<div class="skeleton skeleton-btn"></div>
+		<div class="skeleton skeleton-btn"></div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
         
         <div class="game-list">
           <div class="card-juego" v-for="juego in juegosFiltrados" :key="juego.id">
@@ -545,12 +559,11 @@
 
     <!-- ── JUEGO RADAR ─────────────────────────────────────── -->
     <section id="juego-radar" class="hidden">
-      <h2>Juego: Radar visual</h2>
+      <h2>Juego: Exploraciones</h2>
       <div class="radar-panel-controles">
         <p>Busca los estímulos objetivo entre los distractores y haz clic solo en ellos.</p>
         <div class="radar-info">
           <span>Ronda: <strong id="radar-ronda">1 / 3</strong></span>
-          <span>Objetivo: <strong id="radar-objetivo">▲ azul</strong></span>
           <span>Aciertos: <strong id="radar-aciertos">0</strong></span>
           <span>Errores: <strong id="radar-errores">0</strong></span>
           <span>Tiempo: <strong id="radar-tiempo">0</strong> s</span>
@@ -562,7 +575,9 @@
           <button id="radar-volver"    class="btn-secundario">Volver a juegos</button>
         </div>
       </div>
+      
       <div id="radar-grid" class="radar-grid"></div>
+      
     </section>
 
     <!-- ── JUEGO DIFERENCIAS ───────────────────────────────── -->
@@ -589,7 +604,7 @@
 
     <!-- ── JUEGO RASGOS ────────────────────────────────────── -->
     <section id="juego-rasgos" class="hidden">
-      <h2>Juego: Rasgos críticos</h2>
+      <h2>Juego: Cierre visual</h2>
       <div class="rasgos-panel-controles">
         <p>Observa la forma incompleta y encuentra la forma <strong>completa</strong> en el tablero.</p>
         <div class="rasgos-info">
@@ -646,7 +661,15 @@
           <button v-if="puedeGestionar" class="btn" @click="abrirModalNuevo">+ Añadir alumno</button>
         </div>
         <p v-if="error"    class="form-error">{{ error }}</p>
-        <p v-if="cargando" class="cargando-texto">Cargando alumnos...</p>
+        <div v-if="cargando" class="student-list">
+	 <div class="skeleton-card-alumno" v-for="n in 6" :key="n">
+	    <div class="skeleton skeleton-avatar"></div>
+	    <div class="skeleton skeleton-line skeleton-line--nombre"></div>
+	    <div class="skeleton skeleton-line skeleton-line--dato"></div>
+	    <div class="skeleton skeleton-line skeleton-line--dato"></div>
+	    <div class="skeleton skeleton-btn"></div>
+	 </div>
+	</div>
 
         <div class="student-list" v-if="!cargando && !error">
           <div class="card card-alumno" v-for="alumno in alumnosFiltrados" :key="alumno.id">
@@ -825,9 +848,9 @@
               <ul>
                 <li><strong>Encuentra las parejas:</strong> memoria visual y atención a corto plazo.</li>
                 <li><strong>Recuerda las casillas:</strong> memoria espacial y atención sostenida.</li>
-                <li><strong>Radar visual:</strong> recorridos visuales y discriminación figura-fondo.</li>
+                <li><strong>Exploraciones:</strong> recorridos visuales y discriminación figura-fondo.</li>
                 <li><strong>Encuentra las diferencias:</strong> discriminación visual fina y atención sostenida.</li>
-                <li><strong>Rasgos críticos:</strong> reconocimiento de formas parciales e incompletas.</li>
+                <li><strong>Cierre visual:</strong> reconocimiento de formas parciales e incompletas.</li>
                 <li><strong>Puzzle:</strong> percepción espacial y memoria visual mediante recomposición de ilustraciones.</li>
               </ul>
             </div>
@@ -843,7 +866,7 @@
           <details class="faq-item">
             <summary class="faq-pregunta">¿Los juegos tienen sistema de rondas? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
             <div class="faq-respuesta">
-              <p>Sí. Los juegos Radar visual y Rasgos críticos tienen un sistema de rondas progresivo: el tablero crece con cada ronda superada y el juego termina si se cometen demasiados errores. El número de rondas depende del nivel seleccionado (Fácil: 3 rondas, Medio: 5, Difícil: 8).</p>
+              <p>Sí. Los juegos Exploraciones y Cierre visual tienen un sistema de rondas progresivo: el tablero crece con cada ronda superada y el juego termina si se cometen demasiados errores. El número de rondas depende del nivel seleccionado (Fácil: 3 rondas, Medio: 5, Difícil: 8).</p>
             </div>
           </details>
 
@@ -953,7 +976,10 @@
           <label for="login-email">Correo electrónico</label>
           <input type="email" id="login-email" autocomplete="email" required>
           <label for="login-password">Contraseña</label>
-          <input type="password" id="login-password" autocomplete="current-password" required>
+          <div class="input-password-wrap">
+	    <input type="password" id="login-password" autocomplete="current-password" required>
+	    <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
+	  </div>
           <p id="login-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
           <button type="submit">Entrar</button>
           <p class="form-links">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
@@ -969,12 +995,18 @@
           <label for="register-email">Correo electrónico</label>
           <input type="email" id="register-email" autocomplete="email" required>
           <label for="register-password">Contraseña</label>
-          <input type="password" id="register-password" autocomplete="new-password" minlength="8" required aria-describedby="password-hint">
+          <div class="input-password-wrap">
+            <input type="password" id="login-password" autocomplete="current-password" required>
+            <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
+          </div>
           <small id="password-hint" class="form-hint">Mínimo 8 caracteres, con al menos una mayúscula, un número y un símbolo.</small>
           <div id="password-strength-bar" class="strength-bar"><span></span><span></span><span></span><span></span></div>
           <p id="password-strength-label" class="strength-label"></p>
           <label for="register-password-confirm">Repetir contraseña</label>
-          <input type="password" id="register-password-confirm" autocomplete="new-password" required>
+          <div class="input-password-wrap">
+            <input type="password" id="login-password" autocomplete="current-password" required>
+            <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
+          </div>
           <label for="register-category">Rol</label>
           <select id="register-category" required>
             <option value="">-- Selecciona tu rol --</option>
@@ -1042,11 +1074,23 @@
           <hr class="perfil-separador">
           <h4>Cambiar contraseña <small>(dejar en blanco para no cambiar)</small></h4>
           <label for="perfil-pwd-actual">Contraseña actual</label>
-          <input type="password" id="perfil-pwd-actual" autocomplete="current-password">
-          <label for="perfil-pwd-nueva">Nueva contraseña</label>
-          <input type="password" id="perfil-pwd-nueva" autocomplete="new-password">
-          <label for="perfil-pwd-confirmar">Confirmar nueva contraseña</label>
-          <input type="password" id="perfil-pwd-confirmar" autocomplete="new-password">
+		<label for="perfil-pwd-actual">Contraseña actual</label>
+		<div class="input-password-wrap">
+		  <input type="password" id="perfil-pwd-actual" autocomplete="current-password">
+		  <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
+		</div>
+
+		<label for="perfil-pwd-nueva">Nueva contraseña</label>
+		<div class="input-password-wrap">
+		  <input type="password" id="perfil-pwd-nueva" autocomplete="new-password">
+		  <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
+		</div>
+
+		<label for="perfil-pwd-confirmar">Confirmar nueva contraseña</label>
+		<div class="input-password-wrap">
+		  <input type="password" id="perfil-pwd-confirmar" autocomplete="new-password">
+		  <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
+		</div>
           <p id="perfil-error"   class="form-error"   style="display:none"></p>
           <p id="perfil-success" class="form-success" style="display:none"></p>
           <div class="perfil-usuario-botones">

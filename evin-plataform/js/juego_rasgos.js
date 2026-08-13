@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     await fetch('https://evin.click/api/v1/sesiones', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
-      body: JSON.stringify({ alumno: user.nombre || 'Anónimo', alumno_id: user.alumno_id || null, juego: 'Rasgos críticos', aciertos, intentos })
+      body: JSON.stringify({ alumno: user.nombre || 'Anónimo', alumno_id: user.alumno_id || null, juego: 'Cierre visual', aciertos, intentos })
     });
   } catch (e) { console.error('Error al registrar sesión:', e); }
 }

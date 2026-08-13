@@ -1,7 +1,9 @@
 // js/juego_radar.js
 document.addEventListener('DOMContentLoaded', () => {
 
- 
+  const _evinUser     = JSON.parse(localStorage.getItem('evin_user') || '{}');
+  const usuarioActual = _evinUser.nombre || 'Anónimo';
+
   const radarGrid       = document.getElementById('radar-grid');
   const radarObjetivoEl = document.getElementById('radar-objetivo');
   const radarAciertosEl = document.getElementById('radar-aciertos');
@@ -71,16 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function registrarSesion(aciertos, intentos) {
-  try {
-    const token    = localStorage.getItem('evin_token');
-    const user     = JSON.parse(localStorage.getItem('evin_user') || '{}');
-    await fetch('https://evin.click/api/v1/sesiones', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
-      body: JSON.stringify({ alumno: user.nombre || 'Anónimo', alumno_id: user.alumno_id || null, juego: 'Radar visual', aciertos, intentos })
-    });
-  } catch (e) { console.error('Error al registrar sesión:', e); }
-}
+    try {
+      const token = localStorage.getItem('evin_token');
+      await fetch('http://162.0.228.169/api/v1/sesiones', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
+        body: JSON.stringify({ alumno: usuarioActual, juego: 'Radar visual', aciertos, intentos })
+      });
+    } catch (e) { console.error('Error al registrar sesión:', e); }
+  }
 
   function actualizarUI() {
     const cfg = configPorNivel();
@@ -132,11 +133,27 @@ document.addEventListener('DOMContentLoaded', () => {
     radarGrid.style.gap                 = `${gapPx}px`;
     radarGrid.style.justifyContent      = 'center';
 
-    const indicesObj = [...Array(total).keys()].sort(() => Math.random() - 0.5).slice(0, numObjetivos);
+    // ── Celda de referencia (primera posición, no clickable) ──
+    const celdaRef = document.createElement('div');
+    celdaRef.className = 'radar-cell radar-cell-referencia';
+    celdaRef.setAttribute('aria-label', 'Objetivo: ' + radarObjetivo.alt);
+    celdaRef.setAttribute('role', 'img');
+    const wrapperRef = document.createElement('div');
+    wrapperRef.className = 'radar-svg-wrap';
+    wrapperRef.innerHTML = radarObjetivo.svg;
+    wrapperRef.setAttribute('aria-hidden', 'true');
+    
+    
+    
+    celdaRef.appendChild(wrapperRef);
+    
+    radarGrid.appendChild(celdaRef);
+
+    const indicesObj = [...Array(total - 1).keys()].sort(() => Math.random() - 0.5).slice(0, numObjetivos);
     const setObj     = new Set(indicesObj);
     const distractores = radarItems.filter(x => x.id !== radarObjetivo.id);
 
-    for (let i = 0; i < total; i++) {
+    for (let i = 0; i < total - 1; i++) {
       const cell = document.createElement('div');
       cell.className = 'radar-cell';
       const item = setObj.has(i)
@@ -198,8 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             // ── SONIDO RONDA SUPERADA ──
             if (window.Sonidos) Sonidos.rondaSuperada();
-            rondaActual++;
             if (window.Animaciones) Animaciones.rondaSuperada();
+            rondaActual++;
             showModal('¡Ronda superada!', `Completaste la ronda ${rondaActual - 1}. ¡Ahora el tablero es más grande!`);
             setTimeout(iniciarRonda, 1800);
           }, 400);
@@ -244,12 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.Animaciones) Animaciones.victoria('juego-radar');
       const cfg = configPorNivel();
       showModal('🏆 ¡Completado!',
-        `Has superado las ${cfg.rondasMax} rondas.\nAciertos: ${radarAciertos}\nErrores: ${radarErrores}\nTiempo: ${radarTiempo}s`, () => iniciarRadarVisual());
+        `Has superado las ${cfg.rondasMax} rondas.\nAciertos: ${radarAciertos}\nErrores: ${radarErrores}\nTiempo: ${radarTiempo}s`);
     } else {
       if (window.Sonidos) Sonidos.gameOver();
       if (window.Animaciones) Animaciones.gameOver('juego-radar');
       showModal('💥 Game Over',
-        `Cometiste ${radarErrores} errores.\nLlegaste hasta la ronda ${rondaActual}.\nAciertos totales: ${radarAciertos}\nTiempo: ${radarTiempo}s`, () => iniciarRadarVisual());
+        `Cometiste ${radarErrores} errores.\nLlegaste hasta la ronda ${rondaActual}.\nAciertos totales: ${radarAciertos}\nTiempo: ${radarTiempo}s`);
     }
   }
 

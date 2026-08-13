@@ -18,180 +18,108 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Ilustraciones SVG temáticas ───────────────────────────────────────────
   // Cada ilustración es un SVG 300x300 dividido en piezas por CSS background-position
   const ilustraciones = [
-    {
-      id: 'sol',
-      nombre: 'El sol',
-      svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-        <rect width="300" height="300" fill="#87CEEB"/>
-        <!-- Rayos -->
-        <line x1="150" y1="30"  x2="150" y2="10"  stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
-        <line x1="150" y1="270" x2="150" y2="290" stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
-        <line x1="30"  y1="150" x2="10"  y2="150" stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
-        <line x1="270" y1="150" x2="290" y2="150" stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
-        <line x1="68"  y1="68"  x2="54"  y2="54"  stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
-        <line x1="232" y1="68"  x2="246" y2="54"  stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
-        <line x1="68"  y1="232" x2="54"  y2="246" stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
-        <line x1="232" y1="232" x2="246" y2="246" stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
-        <!-- Círculo solar -->
-        <circle cx="150" cy="150" r="70" fill="#FFD700" stroke="#FFA500" stroke-width="4"/>
-        <!-- Cara -->
-        <circle cx="125" cy="135" r="10" fill="#FFA500"/>
-        <circle cx="175" cy="135" r="10" fill="#FFA500"/>
-        <path d="M 120 175 Q 150 200 180 175" stroke="#FFA500" stroke-width="6" fill="none" stroke-linecap="round"/>
-        <!-- Nubes -->
-        <ellipse cx="60"  cy="80"  rx="35" ry="20" fill="white" opacity="0.9"/>
-        <ellipse cx="240" cy="60"  rx="40" ry="22" fill="white" opacity="0.9"/>
-        <!-- Hierba -->
-        <rect x="0" y="260" width="300" height="40" fill="#4CAF50"/>
-        <ellipse cx="150" cy="260" rx="300" ry="20" fill="#66BB6A"/>
-      </svg>`
-    },
-    {
-      id: 'gato',
-      nombre: 'El gato',
-      svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-        <rect width="300" height="300" fill="#FFF8DC"/>
-        <!-- Cuerpo -->
-        <ellipse cx="150" cy="210" rx="80" ry="70" fill="#FF8C00"/>
-        <!-- Cabeza -->
-        <circle cx="150" cy="120" r="65" fill="#FF8C00"/>
-        <!-- Orejas -->
-        <polygon points="95,70 75,20 115,60"  fill="#FF8C00"/>
-        <polygon points="205,70 225,20 185,60" fill="#FF8C00"/>
-        <polygon points="98,65 82,30 112,58"  fill="#FFB6C1"/>
-        <polygon points="202,65 218,30 188,58" fill="#FFB6C1"/>
-        <!-- Ojos -->
-        <ellipse cx="120" cy="110" rx="16" ry="18" fill="#00CC44"/>
-        <ellipse cx="180" cy="110" rx="16" ry="18" fill="#00CC44"/>
-        <ellipse cx="120" cy="112" rx="7"  ry="14" fill="#111"/>
-        <ellipse cx="180" cy="112" rx="7"  ry="14" fill="#111"/>
-        <circle  cx="116" cy="107" r="3"  fill="white"/>
-        <circle  cx="176" cy="107" r="3"  fill="white"/>
-        <!-- Nariz -->
-        <polygon points="150,130 142,140 158,140" fill="#FF69B4"/>
-        <!-- Boca -->
-        <path d="M 142 140 Q 135 152 125 148" stroke="#333" stroke-width="2.5" fill="none"/>
-        <path d="M 158 140 Q 165 152 175 148" stroke="#333" stroke-width="2.5" fill="none"/>
-        <!-- Bigotes -->
-        <line x1="90"  y1="135" x2="135" y2="140" stroke="#333" stroke-width="2"/>
-        <line x1="90"  y1="148" x2="135" y2="147" stroke="#333" stroke-width="2"/>
-        <line x1="210" y1="135" x2="165" y2="140" stroke="#333" stroke-width="2"/>
-        <line x1="210" y1="148" x2="165" y2="147" stroke="#333" stroke-width="2"/>
-        <!-- Cola -->
-        <path d="M 225 240 Q 270 200 260 160 Q 250 130 270 110" stroke="#FF8C00" stroke-width="18" fill="none" stroke-linecap="round"/>
-        <!-- Patas -->
-        <ellipse cx="110" cy="270" rx="28" ry="18" fill="#FF8C00"/>
-        <ellipse cx="190" cy="270" rx="28" ry="18" fill="#FF8C00"/>
-      </svg>`
-    },
-    {
-      id: 'arbol',
-      nombre: 'El árbol',
-      svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-        <rect width="300" height="300" fill="#87CEEB"/>
-        <!-- Suelo -->
-        <rect x="0" y="255" width="300" height="45" fill="#8B4513"/>
-        <rect x="0" y="255" width="300" height="12" fill="#4CAF50"/>
-        <!-- Tronco -->
-        <rect x="128" y="180" width="44" height="80" rx="8" fill="#8B4513"/>
-        <rect x="135" y="185" width="8"  height="70" rx="4" fill="#A0522D" opacity="0.5"/>
-        <!-- Copa capas -->
-        <polygon points="150,30 80,140 220,140"  fill="#2E7D32"/>
-        <polygon points="150,60 70,160 230,160"  fill="#388E3C"/>
-        <polygon points="150,95 65,190 235,190"  fill="#43A047"/>
-        <!-- Detalles copa -->
-        <circle cx="110" cy="90"  r="15" fill="#1B5E20" opacity="0.4"/>
-        <circle cx="190" cy="100" r="12" fill="#1B5E20" opacity="0.4"/>
-        <circle cx="150" cy="70"  r="10" fill="#1B5E20" opacity="0.4"/>
-        <!-- Manzanas -->
-        <circle cx="120" cy="130" r="10" fill="#e63946"/>
-        <circle cx="180" cy="125" r="10" fill="#e63946"/>
-        <circle cx="150" cy="145" r="10" fill="#FFD700"/>
-        <!-- Pájaros -->
-        <path d="M 50 60 Q 55 55 60 60" stroke="#333" stroke-width="2.5" fill="none"/>
-        <path d="M 240 80 Q 245 75 250 80" stroke="#333" stroke-width="2.5" fill="none"/>
-      </svg>`
-    },
-    {
-      id: 'casa',
-      nombre: 'La casa',
-      svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-        <rect width="300" height="300" fill="#87CEEB"/>
-        <!-- Suelo -->
-        <rect x="0" y="265" width="300" height="35" fill="#4CAF50"/>
-        <!-- Tejado -->
-        <polygon points="150,40 40,140 260,140" fill="#e63946"/>
-        <polygon points="150,40 40,140 55,140 150,55 245,140 260,140" fill="#c62828"/>
-        <!-- Chimenea -->
-        <rect x="195" y="60" width="28" height="55" fill="#8B4513"/>
-        <rect x="192" y="55" width="34" height="12" rx="3" fill="#6D4C41"/>
-        <!-- Humo -->
-        <circle cx="205" cy="45" r="8"  fill="#ccc" opacity="0.7"/>
-        <circle cx="215" cy="32" r="10" fill="#bbb" opacity="0.6"/>
-        <circle cx="208" cy="20" r="7"  fill="#aaa" opacity="0.5"/>
-        <!-- Pared -->
-        <rect x="55" y="138" width="190" height="130" fill="#FFCC80"/>
-        <!-- Puerta -->
-        <rect x="120" y="195" width="60" height="73" rx="6" fill="#8B4513"/>
-        <rect x="123" y="198" width="54" height="67" rx="4" fill="#A0522D"/>
-        <circle cx="172" cy="233" r="5" fill="#FFD700"/>
-        <!-- Ventana izq -->
-        <rect x="68" y="160" width="58" height="50" rx="5" fill="#B3E5FC"/>
-        <rect x="68" y="160" width="58" height="50" rx="5" fill="none" stroke="#8B4513" stroke-width="5"/>
-        <line x1="97" y1="160" x2="97" y2="210" stroke="#8B4513" stroke-width="3"/>
-        <line x1="68" y1="185" x2="126" y2="185" stroke="#8B4513" stroke-width="3"/>
-        <!-- Ventana der -->
-        <rect x="174" y="160" width="58" height="50" rx="5" fill="#B3E5FC"/>
-        <rect x="174" y="160" width="58" height="50" rx="5" fill="none" stroke="#8B4513" stroke-width="5"/>
-        <line x1="203" y1="160" x2="203" y2="210" stroke="#8B4513" stroke-width="3"/>
-        <line x1="174" y1="185" x2="232" y2="185" stroke="#8B4513" stroke-width="3"/>
-        <!-- Flores -->
-        <circle cx="80"  cy="263" r="8" fill="#FF69B4"/>
-        <circle cx="100" cy="260" r="8" fill="#FF4500"/>
-        <circle cx="200" cy="263" r="8" fill="#FFD700"/>
-        <circle cx="220" cy="260" r="8" fill="#FF69B4"/>
-      </svg>`
-    },
-    {
-      id: 'pez',
-      nombre: 'El pez',
-      svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-        <rect width="300" height="300" fill="#1565C0"/>
-        <!-- Fondo marino -->
-        <ellipse cx="150" cy="310" rx="200" ry="60" fill="#0D47A1"/>
-        <!-- Burbujas -->
-        <circle cx="60"  cy="60"  r="8"  fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-        <circle cx="240" cy="90"  r="6"  fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-        <circle cx="80"  cy="180" r="5"  fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-        <circle cx="230" cy="200" r="9"  fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
-        <!-- Algas -->
-        <path d="M 40 300 Q 30 260 45 230 Q 55 200 40 170" stroke="#2E7D32" stroke-width="6" fill="none"/>
-        <path d="M 260 300 Q 270 255 255 220 Q 245 190 265 160" stroke="#388E3C" stroke-width="6" fill="none"/>
-        <!-- Cola -->
-        <polygon points="55,150 20,110 20,190" fill="#FF6F00"/>
-        <!-- Cuerpo -->
-        <ellipse cx="165" cy="150" rx="110" ry="65" fill="#FF8F00"/>
-        <!-- Vientre -->
-        <ellipse cx="165" cy="165" rx="85"  ry="40" fill="#FFCC02"/>
-        <!-- Aleta dorsal -->
-        <polygon points="130,88 150,55 190,88" fill="#E65100"/>
-        <!-- Aleta pectoral -->
-        <ellipse cx="155" cy="175" rx="35" ry="18" fill="#E65100" transform="rotate(-20,155,175)"/>
-        <!-- Ojo -->
-        <circle cx="240" cy="135" r="22" fill="white"/>
-        <circle cx="244" cy="133" r="14" fill="#1565C0"/>
-        <circle cx="248" cy="129" r="5"  fill="black"/>
-        <circle cx="244" cy="127" r="4"  fill="white"/>
-        <!-- Boca -->
-        <path d="M 268 155 Q 278 165 268 172" stroke="#E65100" stroke-width="4" fill="none" stroke-linecap="round"/>
-        <!-- Escamas -->
-        <path d="M 120 130 Q 135 120 150 130" stroke="#E65100" stroke-width="2" fill="none"/>
-        <path d="M 150 130 Q 165 120 180 130" stroke="#E65100" stroke-width="2" fill="none"/>
-        <path d="M 130 155 Q 145 145 160 155" stroke="#E65100" stroke-width="2" fill="none"/>
-        <path d="M 160 155 Q 175 145 190 155" stroke="#E65100" stroke-width="2" fill="none"/>
-      </svg>`
-    }
-  ];
+  {
+    id: 'sol',
+    nombre: 'El sol',
+    svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#87CEEB"/>
+  <!-- Rayos simples y gruesos -->
+  <line x1="150" y1="20"  x2="150" y2="55"  stroke="#FFD700" stroke-width="12" stroke-linecap="round"/>
+  <line x1="150" y1="245" x2="150" y2="280" stroke="#FFD700" stroke-width="12" stroke-linecap="round"/>
+  <line x1="20"  y1="150" x2="55"  y2="150" stroke="#FFD700" stroke-width="12" stroke-linecap="round"/>
+  <line x1="245" y1="150" x2="280" y2="150" stroke="#FFD700" stroke-width="12" stroke-linecap="round"/>
+  <line x1="57"  y1="57"  x2="81"  y2="81"  stroke="#FFD700" stroke-width="12" stroke-linecap="round"/>
+  <line x1="219" y1="57"  x2="243" y2="81"  stroke="#FFD700" stroke-width="12" stroke-linecap="round"/>
+  <line x1="57"  y1="243" x2="81"  y2="219" stroke="#FFD700" stroke-width="12" stroke-linecap="round"/>
+  <line x1="219" y1="243" x2="243" y2="219" stroke="#FFD700" stroke-width="12" stroke-linecap="round"/>
+  <!-- Círculo solar grande y sólido -->
+  <circle cx="150" cy="150" r="80" fill="#FFD700"/>
+  <!-- Cara simple -->
+  <circle cx="120" cy="135" r="12" fill="#FF8C00"/>
+  <circle cx="180" cy="135" r="12" fill="#FF8C00"/>
+  <path d="M 115 175 Q 150 205 185 175" stroke="#FF8C00" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- Suelo verde sólido -->
+  <rect x="0" y="255" width="300" height="45" fill="#4CAF50"/>
+</svg>`
+  },
+  {
+    id: 'manzana',
+    nombre: 'La manzana',
+    svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#90EE90"/>
+  <!-- Tallo -->
+  <rect x="140" y="40" width="20" height="50" rx="10" fill="#8B4513"/>
+  <!-- Hoja -->
+  <ellipse cx="175" cy="55" rx="35" ry="18" fill="#2E7D32" transform="rotate(-30 175 55)"/>
+  <!-- Manzana grande y sólida -->
+  <ellipse cx="150" cy="175" rx="100" ry="110" fill="#e63946"/>
+  <!-- Brillo -->
+  <ellipse cx="110" cy="120" rx="25" ry="18" fill="rgba(255,255,255,0.35)" transform="rotate(-20 110 120)"/>
+</svg>`
+  },
+  {
+    id: 'casa',
+    nombre: 'La casa',
+    svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#87CEEB"/>
+  <!-- Suelo -->
+  <rect x="0" y="265" width="300" height="35" fill="#4CAF50"/>
+  <!-- Tejado grande sólido -->
+  <polygon points="150,30 280,140 20,140" fill="#e63946"/>
+  <!-- Pared sólida -->
+  <rect x="40" y="138" width="220" height="130" fill="#FFCC80"/>
+  <!-- Puerta grande -->
+  <rect x="110" y="200" width="80" height="68" rx="8" fill="#8B4513"/>
+  <!-- Ventana izquierda grande -->
+  <rect x="55" y="160" width="70" height="60" rx="6" fill="#B3E5FC"/>
+  <line x1="90"  y1="160" x2="90"  y2="220" stroke="#8B4513" stroke-width="5"/>
+  <line x1="55"  y1="190" x2="125" y2="190" stroke="#8B4513" stroke-width="5"/>
+  <!-- Ventana derecha grande -->
+  <rect x="175" y="160" width="70" height="60" rx="6" fill="#B3E5FC"/>
+  <line x1="210" y1="160" x2="210" y2="220" stroke="#8B4513" stroke-width="5"/>
+  <line x1="175" y1="190" x2="245" y2="190" stroke="#8B4513" stroke-width="5"/>
+</svg>`
+  },
+  {
+    id: 'flor',
+    nombre: 'La flor',
+    svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#90EE90"/>
+  <!-- Tallo grueso -->
+  <rect x="138" y="180" width="24" height="100" rx="12" fill="#2E7D32"/>
+  <!-- Hojas -->
+  <ellipse cx="100" cy="220" rx="45" ry="20" fill="#4CAF50" transform="rotate(-30 100 220)"/>
+  <ellipse cx="200" cy="240" rx="45" ry="20" fill="#4CAF50" transform="rotate(30 200 240)"/>
+  <!-- Pétalos grandes y sólidos -->
+  <ellipse cx="150" cy="80"  rx="30" ry="55" fill="#FF69B4"/>
+  <ellipse cx="150" cy="80"  rx="30" ry="55" fill="#FF69B4" transform="rotate(45 150 155)"/>
+  <ellipse cx="150" cy="80"  rx="30" ry="55" fill="#FF69B4" transform="rotate(90 150 155)"/>
+  <ellipse cx="150" cy="80"  rx="30" ry="55" fill="#FF69B4" transform="rotate(135 150 155)"/>
+  <!-- Centro grande -->
+  <circle cx="150" cy="155" r="45" fill="#FFD700"/>
+  <circle cx="150" cy="155" r="30" fill="#FF8C00"/>
+</svg>`
+  },
+  {
+    id: 'pelota',
+    nombre: 'La pelota',
+    svg: `<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#87CEEB"/>
+  <!-- Suelo -->
+  <rect x="0" y="265" width="300" height="35" fill="#4CAF50"/>
+  <!-- Sombra -->
+  <ellipse cx="150" cy="268" rx="70" ry="12" fill="rgba(0,0,0,0.2)"/>
+  <!-- Pelota grande sólida -->
+  <circle cx="150" cy="155" r="120" fill="#e63946"/>
+  <!-- Franjas blancas gruesas -->
+  <path d="M 30 155 Q 150 80 270 155" stroke="white" stroke-width="18" fill="none"/>
+  <path d="M 30 155 Q 150 230 270 155" stroke="white" stroke-width="18" fill="none"/>
+  <line x1="150" y1="35" x2="150" y2="275" stroke="white" stroke-width="18"/>
+  <!-- Brillo -->
+  <circle cx="100" cy="95" r="28" fill="rgba(255,255,255,0.3)"/>
+</svg>`
+  },
+];
 
   // ── Estado ─────────────────────────────────────────────────────────────────
   let cols           = 3;

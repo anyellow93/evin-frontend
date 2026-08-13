@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapa = {
           'Encuentra las parejas':     { grad: 'juego-grad-memoria',     svg: svgJuegos.memoria },
           'Recuerda las casillas':     { grad: 'juego-grad-grid',        svg: svgJuegos.grid },
-          'Radar visual':              { grad: 'juego-grad-radar',       svg: svgJuegos.radar },
+          'Exploraciones':              { grad: 'juego-grad-radar',       svg: svgJuegos.radar },
           'Encuentra las diferencias': { grad: 'juego-grad-diferencias', svg: svgJuegos.diferencias },
           'Rasgos Críticos':           { grad: 'juego-grad-rasgos',      svg: svgJuegos.rasgos },
           'Puzzle':                    { grad: 'juego-grad-puzzle',      svg: svgJuegos.puzzle }
@@ -506,9 +506,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapa = {
           'Encuentra las parejas':     'juego-memoria',
           'Recuerda las casillas':     'juego-grid',
-          'Radar visual':              'juego-radar',
+          'Exploraciones':              'juego-radar',
           'Encuentra las diferencias': 'juego-diferencias',
-          'Rasgos críticos':           'juego-rasgos',
+          'Cierre visual':           'juego-rasgos',
           'Puzzle':                    'juego-puzzle'
         };
 
@@ -667,5 +667,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   window.__vueAlumnos = _alumnosApp.mount('#app-alumnos');
+  
+  document.querySelectorAll('.btn-ver-password').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.previousElementSibling;
+      if (!input) return;
+      const visible = input.type === 'text';
+      input.type = visible ? 'password' : 'text';
+      btn.textContent = visible ? '👁' : '🙈';
+      btn.setAttribute('aria-label', visible ? 'Mostrar contraseña' : 'Ocultar contraseña');
+    });
+  });
 
 });
