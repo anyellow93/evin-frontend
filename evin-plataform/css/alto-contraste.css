@@ -3,25 +3,11 @@
    Se activa añadiendo la clase .alto-contraste al <body>
    ============================================= */
 
-
 /* ── 1. BASE ──────────────────────────────────────────────── */
 body.alto-contraste {
   background: #000 !important;
   color: #fff !important;
 }
-
-body.alto-contraste h1,
-body.alto-contraste h2,
-body.alto-contraste h3,
-body.alto-contraste h4,
-body.alto-contraste p,
-body.alto-contraste li,
-body.alto-contraste label,
-body.alto-contraste span {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
 body.alto-contraste main,
 body.alto-contraste section,
 body.alto-contraste footer {
@@ -29,26 +15,51 @@ body.alto-contraste footer {
   color: #fff !important;
 }
 
+/* Texto plano blanco reutilizado en toda la hoja
+   (agrupa lo que antes estaba repetido en varias secciones) */
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste h4,
+body.alto-contraste p,
+body.alto-contraste li,
+body.alto-contraste label,
+body.alto-contraste span,
+body.alto-contraste .card h3,
+body.alto-contraste .card p,
+body.alto-contraste .card span,
+body.alto-contraste .card li,
+body.alto-contraste #dashboard h2,
+body.alto-contraste .dash-stat-label,
+body.alto-contraste .dash-panel h3,
+body.alto-contraste .dash-ranking-nombre,
+body.alto-contraste .dash-ranking-pct,
+body.alto-contraste .dash-actividad-alumno,
+body.alto-contraste .dash-atencion-nombre,
+body.alto-contraste .modal-content h2,
+body.alto-contraste #modalDesc,
+body.alto-contraste #closeModal,
+body.alto-contraste .perfil-tabla td {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
 
 /* ── 2. HEADER Y NAV ──────────────────────────────────────── */
 body.alto-contraste header {
   background: #000 !important;
   border-bottom: 3px solid #fff !important;
 }
-
 body.alto-contraste .menu-btn,
 body.alto-contraste .nav-links a {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
-
 body.alto-contraste .menu-btn.active {
   background: #fff !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
   border-color: #fff !important;
 }
-
 body.alto-contraste .logo-text {
   background: none !important;
   -webkit-background-clip: unset !important;
@@ -56,11 +67,34 @@ body.alto-contraste .logo-text {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
-
 body.alto-contraste .logo-text::after {
   display: none !important;
 }
-
+/* El botón de login (píldora blanca) hereda de styles.css un :active
+   que solo cambia el fondo, sin fijar el color del texto/icono — en
+   alto contraste eso deja texto blanco sobre fondo blanco al pulsar.
+   Se fuerza el mismo esquema (fondo blanco, texto negro) en todos
+   los estados para que nunca desaparezca. */
+body.alto-contraste .nav-login,
+body.alto-contraste .nav-login:hover,
+body.alto-contraste .nav-login:active,
+body.alto-contraste .nav-login:focus-visible {
+  background: #fff !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border: 2px solid #000 !important;
+}
+body.alto-contraste .nav-login i,
+body.alto-contraste .nav-login svg,
+body.alto-contraste .nav-login span {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  fill: #000 !important;
+}
+body.alto-contraste .nav-login:focus-visible {
+  outline: 3px solid #ff0 !important;
+  outline-offset: 2px !important;
+}
 
 /* ── 3. TARJETAS GENERALES ────────────────────────────────── */
 body.alto-contraste .card {
@@ -68,53 +102,34 @@ body.alto-contraste .card {
   border: 2px solid #fff !important;
   box-shadow: none !important;
 }
-
-body.alto-contraste .card h3,
-body.alto-contraste .card p,
-body.alto-contraste .card span,
-body.alto-contraste .card li {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
-body.alto-contraste .card button {
+/* mismo look que .btn-primary: se reutiliza la lógica de botón amarillo */
+body.alto-contraste .card button,
+body.alto-contraste .btn-danger {
   background: #ff0 !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
   border: 2px solid #ff0 !important;
+}
+body.alto-contraste .card button {
   width: auto !important;
   min-height: 44px !important;
 }
-
 body.alto-contraste .card button:hover {
   background: #fff !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
 }
 
-
 /* ── 4. DASHBOARD — STATS ─────────────────────────────────── */
-body.alto-contraste #dashboard h2 {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
 body.alto-contraste .dash-stat-card {
   background: #111 !important;
   border: 2px solid #fff !important;
   box-shadow: none !important;
 }
-
 body.alto-contraste .dash-stat-valor {
   color: #ff0 !important;
   -webkit-text-fill-color: #ff0 !important;
 }
-
-body.alto-contraste .dash-stat-label {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
 
 /* ── 5. DASHBOARD — PANELES ───────────────────────────────── */
 body.alto-contraste .dash-panel {
@@ -123,72 +138,39 @@ body.alto-contraste .dash-panel {
   box-shadow: none !important;
 }
 
-body.alto-contraste .dash-panel h3 {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
-
 /* ── 6. DASHBOARD — RANKING ───────────────────────────────── */
-body.alto-contraste .dash-ranking-nombre {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
 body.alto-contraste .dash-barra-wrap {
   background: #333 !important;
 }
-
-body.alto-contraste .dash-ranking-pct {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
 body.alto-contraste .pos-oro    { background: #ffd700 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
 body.alto-contraste .pos-plata  { background: #c0c0c0 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
 body.alto-contraste .pos-bronce { background: #cd7f32 !important; color: #000 !important; -webkit-text-fill-color: #000 !important; }
 body.alto-contraste .pos-normal { background: #333 !important;    color: #fff !important; -webkit-text-fill-color: #fff !important; }
-
 
 /* ── 7. DASHBOARD — ACTIVIDAD RECIENTE ───────────────────── */
 body.alto-contraste .dash-actividad-item {
   background: #1a1a1a !important;
   border: 1px solid #555 !important;
 }
-
-body.alto-contraste .dash-actividad-alumno {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
 body.alto-contraste .dash-actividad-juego,
 body.alto-contraste .dash-actividad-fecha {
   color: #ccc !important;
   -webkit-text-fill-color: #ccc !important;
 }
 
-
 /* ── 8. DASHBOARD — ATENCIÓN ──────────────────────────────── */
 body.alto-contraste .dash-atencion-item {
   background: #1a0d00 !important;
   border-color: #ff0 !important;
 }
-
-body.alto-contraste .dash-atencion-nombre {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
 body.alto-contraste .dash-atencion-curso {
   color: #ccc !important;
   -webkit-text-fill-color: #ccc !important;
 }
-
 body.alto-contraste .dash-vacio {
   color: #999 !important;
   -webkit-text-fill-color: #999 !important;
 }
-
 
 /* ── 9. BOTONES GENERALES ─────────────────────────────────── */
 body.alto-contraste .btn,
@@ -199,7 +181,6 @@ body.alto-contraste .btn-primary {
   border: 2px solid #fff !important;
   font-weight: 700 !important;
 }
-
 body.alto-contraste .btn:hover,
 body.alto-contraste .btn-primary:hover {
   background: #ff0 !important;
@@ -207,28 +188,18 @@ body.alto-contraste .btn-primary:hover {
   -webkit-text-fill-color: #000 !important;
   border-color: #ff0 !important;
 }
-
 body.alto-contraste .btn-secundario {
   background: #000 !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
   border: 2px solid #fff !important;
 }
-
 body.alto-contraste .btn-secundario:hover {
   background: #ff0 !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
   border-color: #ff0 !important;
 }
-
-body.alto-contraste .btn-danger {
-  background: #ff0 !important;
-  color: #000 !important;
-  -webkit-text-fill-color: #000 !important;
-  border: 2px solid #ff0 !important;
-}
-
 
 /* ── 10. FORMULARIOS ──────────────────────────────────────── */
 body.alto-contraste input,
@@ -239,26 +210,28 @@ body.alto-contraste textarea {
   -webkit-text-fill-color: #fff !important;
   border: 2px solid #fff !important;
 }
-
 body.alto-contraste input::placeholder {
   color: #ccc !important;
   -webkit-text-fill-color: #ccc !important;
 }
-
 body.alto-contraste input:focus,
 body.alto-contraste select:focus,
 body.alto-contraste textarea:focus {
+  background-color: #000 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
   outline: 3px solid #ff0 !important;
   border-color: #ff0 !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
 }
-
 body.alto-contraste .form-error {
   background: #ff0 !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
   border-color: #ff0 !important;
 }
-
 body.alto-contraste .form-success {
   background: #0f0 !important;
   color: #000 !important;
@@ -266,6 +239,15 @@ body.alto-contraste .form-success {
   border-color: #0f0 !important;
 }
 
+/* Fix autofill en alto contraste (Chrome/Safari rellenan con su propio fondo) */
+body.alto-contraste input:-webkit-autofill,
+body.alto-contraste input:-webkit-autofill:hover,
+body.alto-contraste input:-webkit-autofill:focus,
+body.alto-contraste input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 100px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
+  caret-color: #fff;
+}
 
 /* ── 11. BADGES ───────────────────────────────────────────── */
 body.alto-contraste .badge,
@@ -287,31 +269,17 @@ body.alto-contraste .rol-alumno {
   border: 2px solid #fff !important;
 }
 
-
 /* ── 12. MODAL ────────────────────────────────────────────── */
 body.alto-contraste .modal-content {
   background: #000 !important;
   border: 3px solid #fff !important;
   color: #fff !important;
 }
-
-body.alto-contraste .modal-content h2,
-body.alto-contraste #modalDesc {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
-body.alto-contraste #closeModal {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-}
-
 body.alto-contraste #closeModal:hover {
   background: #ff0 !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
 }
-
 
 /* ── 13. PERFIL ALUMNO ────────────────────────────────────── */
 body.alto-contraste .perfil-panel {
@@ -319,24 +287,18 @@ body.alto-contraste .perfil-panel {
   border: 3px solid #fff !important;
   color: #fff !important;
 }
-
 body.alto-contraste .perfil-header {
   background: #000 !important;
   border-bottom: 2px solid #fff !important;
 }
-
 body.alto-contraste .perfil-tabla th {
   background: #fff !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
 }
-
 body.alto-contraste .perfil-tabla td {
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
   border-color: #555 !important;
 }
-
 
 /* ── 14. JUEGO — MEMORIA VISUAL ───────────────────────────── */
 body.alto-contraste .memoria-card-front {
@@ -344,12 +306,10 @@ body.alto-contraste .memoria-card-front {
   border: 2px solid #fff !important;
   border-radius: 10px !important;
 }
-
 body.alto-contraste .memoria-card-front .memoria-card-dorso {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
-
 body.alto-contraste .memoria-card-back {
   background: #111 !important;
   border: 2px solid #fff !important;
@@ -357,63 +317,69 @@ body.alto-contraste .memoria-card-back {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
 }
-
 body.alto-contraste .memoria-card.memoria-acertada .memoria-card-back {
   background: #004d00 !important;
   border-color: #0f0 !important;
 }
-
 body.alto-contraste .memoria-card.memoria-error .memoria-card-front,
 body.alto-contraste .memoria-card.memoria-error .memoria-card-back {
   border-color: #f00 !important;
 }
-
 
 /* ── 15. JUEGO — RECUERDA LAS CASILLAS ───────────────────── */
 body.alto-contraste .grid-celda {
   background: #111 !important;
   border: 2px solid #fff !important;
 }
-
 body.alto-contraste .grid-celda-objetivo    { background: #ff0 !important; border-color: #ff0 !important; }
 body.alto-contraste .grid-celda-seleccionada { background: #ff0 !important; border-color: #ff0 !important; }
 body.alto-contraste .grid-celda-correcta    { background: #0f0 !important; border-color: #0f0 !important; }
 body.alto-contraste .grid-celda-incorrecta  { background: #f00 !important; border-color: #f00 !important; }
 body.alto-contraste .grid-celda-eracorrecta { background: #856404 !important; border-color: #ff0 !important; }
 
-
 /* ── 16. JUEGO — RADAR VISUAL ─────────────────────────────── */
 body.alto-contraste .radar-cell {
   background: #111 !important;
   border: 2px solid #fff !important;
 }
-
 body.alto-contraste .radar-cell-seleccionada { outline: 4px solid #ff0 !important; border-color: #ff0 !important; }
 body.alto-contraste .radar-cell-correcta     { outline: 4px solid #0f0 !important; border-color: #0f0 !important; }
 body.alto-contraste .radar-cell-incorrecta,
 body.alto-contraste .radar-cell-faltante     { outline: 4px solid #f00 !important; border-color: #f00 !important; }
-
 
 /* ── 17. JUEGO — DIFERENCIAS ──────────────────────────────── */
 body.alto-contraste .dif-celda {
   background: #111 !important;
   border: 2px solid #555 !important;
 }
-
 body.alto-contraste .dif-celda.dif-correcta { border-color: #0f0 !important; background: #001a00 !important; }
 body.alto-contraste .dif-celda.dif-error    { border-color: #f00 !important; }
-
 
 /* ── 18. BOTÓN DE TOGGLE ──────────────────────────────────── */
 body.alto-contraste .btn-contraste {
   background: #ff0 !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
-  border-color: #000 !important;
+  border: 2px solid #000 !important;
 }
-
 body.alto-contraste .btn-contraste:hover {
   background: #fff !important;
   color: #000 !important;
   -webkit-text-fill-color: #000 !important;
+}
+/* Antes no existían estados propios de :active/:focus-visible,
+   así que el botón podía heredar transform/opacity de .menu-btn
+   y perder legibilidad al pulsar. Se fuerzan explícitamente. */
+body.alto-contraste .btn-contraste:active {
+  background: #ff0 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border-color: #000 !important;
+  transform: none !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+body.alto-contraste .btn-contraste:focus-visible {
+  outline: 3px solid #fff !important;
+  outline-offset: 2px !important;
 }

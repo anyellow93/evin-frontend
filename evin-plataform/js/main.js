@@ -657,12 +657,35 @@ document.addEventListener('DOMContentLoaded', () => {
           this.alumnos = this.alumnos.filter(a => a.id !== alumno.id);
         } catch (e) { alert('Error al eliminar: ' + e.message); }
       },
+      
+      exportarCSV(alumno) {
+	  if (!this.perfilSesiones.length) {
+	    alert('Este alumno no tiene sesiones registradas.');
+	    return;
+	  }
+	  const cabecera = ['Fecha', 'Juego', 'Aciertos', 'Intentos'].join(',');
+	  const filas = this.perfilSesiones.map(s => [
+	    s.fecha || '—',
+	    s.juego || '—',
+	    s.aciertos ?? 0,
+	    s.intentos ?? 0
+	  ].join(','));
+	  const csv     = [cabecera, ...filas].join('\n');
+	  const blob    = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+	  const url     = URL.createObjectURL(blob);
+	  const link    = document.createElement('a');
+	  link.href     = url;
+	  link.download = `EVIN_${alumno.nombre.replace(/ /g,'_')}_sesiones.csv`;
+	  link.click();
+	  URL.revokeObjectURL(url);
+	},     
 
       claseProgreso(valor) {
         if (valor >= 70) return 'progreso-alto';
         if (valor >= 40) return 'progreso-medio';
         return 'progreso-bajo';
       }
+      
     }
   });
 

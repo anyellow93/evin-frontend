@@ -748,6 +748,9 @@
             </div>
             <div class="perfil-sesiones">
               <h3>Historial de sesiones</h3>
+		<button class="btn" @click="exportarCSV(perfilAlumno)" style="margin-bottom:1rem;background:#0F2E8A;">
+		  📥 Exportar CSV
+		</button>
               <p v-if="perfilCargando">Cargando sesiones...</p>
               <p v-else-if="!perfilSesiones.length" class="perfil-vacio">Este alumno aún no tiene sesiones registradas.</p>
               <table v-else class="perfil-tabla">
@@ -996,7 +999,7 @@
           <input type="email" id="register-email" autocomplete="email" required>
           <label for="register-password">Contraseña</label>
           <div class="input-password-wrap">
-            <input type="password" id="login-password" autocomplete="current-password" required>
+            <input type="password" id="register-password" autocomplete="new-password" minlength="8" required aria-describedby="password-hint">
             <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
           </div>
           <small id="password-hint" class="form-hint">Mínimo 8 caracteres, con al menos una mayúscula, un número y un símbolo.</small>
@@ -1004,7 +1007,7 @@
           <p id="password-strength-label" class="strength-label"></p>
           <label for="register-password-confirm">Repetir contraseña</label>
           <div class="input-password-wrap">
-            <input type="password" id="login-password" autocomplete="current-password" required>
+            <input type="password" id="register-password-confirm" autocomplete="new-password" required>
             <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
           </div>
           <label for="register-category">Rol</label>
@@ -1073,7 +1076,7 @@
           <input type="email" id="perfil-email" autocomplete="email">
           <hr class="perfil-separador">
           <h4>Cambiar contraseña <small>(dejar en blanco para no cambiar)</small></h4>
-          <label for="perfil-pwd-actual">Contraseña actual</label>
+          
 		<label for="perfil-pwd-actual">Contraseña actual</label>
 		<div class="input-password-wrap">
 		  <input type="password" id="perfil-pwd-actual" autocomplete="current-password">
