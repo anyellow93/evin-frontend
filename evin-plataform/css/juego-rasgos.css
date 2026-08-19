@@ -1,13 +1,17 @@
 /* =============================================
-   JUEGO PUZZLE — EVIN
+   JUEGO RASGOS CRÍTICOS — EVIN
+   Fondo negro, formas sobre negro, parcial vs completo
    ============================================= */
 
-/* El fondo oscuro y el texto claro solo se aplican mientras se está
-   jugando de verdad — antes eran fijos y dejaban el texto casi
-   invisible en la pantalla de configuración (fondo claro normal). */
-body.solo-juego #juego-puzzle,
-#juego-puzzle.juego-jugando {
-  background: #1a1a2e;
+/* El fondo negro y los textos claros de este juego solo tienen sentido
+   mientras se está jugando de verdad — antes se aplicaban los colores
+   claros de forma fija aunque la sección se viera con el fondo normal
+   claro de la web (pantalla de configuración), dejando el texto casi
+   invisible. Ahora se activan con .juego-jugando (o dentro de una
+   ventana solo-juego); en configuración se usan colores oscuros. */
+body.solo-juego #juego-rasgos,
+#juego-rasgos.juego-jugando {
+  background: #000 !important;
   color: #fff;
   min-height: 100dvh;
   padding: 0.75rem;
@@ -15,25 +19,25 @@ body.solo-juego #juego-puzzle,
   flex-direction: column;
 }
 
-/* ── Panel controles ──────────────────────────────────────── */
-.puzzle-panel-controles {
+/* ── Panel de controles ───────────────────────────────────── */
+.rasgos-panel-controles {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
 
-.puzzle-panel-controles p {
+.rasgos-panel-controles p {
   color: #555;
   font-size: 0.9rem;
   margin: 0;
 }
-body.solo-juego .puzzle-panel-controles p,
-#juego-puzzle.juego-jugando .puzzle-panel-controles p {
+body.solo-juego .rasgos-panel-controles p,
+#juego-rasgos.juego-jugando .rasgos-panel-controles p {
   color: #ccc;
 }
 
-.puzzle-info {
+.rasgos-info {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem 1.5rem;
@@ -41,16 +45,49 @@ body.solo-juego .puzzle-panel-controles p,
   color: var(--dark, #212529);
   align-items: center;
 }
-body.solo-juego .puzzle-info,
-#juego-puzzle.juego-jugando .puzzle-info {
+body.solo-juego .rasgos-info,
+#juego-rasgos.juego-jugando .rasgos-info {
   color: #fff;
 }
 
-.puzzle-info strong { color: var(--primary, #4361ee); }
-body.solo-juego .puzzle-info strong,
-#juego-puzzle.juego-jugando .puzzle-info strong { color: #ff0; }
+.rasgos-info strong { color: var(--primary, #4361ee); }
+body.solo-juego .rasgos-info strong,
+#juego-rasgos.juego-jugando .rasgos-info strong { color: #ff0; }
 
-.puzzle-botones {
+/* ── Objetivo (forma parcial) ─────────────────────────────── */
+.rasgos-objetivo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #111;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.rasgos-objetivo-wrap p {
+  color: #ccc;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+#rasgos-objetivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+#rasgos-objetivo svg {
+  width: clamp(40px, 8vw, 70px);
+  height: clamp(40px, 8vw, 70px);
+}
+
+/* ── Botones ──────────────────────────────────────────────── */
+.rasgos-botones {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -59,114 +96,81 @@ body.solo-juego .puzzle-info strong,
 
 /* Solo se ve en la pantalla de configuración (fondo claro): hereda el
    estilo normal de <select> del sitio en vez de forzar uno oscuro. */
-#puzzle-nivel {
+#rasgos-nivel {
   padding: 0.4rem 0.75rem;
   font-size: 0.9rem;
 }
 
-/* ── Preview de la imagen ─────────────────────────────────── */
-.puzzle-preview-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: #111;
-  border: 2px solid #444;
-  border-radius: 10px;
-  padding: 0.5rem 0.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.puzzle-preview-wrap p {
-  color: #ccc;
-  font-size: 0.85rem;
-  margin: 0;
-}
-
-#puzzle-preview svg {
-  border-radius: 6px;
-  border: 2px solid #555;
-}
-
-/* ── Área de juego ────────────────────────────────────────── */
-.puzzle-area {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 1.5rem;
-  align-items: flex-start;
+/* ── Tablero ──────────────────────────────────────────────── */
+#rasgos-grid {
+  display: grid;
+  gap: clamp(4px, 1vw, 8px);
   justify-content: center;
+  align-content: start;
   flex: 1;
+  width: 100%;
 }
 
-@media (min-width: 700px) {
-  .puzzle-area {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-  }
-}
-
-.puzzle-zona {
-   display: flex;
-  flex-direction: column;
+/* ── Celda ────────────────────────────────────────────────── */
+.rasgos-cell {
+  width:  var(--rasgos-cell-size, 72px);
+  height: var(--rasgos-cell-size, 72px);
+  border-radius: 6px;
+  background: #000;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex: 1;
-  min-width: 0;
-  overflow: auto;
-}
-
-.puzzle-zona-titulo {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #aaa;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-/* ── Huecos ───────────────────────────────────────────────── */
-#puzzle-huecos .puzzle-hueco {
-  border-radius: 4px;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  justify-content: center;
   cursor: pointer;
+  position: relative;
+  transition: transform 0.1s ease;
+  border: 1px solid #222;
 }
 
-#puzzle-huecos .puzzle-hueco:hover:not([data-ocupado]) {
-  border-color: #fff !important;
-  box-shadow: 0 0 6px rgba(255,255,255,0.3);
+.rasgos-cell:hover { transform: scale(1.06); }
+.rasgos-cell:active { transform: scale(0.96); }
+
+.rasgos-svg-wrap {
+  width: 85%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ── Piezas ───────────────────────────────────────────────── */
-/* El border-radius ya no es fijo: cada pieza recibe un radio de
-   esquinas aleatorio distinto desde juego_puzzle.js, para que no
-   haya dos piezas con el mismo contorno exacto. */
-#puzzle-piezas .puzzle-pieza {
-  transition: transform 0.1s, box-shadow 0.15s, border-color 0.15s;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+.rasgos-svg-wrap svg {
+  width: 100%;
+  height: 100%;
 }
 
-#puzzle-piezas .puzzle-pieza:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+/* ── Estados ──────────────────────────────────────────────── */
+.rasgos-cell-correcta {
+  outline: 4px solid #0f0;
+  outline-offset: 2px;
+  box-shadow: 0 0 8px rgba(0,255,0,0.3);
 }
 
-#puzzle-piezas .puzzle-pieza.seleccionada {
-  transform: scale(1.06);
-  box-shadow: 0 0 12px rgba(255,255,0,0.6);
+.rasgos-cell-incorrecta {
+  outline: 4px solid #f00;
+  outline-offset: 2px;
+  box-shadow: 0 0 8px rgba(255,0,0,0.3);
 }
 
-#puzzle-piezas .puzzle-pieza:active {
-  cursor: grabbing;
-  transform: scale(0.97);
+.rasgos-cell-faltante {
+  outline: 4px solid #f80;
+  outline-offset: 2px;
+  box-shadow: 0 0 8px rgba(255,128,0,0.3);
 }
 
 /* ── Alto contraste ───────────────────────────────────────── */
-body.alto-contraste #juego-puzzle { background: #000 !important; }
-body.alto-contraste .puzzle-preview-wrap { border-color: #fff !important; background: #000 !important; }
-body.alto-contraste .puzzle-info,
-body.alto-contraste .puzzle-panel-controles p { color: #fff !important; -webkit-text-fill-color: #fff !important; }
+body.alto-contraste #juego-rasgos { background: #000 !important; }
+body.alto-contraste .rasgos-cell  { background: #000 !important; border-color: #555 !important; }
+body.alto-contraste .rasgos-objetivo-wrap { border-color: #ff0 !important; }
+body.alto-contraste .rasgos-info,
+body.alto-contraste .rasgos-panel-controles p { color: #fff !important; -webkit-text-fill-color: #fff !important; }
 
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 480px) {
-  .puzzle-info { gap: 0.5rem 1rem; font-size: 0.85rem; }
+  .rasgos-info { gap: 0.5rem 1rem; font-size: 0.85rem; }
+  .rasgos-botones .btn,
+  .rasgos-botones .btn-secundario { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
 }
