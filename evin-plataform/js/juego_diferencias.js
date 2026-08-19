@@ -191,8 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
     jugando = true;
   };
 
-  btnEmpezar?.addEventListener('click',  iniciarDiferencias);
-  btnVolver?.addEventListener('click',   () => { clearInterval(timerID); if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
+  btnEmpezar?.addEventListener('click',  () => { window.iniciarModoJuego?.('juego-diferencias'); iniciarDiferencias(); });
+  btnVolver?.addEventListener('click',   () => { clearInterval(timerID); window.finalizarModoJuego?.('juego-diferencias'); if (typeof showSection === 'function') showSection('juegos'); });
   nivelEl?.addEventListener('change',    iniciarDiferencias);
 
 });

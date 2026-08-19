@@ -41,6 +41,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.showSection = showSection;
 
+  // ── Modo juego: separa la configuración de la partida en sí ────────────────
+  // Al pulsar "Empezar/Nueva ronda/Reiniciar" se oculta el bloque .juego-config
+  // (nivel, filas, columnas...) y se pide pantalla completa, para que el
+  // alumno solo vea el tablero y el HUD de estadísticas mientras juega.
+  // Al pulsar "Volver a juegos" (o si el usuario sale de pantalla completa
+  // con Esc) se restaura la configuración.
+  window.iniciarModoJuego = function (seccionId) {
+    const seccion = document.getElementById(seccionId);
+    if (!seccion) return;
+    seccion.classList.add('juego-jugando');
+    if (seccion.requestFullscreen) {
+      seccion.requestFullscreen().catch(() => {});
+    }
+  };
+
+  window.finalizarModoJuego = function (seccionId) {
+    const seccion = document.getElementById(seccionId);
+    if (seccion) seccion.classList.remove('juego-jugando');
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  };
+
+  // Si el alumno sale de pantalla completa con Esc en vez del botón
+  // "Volver a juegos", también se restaura la configuración.
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+      document.querySelectorAll('main > section.juego-jugando')
+        .forEach(s => s.classList.remove('juego-jugando'));
+    }
+  });
+
   // ── Modal principal ────────────────────────────────────────────────────────
 
   let modal = document.getElementById('modal');
@@ -171,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navPerfilNombre = document.getElementById('nav-perfil-nombre');
     if (navLoginBtn)      navLoginBtn.classList.add('hidden');
     if (navPerfilBtn)     navPerfilBtn.classList.remove('hidden');
-    if (navPerfilNombre)  navPerfilNombre.textContent = user.nombre;
+    if (navPerfilNombre)  navPerfilNombre.textContent = 'Mi perfil';
   }
 
   // ── Panel perfil de usuario ───────────────────────────────────────────────
@@ -247,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const user = cargarUsuario();
       user.nombre = nombre; user.email = email;
       localStorage.setItem('evin_user', JSON.stringify(user));
-      if (navPerfilNombre)  navPerfilNombre.textContent  = nombre;
+      if (navPerfilNombre)  navPerfilNombre.textContent  = 'Mi perfil';
       if (userNameSpan)     userNameSpan.textContent     = nombre;
       if (perfilNombreDisp) perfilNombreDisp.textContent = nombre;
       if (perfilAvatar && window.Avatar) {
@@ -515,25 +545,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const seccionId = mapa[juego.nombre];
         if (!seccionId) { showModal(juego.nombre, 'Este juego todavía está en desarrollo.'); return; }
 
-        // Mostrar sección del juego
+        // Solo mostramos la sección con su configuración (nivel, filas,
+        // columnas...). El tablero permanece oculto y no se entra en
+        // pantalla completa hasta que el alumno pulse el botón de
+        // "Empezar/Reiniciar/Nueva partida" propio de cada juego — así
+        // la configuración queda separada de la pantalla de juego.
         showSection(seccionId);
-
-        // Iniciar el juego
-        if (seccionId === 'juego-memoria'     && typeof crearCartasMemoria === 'function') crearCartasMemoria();
-        if (seccionId === 'juego-grid'        && typeof crearTableroGrid   === 'function') crearTableroGrid();
-        if (seccionId === 'juego-radar'       && typeof iniciarRadarVisual === 'function') iniciarRadarVisual();
-        if (seccionId === 'juego-diferencias' && typeof iniciarDiferencias === 'function') iniciarDiferencias();
-        if (seccionId === 'juego-rasgos'      && typeof iniciarRasgos      === 'function') iniciarRasgos();
-        if (seccionId === 'juego-puzzle'      && typeof iniciarPuzzle      === 'function') iniciarPuzzle();
-
-        // Solicitar pantalla completa — debe ir después del init para que el DOM esté listo
-        try {
-          const seccionEl = document.getElementById(seccionId);
-	  if (seccionEl) {
-  		if (seccionEl.requestFullscreen) seccionEl.requestFullscreen();
-  		else if (seccionEl.webkitRequestFullscreen) seccionEl.webkitRequestFullscreen();
-	  }	
-        } catch(e) {}
       }
     }
   }).mount('#app-juegos');

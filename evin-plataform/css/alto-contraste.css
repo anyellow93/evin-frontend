@@ -96,6 +96,44 @@ body.alto-contraste .nav-login:focus-visible {
   outline-offset: 2px !important;
 }
 
+/* Botón "Mi perfil" / "Iniciar sesión" de la cabecera (id, no solo clase).
+   La regla genérica "body.alto-contraste span" de la sección 1 fuerza
+   -webkit-text-fill-color: #fff, y en Chrome/Safari eso pinta el texto
+   por encima de cualquier "color" que le pongamos después aunque tenga
+   !important — por eso el texto quedaba invisible sobre el fondo claro
+   de esta píldora. Se sobreescribe aquí con un selector por id, que
+   tiene más especificidad que el genérico de la sección 1. */
+body.alto-contraste #nav-perfil-btn,
+body.alto-contraste #nav-login-btn {
+  background: #fff !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border: 2px solid #000 !important;
+}
+body.alto-contraste #nav-perfil-btn i,
+body.alto-contraste #nav-perfil-btn span,
+body.alto-contraste #nav-login-btn i,
+body.alto-contraste #nav-login-btn span {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+}
+body.alto-contraste #nav-perfil-btn:hover,
+body.alto-contraste #nav-login-btn:hover {
+  background: #ff0 !important;
+}
+body.alto-contraste #nav-perfil-btn:hover i,
+body.alto-contraste #nav-perfil-btn:hover span,
+body.alto-contraste #nav-login-btn:hover i,
+body.alto-contraste #nav-login-btn:hover span {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+}
+body.alto-contraste #nav-perfil-btn:focus-visible,
+body.alto-contraste #nav-login-btn:focus-visible {
+  outline: 3px solid #ff0 !important;
+  outline-offset: 2px !important;
+}
+
 /* ── 3. TARJETAS GENERALES ────────────────────────────────── */
 body.alto-contraste .card {
   background: #111 !important;

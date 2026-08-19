@@ -11,9 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const radarTiempoEl   = document.getElementById('radar-tiempo');
   const radarRondaEl    = document.getElementById('radar-ronda');
   const radarNivelEl    = document.getElementById('radar-nivel');
+  const radarFilasEl    = document.getElementById('radar-filas');
+  const radarColsEl     = document.getElementById('radar-cols');
   const btnEmpezar      = document.getElementById('radar-empezar');
   const btnComprobar    = document.getElementById('radar-comprobar');
   const btnVolver       = document.getElementById('radar-volver');
+
+  const FILAS_MIN = 3, FILAS_MAX = 8, COLS_MIN = 3, COLS_MAX = 8;
 
   const radarItems = [
     { id: 'triangulo-azul',     alt: 'Triángulo azul',     svg: '<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><polygon points="28,4 52,52 4,52" fill="#3a7fff"/></svg>' },
@@ -34,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'estrella-amarilla',  alt: 'Estrella amarilla',  svg: '<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><polygon points="28,4 34,20 52,20 38,30 44,48 28,37 12,48 18,30 4,20 22,20" fill="#ffdd00"/></svg>' }
   ];
 
+  sugerirDimensionesPorNivel();
+
   let radarObjetivo    = null;
   let radarCeldas      = [];
   let radarAciertos    = 0;
@@ -44,11 +50,34 @@ document.addEventListener('DOMContentLoaded', () => {
   let objetivosEncontrados = 0;
   let juegoActivo      = false;
 
-  function configPorNivel() {
+  function nivelBase() {
     const nivel = radarNivelEl?.value || 'medio';
     if (nivel === 'facil')  return { rondasMax: 3, maxErrores: 2, filasBase: 3, colsBase: 4, numObjetivos: 3 };
     if (nivel === 'medio')  return { rondasMax: 5, maxErrores: 2, filasBase: 4, colsBase: 5, numObjetivos: 4 };
     return                         { rondasMax: 8, maxErrores: 2, filasBase: 5, colsBase: 6, numObjetivos: 5 };
+  }
+
+  // Copia las filas/columnas sugeridas por el nivel a los selects,
+  // como punto de partida editable por el usuario.
+  function sugerirDimensionesPorNivel() {
+    const base = nivelBase();
+    if (radarFilasEl) radarFilasEl.value = base.filasBase;
+    if (radarColsEl)  radarColsEl.value  = base.colsBase;
+  }
+
+  // La dificultad (rondas, errores permitidos, nº de objetivos) sigue
+  // viniendo del nivel, pero las filas/columnas base del tablero se
+  // leen de los selects — así se pueden combinar libremente
+  // (5x7, 6x3...) en vez de estar atadas al nivel.
+  function configPorNivel() {
+    const base  = nivelBase();
+    const filas = parseInt(radarFilasEl?.value, 10);
+    const cols  = parseInt(radarColsEl?.value, 10);
+    return {
+      ...base,
+      filasBase: Number.isFinite(filas) ? Math.min(FILAS_MAX, Math.max(FILAS_MIN, filas)) : base.filasBase,
+      colsBase:  Number.isFinite(cols)  ? Math.min(COLS_MAX,  Math.max(COLS_MIN,  cols))  : base.colsBase
+    };
   }
 
   function configRonda(ronda) {
@@ -270,8 +299,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  btnEmpezar?.addEventListener('click', iniciarRadarVisual);
-  btnVolver?.addEventListener('click',  () => { clearInterval(radarTimerId); if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
-  radarNivelEl?.addEventListener('change', iniciarRadarVisual);
+  btnEmpezar?.addEventListener('click', () => { window.iniciarModoJuego?.('juego-radar'); iniciarRadarVisual(); });
+  btnVolver?.addEventListener('click',  () => { clearInterval(radarTimerId); window.finalizarModoJuego?.('juego-radar'); if (typeof showSection === 'function') showSection('juegos'); });
+  radarNivelEl?.addEventListener('change', () => { sugerirDimensionesPorNivel(); iniciarRadarVisual(); });
+  radarFilasEl?.addEventListener('change', iniciarRadarVisual);
+  radarColsEl?.addEventListener('change',  iniciarRadarVisual);
 
 });

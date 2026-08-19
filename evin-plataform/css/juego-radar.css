@@ -5,7 +5,18 @@
    ============================================= */
 
 /* ── Pantalla completa negra cuando se juega ──────────────── */
-body.solo-juego #juego-radar {
+/* Antes se ponía negra siempre que el body tenía la clase
+   "solo-juego" (una ventana emergente de juego que ya casi no se usa),
+   pero el texto de dentro (instrucciones, estadísticas) estaba
+   pintado en blanco/gris de forma FIJA, sin depender de esa clase.
+   Resultado: en la pantalla de configuración (fondo claro normal de
+   la web) ese texto claro quedaba casi invisible. Ahora el fondo
+   negro y los textos claros solo se aplican cuando se está jugando
+   de verdad (sección con la clase .juego-jugando, o dentro de una
+   ventana solo-juego); en la pantalla de configuración se usan
+   colores oscuros legibles sobre fondo claro. */
+body.solo-juego #juego-radar,
+#juego-radar.juego-jugando {
   background: #000 !important;
   color: #fff;
   min-height: 100dvh;
@@ -23,9 +34,13 @@ body.solo-juego #juego-radar {
 }
 
 .radar-panel-controles p {
-  color: #ccc;
+  color: #555;
   font-size: 0.9rem;
   margin: 0;
+}
+body.solo-juego .radar-panel-controles p,
+#juego-radar.juego-jugando .radar-panel-controles p {
+  color: #ccc;
 }
 
 .radar-info {
@@ -33,11 +48,19 @@ body.solo-juego #juego-radar {
   flex-wrap: wrap;
   gap: 0.75rem 1.5rem;
   font-size: 0.95rem;
-  color: #fff;
+  color: var(--dark, #212529);
   align-items: center;
+}
+body.solo-juego .radar-info,
+#juego-radar.juego-jugando .radar-info {
+  color: #fff;
 }
 
 .radar-info strong {
+  color: var(--primary, #4361ee);
+}
+body.solo-juego .radar-info strong,
+#juego-radar.juego-jugando .radar-info strong {
   color: #ff0;
 }
 
@@ -68,11 +91,11 @@ body.solo-juego #juego-radar {
 }
 
 /* ── Select de nivel ──────────────────────────────────────── */
+/* Vive dentro de .juego-config, que solo se ve en la pantalla de
+   configuración (fondo claro), nunca durante la partida — por eso ya
+   no se le fuerza un fondo oscuro fijo; hereda el estilo normal de
+   <select> del resto del sitio. */
 #radar-nivel {
-  background: #111;
-  color: #fff;
-  border: 1.5px solid #555;
-  border-radius: 8px;
   padding: 0.4rem 0.75rem;
   font-size: 0.9rem;
 }

@@ -270,8 +270,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  btnEmpezar?.addEventListener('click', iniciarRasgos);
-  btnVolver?.addEventListener('click',  () => { clearInterval(rasgosTimerId); if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
+  btnEmpezar?.addEventListener('click', () => { window.iniciarModoJuego?.('juego-rasgos'); iniciarRasgos(); });
+  btnVolver?.addEventListener('click',  () => { clearInterval(rasgosTimerId); window.finalizarModoJuego?.('juego-rasgos'); if (typeof showSection === 'function') showSection('juegos'); });
   rasgosNivelEl?.addEventListener('change', iniciarRasgos);
 
 });

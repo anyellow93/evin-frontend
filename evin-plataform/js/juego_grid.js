@@ -7,9 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const gridAciertosEl = document.getElementById('grid-aciertos');
   const gridErroresEl  = document.getElementById('grid-errores');
   const gridNivelEl    = document.getElementById('grid-nivel');
+  const gridFilasEl    = document.getElementById('grid-filas');
+  const gridColsEl     = document.getElementById('grid-cols');
   const btnEmpezar     = document.getElementById('grid-empezar');
   const btnComprobar   = document.getElementById('grid-comprobar');
   const btnVolver      = document.getElementById('grid-volver');
+
+  const FILAS_MIN = 3, FILAS_MAX = 8, COLS_MIN = 3, COLS_MAX = 8;
 
   let gridFilas     = 3;
   let gridCols      = 3;
@@ -21,14 +25,33 @@ document.addEventListener('DOMContentLoaded', () => {
   let aciertosTotal = 0;
   let erroresTotal  = 0;
 
+  // El nivel solo fija la dificultad (nº de objetivos a memorizar) y
+  // propone unas filas/columnas de partida en los selects; el jugador
+  // puede después ajustarlas manualmente a cualquier combinación
+  // dentro del rango permitido (p. ej. 5x7, 6x3...).
   function configurarNivel() {
+    let filasSugeridas, colsSugeridas;
     if (gridNivelEl.value === 'facil') {
-      gridFilas = 3; gridCols = 3; numObjetivo = 3;
+      filasSugeridas = 3; colsSugeridas = 3; numObjetivo = 3;
     } else if (gridNivelEl.value === 'medio') {
-      gridFilas = 4; gridCols = 4; numObjetivo = 5;
+      filasSugeridas = 4; colsSugeridas = 4; numObjetivo = 5;
     } else {
-      gridFilas = 5; gridCols = 5; numObjetivo = 7;
+      filasSugeridas = 5; colsSugeridas = 5; numObjetivo = 7;
     }
+    if (gridFilasEl) gridFilasEl.value = filasSugeridas;
+    if (gridColsEl)  gridColsEl.value  = colsSugeridas;
+    leerDimensiones();
+  }
+
+  // Lee y valida las filas/columnas elegidas por el usuario en los selects.
+  function leerDimensiones() {
+    const filas = parseInt(gridFilasEl?.value, 10);
+    const cols  = parseInt(gridColsEl?.value, 10);
+    gridFilas = Number.isFinite(filas) ? Math.min(FILAS_MAX, Math.max(FILAS_MIN, filas)) : gridFilas;
+    gridCols  = Number.isFinite(cols)  ? Math.min(COLS_MAX,  Math.max(COLS_MIN,  cols))  : gridCols;
+    // El nº de objetivos nunca puede superar el nº de casillas disponibles.
+    const totalCasillas = gridFilas * gridCols;
+    if (numObjetivo >= totalCasillas) numObjetivo = Math.max(1, totalCasillas - 1);
   }
 
   function barajar(arr) {
@@ -50,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
   window.crearTableroGrid = function () {
-    configurarNivel();
+    leerDimensiones();
     gridTablero.innerHTML = '';
     celdas = [];
     gridTablero.style.gridTemplateColumns = `repeat(${gridCols}, 1fr)`;
@@ -160,10 +183,12 @@ document.addEventListener('DOMContentLoaded', () => {
     gridRondaEl.textContent = ronda;
   }
 
-  btnEmpezar?.addEventListener('click',   nuevaRonda);
+  btnEmpezar?.addEventListener('click',   () => { window.iniciarModoJuego?.('juego-grid'); nuevaRonda(); });
   btnComprobar?.addEventListener('click', comprobarRespuesta);
-  btnVolver?.addEventListener('click',    () => { if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
-  gridNivelEl?.addEventListener('change', crearTableroGrid);
+  btnVolver?.addEventListener('click',    () => { window.finalizarModoJuego?.('juego-grid'); if (typeof showSection === 'function') showSection('juegos'); });
+  gridNivelEl?.addEventListener('change', () => { configurarNivel(); crearTableroGrid(); });
+  gridFilasEl?.addEventListener('change', crearTableroGrid);
+  gridColsEl?.addEventListener('change',  crearTableroGrid);
 
   
 

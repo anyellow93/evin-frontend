@@ -172,8 +172,8 @@
 
   // ── Eventos de UI ──────────────────────────────────────────────────────────
 
-  btnReiniciar?.addEventListener('click', crearCartasMemoria);
-  btnVolver?.addEventListener('click',    () => { if (document.fullscreenElement) document.exitFullscreen(); if (typeof showSection === 'function') showSection('juegos'); });
+  btnReiniciar?.addEventListener('click', () => { window.iniciarModoJuego?.('juego-memoria'); crearCartasMemoria(); });
+  btnVolver?.addEventListener('click',    () => { window.finalizarModoJuego?.('juego-memoria'); if (typeof showSection === 'function') showSection('juegos'); });
   memoriaNivel?.addEventListener('change', crearCartasMemoria);
 
 });

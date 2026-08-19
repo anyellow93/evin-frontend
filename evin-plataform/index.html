@@ -76,7 +76,7 @@
           <li><a href="#faqs"      class="menu-btn"><i class="fas fa-question-circle"></i> FAQs</a></li>
         </ul>
         <a href="#usuario" class="menu-btn" id="nav-login-btn"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
-        <a href="#" class="menu-btn hidden" id="nav-perfil-btn"><i class="fas fa-user-circle"></i> <span id="nav-perfil-nombre"></span></a>
+        <a href="#" class="menu-btn hidden" id="nav-perfil-btn"><i class="fas fa-user-circle"></i> <span id="nav-perfil-nombre">Mi perfil</span></a>
       </nav>
     </div>
   </header>
@@ -529,12 +529,14 @@
         <div class="memoria-info">
           <span>Intentos: <strong id="memoria-intentos">0</strong></span>
           <span>Tiempo: <strong id="memoria-tiempo">0</strong> s</span>
+        </div>
+        <div class="juego-config">
           <label>Nivel: <select id="memoria-nivel"><option value="facil">Fácil</option><option value="medio">Medio</option><option value="dificil">Difícil</option></select></label>
         </div>
-        <button id="memoria-reiniciar" class="btn">Reiniciar</button>
+        <button id="memoria-reiniciar" class="btn">Empezar</button>
         <button id="memoria-volver" class="btn-secundario">Volver a juegos</button>
       </div>
-      <div id="memoria-grid" class="memoria-grid"></div>
+      <div id="memoria-grid" class="memoria-grid juego-tablero"></div>
     </section>
 
     <!-- ── JUEGO GRID ──────────────────────────────────────── -->
@@ -546,7 +548,21 @@
           <span>Ronda: <strong id="grid-ronda">1</strong></span>
           <span>Aciertos: <strong id="grid-aciertos">0</strong></span>
           <span>Errores: <strong id="grid-errores">0</strong></span>
+        </div>
+        <div class="juego-config">
           <label>Nivel: <select id="grid-nivel"><option value="facil">Fácil (3x3)</option><option value="medio">Medio (4x4)</option><option value="dificil">Difícil (5x5)</option></select></label>
+          <label>Filas:
+            <select id="grid-filas">
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+            </select>
+          </label>
+          <label>Columnas:
+            <select id="grid-cols">
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+            </select>
+          </label>
         </div>
         <div class="grid-botones">
           <button id="grid-empezar"   class="btn">Nueva ronda</button>
@@ -554,7 +570,7 @@
           <button id="grid-volver"    class="btn-secundario">Volver a juegos</button>
         </div>
       </div>
-      <div id="grid-tablero" class="grid-tablero"></div>
+      <div id="grid-tablero" class="grid-tablero juego-tablero"></div>
     </section>
 
     <!-- ── JUEGO RADAR ─────────────────────────────────────── -->
@@ -568,7 +584,21 @@
           <span>Errores: <strong id="radar-errores">0</strong></span>
           <span>Tiempo: <strong id="radar-tiempo">0</strong> s</span>
         </div>
-        <label>Nivel: <select id="radar-nivel"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></label>
+        <div class="juego-config">
+          <label>Nivel: <select id="radar-nivel"><option value="facil">Fácil</option><option value="medio" selected>Medio</option><option value="dificil">Difícil</option></select></label>
+          <label>Filas:
+            <select id="radar-filas">
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+            </select>
+          </label>
+          <label>Columnas:
+            <select id="radar-cols">
+              <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+            </select>
+          </label>
+        </div>
         <div class="radar-botones">
           <button id="radar-empezar"   class="btn">Nueva búsqueda</button>
           <button id="radar-comprobar" class="btn" disabled>Comprobar selección</button>
@@ -576,7 +606,7 @@
         </div>
       </div>
       
-      <div id="radar-grid" class="radar-grid"></div>
+      <div id="radar-grid" class="radar-grid juego-tablero"></div>
       
     </section>
 
@@ -588,6 +618,8 @@
         <div class="diferencias-info">
           <span>Encontradas: <strong id="diferencias-contador">0</strong> / <strong id="diferencias-total">0</strong></span>
           <span>Tiempo: <strong id="diferencias-tiempo">0</strong> s</span>
+        </div>
+        <div class="juego-config">
           <label>Nivel: <select id="diferencias-nivel"><option value="facil">Fácil (3x3, 3 dif.)</option><option value="medio" selected>Medio (4x4, 5 dif.)</option><option value="dificil">Difícil (5x5, 7 dif.)</option></select></label>
         </div>
         <div class="diferencias-botones">
@@ -596,7 +628,7 @@
         </div>
         <p id="diferencias-mensaje" class="diferencias-mensaje" style="display:none"></p>
       </div>
-      <div class="diferencias-tableros">
+      <div class="diferencias-tableros juego-tablero">
         <div class="diferencias-lado"><h3>Imagen original</h3><div id="diferencias-izq" class="diferencias-grid"></div></div>
         <div class="diferencias-lado"><h3>¿Cuáles son las diferencias?</h3><div id="diferencias-der" class="diferencias-grid"></div></div>
       </div>
@@ -613,17 +645,19 @@
           <span>Errores: <strong id="rasgos-errores">0 / 2</strong></span>
           <span>Tiempo: <strong id="rasgos-tiempo">0</strong> s</span>
         </div>
-        <div class="rasgos-objetivo-wrap">
+        <div class="rasgos-objetivo-wrap juego-tablero">
           <p>Busca la forma completa de:</p>
           <div id="rasgos-objetivo"></div>
         </div>
-        <label>Nivel: <select id="rasgos-nivel"><option value="facil">Fácil (3 rondas)</option><option value="medio" selected>Medio (5 rondas)</option><option value="dificil">Difícil (8 rondas)</option></select></label>
+        <div class="juego-config">
+          <label>Nivel: <select id="rasgos-nivel"><option value="facil">Fácil (3 rondas)</option><option value="medio" selected>Medio (5 rondas)</option><option value="dificil">Difícil (8 rondas)</option></select></label>
+        </div>
         <div class="rasgos-botones">
           <button id="rasgos-empezar" class="btn">Nueva partida</button>
           <button id="rasgos-volver"  class="btn-secundario">Volver a juegos</button>
         </div>
       </div>
-      <div id="rasgos-grid" class="rasgos-grid"></div>
+      <div id="rasgos-grid" class="rasgos-grid juego-tablero"></div>
     </section>
 
     <!-- ── JUEGO PUZZLE ────────────────────────────────────── -->
@@ -636,17 +670,19 @@
           <span>Movimientos: <strong id="puzzle-movimientos">0</strong></span>
           <span>Tiempo: <strong id="puzzle-tiempo">0</strong> s</span>
         </div>
-        <div class="puzzle-preview-wrap">
+        <div class="puzzle-preview-wrap juego-tablero">
           <div id="puzzle-preview"></div>
           <p>Imagen objetivo — reconstruye esta ilustración</p>
         </div>
-        <label>Nivel: <select id="puzzle-nivel"><option value="facil">Fácil (3×3)</option><option value="medio" selected>Medio (4×4)</option><option value="dificil">Difícil (5×5)</option></select></label>
+        <div class="juego-config">
+          <label>Nivel: <select id="puzzle-nivel"><option value="facil">Fácil (3×3)</option><option value="medio" selected>Medio (4×4)</option><option value="dificil">Difícil (5×5)</option></select></label>
+        </div>
         <div class="puzzle-botones">
           <button id="puzzle-empezar" class="btn">Nueva partida</button>
           <button id="puzzle-volver"  class="btn-secundario">Volver a juegos</button>
         </div>
       </div>
-      <div class="puzzle-area">
+      <div class="puzzle-area juego-tablero">
         <div class="puzzle-zona"><span class="puzzle-zona-titulo">Tablero</span><div id="puzzle-huecos"></div></div>
         <div class="puzzle-zona"><span class="puzzle-zona-titulo">Piezas disponibles</span><div id="puzzle-piezas"></div></div>
       </div>

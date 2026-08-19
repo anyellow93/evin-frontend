@@ -2,7 +2,8 @@
    JUEGO PUZZLE — EVIN
    ============================================= */
 
-body.solo-juego #juego-puzzle {
+body.solo-juego #juego-puzzle,
+#juego-puzzle.juego-jugando {
   background: #1a1a2e;
   color: #fff;
   min-height: 100dvh;
@@ -20,9 +21,14 @@ body.solo-juego #juego-puzzle {
 }
 
 .puzzle-panel-controles p {
-  color: #ccc;
+  color: #555;
   font-size: 0.9rem;
   margin: 0;
+}
+
+body.solo-juego .puzzle-panel-controles p,
+#juego-puzzle.juego-jugando .puzzle-panel-controles p {
+  color: #ccc;
 }
 
 .puzzle-info {
@@ -30,11 +36,21 @@ body.solo-juego #juego-puzzle {
   flex-wrap: wrap;
   gap: 0.75rem 1.5rem;
   font-size: 0.95rem;
-  color: #fff;
+  color: var(--dark, #212529);
   align-items: center;
 }
 
-.puzzle-info strong { color: #ff0; }
+body.solo-juego .puzzle-info,
+#juego-puzzle.juego-jugando .puzzle-info {
+  color: #fff;
+}
+
+.puzzle-info strong { color: var(--primary, #4361ee); }
+
+body.solo-juego .puzzle-info strong,
+#juego-puzzle.juego-jugando .puzzle-info strong {
+  color: #ff0;
+}
 
 .puzzle-botones {
   display: flex;
@@ -44,10 +60,6 @@ body.solo-juego #juego-puzzle {
 }
 
 #puzzle-nivel {
-  background: #111;
-  color: #fff;
-  border: 1.5px solid #555;
-  border-radius: 8px;
   padding: 0.4rem 0.75rem;
   font-size: 0.9rem;
 }

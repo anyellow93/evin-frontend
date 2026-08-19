@@ -1265,3 +1265,37 @@ section[id^="juego-"]:-webkit-full-screen {
 
   body.solo-juego main > section { padding: 0.75rem; }
 }
+
+/* ── Modo juego: separar configuración de la partida ─────────────────────
+   Al iniciar una partida (window.iniciarModoJuego) la sección del juego
+   recibe la clase .juego-jugando: se oculta el bloque .juego-config
+   (nivel, filas, columnas...) y la sección pasa a pantalla completa, para
+   que el alumno solo vea el tablero y las estadísticas mientras juega,
+   sin controles de configuración que le distraigan. Al volver (o al salir
+   de pantalla completa con Esc) se restaura todo. */
+main > section.juego-jugando .juego-config {
+  display: none !important;
+}
+
+/* El tablero (y cualquier elemento propio de la partida, como la forma
+   objetivo de "Cierre visual" o la imagen de referencia del puzzle)
+   permanece oculto hasta que se pulsa "Empezar/Reiniciar/Nueva partida":
+   así, al entrar a un juego, el alumno ve primero solo la configuración
+   y las instrucciones, no un tablero vacío. */
+main > section:not(.juego-jugando) .juego-tablero {
+  display: none !important;
+}
+
+main > section:fullscreen {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--light);
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+body.alto-contraste main > section:fullscreen {
+  background: #000 !important;
+}
