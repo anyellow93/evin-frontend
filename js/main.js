@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'Recuerda las casillas':     { grad: 'juego-grad-grid',        svg: svgJuegos.grid },
           'Exploraciones':              { grad: 'juego-grad-radar',       svg: svgJuegos.radar },
           'Encuentra las diferencias': { grad: 'juego-grad-diferencias', svg: svgJuegos.diferencias },
-          'Rasgos Críticos':           { grad: 'juego-grad-rasgos',      svg: svgJuegos.rasgos },
+          'Cierre visual':           { grad: 'juego-grad-rasgos',      svg: svgJuegos.rasgos },
           'Puzzle':                    { grad: 'juego-grad-puzzle',      svg: svgJuegos.puzzle }
         };
         return mapa[juego.nombre] || { grad: 'juego-grad-default', svg: '<svg viewBox="0 0 120 120"><text x="60" y="70" text-anchor="middle" font-size="50">🎮</text></svg>' };
