@@ -38,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
     menuButtons.forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('href') === `#${idToShow}`);
     });
+    // El dashboard solo carga sus datos una vez al arrancar la página
+    // (en su mounted()); si en ese momento aún no había sesión iniciada,
+    // se queda sin datos para siempre. Al entrar a la sección, forzamos
+    // una recarga si ya tenemos usuario logueado.
+    if (idToShow === 'dashboard' && window.__vueDashboard?.cargarDatos) {
+      window.__vueDashboard.cargarDatos();
+    }
   }
   window.showSection = showSection;
 

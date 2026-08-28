@@ -89,10 +89,6 @@
     <div class="hero-evin">
       <img src="img/hero-evin.png" alt="EVIN - Estimulación Visual en Internet" class="hero-evin-img">
       <div class="hero-evin-overlay"></div>
-      <div class="hero-evin-contenido">
-        
-        <a href="#juegos" class="hero-evin-cta menu-btn">Explorar juegos</a>
-      </div>
     </div>
        <h2>Bienvenido a EVIN</h2>
       <p id="inicio-bienvenida"></p>
@@ -533,8 +529,10 @@
         <div class="juego-config">
           <label>Nivel: <select id="memoria-nivel"><option value="facil">Fácil</option><option value="medio">Medio</option><option value="dificil">Difícil</option></select></label>
         </div>
-        <button id="memoria-reiniciar" class="btn">Empezar</button>
-        <button id="memoria-volver" class="btn-secundario">Volver a juegos</button>
+        <div class="memoria-botones">
+          <button id="memoria-reiniciar" class="btn btn-primary">Empezar</button>
+          <button id="memoria-volver" class="btn btn-secundario">Volver a juegos</button>
+        </div>
       </div>
       <div id="memoria-grid" class="memoria-grid juego-tablero"></div>
     </section>
@@ -565,9 +563,9 @@
           </label>
         </div>
         <div class="grid-botones">
-          <button id="grid-empezar"   class="btn">Nueva ronda</button>
-          <button id="grid-comprobar" class="btn" disabled>Comprobar</button>
-          <button id="grid-volver"    class="btn-secundario">Volver a juegos</button>
+          <button id="grid-empezar"   class="btn btn-primary">Nueva ronda</button>
+          <button id="grid-comprobar" class="btn btn-primary" disabled>Comprobar</button>
+          <button id="grid-volver"    class="btn btn-secundario">Volver a juegos</button>
         </div>
       </div>
       <div id="grid-tablero" class="grid-tablero juego-tablero"></div>
@@ -600,9 +598,8 @@
           </label>
         </div>
         <div class="radar-botones">
-          <button id="radar-empezar"   class="btn">Nueva búsqueda</button>
-          <button id="radar-comprobar" class="btn" disabled>Comprobar selección</button>
-          <button id="radar-volver"    class="btn-secundario">Volver a juegos</button>
+          <button id="radar-empezar"   class="btn btn-primary">Nueva búsqueda</button>
+          <button id="radar-volver"    class="btn btn-secundario">Volver a juegos</button>
         </div>
       </div>
       
@@ -623,8 +620,8 @@
           <label>Nivel: <select id="diferencias-nivel"><option value="facil">Fácil (3x3, 3 dif.)</option><option value="medio" selected>Medio (4x4, 5 dif.)</option><option value="dificil">Difícil (5x5, 7 dif.)</option></select></label>
         </div>
         <div class="diferencias-botones">
-          <button id="diferencias-empezar" class="btn">Nueva partida</button>
-          <button id="diferencias-volver"  class="btn-secundario">Volver a juegos</button>
+          <button id="diferencias-empezar" class="btn btn-primary">Nueva partida</button>
+          <button id="diferencias-volver"  class="btn btn-secundario">Volver a juegos</button>
         </div>
         <p id="diferencias-mensaje" class="diferencias-mensaje" style="display:none"></p>
       </div>
@@ -653,8 +650,8 @@
           <label>Nivel: <select id="rasgos-nivel"><option value="facil">Fácil (3 rondas)</option><option value="medio" selected>Medio (5 rondas)</option><option value="dificil">Difícil (8 rondas)</option></select></label>
         </div>
         <div class="rasgos-botones">
-          <button id="rasgos-empezar" class="btn">Nueva partida</button>
-          <button id="rasgos-volver"  class="btn-secundario">Volver a juegos</button>
+          <button id="rasgos-empezar" class="btn btn-primary">Nueva partida</button>
+          <button id="rasgos-volver"  class="btn btn-secundario">Volver a juegos</button>
         </div>
       </div>
       <div id="rasgos-grid" class="rasgos-grid juego-tablero"></div>
@@ -678,8 +675,8 @@
           <label>Nivel: <select id="puzzle-nivel"><option value="facil">Fácil (3×3)</option><option value="medio" selected>Medio (4×4)</option><option value="dificil">Difícil (5×5)</option></select></label>
         </div>
         <div class="puzzle-botones">
-          <button id="puzzle-empezar" class="btn">Nueva partida</button>
-          <button id="puzzle-volver"  class="btn-secundario">Volver a juegos</button>
+          <button id="puzzle-empezar" class="btn btn-primary">Nueva partida</button>
+          <button id="puzzle-volver"  class="btn btn-secundario">Volver a juegos</button>
         </div>
       </div>
       <div class="puzzle-area juego-tablero">

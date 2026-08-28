@@ -1299,3 +1299,21 @@ main > section:fullscreen {
 body.alto-contraste main > section:fullscreen {
   background: #000 !important;
 }
+
+/* ── Botones de juego centrados (Empezar/Nueva partida + Volver) ──── */
+.memoria-botones,
+.grid-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.memoria-botones,
+.grid-botones,
+.radar-botones,
+.diferencias-botones,
+.rasgos-botones,
+.puzzle-botones {
+  justify-content: center;
+}
