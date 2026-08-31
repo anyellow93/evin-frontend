@@ -708,6 +708,54 @@ input[type="search"] {
 .rol-padre    { background: #c2410c;         color: #fff; }
 .rol-alumno   { background: #16a34a;         color: #fff; }
 
+/* ── ADMINISTRACIÓN DE USUARIOS ───────────────────────────── */
+.admin-intro {
+  max-width: 60ch;
+  margin-bottom: 1.25rem;
+  color: var(--text-muted, #555);
+}
+
+.admin-buscador {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.admin-tabla-wrap { overflow-x: auto; }
+
+.admin-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.admin-tabla th,
+.admin-tabla td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.admin-tabla th {
+  background: #f8f9fa;
+  font-weight: 700;
+}
+
+.admin-tabla select {
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
 
 /* ── 13. JUEGO — MEMORIA VISUAL ───────────────────────────── */
 .memoria-panel-controles {

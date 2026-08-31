@@ -70,10 +70,11 @@
       <nav class="main-nav">
         <ul class="nav-links">
           <li><a href="#inicio"    class="menu-btn"><i class="fas fa-home"></i> Inicio</a></li>
-          <li><a href="#dashboard" class="menu-btn"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+          <li><a href="#dashboard" class="menu-btn" id="nav-dashboard-btn" style="display:none"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
           <li><a href="#juegos"    class="menu-btn"><i class="fa-solid fa-puzzle-piece"></i> Juegos</a></li>
-          <li><a href="#alumnos"   class="menu-btn"><i class="fas fa-user-graduate"></i> Alumnos</a></li>
+          <li><a href="#alumnos"   class="menu-btn" id="nav-alumnos-btn" style="display:none"><i class="fas fa-user-graduate"></i> Alumnos</a></li>
           <li><a href="#faqs"      class="menu-btn"><i class="fas fa-question-circle"></i> FAQs</a></li>
+          <li><a href="#admin"     class="menu-btn" id="nav-admin-btn" style="display:none"><i class="fas fa-user-shield"></i> Administración</a></li>
         </ul>
         <a href="#usuario" class="menu-btn" id="nav-login-btn"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
         <a href="#" class="menu-btn hidden" id="nav-perfil-btn"><i class="fas fa-user-circle"></i> <span id="nav-perfil-nombre">Mi perfil</span></a>
@@ -826,6 +827,63 @@
       </div>
     </section>
 
+    <!-- ── ADMINISTRACIÓN (solo rol técnico/admin) ───────────── -->
+    <section id="admin" class="hidden">
+      <div id="app-admin">
+        <h2>Administración de usuarios</h2>
+        <p class="admin-intro">
+          Aquí puedes revisar todas las cuentas registradas y asignar el rol de
+          <strong>Profesor</strong> o <strong>Técnico</strong>. Por seguridad, nadie puede
+          obtener estos roles desde el formulario público de registro: solo un administrador
+          puede concederlos desde esta pantalla.
+        </p>
+
+        <p v-if="cargando" class="cargando-texto">Cargando usuarios...</p>
+        <p v-if="error" class="form-error">{{ error }}</p>
+        <p v-if="mensaje" class="form-success">{{ mensaje }}</p>
+
+        <div v-if="!cargando && !error" class="admin-tabla-wrap">
+          <input
+            type="search"
+            class="admin-buscador"
+            v-model="busqueda"
+            placeholder="Buscar por nombre o correo...">
+
+          <table class="admin-tabla">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Rol actual</th>
+                <th>Cambiar rol</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="u in usuariosFiltrados" :key="u.id">
+                <td>{{ u.nombre }}</td>
+                <td>{{ u.email }}</td>
+                <td><span class="user-role-badge" :class="'rol-' + u.rol">{{ etiquetaRol(u.rol) }}</span></td>
+                <td>
+                  <select
+                    :value="u.rol"
+                    :disabled="guardandoId === u.id"
+                    @change="cambiarRol(u, $event.target.value)">
+                    <option value="alumno">Alumno</option>
+                    <option value="padre">Familiar / Padre</option>
+                    <option value="profesor">Profesor</option>
+                    <option value="tecnico">Técnico (admin)</option>
+                  </select>
+                </td>
+              </tr>
+              <tr v-if="!usuariosFiltrados.length">
+                <td colspan="4" class="dash-vacio">No se han encontrado usuarios.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- ── FAQs ────────────────────────────────────────────── -->
     <section id="faqs" class="hidden">
       <div class="faqs-container">
@@ -1046,11 +1104,10 @@
           <label for="register-category">Rol</label>
           <select id="register-category" required>
             <option value="">-- Selecciona tu rol --</option>
-            <option value="profesor">Profesor</option>
-            <option value="tecnico">Técnico</option>
             <option value="padre">Familiar / Padre</option>
             <option value="alumno">Alumno</option>
           </select>
+          <small class="form-hint">Las cuentas de Profesor y Técnico solo pueden ser creadas por un administrador de la plataforma.</small>
           <div id="alumno-extra" class="hidden">
             <label for="register-alumno-nombre">Nombre del alumno</label>
             <input type="text" id="register-alumno-nombre" autocomplete="off">
@@ -1159,6 +1216,7 @@
   <script src="js/carrusel.js" defer></script>
   <script src="js/juego-modal.js"></script>
   <script src="js/dashboard.js"></script>
+  <script src="js/admin.js"></script>
   <script src="js/main.js"></script>
   <script src="js/roles.js"></script>
   <script src="js/juego_memoria.js"></script>

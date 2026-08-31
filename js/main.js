@@ -168,21 +168,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Permisos por rol ──────────────────────────────────────────────────────
 
+  // Reglas de visibilidad del menú por rol:
+  //  - Sin sesión / alumno / padre → Inicio, Juegos, FAQs (+ editar perfil si hay sesión)
+  //  - Profesor                    → todo lo anterior + Dashboard y Alumnos (NO Administración)
+  //  - Técnico (administrador)     → todo, incluida Administración
   function aplicarPermisosPorRol(user) {
     const rol      = user?.rol || user?.role || '';
-    const esGestor = rol === 'profesor' || rol === 'tecnico';
-    const btnAlumnos   = document.querySelector('.menu-btn[href="#alumnos"]');
-    const btnDashboard = document.querySelector('.menu-btn[href="#dashboard"]');
+    const esAdmin  = rol === 'tecnico';
+    const esGestor = rol === 'profesor' || esAdmin; // profesor y técnico ven Dashboard/Alumnos
+
+    const btnAlumnos   = document.getElementById('nav-alumnos-btn');
+    const btnDashboard = document.getElementById('nav-dashboard-btn');
+    const btnAdmin     = document.getElementById('nav-admin-btn');
+
     if (btnAlumnos)   btnAlumnos.style.display   = esGestor ? '' : 'none';
-    if (btnDashboard) btnDashboard.style.display  = esGestor ? '' : 'none';
-    if (!esGestor) {
-      const seccionActual = [...sections].find(s => !s.classList.contains('hidden'));
-      if (seccionActual && (seccionActual.id === 'alumnos' || seccionActual.id === 'dashboard')) showSection('inicio');
-    }
+    if (btnDashboard) btnDashboard.style.display = esGestor ? '' : 'none';
+    if (btnAdmin)     btnAdmin.style.display     = esAdmin  ? '' : 'none';
+
+    const seccionActual = [...sections].find(s => !s.classList.contains('hidden'));
+    if (seccionActual && (
+      (!esGestor && (seccionActual.id === 'alumnos' || seccionActual.id === 'dashboard')) ||
+      (!esAdmin  && seccionActual.id === 'admin')
+    )) showSection('inicio');
   }
 
+  // Estado por defecto (sin sesión iniciada): solo Inicio, Juegos y FAQs.
   function resetearPermisos() {
-    document.querySelectorAll('.menu-btn').forEach(btn => { btn.style.display = ''; });
+    const btnAlumnos   = document.getElementById('nav-alumnos-btn');
+    const btnDashboard = document.getElementById('nav-dashboard-btn');
+    const btnAdmin     = document.getElementById('nav-admin-btn');
+    if (btnAlumnos)   btnAlumnos.style.display   = 'none';
+    if (btnDashboard) btnDashboard.style.display = 'none';
+    if (btnAdmin)     btnAdmin.style.display     = 'none';
   }
 
   window.aplicarPermisosPorRol = aplicarPermisosPorRol;
@@ -408,16 +425,19 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const target = btn.getAttribute('href').slice(1);
       const user   = cargarUsuario();
-      if (!user && (target === 'juegos' || target === 'alumnos' || target === 'dashboard')) {
+      if (!user && (target === 'juegos' || target === 'alumnos' || target === 'dashboard' || target === 'admin')) {
         showSection('usuario'); mostrarLogin(); return;
       }
       if (user) {
         const rol      = user.rol || user.role || '';
         const esGestor = rol === 'profesor' || rol === 'tecnico';
+        const esAdmin  = rol === 'tecnico';
         if (!esGestor && (target === 'alumnos' || target === 'dashboard')) { showSection('inicio'); return; }
+        if (!esAdmin && target === 'admin') { showSection('inicio'); return; }
       }
       showSection(target);
       if (target === 'alumnos' && window.__vueAlumnos) window.__vueAlumnos.cargarAlumnos();
+      if (target === 'admin' && window.__vueAdmin) window.__vueAdmin.cargarUsuarios();
     });
   });
 

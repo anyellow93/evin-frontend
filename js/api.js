@@ -49,7 +49,7 @@ const Api = {
     });
   },
 
-  register(nombre, email, password, role = 'profesor', curso = '') {
+  register(nombre, email, password, role = 'alumno', curso = '') {
     return this._fetch('/register', {
       method: 'POST',
       body: JSON.stringify({ nombre, email, password, role, curso })
@@ -132,6 +132,19 @@ const Api = {
     return this._fetch('/sesiones', {
       method: 'POST',
       body: JSON.stringify({ alumno, alumno_id, juego, aciertos, intentos })
+    });
+  },
+
+  // ── Administración de usuarios (solo rol "tecnico") ───────────────────────
+
+  getUsuarios() {
+    return this._fetch('/users');
+  },
+
+  actualizarRolUsuario(id, rol) {
+    return this._fetch(`/users/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ rol })
     });
   }
 };
