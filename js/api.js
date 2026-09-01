@@ -69,6 +69,13 @@ const Api = {
   });
  },
 
+  resetPassword(token, password) {
+    return this._fetch('/password/reset', {
+      method: 'POST',
+      body: JSON.stringify({ token, password })
+    });
+  },
+
   // ── Juegos ─────────────────────────────────────────────────────────────────
 
   getJuegos() {

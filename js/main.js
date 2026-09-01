@@ -137,11 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginForm       = document.getElementById('login-form');
   const registerForm    = document.getElementById('register-form');
   const forgotForm      = document.getElementById('forgot-form');
+  const resetForm       = document.getElementById('reset-form');
   const userInfo        = document.getElementById('user-info');
   const showRegister    = document.getElementById('show-register');
   const showLogin       = document.getElementById('show-login');
   const showForgot      = document.getElementById('show-forgot');
   const showLoginForgot = document.getElementById('show-login-from-forgot');
+  const showLoginReset  = document.getElementById('show-login-from-reset');
   const logoutBtn       = document.getElementById('logout');
   const userNameSpan    = document.getElementById('user-name');
   const userRoleBadge   = document.getElementById('user-role');
@@ -149,6 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const registerError   = document.getElementById('register-error');
   const forgotError     = document.getElementById('forgot-error');
   const forgotSuccess   = document.getElementById('forgot-success');
+  const resetError      = document.getElementById('reset-error');
+  const resetSuccess    = document.getElementById('reset-success');
   const alumnoExtra     = document.getElementById('alumno-extra');
   const categorySelect  = document.getElementById('register-category');
   const strengthBar     = document.getElementById('password-strength-bar');
@@ -157,14 +161,28 @@ document.addEventListener('DOMContentLoaded', () => {
   function mostrarError(el, msg) { if (!el) return; el.textContent = msg; el.style.display = 'block'; }
   function ocultarError(el)      { if (!el) return; el.style.display = 'none'; }
 
-  function mostrarLogin()    { loginForm?.classList.remove('hidden'); registerForm?.classList.add('hidden'); forgotForm?.classList.add('hidden'); }
-  function mostrarRegister() { loginForm?.classList.add('hidden'); registerForm?.classList.remove('hidden'); forgotForm?.classList.add('hidden'); }
-  function mostrarForgot()   { loginForm?.classList.add('hidden'); registerForm?.classList.add('hidden'); forgotForm?.classList.remove('hidden'); }
+  function mostrarLogin()    { loginForm?.classList.remove('hidden'); registerForm?.classList.add('hidden'); forgotForm?.classList.add('hidden'); resetForm?.classList.add('hidden'); }
+  function mostrarRegister() { loginForm?.classList.add('hidden'); registerForm?.classList.remove('hidden'); forgotForm?.classList.add('hidden'); resetForm?.classList.add('hidden'); }
+  function mostrarForgot()   { loginForm?.classList.add('hidden'); registerForm?.classList.add('hidden'); forgotForm?.classList.remove('hidden'); resetForm?.classList.add('hidden'); }
+  function mostrarReset()    { loginForm?.classList.add('hidden'); registerForm?.classList.add('hidden'); forgotForm?.classList.add('hidden'); resetForm?.classList.remove('hidden'); }
 
   showRegister?.addEventListener('click',    e => { e.preventDefault(); mostrarRegister(); });
   showLogin?.addEventListener('click',       e => { e.preventDefault(); mostrarLogin(); });
   showForgot?.addEventListener('click',      e => { e.preventDefault(); mostrarForgot(); });
   showLoginForgot?.addEventListener('click', e => { e.preventDefault(); mostrarLogin(); });
+  showLoginReset?.addEventListener('click',  e => { e.preventDefault(); mostrarLogin(); });
+
+  // ── Enlace de recuperación de contraseña (?reset_token=... en la URL) ──────
+  // Viene del email que manda PasswordMailer#reset_password. Si está presente,
+  // abrimos directamente el formulario de "nueva contraseña" en vez del login.
+  const resetTokenUrl = new URLSearchParams(window.location.search).get('reset_token');
+  if (resetTokenUrl) {
+    showSection('usuario');
+    mostrarReset();
+    // Limpiamos el parámetro de la URL para que no se reenvíe al recargar/compartir.
+    const urlLimpia = window.location.pathname + window.location.hash;
+    window.history.replaceState({}, document.title, urlLimpia);
+  }
 
   // ── Permisos por rol ──────────────────────────────────────────────────────
 
@@ -208,7 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Restaurar sesión ──────────────────────────────────────────────────────
 
   const savedUser = cargarUsuario();
-  if (savedUser) { actualizarUIUsuario(savedUser); aplicarPermisosPorRol(savedUser); }
+  // Si venimos de un enlace de recuperación de contraseña, ese formulario
+  // manda siempre, aunque ya haya una sesión iniciada en este navegador.
+  if (savedUser && !resetTokenUrl) { actualizarUIUsuario(savedUser); aplicarPermisosPorRol(savedUser); }
 
   // ── Actualizar UI ─────────────────────────────────────────────────────────
 
@@ -219,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loginForm?.classList.add('hidden');
     registerForm?.classList.add('hidden');
     forgotForm?.classList.add('hidden');
+    resetForm?.classList.add('hidden');
     userInfo?.classList.remove('hidden');
     const navLoginBtn     = document.getElementById('nav-login-btn');
     const navPerfilBtn    = document.getElementById('nav-perfil-btn');
@@ -406,6 +427,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ── Nueva contraseña (desde el enlace del correo de recuperación) ──────────
+
+  resetForm?.querySelector('form').addEventListener('submit', async e => {
+    e.preventDefault();
+    ocultarError(resetError);
+    if (resetSuccess) resetSuccess.style.display = 'none';
+
+    if (!resetTokenUrl) {
+      mostrarError(resetError, 'El enlace no es válido. Solicita uno nuevo desde "¿Olvidaste tu contraseña?".');
+      return;
+    }
+    const password = document.getElementById('reset-password').value;
+    const confirm  = document.getElementById('reset-password-confirm').value;
+    if (!passwordEsSegura(password)) { mostrarError(resetError, 'La contraseña debe tener mínimo 8 caracteres, una mayúscula, un número y un símbolo.'); return; }
+    if (password !== confirm) { mostrarError(resetError, 'Las contraseñas no coinciden.'); return; }
+
+    try {
+      await Api.resetPassword(resetTokenUrl, password);
+      if (resetSuccess) { resetSuccess.textContent = 'Contraseña actualizada. Ya puedes iniciar sesión.'; resetSuccess.style.display = 'block'; }
+      document.getElementById('reset-password').value = '';
+      document.getElementById('reset-password-confirm').value = '';
+      setTimeout(mostrarLogin, 1500);
+    } catch (err) {
+      mostrarError(resetError, err.message || 'El enlace ha expirado o no es válido. Solicita uno nuevo.');
+    }
+  });
+
   // ── Logout ────────────────────────────────────────────────────────────────
 
   logoutBtn?.addEventListener('click', () => {
@@ -442,7 +490,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── Iniciar en sección inicio ────────────────────────────────────────────
-  showSection('inicio');
+  // (si veníamos de un enlace de recuperación de contraseña, nos quedamos en
+  // la sección "usuario" con el formulario de nueva contraseña ya abierto)
+  if (!resetTokenUrl) showSection('inicio');
 
   // ── SVGs para tarjetas de juego ───────────────────────────────────────────
 

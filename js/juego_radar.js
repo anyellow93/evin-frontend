@@ -104,10 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
   async function registrarSesion(aciertos, intentos) {
     try {
       const token = localStorage.getItem('evin_token');
-      await fetch('http://162.0.228.169/api/v1/sesiones', {
+      const user  = JSON.parse(localStorage.getItem('evin_user') || '{}');
+      await fetch('https://evin.click/api/v1/sesiones', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' },
-        body: JSON.stringify({ alumno: usuarioActual, juego: 'Radar visual', aciertos, intentos })
+        body: JSON.stringify({
+          alumno:    user.nombre || usuarioActual,
+          alumno_id: user.alumno_id || null,
+          juego:     'Exploraciones',
+          aciertos,
+          intentos
+        })
       });
     } catch (e) { console.error('Error al registrar sesión:', e); }
   }

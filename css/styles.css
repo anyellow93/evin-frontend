@@ -452,6 +452,18 @@ footer {
   border-color: var(--primary);
 }
 
+/* Botones de los formularios de acceso (Entrar / Crear cuenta / Enviar enlace):
+   mismo estilo .btn del resto de la web, pero más grandes y ocupando todo el
+   ancho del formulario para que destaquen como acción principal. */
+.btn-auth {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.05rem;
+  padding: 0.85rem 1.4rem;
+  min-height: 52px;
+  margin-top: 0.5rem;
+}
+
 
 /* ── 10. FORMULARIOS ──────────────────────────────────────── */
 input,

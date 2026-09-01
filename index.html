@@ -817,8 +817,8 @@
               <label>Progreso (%)</label><input type="number" v-model.number="form.progreso" min="0" max="100">
               <p v-if="modalError" class="form-error">{{ modalError }}</p>
               <div class="modal-botones">
-                <button type="submit" class="btn">{{ modoModal === 'nuevo' ? 'Crear alumno' : 'Guardar cambios' }}</button>
-                <button type="button" class="btn-secundario" @click="cerrarModal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">{{ modoModal === 'nuevo' ? 'Crear alumno' : 'Guardar cambios' }}</button>
+                <button type="button" class="btn btn-secundario" @click="cerrarModal">Cancelar</button>
               </div>
             </form>
           </div>
@@ -1075,7 +1075,7 @@
 	    <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
 	  </div>
           <p id="login-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
-          <button type="submit">Entrar</button>
+          <button type="submit" class="btn btn-primary btn-auth">Entrar</button>
           <p class="form-links">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
           <p class="form-links"><a href="#" id="show-forgot">¿Olvidaste tu contraseña?</a></p>
         </form>
@@ -1115,7 +1115,7 @@
             <input type="text" id="register-alumno-curso" placeholder="Ej: 3º Primaria">
           </div>
           <p id="register-error" class="form-error" role="alert" aria-live="assertive" style="display:none"></p>
-          <button type="submit">Crear cuenta</button>
+          <button type="submit" class="btn btn-primary btn-auth">Crear cuenta</button>
           <p class="form-links">¿Ya tienes cuenta? <a href="#" id="show-login">Inicia sesión</a></p>
         </form>
       </div>
@@ -1128,8 +1128,31 @@
           <input type="email" id="forgot-email" autocomplete="email" required>
           <p id="forgot-error"   class="form-error"   role="alert"  aria-live="assertive" style="display:none"></p>
           <p id="forgot-success" class="form-success" role="status" aria-live="polite"    style="display:none"></p>
-          <button type="submit">Enviar enlace</button>
+          <button type="submit" class="btn btn-primary btn-auth">Enviar enlace</button>
           <p class="form-links"><a href="#" id="show-login-from-forgot">Volver al inicio de sesión</a></p>
+        </form>
+      </div>
+
+      <!-- Se muestra solo cuando se llega desde el enlace del correo de
+           recuperación (?reset_token=...). Ver js/main.js. -->
+      <div id="reset-form" class="hidden">
+        <h2>Elige una nueva contraseña</h2>
+        <form novalidate>
+          <label for="reset-password">Nueva contraseña</label>
+          <div class="input-password-wrap">
+            <input type="password" id="reset-password" autocomplete="new-password" minlength="8" required>
+            <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
+          </div>
+          <small class="form-hint">Mínimo 8 caracteres, con al menos una mayúscula, un número y un símbolo.</small>
+          <label for="reset-password-confirm">Repetir nueva contraseña</label>
+          <div class="input-password-wrap">
+            <input type="password" id="reset-password-confirm" autocomplete="new-password" required>
+            <button type="button" class="btn-ver-password" aria-label="Mostrar contraseña" tabindex="-1">👁</button>
+          </div>
+          <p id="reset-error"   class="form-error"   role="alert"  aria-live="assertive" style="display:none"></p>
+          <p id="reset-success" class="form-success" role="status" aria-live="polite"    style="display:none"></p>
+          <button type="submit" class="btn btn-primary btn-auth">Guardar nueva contraseña</button>
+          <p class="form-links"><a href="#" id="show-login-from-reset">Volver al inicio de sesión</a></p>
         </form>
       </div>
 
@@ -1203,7 +1226,11 @@
   <footer>
     <p><strong>EVIN</strong> — Plataforma de Estimulación Visual en Internet</p>
     <p>Trabajo Final de Grado · UNED · 2026</p>
-    <p><a href="#faqs" style="color:rgba(255,255,255,0.7)">FAQs</a> · <a href="#accesibilidad" style="color:rgba(255,255,255,0.7)">Accesibilidad</a></p>
+    <p>
+      <a href="#faqs" style="color:rgba(255,255,255,0.7)">FAQs</a> ·
+      <a href="#accesibilidad" style="color:rgba(255,255,255,0.7)">Accesibilidad</a> ·
+      <a href="mailto:angelopez267@gmail.com?subject=Contacto%20desde%20EVIN" style="color:rgba(255,255,255,0.7)">Contacto</a>
+    </p>
     <p style="font-size:0.8rem;opacity:0.6;margin-top:0.5rem">&copy; 2025 EVIN — Todos los derechos reservados</p>
   </footer>
 
