@@ -692,7 +692,7 @@
         <h2>Alumnos</h2>
         <div class="alumnos-header">
           <input type="search" v-model="busqueda" placeholder="Buscar alumnos..." aria-label="Buscar alumnos">
-          <button v-if="puedeGestionar" class="btn" @click="abrirModalNuevo">+ Añadir alumno</button>
+          <button v-if="puedeGestionar" class="btn btn-primary" @click="abrirModalNuevo">+ Añadir alumno</button>
         </div>
         <p v-if="error"    class="form-error">{{ error }}</p>
         <div v-if="cargando" class="student-list">
@@ -715,7 +715,7 @@
              
             </p>
             <div class="card-acciones">
-              <button class="btn" @click="verPerfil(alumno)" :aria-label="`Ver perfil de ${alumno.nombre}`">Ver perfil</button>
+              <button class="btn btn-primary" @click="verPerfil(alumno)" :aria-label="`Ver perfil de ${alumno.nombre}`">Ver perfil</button>
               <button v-if="puedeGestionar" class="btn-secundario" @click="abrirModalEditar(alumno)">✏️ Editar</button>
               <button v-if="puedeGestionar" class="btn-danger"     @click="confirmarEliminar(alumno)">🗑️ Eliminar</button>
             </div>
@@ -782,7 +782,7 @@
             </div>
             <div class="perfil-sesiones">
               <h3>Historial de sesiones</h3>
-		<button class="btn" @click="exportarCSV(perfilAlumno)" style="margin-bottom:1rem;background:#0F2E8A;">
+		<button class="btn btn-primary" @click="exportarCSV(perfilAlumno)" style="margin-bottom:1rem;">
 		  📥 Exportar CSV
 		</button>
               <p v-if="perfilCargando">Cargando sesiones...</p>
@@ -1159,7 +1159,7 @@
       <div id="user-info" class="hidden">
         <p>Bienvenido, <strong><span id="user-name"></span></strong></p>
         <p id="user-role" class="user-role-badge"></p>
-        <button id="logout">Cerrar sesión</button>
+        <button id="logout" class="btn btn-danger">Cerrar sesión</button>
       </div>
     </section>
 

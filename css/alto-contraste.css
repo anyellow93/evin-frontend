@@ -421,3 +421,47 @@ body.alto-contraste .btn-contraste:focus-visible {
   outline: 3px solid #fff !important;
   outline-offset: 2px !important;
 }
+
+/* ── 19. ADMINISTRACIÓN — TABLA DE USUARIOS ───────────────── */
+/* Mismo patrón que la tabla de perfil de alumno (sección 13):
+   caja negra con borde blanco, cabecera invertida (fondo blanco,
+   texto negro) y filas en blanco sobre negro. */
+body.alto-contraste .admin-tabla {
+  background: #000 !important;
+  border: 2px solid #fff !important;
+  box-shadow: none !important;
+}
+body.alto-contraste .admin-tabla th {
+  background: #fff !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border-bottom: 2px solid #fff !important;
+}
+body.alto-contraste .admin-tabla td {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  border-bottom: 1px solid #555 !important;
+}
+body.alto-contraste .admin-buscador {
+  background: #000 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  border: 2px solid #fff !important;
+}
+body.alto-contraste .admin-buscador::placeholder {
+  color: #ccc !important;
+  -webkit-text-fill-color: #ccc !important;
+}
+body.alto-contraste .admin-tabla select {
+  background: #000 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  border: 2px solid #fff !important;
+}
+body.alto-contraste .admin-tabla select:focus {
+  outline: 3px solid #ff0 !important;
+  border-color: #ff0 !important;
+}
+body.alto-contraste .admin-tabla select:disabled {
+  opacity: 0.6 !important;
+}

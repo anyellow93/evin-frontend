@@ -235,7 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function actualizarUIUsuario(user) {
     const rolesLabel = { profesor: 'Profesor', tecnico: 'Técnico', padre: 'Familiar', alumno: 'Alumno' };
     userNameSpan.textContent = user.nombre;
-    if (userRoleBadge) userRoleBadge.textContent = rolesLabel[user.rol] || user.rol || user.role;
+    if (userRoleBadge) {
+      userRoleBadge.textContent = rolesLabel[user.rol] || user.rol || user.role;
+      userRoleBadge.className   = `user-role-badge rol-${user.rol || user.role || ''}`;
+    }
     loginForm?.classList.add('hidden');
     registerForm?.classList.add('hidden');
     forgotForm?.classList.add('hidden');
@@ -275,7 +278,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('perfil-pwd-nueva').value     = '';
     document.getElementById('perfil-pwd-confirmar').value = '';
     if (perfilNombreDisp) perfilNombreDisp.textContent = user.nombre;
-    if (perfilRolDisp)    perfilRolDisp.textContent    = rolesLabel[user.rol] || user.rol || '';
+    if (perfilRolDisp) {
+      perfilRolDisp.textContent = rolesLabel[user.rol] || user.rol || '';
+      perfilRolDisp.className   = `user-role-badge rol-${user.rol || ''}`;
+    }
     if (perfilEmailDisp)  perfilEmailDisp.textContent  = user.email || '';
     if (perfilAvatar && window.Avatar) {
       perfilAvatar.innerHTML = `<img src="${Avatar.svg(user.nombre, 72)}" alt="Avatar" style="border-radius:50%;width:72px;height:72px;">`;

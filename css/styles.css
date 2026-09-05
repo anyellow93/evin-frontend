@@ -1068,6 +1068,13 @@ body.solo-juego main > section {
   color: var(--text-secondary);
 }
 
+/* La insignia de rol es un <p>, así que sin esto heredaba el gris apagado
+   de la regla anterior en vez del blanco que le da .user-role-badge,
+   dejando el texto casi ilegible sobre el fondo de color del rol. */
+.perfil-usuario-header p.user-role-badge {
+  color: #fff;
+}
+
 .perfil-usuario-cerrar {
   position: absolute;
   top: 0.75rem;
