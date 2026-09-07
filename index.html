@@ -624,7 +624,9 @@
         <p>Arrastra las piezas a su posición correcta o haz clic en una pieza y luego en su hueco.</p>
         <div class="puzzle-info">
           <span>Ronda: <strong id="puzzle-ronda">1 / 3</strong></span>
-          <span>Movimientos: <strong id="puzzle-movimientos">0</strong></span>
+          <span>Nivel: <strong id="puzzle-nivel-actual">—</strong></span>
+          <span>Aciertos: <strong id="puzzle-aciertos">0</strong></span>
+          <span>Errores: <strong id="puzzle-errores">0</strong></span>
           <span>Tiempo: <strong id="puzzle-tiempo">0</strong> s</span>
         </div>
         <div class="puzzle-preview-wrap juego-tablero">
@@ -633,6 +635,10 @@
         </div>
         <div class="juego-config">
           <label>Nivel: <select id="puzzle-nivel"><option value="facil">Fácil (3×3)</option><option value="medio" selected>Medio (4×4)</option><option value="dificil">Difícil (5×5)</option></select></label>
+          <label class="puzzle-check-numeros">
+            <input type="checkbox" id="puzzle-numeros" checked>
+            Mostrar números en las piezas
+          </label>
         </div>
         <div class="puzzle-botones">
           <button id="puzzle-empezar" class="btn btn-primary">Nueva partida</button>
@@ -746,7 +752,7 @@
                 <tbody>
                   <tr v-for="sesion in perfilSesiones" :key="sesion.id">
                     <td>{{ formatFecha(sesion.fecha) }}</td>
-                    <td>{{ sesion.juego }}</td>
+                    <td>{{ sesion.juego_nombre }}</td>
                     <td>{{ sesion.aciertos }}</td>
                     <td>{{ sesion.intentos }}</td>
                     <td><span class="pct-badge" :class="clasePct(sesion.porcentaje)">{{ sesion.porcentaje }}%</span></td>

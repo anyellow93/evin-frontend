@@ -8,6 +8,22 @@
    ============================================= */
 
 
+/* ── Utilidad: solo lectores de pantalla ─────────────────────
+   Usada por los anuncios en vivo (#anuncio-juego / #anuncio-urgente)
+   y por cualquier texto que deba existir para accesibilidad sin
+   ocupar espacio visual. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ── 1. VARIABLES ─────────────────────────────────────────── */
 :root {
   /* Paleta principal */
@@ -719,6 +735,39 @@ input[type="search"] {
 .rol-tecnico  { background: #0f766e;         color: #fff; }
 .rol-padre    { background: #c2410c;         color: #fff; }
 .rol-alumno   { background: #16a34a;         color: #fff; }
+
+/* ── Administración: contador de visitas ─────────────────── */
+.admin-visitas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.admin-visitas-stat {
+  flex: 1 1 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.admin-visitas-valor {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.admin-visitas-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
 
 /* ── ADMINISTRACIÓN DE USUARIOS ───────────────────────────── */
 .admin-intro {

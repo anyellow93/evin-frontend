@@ -778,7 +778,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	  const cabecera = ['Fecha', 'Juego', 'Aciertos', 'Intentos'].join(',');
 	  const filas = this.perfilSesiones.map(s => [
 	    s.fecha || '—',
-	    s.juego || '—',
+	    s.juego_nombre || '—',
 	    s.aciertos ?? 0,
 	    s.intentos ?? 0
 	  ].join(','));

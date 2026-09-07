@@ -64,6 +64,21 @@ body.solo-juego .puzzle-info strong,
   font-size: 0.9rem;
 }
 
+.puzzle-check-numeros {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.puzzle-check-numeros input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
 /* ── Preview de la imagen ─────────────────────────────────── */
 .puzzle-preview-wrap {
   display: flex;
@@ -88,12 +103,16 @@ body.solo-juego .puzzle-info strong,
 }
 
 /* ── Área de juego ────────────────────────────────────────── */
+/* Mobile-first: el tablero y las piezas se apilan en vertical.
+   Antes se forzaba flex-row en todos los tamaños, lo que en
+   pantallas estrechas dividía el ancho disponible entre las dos
+   zonas y encogía las piezas muy por debajo del tamaño táctil
+   accesible — crítico para usuarios con baja visión. */
 .puzzle-area {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-direction: column;
   gap: 1.5rem;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex: 1;
 }
@@ -126,6 +145,7 @@ body.solo-juego .puzzle-info strong,
 
 /* ── Huecos ───────────────────────────────────────────────── */
 #puzzle-huecos .puzzle-hueco {
+  position: relative;
   border-radius: 4px;
   transition: border-color 0.15s, box-shadow 0.15s;
   cursor: pointer;
@@ -136,8 +156,47 @@ body.solo-juego .puzzle-info strong,
   box-shadow: 0 0 6px rgba(255,255,255,0.3);
 }
 
+#puzzle-huecos .puzzle-hueco.seleccionado-hueco {
+  border: 3px solid #ff0 !important;
+  box-shadow: 0 0 10px rgba(255,255,0,0.6);
+}
+
+/* Estado correcto/incorrecto: el color nunca es la única señal —
+   siempre va acompañado de un icono (::after), texto para lector
+   de pantalla (ver anuncio-juego/anuncio-urgente) y sonido. */
+#puzzle-huecos .puzzle-hueco.puzzle-correcta {
+  border: 2px solid #0f0 !important;
+  box-shadow: 0 0 8px rgba(0,255,0,0.4);
+}
+
+#puzzle-huecos .puzzle-hueco.puzzle-incorrecta,
+#puzzle-piezas .puzzle-pieza.puzzle-incorrecta {
+  border: 3px solid #f00 !important;
+}
+
+.puzzle-icono-estado {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.puzzle-icono-estado.icono-ok  { background: #0f0; color: #063; }
+.puzzle-icono-estado.icono-err { background: #f00; color: #fff; }
+
 /* ── Piezas ───────────────────────────────────────────────── */
 #puzzle-piezas .puzzle-pieza {
+  position: relative;
   border-radius: 4px;
   transition: transform 0.1s, box-shadow 0.15s, border-color 0.15s;
   box-shadow: 0 3px 8px rgba(0,0,0,0.4);
@@ -149,6 +208,7 @@ body.solo-juego .puzzle-info strong,
 }
 
 #puzzle-piezas .puzzle-pieza.seleccionada {
+  border: 3px solid #ff0 !important;
   transform: scale(1.06);
   box-shadow: 0 0 12px rgba(255,255,0,0.6);
 }
@@ -158,11 +218,57 @@ body.solo-juego .puzzle-info strong,
   transform: scale(0.97);
 }
 
+/* ── Números de referencia (huecos y piezas) ─────────────────
+   Permiten emparejar por número en vez de por comparación visual
+   fina del fragmento de imagen — imprescindible para baja visión. */
+.puzzle-numero {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.6);
+  pointer-events: none;
+  z-index: 2;
+}
+
+#juego-puzzle.puzzle-sin-numeros .puzzle-numero {
+  display: none;
+}
+
+/* ── Foco por teclado ─────────────────────────────────────── */
+#puzzle-huecos .puzzle-hueco:focus-visible,
+#puzzle-piezas .puzzle-pieza:focus-visible {
+  outline: 3px solid #f4d35e;
+  outline-offset: 2px;
+}
+
 /* ── Alto contraste ───────────────────────────────────────── */
 body.alto-contraste #juego-puzzle { background: #000 !important; }
 body.alto-contraste .puzzle-preview-wrap { border-color: #fff !important; background: #000 !important; }
 body.alto-contraste .puzzle-info,
 body.alto-contraste .puzzle-panel-controles p { color: #fff !important; -webkit-text-fill-color: #fff !important; }
+body.alto-contraste .puzzle-numero {
+  background: #fff !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+  border: 1px solid #000 !important;
+}
+body.alto-contraste .puzzle-icono-estado.icono-ok  { background: #0f0 !important; color: #000 !important; }
+body.alto-contraste .puzzle-icono-estado.icono-err { background: #f00 !important; color: #fff !important; }
+body.alto-contraste #puzzle-huecos .puzzle-hueco.seleccionado-hueco,
+body.alto-contraste #puzzle-piezas .puzzle-pieza.seleccionada {
+  border-color: #ff0 !important;
+}
 
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 480px) {
