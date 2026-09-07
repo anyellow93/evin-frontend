@@ -495,6 +495,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── Enlaces del pie de página (FAQs, Accesibilidad) ──────────────────────
+  // No son .menu-btn (no deben aparecer marcados como activos en el menú),
+  // pero deben navegar igualmente a su sección en vez de quedarse en un
+  // ancla muerta (la sección de destino tiene class="hidden" por defecto).
+  document.querySelectorAll('footer a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showSection(link.getAttribute('href').slice(1));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
   // ── Iniciar en sección inicio ────────────────────────────────────────────
   // (si veníamos de un enlace de recuperación de contraseña, nos quedamos en
   // la sección "usuario" con el formulario de nueva contraseña ya abierto)

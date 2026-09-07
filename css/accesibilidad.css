@@ -1,7 +1,70 @@
 /* =============================================
    PARCHE DE ACCESIBILIDAD - EVIN
-  
+
    ============================================= */
+
+/* 0. SECCIÓN "ACCESIBILIDAD" — ajustes rápidos
+   ------------------------------------------- */
+
+.accesibilidad-ajuste {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  margin-bottom: 0.75rem;
+}
+
+.accesibilidad-ajuste-info strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.accesibilidad-ajuste-info p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  max-width: 55ch;
+}
+
+.accesibilidad-texto-controles {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.accesibilidad-texto-controles .btn,
+.accesibilidad-texto-controles .btn-secundario {
+  min-width: 44px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.accesibilidad-texto-controles [aria-pressed="true"] {
+  outline: 3px solid #f4d35e;
+  outline-offset: 2px;
+}
+
+body.alto-contraste .accesibilidad-ajuste {
+  background: #111 !important;
+  border-color: #fff !important;
+}
+
+body.alto-contraste .accesibilidad-ajuste-info strong {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+body.alto-contraste .accesibilidad-ajuste-info p {
+  color: #ccc !important;
+  -webkit-text-fill-color: #ccc !important;
+}
 
 /* 1. CONTRASTE MEJORADO
    ------------------------------------------- */

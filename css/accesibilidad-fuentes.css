@@ -5,6 +5,17 @@
 /* ── 1. Tamaño base de fuente ─────────────────────────────── */
 html { font-size: 18px; }
 
+/* Control de tamaño de texto (sección Accesibilidad) — escala el
+   font-size raíz; como el resto de estilos usa rem, todo el sitio
+   escala junto con él. */
+html.texto-grande  { font-size: 21px; }
+html.texto-xgrande { font-size: 24px; }
+
+@media (max-width: 768px) {
+  html.texto-grande  { font-size: 19px; }
+  html.texto-xgrande { font-size: 21px; }
+}
+
 body {
   font-size: 1rem;
   line-height: 1.6;

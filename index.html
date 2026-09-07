@@ -983,6 +983,87 @@
         </div>
       </div>
     </section>
+
+    <!-- ── ACCESIBILIDAD ───────────────────────────────────── -->
+    <section id="accesibilidad" class="hidden">
+      <div class="faqs-container">
+
+        <div class="faqs-header">
+          <h2>Accesibilidad</h2>
+          <p>EVIN está diseñado para ser usado por personas con baja visión. Aquí puedes ajustar la plataforma a tus necesidades y conocer nuestro compromiso de accesibilidad.</p>
+        </div>
+
+        <!-- Ajustes -->
+        <div class="faqs-grupo">
+          <h3 class="faqs-grupo-titulo"><span class="faqs-grupo-icono" aria-hidden="true">⚙️</span> Ajustes rápidos</h3>
+
+          <div class="accesibilidad-ajuste">
+            <div class="accesibilidad-ajuste-info">
+              <strong>Tamaño del texto</strong>
+              <p>Aumenta o reduce el tamaño de todo el texto de la plataforma. La preferencia se guarda en este navegador.</p>
+            </div>
+            <div class="accesibilidad-texto-controles" role="group" aria-label="Ajustar tamaño de texto">
+              <button type="button" class="btn btn-secundario" id="texto-disminuir" aria-label="Reducir tamaño de texto">A-</button>
+              <button type="button" class="btn btn-secundario" id="texto-normal" aria-label="Tamaño de texto normal">A</button>
+              <button type="button" class="btn btn-secundario" id="texto-aumentar" aria-label="Aumentar tamaño de texto">A+</button>
+            </div>
+          </div>
+
+          <div class="accesibilidad-ajuste">
+            <div class="accesibilidad-ajuste-info">
+              <strong>Alto contraste</strong>
+              <p>Activa el modo de alto contraste (fondo negro y texto blanco/amarillo) para mejorar la legibilidad. También disponible con el botón fijo de la esquina inferior derecha o el atajo <kbd>Alt</kbd> + <kbd>C</kbd>.</p>
+            </div>
+            <div class="accesibilidad-texto-controles">
+              <button type="button" class="btn btn-primary" id="accesibilidad-toggle-contraste">Activar / desactivar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navegación por teclado -->
+        <div class="faqs-grupo">
+          <h3 class="faqs-grupo-titulo"><span class="faqs-grupo-icono" aria-hidden="true">⌨️</span> Navegación por teclado</h3>
+
+          <details class="faq-item">
+            <summary class="faq-pregunta">¿Puedo usar EVIN sin ratón? <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>Sí. Toda la plataforma se puede recorrer con el teclado:</p>
+              <ul>
+                <li><strong>Tab</strong> / <strong>Mayús + Tab</strong>: moverse entre enlaces, botones y campos.</li>
+                <li><strong>Intro</strong> o <strong>Espacio</strong>: activar el elemento enfocado.</li>
+                <li><strong>Esc</strong>: cerrar ventanas y modales abiertos.</li>
+                <li><strong>Alt + C</strong>: activar o desactivar el modo de alto contraste desde cualquier página.</li>
+              </ul>
+              <p>El elemento que tiene el foco del teclado se marca siempre con un contorno amarillo bien visible.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Compromiso -->
+        <div class="faqs-grupo">
+          <h3 class="faqs-grupo-titulo"><span class="faqs-grupo-icono" aria-hidden="true">📋</span> Nuestro compromiso</h3>
+
+          <details class="faq-item" open>
+            <summary class="faq-pregunta">Declaración de accesibilidad <span class="faq-chevron" aria-hidden="true">▼</span></summary>
+            <div class="faq-respuesta">
+              <p>EVIN (Estimulación Visual en Internet) es un Trabajo Final de Grado de Ingeniería Informática cuyo objetivo principal es servir de herramienta de entrenamiento visual para personas con baja visión. La accesibilidad es, por tanto, un requisito central del proyecto y no un añadido posterior.</p>
+              <p>Trabajamos siguiendo, en la medida de lo posible, las <strong>Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1</strong>, nivel AA, e incluimos entre otras medidas:</p>
+              <ul>
+                <li>Contraste de color reforzado y un modo de alto contraste activable en toda la plataforma.</li>
+                <li>Tamaño de fuente base aumentado y control de tamaño de texto ajustable por el usuario.</li>
+                <li>Área táctil mínima de 44×44 px en botones y controles interactivos.</li>
+                <li>Indicador de foco visible en todos los elementos navegables por teclado.</li>
+                <li>Estados de los juegos diferenciados por color, forma y texto, no solo por color.</li>
+                <li>Soporte para la preferencia del sistema operativo de reducir el movimiento y las animaciones.</li>
+              </ul>
+              <p>Somos conscientes de que todavía hay margen de mejora. Si detectas alguna barrera de accesibilidad al usar EVIN, puedes <a href="mailto:angelopez267@gmail.com?subject=Accesibilidad%20EVIN" style="color:var(--primary)">escribirnos</a> y la tendremos en cuenta.</p>
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
     <!-- ── USUARIO ─────────────────────────────────────────── -->
     <section id="usuario">
       <div id="login-form">
@@ -1148,6 +1229,7 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script src="js/api.js"></script>
   <script src="js/alto-contraste.js"></script>
+  <script src="js/accesibilidad-texto.js"></script>
   <script src="js/avatar.js"></script>
   <script src="js/sonidos.js"></script>
   <script src="js/carrusel.js" defer></script>
