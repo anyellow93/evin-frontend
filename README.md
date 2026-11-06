@@ -84,7 +84,7 @@ Abre `http://localhost:8080`. Para que funcione el login, el backend tiene que e
 
 | Panel del docente | Vista del alumno |
 |---|---|
-| ![Panel del docente](img/panel-docente.PNG) | ![Vista del alumno](img/screenshots/vista-alumno.png) |
+| ![Panel del docente](img/panel-docente.PNG) | ![Vista del alumno](img/screenshots/captura_alumno.PNG) |
 
 ## Prueba la demo
 
