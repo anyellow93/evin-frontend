@@ -82,13 +82,16 @@ Abre `http://localhost:8080`. Para que funcione el login, el backend tiene que e
 - **JWT** para autenticarse contra la API sin depender de cookies de sesión.
 - **Accesibilidad desde el diseño**: el público objetivo la necesita, así que se tuvo en cuenta desde el principio.
 
+| Panel del docente | Vista del alumno |
+|---|---|
+| ![Panel del docente](img/screenshots/panel-docente.png) | ![Vista del alumno](img/screenshots/vista-alumno.png) |
+
 ## Prueba la demo
 
 Entra en [evin.click](https://evin.click) con estas cuentas de demostración:
 
 | Rol | Email | Contraseña |
 |---|---|---|
-| Docente | demo.docente@evin.click | Demo1234! |
 | Alumno | demo.alumno@evin.click | Demo1234! |
 
 ## Autor
